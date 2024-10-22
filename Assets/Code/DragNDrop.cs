@@ -11,15 +11,15 @@ namespace CowtasticGameStudio.UI
         #region Variables Drag & Drop
 
         /// <summary>
-        ///  Bandera para saber si se está arrastrando un objeto
+        ///  Bandera para saber si se estï¿½ arrastrando un objeto
         /// </summary>
         private bool isDragging = false;
         /// <summary>
-        /// El objeto que está siendo arrastrado
+        /// El objeto que estï¿½ siendo arrastrado
         /// </summary>
         private Transform draggedObject;
         /// <summary>
-        /// El offset de la posición del objeto en relación con la posición del ratón
+        /// El offset de la posiciï¿½n del objeto en relaciï¿½n con la posiciï¿½n del ratï¿½n
         /// </summary>
         private Vector3 dragOffset;
         /// <summary>
@@ -27,7 +27,7 @@ namespace CowtasticGameStudio.UI
         /// </summary>
         private float objectZDepth;
         /// <summary>
-        /// El valor fijo de la posición en el eje Y del objeto durante el arrastre
+        /// El valor fijo de la posiciï¿½n en el eje Y del objeto durante el arrastre
         /// </summary>
         private float fixedYPosition;
 
@@ -53,21 +53,21 @@ namespace CowtasticGameStudio.UI
 
         void Update()
         {
-            // Si se presiona el botón izquierdo del ratón
+            // Si se presiona el botï¿½n izquierdo del ratï¿½n
             if (Input.GetMouseButtonDown(0))
             {
                 // Inicia el proceso de arrastre
                 HandleMouseDown();
             }
-            // Actualiza la posición del objeto mientras se arrastra
+            // Actualiza la posiciï¿½n del objeto mientras se arrastra
             if (isDragging)
             {
                 HandleMouseDrag();
             }
-            // Si se suelta el botón del ratón
+            // Si se suelta el botï¿½n del ratï¿½n
             if (Input.GetMouseButtonUp(0))
             {
-                // Detiene el arrastre y coloca el objeto en su nueva posición o lo devuelve a su lugar original "PENDIENTE DE INCLUIR"
+                // Detiene el arrastre y coloca el objeto en su nueva posiciï¿½n o lo devuelve a su lugar original "PENDIENTE DE INCLUIR"
                 HandleMouseUp();
             }
         }
@@ -89,10 +89,10 @@ namespace CowtasticGameStudio.UI
         /// </summary>
         private void HandleMouseDrag()
         {
-            // Convierte la posición del ratón a coordenadas del mundo
+            // Convierte la posiciï¿½n del ratï¿½n a coordenadas del mundo
             Vector3 mousePosition = GetMouseWorldPosition();
 
-            // Verifica si el objeto está sobre un "Place"
+            // Verifica si el objeto estï¿½ sobre un "Place"
             if (IsMouseOverPlace(out RaycastHit hitBelow))
             {
                 // Si no estaba sobre un "Place" antes
@@ -100,22 +100,22 @@ namespace CowtasticGameStudio.UI
                 {
                     // Cambia el color del objeto a negro
                     ChangeColor(Color.black);
-                    // Marca que ahora está sobre un "Place"
+                    // Marca que ahora estï¿½ sobre un "Place"
                     isOverPlace = true;
                 }
             }
             else
             {
-                // Si estaba sobre un "Place" pero ya no lo está
+                // Si estaba sobre un "Place" pero ya no lo estï¿½
                 if (isOverPlace)
                 {
                     // Restaura el color original del objeto
                     RevertColor();
-                    // Indica que ya no está sobre un "Place"
+                    // Indica que ya no estï¿½ sobre un "Place"
                     isOverPlace = false;
                 }
             }
-            // Actualiza la posición del objeto mientras se arrastra
+            // Actualiza la posiciï¿½n del objeto mientras se arrastra
             UpdateObjectPosition(mousePosition);
         }
 
@@ -127,7 +127,7 @@ namespace CowtasticGameStudio.UI
             // Verifica si hay un objeto siendo arrastrado
             if (draggedObject != null)
             {
-                // Si el objeto está sobre un "Place"
+                // Si el objeto estï¿½ sobre un "Place"
                 if (IsMouseOverPlace(out RaycastHit hitBelow))
                 {
                     // Coloca el objeto sobre el "Place"
@@ -135,7 +135,7 @@ namespace CowtasticGameStudio.UI
                 }
                 // Detiene el arrastre
                 StopDragging();
-                //Aquí anadir la logica para que vuelva a su posicion original
+                //Aquï¿½ anadir la logica para que vuelva a su posicion original
             }
         }
 
@@ -146,15 +146,15 @@ namespace CowtasticGameStudio.UI
         private void StartDragging(Transform objectToDrag)
         {
             #region Variables de StarDragging
-            // Asigna el objeto que se está arrastrando
+            // Asigna el objeto que se estï¿½ arrastrando
             draggedObject = objectToDrag;
-            // Indica que se está arrastrando
+            // Indica que se estï¿½ arrastrando
             isDragging = true;
             // Obtiene la profundidad Z del objeto en la pantalla
             objectZDepth = Camera.main.WorldToScreenPoint(draggedObject.position).z;
             // Hace que la posicion sea siempre la original + 1
             fixedYPosition = draggedObject.position.y + 1;
-            // Obtiene la posición del ratón en el mundo
+            // Obtiene la posiciï¿½n del ratï¿½n en el mundo
             Vector3 mousePosition = GetMouseWorldPosition();
             // Esto hace que al arrastrar no se vaya "Volando" la carta, manteniendose a un nivel estable, de no estar se saldria del escenario
             dragOffset = draggedObject.position - new Vector3(mousePosition.x, 0, mousePosition.z);
@@ -174,7 +174,7 @@ namespace CowtasticGameStudio.UI
         /// </summary>
         private void StopDragging()
         {
-            // Indica que ya no se está arrastrando
+            // Indica que ya no se estï¿½ arrastrando
             isDragging = false;
             if (isOverPlace)
             {
@@ -188,7 +188,7 @@ namespace CowtasticGameStudio.UI
         }
 
         /// <summary>
-        /// Actualiza la posición del objeto mientras se arrastra
+        /// Actualiza la posiciï¿½n del objeto mientras se arrastra
         /// </summary>
         /// <param name="mousePosition">Posicion del mouse</param>
         private void UpdateObjectPosition(Vector3 mousePosition)
@@ -198,25 +198,25 @@ namespace CowtasticGameStudio.UI
         }
 
         /// <summary>
-        /// Traslada la posición del ratón en pantalla a una posición en el mundo
+        /// Traslada la posiciï¿½n del ratï¿½n en pantalla a una posiciï¿½n en el mundo
         /// </summary>
         /// <returns>Posicion equivalente en el mundo</returns>
         private Vector3 GetMouseWorldPosition()
         {
             // Usa la profundidad Z capturada
             Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, objectZDepth);
-            // Convierte la posición de la pantalla a posición en el mundo
+            // Convierte la posiciï¿½n de la pantalla a posiciï¿½n en el mundo
             return Camera.main.ScreenToWorldPoint(mouseScreenPosition);
         }
 
         /// <summary>
-        /// Realiza un raycast desde la posición del ratón
+        /// Realiza un raycast desde la posiciï¿½n del ratï¿½n
         /// </summary>
         /// <param name="hit">Detector</param>
         /// <returns>Si ha detectado algun objeto</returns>
         private bool RaycastFromMouse(out RaycastHit hit)
         {
-            // Crea un rayo desde la cámara hacia la posición del ratón
+            // Crea un rayo desde la cï¿½mara hacia la posiciï¿½n del ratï¿½n
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             // Verifica si el rayo toca un objeto
             return Physics.Raycast(ray, out hit);
@@ -270,7 +270,7 @@ namespace CowtasticGameStudio.UI
         /// <param name="hitBelow">Si golpea place</param>
         private void SnapToPlace(RaycastHit hitBelow)
         {
-            // Obtiene la posición del "Place"
+            // Obtiene la posiciï¿½n del "Place"
             Vector3 placePosition = hitBelow.collider.transform.position;
             // Coloca el objeto ligeramente por encima del "Place"
             draggedObject.position = new Vector3(placePosition.x, placePosition.y + placementHeightOffset, placePosition.z);
