@@ -3,11 +3,13 @@ using UnityEngine;
 public class DragNDrop : MonoBehaviour
 {
     public Camera cam;
+    //Variables para la logica de arrastre
     private bool isDragging = false;  // Bandera para saber si se está arrastrando un objeto
     private Transform draggedObject;  // El objeto que está siendo arrastrado
     private Vector3 dragOffset;  // El offset de la posición del objeto en relación con la posición del ratón
     private float objectZDepth;  // La profundidad del objeto en el eje Z en el espacio de la pantalla
     private float fixedYPosition;  // El valor fijo de la posición en el eje Y del objeto durante el arrastre
+    //Variables para la funcion de cambio de color
     public float placementHeightOffset = 1f;  // Altura adicional para colocar el objeto por encima de un "Place"
     private Color originalColor;  // El color original del objeto para restaurarlo después de cambiar su color
     private bool isOverPlace = false;  // Indica si el objeto está sobre un objeto con la etiqueta "Place"
@@ -19,7 +21,7 @@ public class DragNDrop : MonoBehaviour
             HandleMouseDown();  // Inicia el proceso de arrastre
         }
 
-        if (isDragging)  // Si el objeto está siendo arrastrado
+        if (isDragging) 
         {
             HandleMouseDrag();  // Actualiza la posición del objeto mientras se arrastra
         }
@@ -76,6 +78,7 @@ public class DragNDrop : MonoBehaviour
             }
             StopDragging();  // Detiene el arrastre
         }
+        //Aquí anadir la logica para que vuelva a su posicion original
     }
 
     // Comienza el arrastre del objeto seleccionado
@@ -84,9 +87,9 @@ public class DragNDrop : MonoBehaviour
         draggedObject = objectToDrag;  // Asigna el objeto que se está arrastrando
         isDragging = true;  // Indica que se está arrastrando
         objectZDepth = cam.WorldToScreenPoint(draggedObject.position).z;  // Obtiene la profundidad Z del objeto en la pantalla
-        fixedYPosition = draggedObject.position.y + 1;  // ??? Fija la posición Y del objeto a su posición original más 1, no está claro por qué se suma 1
+        fixedYPosition = draggedObject.position.y + 1;  // Hace que la posicion sea siempre la original + 1
         Vector3 mousePosition = GetMouseWorldPosition();  // Obtiene la posición del ratón en el mundo
-        dragOffset = draggedObject.position - new Vector3(mousePosition.x, 0, mousePosition.z);  // ??? El offset se calcula solo para los ejes X y Z, ignorando el Y
+        dragOffset = draggedObject.position - new Vector3(mousePosition.x, 0, mousePosition.z);  // Esto hace que al arrastrar no se vaya "Volando" la carta, manteniendose a un nivel estable
 
         Renderer renderer = draggedObject.GetComponent<Renderer>();  // Obtiene el Renderer del objeto para cambiar su color
         if (renderer != null)
