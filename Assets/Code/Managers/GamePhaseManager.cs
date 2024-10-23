@@ -14,7 +14,22 @@ public class GamePhaseManager
 
     public void NextPhase()
     {
-        
+        if (currentPhase is StartDayPhase)
+        {
+            SetPhase(new PlaceCardsPhase());
+        }
+        else if (currentPhase is PlaceCardsPhase)
+        {
+            SetPhase(new ActionPointsPhase());
+        }
+        else if (currentPhase is ActionPointsPhase)
+        {
+            SetPhase(new MarketPhase());
+        }
+        else if (currentPhase is MarketPhase)
+        {
+            SetPhase(new StartDayPhase()); // Comienza un nuevo día
+        }
     }
 
     public void Update()
