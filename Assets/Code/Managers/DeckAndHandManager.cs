@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+#endif
 
 public class DeckAndHandManager : MonoBehaviour
 {
@@ -108,5 +110,18 @@ public class DeckAndHandManager : MonoBehaviour
             card.transform.rotation = Quaternion.identity;
         }
     }
-}
 
+#if UNITY_EDITOR
+    /// <summary>
+    /// Permite mover las últimas cartas a la mano al presionar el botón derecho del ratón
+    /// </summary>
+    private void Update()
+    {
+        // Si se presiona el botón derecho del ratón en el editor
+        if (Input.GetMouseButtonDown(1))
+        {
+            MoveLastCardsToHand();
+        }
+    }
+#endif
+}
