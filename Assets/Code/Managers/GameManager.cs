@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -8,11 +7,6 @@ public class GameManager : MonoBehaviour
     public GamePhaseManager GamePhaseManager { get; private set; }
     public GameCalendar GameCalendar { get; private set; }
     // Puedes añadir más gestores aquí (AudioManager, UIManager, etc.)
-
-
-    [Header("Calendar Events")]
-    public List<CalendarEvent> calendarEvents; // Permitir agregar eventos desde el editor
-
 
     private void Awake()
     {
@@ -24,7 +18,7 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         // Para mantenerlo entre escenas, creo que no sera necesario !!!
-        DontDestroyOnLoad(gameObject);  
+        DontDestroyOnLoad(gameObject);
 
         InitializeManagers();
     }
@@ -35,6 +29,8 @@ public class GameManager : MonoBehaviour
         GamePhaseManager = new GamePhaseManager();
         GameCalendar = new GameCalendar();
         // Instanciar otros managers si es necesario
+
+        addCalendarEvents();
     }
 
     private void Update()
@@ -44,5 +40,13 @@ public class GameManager : MonoBehaviour
         {
             GamePhaseManager.Update();
         }
-    } 
+    }
+
+    private void addCalendarEvents()
+    {
+        GameCalendar.AddCalendarEvent(new HarvestDayEvent());
+        GameCalendar.AddCalendarEvent(new CowDayEvent());
+        GameCalendar.AddCalendarEvent(new PlagueEvent());
+        GameCalendar.AddCalendarEvent(new BrokenFridgeEvent());
+    }
 }

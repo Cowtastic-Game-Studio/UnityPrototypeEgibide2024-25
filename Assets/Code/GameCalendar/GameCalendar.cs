@@ -16,7 +16,7 @@ public class GameCalendar
     {
         currentDay++;
         // Al final de cada semana
-        if (currentDay % 7 == 0) 
+        if (currentDay % 7 == 0)
         {
             currentWeek++;
             CheckForEvent();

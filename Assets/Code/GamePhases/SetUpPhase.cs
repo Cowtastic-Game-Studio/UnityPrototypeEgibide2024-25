@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SetUpPhase : IGamePhase
@@ -22,7 +20,7 @@ public class SetUpPhase : IGamePhase
 
     public void NewGame()
     {
-        
+
     }
 
     public void LoadGame()

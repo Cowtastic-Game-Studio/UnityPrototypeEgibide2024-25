@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine; 
 
 public class GameCalendarEventManager
 {
@@ -27,10 +26,10 @@ public class GameCalendarEventManager
         if (availableEvents.Count > 0)
         {
             // Genera un índice aleatorio
-            int index = UnityEngine.Random.Range(0, availableEvents.Count); 
+            int index = UnityEngine.Random.Range(0, availableEvents.Count);
             activeEvent = availableEvents[index];
             // Llama al método TriggerEvent
-            activeEvent.TriggerEvent(); 
+            activeEvent.TriggerEvent();
         }
     }
 
@@ -39,7 +38,7 @@ public class GameCalendarEventManager
         if (activeEvent != null)
         {
             // Llama al método EndEvent
-            activeEvent.EndEvent(); 
+            activeEvent.EndEvent();
             activeEvent = null;
         }
     }

@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 //[CreateAssetMenu(fileName = "NewCalendarEvent", menuName = "Calendar/Event")]
-public abstract class CalendarEvent : ScriptableObject
+public abstract class CalendarEvent // : ScriptableObject
 {
     // Nombre del evento
     public string eventName { get; private set; }
@@ -12,7 +10,6 @@ public abstract class CalendarEvent : ScriptableObject
     public string eventDescription { get; private set; }
 
     // Duración del evento en días
-
     public int duration { get; private set; }
 
     // Estado del evento
