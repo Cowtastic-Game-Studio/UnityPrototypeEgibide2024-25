@@ -1,45 +1,40 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Card", menuName = "Card")]
-public class ICard : ScriptableObject
+public interface ICard
 {
-    #region variables de la clase
     /// <summary>
     /// Nombre de la carta
     /// </summary>
-    private string name;
+    string Name { get; }
 
     /// <summary>
     /// Descripcion de la carta
     /// </summary>
-    private string description;
+    string Description { get; }
 
     /// <summary>
     /// Coste de la carta
     /// </summary>
-    private int cost;
+    int Cost { get; }
 
     /// <summary>
     /// Puntos de accion que cuesta la carta
     /// </summary>
-    private int actionPoints;
+    int ActionPoints { get; }
 
     /// <summary>
     /// Dias de vida de la carta
     /// </summary>
-    private int lifeCycleDays;
+    int LifeCycleDays { get; }
 
     /// <summary>
     /// Lista de recursos necesarios para la carta
     /// </summary>
-    private List<ResourceAmmount> requiredResources;
+    List<ResourceAmmount> RequiredResources { get; }
 
     /// <summary>
     /// Lista de recursos que produce la carta
     /// </summary>
-    private List<ResourceAmmount> producedResources;
-
-    #endregion
+    List<ResourceAmmount> ProducedResources { get; }
 }

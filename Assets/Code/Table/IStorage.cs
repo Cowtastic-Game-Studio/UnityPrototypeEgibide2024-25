@@ -1,12 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Storage", menuName = "Storage")]
-public class IStorage : ScriptableObject
+public interface IStorage
 {
-    private int maxRes;
-    private int level;
-    private int resource;
+    /// <summary>
+    /// Máximo de recursos que puede almacenar.
+    /// </summary>
+    int MaxResources { get; }
+
+    /// <summary>
+    /// Nivel del almacenamiento.
+    /// </summary>
+    int Level { get; }
+
+    /// <summary>
+    /// Cantidad de recursos actualmente almacenados.
+    /// </summary>
+    int Resource { get; }
 }
