@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ICard : MonoBehaviour
+[CreateAssetMenu(fileName = "Card", menuName = "Card")]
+public class ICard : ScriptableObject
 {
     #region variables de la clase
     /// <summary>
@@ -41,15 +42,4 @@ public class ICard : MonoBehaviour
     private List<ResourceAmmount> producedResources;
 
     #endregion
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
