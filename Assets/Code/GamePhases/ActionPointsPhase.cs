@@ -1,34 +1,34 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class ActionPointsPhase : IGamePhaseWUndo
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    public ActionManager<ICommand> ActionManager { get; private set; }
-
-    public ActionPointsPhase()
+    public class ActionPointsPhase : IGamePhaseWUndo
     {
-        // Inicializar el ActionManager
-        ActionManager = new ActionManager<ICommand>();
-    }
+        public ActionManager<ICommand> ActionManager { get; private set; }
 
-    public void EnterPhase()
-    {
-        // Código para entrar en la fase
-        Console.WriteLine("Entering Action Points Phase");
-    }
+        public ActionPointsPhase()
+        {
+            // Inicializar el ActionManager
+            ActionManager = new ActionManager<ICommand>();
+        }
 
-    public void ExecutePhase()
-    {
-        // Código que define la lógica de la fase
-        Console.WriteLine("Executing Action Points Phase");
+        public void EnterPhase()
+        {
+            // Código para entrar en la fase
+            Console.WriteLine("Entering Action Points Phase");
+        }
 
-    }
+        public void ExecutePhase()
+        {
+            // Código que define la lógica de la fase
+            Console.WriteLine("Executing Action Points Phase");
 
-    public void EndPhase()
-    {
-        // Código para finalizar la fase
-        Console.WriteLine("Ending Action Points Phase");
+        }
+
+        public void EndPhase()
+        {
+            // Código para finalizar la fase
+            Console.WriteLine("Ending Action Points Phase");
+        }
     }
 }
