@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Deck : MonoBehaviour
+public class TarvernZone : MonoBehaviour, IDropZone<Customer>
 {
     #region Propiedades de la clase
     /// <summary>
-    /// Lista de cartas del deck
+    /// Si esta activo o no
     /// </summary>
-    private List<ICard> cards;
-    #endregion 
-    
+    public bool IsActive { get; }
+
+    /// <summary>
+    /// El tipo de la zona
+    /// </summary>
+    public Customer Type { get; }
+    #endregion
+
     #region Metodos de la clase
     // Start is called before the first frame update
     void Start()

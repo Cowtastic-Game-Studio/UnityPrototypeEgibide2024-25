@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bank : MonoBehaviour, IStorage
+public class Fridge : MonoBehaviour, IStorage
 {
     #region Propiedades de clase
     /// <summary>
@@ -26,18 +26,18 @@ public class Bank : MonoBehaviour, IStorage
     public int Resource { get; }
     #endregion
 
-    #region Constructor
+    #region Constructor de la clase
     /// <summary>
     /// Constructor del almacen
     /// </summary>
-    public Bank()
+    public Fridge()
     {
         // Le indicamos que el tipo del recurso es
-        this.Type = GameResource.Muuney;
+        this.Type = GameResource.Milk;
     }
     #endregion
 
-    #region Metodos de clase
+    #region Metodos de la clase
     // Start is called before the first frame update
     void Start()
     {

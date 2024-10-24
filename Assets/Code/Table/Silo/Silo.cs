@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bank : MonoBehaviour, IStorage
+public class Silo : MonoBehaviour, IStorage
 {
-    #region Propiedades de clase
+    #region Propiedades de la clase
     /// <summary>
     /// Tipo de recurso que almacenara
     /// </summary>
@@ -26,18 +26,18 @@ public class Bank : MonoBehaviour, IStorage
     public int Resource { get; }
     #endregion
 
-    #region Constructor
+    #region Constructor de la clase
     /// <summary>
     /// Constructor del almacen
     /// </summary>
-    public Bank()
+    public Silo()
     {
         // Le indicamos que el tipo del recurso es
-        this.Type = GameResource.Muuney;
+        this.Type = GameResource.Cereal;
     }
     #endregion
 
-    #region Metodos de clase
+    #region Metodos de la clase
     // Start is called before the first frame update
     void Start()
     {

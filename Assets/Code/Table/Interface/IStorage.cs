@@ -2,23 +2,25 @@ using UnityEngine;
 
 public interface IStorage
 {
+    #region propiedades
     /// <summary>
     /// Máximo de recursos que puede almacenar.
     /// </summary>
-    GameResource type { get; }
+    GameResource Type { get; }
 
     /// <summary>
     /// Máximo de recursos que puede almacenar.
     /// </summary>
-    int maxResources { get; }
+    int MaxResources { get; }
 
     /// <summary>
     /// Nivel del almacenamiento.
     /// </summary>
-    int level { get; }
+    int Level { get; }
 
     /// <summary>
     /// Cantidad de recursos actualmente almacenados.
     /// </summary>
-    int resource { get; }
+    int Resource { get; }
+    #endregion
 }
