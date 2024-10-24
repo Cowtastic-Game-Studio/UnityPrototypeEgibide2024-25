@@ -1,21 +1,24 @@
 using System.Collections.Generic;
 
-public class ActionManager<T> where T : ICommand
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    private Stack<T> actionHistory = new Stack<T>();
-
-    public void ExecuteAction(T action)
+    public class ActionManager<T> where T : ICommand
     {
-        action.Execute();
-        actionHistory.Push(action);
-    }
+        private Stack<T> actionHistory = new Stack<T>();
 
-    public void UndoAction()
-    {
-        if (actionHistory.Count > 0)
+        public void ExecuteAction(T action)
         {
-            T action = actionHistory.Pop();
-            action.Undo();
+            action.Execute();
+            actionHistory.Push(action);
+        }
+
+        public void UndoAction()
+        {
+            if (actionHistory.Count > 0)
+            {
+                T action = actionHistory.Pop();
+                action.Undo();
+            }
         }
     }
 }

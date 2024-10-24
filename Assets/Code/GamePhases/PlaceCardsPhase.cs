@@ -1,9 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class PlaceCardsPhase : IGamePhaseWUndo
+namespace CowtasticGameStudio.MuuliciousHarvest
+{
+    public class PlaceCardsPhase : IGamePhaseWUndo
 {
     public ActionManager<ICommand> ActionManager { get; private set; }
 
@@ -31,5 +30,6 @@ public class PlaceCardsPhase : IGamePhaseWUndo
         // Código para finalizar la fase
         Console.WriteLine("Ending Place Cards Phase");
     }
+}
 }
 
