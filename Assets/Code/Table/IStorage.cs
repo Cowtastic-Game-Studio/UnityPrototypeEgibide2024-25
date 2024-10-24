@@ -5,15 +5,20 @@ public interface IStorage
     /// <summary>
     /// Máximo de recursos que puede almacenar.
     /// </summary>
-    int MaxResources { get; }
+    GameResource type { get; }
+
+    /// <summary>
+    /// Máximo de recursos que puede almacenar.
+    /// </summary>
+    int maxResources { get; }
 
     /// <summary>
     /// Nivel del almacenamiento.
     /// </summary>
-    int Level { get; }
+    int level { get; }
 
     /// <summary>
     /// Cantidad de recursos actualmente almacenados.
     /// </summary>
-    int Resource { get; }
+    int resource { get; }
 }
