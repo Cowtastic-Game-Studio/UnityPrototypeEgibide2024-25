@@ -42,6 +42,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 GamePhaseManager.Update();
             }
+
+            #region CheatCodes
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                GameCalendar.NextDay();
+                Debug.Log("NextDay: " + GameCalendar.CurrentDay);
+            }
+            #endregion
         }
 
         private void addCalendarEvents()
