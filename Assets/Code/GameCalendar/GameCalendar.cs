@@ -1,38 +1,41 @@
-public class GameCalendar
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    private int currentDay;
-    private int currentWeek;
-    private GameCalendarEventManager eventManager;
-
-    public GameCalendar()
+    public class GameCalendar
     {
-        currentDay = 0;
-        currentWeek = 0;
-        eventManager = new GameCalendarEventManager();
-    }
+        private int currentDay;
+        private int currentWeek;
+        private GameCalendarEventManager eventManager;
 
-    // Avanzar al siguiente día
-    public void NextDay()
-    {
-        currentDay++;
-        // Al final de cada semana
-        if (currentDay % 7 == 0)
+        public GameCalendar()
         {
-            currentWeek++;
-            CheckForEvent();
+            currentDay = 0;
+            currentWeek = 0;
+            eventManager = new GameCalendarEventManager();
         }
-    }
 
-    // Comprobar si debe ocurrir un evento
-    public void CheckForEvent()
-    {
-        // Dispara un evento aleatorio
-        eventManager.TriggerRandomEvent();
-    }
+        // Avanzar al siguiente día
+        public void NextDay()
+        {
+            currentDay++;
+            // Al final de cada semana
+            if (currentDay % 7 == 0)
+            {
+                currentWeek++;
+                CheckForEvent();
+            }
+        }
 
-    // Agregar eventos al calendario
-    public void AddCalendarEvent(CalendarEvent calendarEvent)
-    {
-        eventManager.AddEvent(calendarEvent);
+        // Comprobar si debe ocurrir un evento
+        public void CheckForEvent()
+        {
+            // Dispara un evento aleatorio
+            eventManager.TriggerRandomEvent();
+        }
+
+        // Agregar eventos al calendario
+        public void AddCalendarEvent(CalendarEvent calendarEvent)
+        {
+            eventManager.AddEvent(calendarEvent);
+        }
     }
 }

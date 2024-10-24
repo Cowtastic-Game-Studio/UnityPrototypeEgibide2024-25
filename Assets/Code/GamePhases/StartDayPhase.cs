@@ -1,21 +1,24 @@
 using UnityEngine;
 
-public class StartDayPhase : IGamePhase
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    public void EnterPhase()
+    public class StartDayPhase : IGamePhase
     {
-        // Lógica de inicialización
-        Debug.Log("Empieza el día. Roba 5 cartas.");
-    }
+        public void EnterPhase()
+        {
+            // Lógica de inicialización
+            Debug.Log("Empieza el día. Roba 5 cartas.");
+        }
 
-    public void ExecutePhase()
-    {
-        // Lógica principal, lo que sucede durante esta fase
-    }
+        public void ExecutePhase()
+        {
+            // Lógica principal, lo que sucede durante esta fase
+        }
 
-    public void EndPhase()
-    {
-        Debug.Log("Termina la fase de empezar el día.");
+        public void EndPhase()
+        {
+            Debug.Log("Termina la fase de empezar el día.");
+        }
     }
 }
 

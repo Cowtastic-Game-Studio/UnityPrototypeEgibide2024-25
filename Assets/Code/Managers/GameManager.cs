@@ -1,52 +1,55 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    public static GameManager Instance { get; private set; }
-
-    public GamePhaseManager GamePhaseManager { get; private set; }
-    public GameCalendar GameCalendar { get; private set; }
-    // Puedes añadir más gestores aquí (AudioManager, UIManager, etc.)
-
-    private void Awake()
+    public class GameManager : MonoBehaviour
     {
-        if (Instance != null && Instance != this)
+        public static GameManager Instance { get; private set; }
+
+        public GamePhaseManager GamePhaseManager { get; private set; }
+        public GameCalendar GameCalendar { get; private set; }
+        // Puedes añadir más gestores aquí (AudioManager, UIManager, etc.)
+
+        private void Awake()
         {
-            Destroy(gameObject);
-            return;
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+            // Para mantenerlo entre escenas, creo que no sera necesario !!!
+            DontDestroyOnLoad(gameObject);
+
+            InitializeManagers();
         }
 
-        Instance = this;
-        // Para mantenerlo entre escenas, creo que no sera necesario !!!
-        DontDestroyOnLoad(gameObject);
-
-        InitializeManagers();
-    }
-
-    private void InitializeManagers()
-    {
-        // Instanciar cualquier otro sistema que quieras manejar desde aquí
-        GamePhaseManager = new GamePhaseManager();
-        GameCalendar = new GameCalendar();
-        // Instanciar otros managers si es necesario
-
-        addCalendarEvents();
-    }
-
-    private void Update()
-    {
-        // Puedes delegar el Update a los distintos sistemas si es necesario
-        if (GamePhaseManager != null)
+        private void InitializeManagers()
         {
-            GamePhaseManager.Update();
-        }
-    }
+            // Instanciar cualquier otro sistema que quieras manejar desde aquí
+            GamePhaseManager = new GamePhaseManager();
+            GameCalendar = new GameCalendar();
+            // Instanciar otros managers si es necesario
 
-    private void addCalendarEvents()
-    {
-        GameCalendar.AddCalendarEvent(new HarvestDayEvent());
-        GameCalendar.AddCalendarEvent(new CowDayEvent());
-        GameCalendar.AddCalendarEvent(new PlagueEvent());
-        GameCalendar.AddCalendarEvent(new BrokenFridgeEvent());
+            addCalendarEvents();
+        }
+
+        private void Update()
+        {
+            // Puedes delegar el Update a los distintos sistemas si es necesario
+            if (GamePhaseManager != null)
+            {
+                GamePhaseManager.Update();
+            }
+        }
+
+        private void addCalendarEvents()
+        {
+            GameCalendar.AddCalendarEvent(new HarvestDayEvent());
+            GameCalendar.AddCalendarEvent(new CowDayEvent());
+            GameCalendar.AddCalendarEvent(new PlagueEvent());
+            GameCalendar.AddCalendarEvent(new BrokenFridgeEvent());
+        }
     }
 }

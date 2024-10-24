@@ -1,42 +1,45 @@
-public class GamePhaseManager
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    private IGamePhase currentPhase;
-
-    public void SetPhase(IGamePhase newPhase)
+    public class GamePhaseManager
     {
-        if (currentPhase != null)
-        {
-            currentPhase.EndPhase();
-        }
-        currentPhase = newPhase;
-        currentPhase.EnterPhase();
-    }
+        private IGamePhase currentPhase;
 
-    public void NextPhase()
-    {
-        if (currentPhase is StartDayPhase)
+        public void SetPhase(IGamePhase newPhase)
         {
-            SetPhase(new PlaceCardsPhase());
+            if (currentPhase != null)
+            {
+                currentPhase.EndPhase();
+            }
+            currentPhase = newPhase;
+            currentPhase.EnterPhase();
         }
-        else if (currentPhase is PlaceCardsPhase)
-        {
-            SetPhase(new ActionPointsPhase());
-        }
-        else if (currentPhase is ActionPointsPhase)
-        {
-            SetPhase(new MarketPhase());
-        }
-        else if (currentPhase is MarketPhase)
-        {
-            SetPhase(new StartDayPhase()); // Comienza un nuevo día
-        }
-    }
 
-    public void Update()
-    {
-        if (currentPhase != null)
+        public void NextPhase()
         {
-            currentPhase.ExecutePhase();
+            if (currentPhase is StartDayPhase)
+            {
+                SetPhase(new PlaceCardsPhase());
+            }
+            else if (currentPhase is PlaceCardsPhase)
+            {
+                SetPhase(new ActionPointsPhase());
+            }
+            else if (currentPhase is ActionPointsPhase)
+            {
+                SetPhase(new MarketPhase());
+            }
+            else if (currentPhase is MarketPhase)
+            {
+                SetPhase(new StartDayPhase()); // Comienza un nuevo día
+            }
+        }
+
+        public void Update()
+        {
+            if (currentPhase != null)
+            {
+                currentPhase.ExecutePhase();
+            }
         }
     }
 }
