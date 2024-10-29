@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 #if UNITY_EDITOR
 #endif
@@ -41,19 +40,19 @@ public class DeckAndHandManager : MonoBehaviour
     /// </summary>
     void InitializeDeck(int numberOfCards)
     {
-        for(int i = 0; i < numberOfCards; i++)
+        for (int i = 0; i < numberOfCards; i++)
         {
             //Instanciar un nuevo gameObject de carta
             GameObject newCard = Instantiate(cardPrefab, deckArea);
             //Establece nombre y atributos de las cartas
-            newCard.name="Carta" + (i+1);
+            newCard.name = "Carta" + (i + 1);
             //Restablecer la posiion dentro del area de mazo
             newCard.transform.localPosition = Vector3.zero;
             //Agregar carta al mazo
             DrawDeck.Add(newCard);
         }
     }
-   
+
 
     /// <summary>
     /// La quid de la cuestion, esto se encarga de robar las ultimas cartas del mazo, y de trasladarlas a la mano. Otra funcion las ordena y coloca mas adelante
@@ -61,7 +60,7 @@ public class DeckAndHandManager : MonoBehaviour
     public void MoveLastCardsToHand(int cardsToDraw)
     {
         // Mover hasta el numero de cartas que recibe, o menos si el mazo tiene menos de dicho numero
-            cardsToDraw = Mathf.Min(cardsToDraw, DrawDeck.Count);
+        cardsToDraw = Mathf.Min(cardsToDraw, DrawDeck.Count);
 
         for (int i = 0; i < cardsToDraw; i++)
         {
@@ -75,7 +74,7 @@ public class DeckAndHandManager : MonoBehaviour
             GameObject newCard = Instantiate(cardPrefab, handArea);
 
             // Establecer las propiedades de la nueva carta basadas en la original
-            newCard.name = originalCard.name; 
+            newCard.name = originalCard.name;
             // TODO: Asignar el resto de atributos de las cartas dependiendo de que tipo sea agregas unos los atributos.
 
             //Destruye el objeto de la carta que has retirado para que no se quede una carta vacia en la mano.
@@ -111,16 +110,19 @@ public class DeckAndHandManager : MonoBehaviour
     /// <summary>
     /// El metodo de robo que se ejecuta a principio de la fase de inicio.
     /// </summary>
-    public void Draw(){
-            MoveLastCardsToHand(drawCards);
+    public void Draw()
+    {
+        MoveLastCardsToHand(drawCards);
     }
 
     /// <summary>
     /// El metodo de mulligan
     /// </summary>
-    public void Mulligan(){
+    public void Mulligan()
+    {
         int handNumber = HandDeck.Count;
-        if(HandDeck.Count >= handNumber){
+        if (HandDeck.Count >= handNumber)
+        {
             for (int i = 0; i < handNumber; i++)
             {
                 // Obtener la ultima carta en el mazo
@@ -135,19 +137,19 @@ public class DeckAndHandManager : MonoBehaviour
                 // Establecer las propiedades de la nueva carta basadas en la original
                 newCard.name = originalCard.name;
                 // TODO: Asignar el resto de atributos de las cartas
-                
+
                 //Destruye el objeto de la carta que has retirado para que no se quede una carta vacia en la mano.
                 Destroy(originalCard);
-                
+
                 // Agregar la nueva carta a la mano e insertar al principio para mantener la mas reciente a la izquierda
                 DrawDeck.Insert(0, newCard);
             }
-        drawCards = (handNumber - 1);
-        if(handNumber < 2)
-        {
-            // TODO: Desactivar el boton de mulligan
-        }
-        this.Draw();
+            drawCards = (handNumber - 1);
+            if (handNumber < 2)
+            {
+                // TODO: Desactivar el boton de mulligan
+            }
+            this.Draw();
         }
     }
 
@@ -158,22 +160,22 @@ public class DeckAndHandManager : MonoBehaviour
         InitializeDeck(10);
     }
     /// <summary>
-    /// Permite mover las �ltimas cartas a la mano al presionar el bot�n derecho del rat�n
+    /// Controles para hacer pruebas
     /// </summary>
 
     private void Update()
     {
         //Esto son inputs para probar la funcionalidad, destruirlos en cuanto este mapeado con botones.
-        // Si se presiona el boton izquierdo del raton en el editor
-        if (Input.GetMouseButtonDown(0))
+        // Si se presiona el boton derecho del raton en el editor
+        if (Input.GetMouseButtonDown(1))
         {
-             Draw();
+            Draw();
         }
 
-        // Si se presiona el boton derecho del raton en el editor
-         if (Input.GetMouseButtonDown(1))
+        // Si se presiona el boton central del raton en el editor
+        if (Input.GetMouseButtonDown(2))
         {
-             Mulligan();
+            Mulligan();
         }
     }
 #endif

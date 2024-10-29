@@ -58,7 +58,7 @@ namespace CowtasticGameStudio.UI
         void Update()
         {
             // Si se presiona el botón asignado
-            if (Input.GetMouseButtonDown(2))
+            if (Input.GetMouseButtonDown(0))
             {
                 // Inicia el proceso de arrastre
                 HandleMouseDown();
@@ -69,7 +69,7 @@ namespace CowtasticGameStudio.UI
                 HandleMouseDrag();
             }
             // Si se suelta el botón del ratón
-            if (Input.GetMouseButtonUp(2))
+            if (Input.GetMouseButtonUp(0))
             {
                 // Detiene el arrastre y coloca el objeto en su nueva posición o lo devuelve a su lugar original
                 HandleMouseUp();
