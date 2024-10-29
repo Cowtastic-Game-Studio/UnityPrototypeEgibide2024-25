@@ -10,21 +10,30 @@ public class CleaningTable : MonoBehaviour
     /// <summary>
     /// Cuando se le llama, quita las cartas colocadas en el tablero y las introduce en el mazo de descartes
     /// </summary>
-    public void WipeBoard()
+    private void WipeBoard()
     {
-        // Find all GameObjects tagged as "card"
-        GameObject[] cardsOnBoard = GameObject.FindGameObjectsWithTag("Carta");
+        // Get all GameObjects with the "Card" tag in the scene
+        GameObject[] cardsInScene = GameObject.FindGameObjectsWithTag("Carta");
 
-        // Move each card to Descartes
-        foreach (GameObject card in cardsOnBoard)
+        foreach (GameObject card in cardsInScene)
         {
-            // Set Descartes as the new parent
-            card.transform.SetParent(descartes.transform);
-            // Optional: Reset local position, rotation, etc., as needed
-            card.transform.localPosition = Vector3.zero;  // Position at the center of Descartes
-            card.transform.localRotation = Quaternion.identity;
+            // Perform a raycast downward from each card to check if it's over a "Place"
+            Ray ray = new Ray(card.transform.position, Vector3.down);
+            if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.CompareTag("Place"))
+            {
+
+                // Set Descartes as the new parent
+                card.transform.SetParent(descartes.transform);
+                // Optional: Reset local position, rotation, etc., as needed
+                card.transform.localPosition = Vector3.zero;  // Position at the center of Descartes
+                card.transform.localRotation = Quaternion.identity;
+
+                // Optionally disable or hide the card from the deck
+                // card.SetActive(false);
+            }
         }
     }
+
     void Update()
     {
 #if UNITY_EDITOR

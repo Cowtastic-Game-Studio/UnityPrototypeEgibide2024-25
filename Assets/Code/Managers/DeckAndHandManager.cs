@@ -28,7 +28,7 @@ public class DeckAndHandManager : MonoBehaviour
     /// <summary>
     /// Espaciado entre cartas
     /// </summary>
-    public float cardSpacing = 1;
+    public float cardSpacing = 0.4f;
 
     void Start()
     {
