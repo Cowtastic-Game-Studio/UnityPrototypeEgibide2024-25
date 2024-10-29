@@ -1,6 +1,6 @@
-﻿namespace CowtasticGameStudio.MuuliciousHarvest.Tabletop
+﻿namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    internal interface ICard
+    public interface ICard
     {
     }
 }
