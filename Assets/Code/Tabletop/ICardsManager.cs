@@ -1,13 +1,16 @@
-﻿namespace CowtasticGameStudio.MuuliciousHarvest.Tabletop
+﻿using System.Collections.Generic;
+
+namespace CowtasticGameStudio.MuuliciousHarvest.Tabletop
 {
     internal interface ICardsManager
     {
         #region Properties
 
-        public IDeck DrawDeck { get; }
-        public IDeck HandDeck { get; }
-        public IDeck DiscardDeck { get; }
-        public IDeck StartDeck { get; }
+        public IDeck Deck { get; }
+
+        public List<ICard> Hand { get; }
+
+        public IDeck DiscardPile { get; }
 
         #endregion
 
