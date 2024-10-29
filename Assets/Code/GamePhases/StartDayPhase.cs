@@ -12,9 +12,14 @@ public class StartDayPhase : IGamePhase
 
         public void ExecutePhase()
         {
-            hand.Mulligan();
+            
         }
 
+        public void Mulligan()
+        {
+            //Llama a Mulligan
+            hand.Mulligan();
+        }
         public void EndPhase()
         {
             
