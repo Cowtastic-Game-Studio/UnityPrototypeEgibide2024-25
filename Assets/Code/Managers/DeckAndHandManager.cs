@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 #if UNITY_EDITOR
 #endif
@@ -12,11 +13,11 @@ public class DeckAndHandManager : MonoBehaviour
     /// <summary>
     /// Lista de cartas en el mazo
     /// </summary>
-    public List<GameObject> deck = new List<GameObject>();
+    public List<GameObject> DrawDeck = new List<GameObject>();
     /// <summary>
     /// Cartas en la mano
     /// </summary>
-    public List<GameObject> hand = new List<GameObject>();
+    public List<GameObject> HandDeck = new List<GameObject>();
     /// <summary>
     /// Lugar donde se haya el mazo
     /// </summary>
@@ -31,78 +32,120 @@ public class DeckAndHandManager : MonoBehaviour
     public float cardSpacing = 0.4f;
 
     /// <summary>
-    /// Inicializa un mazo con un número específico de cartas, este ha sido usado para las pruebas, borrar mas adelante o intercambiarlo por el mazo en si
+    /// Variable para poder decidir desde el editor la cantidad de cartas que se roban por turno.
     /// </summary>
-    /// <param name="numberOfCards">Cuantas cartas quieres generar</param>
-    void InitializeDeck(int numberOfCards)
+    public int drawCards;
+
+    /// <summary>
+    /// Crea un mazo con un numero de cartas a especificar para hacer pruebas.
+    /// </summary>
+    void initializeDeck(int numberOfCards)
     {
-        for (int i = 0; i < numberOfCards; i++)
+        for(int i = 0; i < numberOfCards; i++)
         {
-            // Instanciar un nuevo GameObject de carta
+            //Instanciar un nuevo gameObject de carta
             GameObject newCard = Instantiate(cardPrefab, deckArea);
-
-            // Establecer un nombre único o atributos para distinguir las cartas
-            newCard.name = "Carta " + (i + 1);
-            newCard.transform.localPosition = Vector3.zero;  // Restablecer posición dentro de deckArea
-
-            // Agregar la carta a la lista del mazo
-            deck.Add(newCard);
+            //Establece nombre y atributos de las cartas
+            newCard.name="Carta" + (i+1);
+            //Restablecer la posiion dentro del area de mazo
+            newCard.transform.localPosition = Vector3.zero;
+            //Agregar carta al mazo
+            DrawDeck.Add(newCard);
         }
     }
 
     /// <summary>
-    /// La quid de la cuestion, esto se encarga de robar las 4 ultimas cartas del mazo, y de trasladarlas a la mano. Otra funcion las ordena y coloca mas adelante
+    /// La quid de la cuestion, esto se encarga de robar las ultimas cartas del mazo, y de trasladarlas a la mano. Otra funcion las ordena y coloca mas adelante
     /// </summary>
-    public void MoveLastCardsToHand()
+    public void MoveLastCardsToHand(int cardsToDraw)
     {
-        // Mover hasta 4 cartas, o menos si el mazo tiene menos de 4
-        int cardsToMove = Mathf.Min(4, deck.Count);
+        // Mover hasta el numero de cartas que recibe, o menos si el mazo tiene menos de dicho numero
+            cardsToDraw = Mathf.Min(cardsToDraw, DrawDeck.Count);
 
-        for (int i = 0; i < cardsToMove; i++)
+        for (int i = 0; i < cardsToDraw; i++)
         {
-            // Obtener la última carta en el mazo
-            GameObject originalCard = deck[deck.Count - 1];
+            // Obtener la ï¿½ltima carta en el mazo
+            GameObject originalCard = DrawDeck[DrawDeck.Count - 1];
 
             // Quitar la carta del mazo
-            deck.RemoveAt(deck.Count - 1);
+            DrawDeck.RemoveAt(DrawDeck.Count - 1);
 
             // Instanciar una nueva carta del prefab
             GameObject newCard = Instantiate(cardPrefab, handArea);
 
             // Establecer las propiedades de la nueva carta basadas en la original
-            newCard.name = originalCard.name; // Copiar el nombre o establecer cualquier otro atributo según sea necesario
+            newCard.name = originalCard.name; 
+            // TODO: Asignar el resto de atributos de las cartas
+                
+            //Destruye el objeto de la carta que has retirado para que no se quede una carta vacia en la mano.
+            Destroy(originalCard);
 
-            // Las futuras propiedades de cartas aplicarlas aquí, ejemplo para ello
-            // En caso de tener script con atributos, es posible hacerlo asi:
-            // CardAttributes originalAttributes = originalCard.GetComponent<CardAttributes>();
-            // CardAttributes newAttributes = newCard.GetComponent<CardAttributes>();
-            // newAttributes.CopyFrom(originalAttributes); // Implementar el método CopyFrom para copiar datos
-
-            // Agregar la nueva carta a la mano e insertar al principio para mantener la más reciente a la izquierda
-            hand.Insert(0, newCard);
+            // Agregar la nueva carta a la mano e insertar al principio para mantener la mas reciente a la izquierda
+            HandDeck.Insert(0, newCard);
         }
 
-        // Reorganizar las cartas en la mano después de mover todas las cartas
+        // Reorganizar las cartas en la mano despuï¿½s de mover todas las cartas
         ArrangeHand();
     }
 
     /// <summary>
-    /// Organiza las cartas en la mano en un diseño horizontal con espacio de 1, es el encargado principal de ello
+    /// Organiza las cartas en la mano en un diseï¿½o horizontal con espacio de 1, es el encargado principal de ello
     /// </summary>
     private void ArrangeHand()
     {
-        // Obtener la referencia de la cámara principal para que estén mirando a la camara
+        // Obtener la referencia de la cï¿½mara principal para que estï¿½n mirando a la camara
         Camera mainCamera = Camera.main;
 
-        for (int i = 0; i < hand.Count; i++)
+        for (int i = 0; i < HandDeck.Count; i++)
         {
-            GameObject card = hand[i];
-            // Posicionar la carta según su índice y espacio
+            GameObject card = HandDeck[i];
+            // Posicionar la carta segï¿½n su ï¿½ndice y espacio
             card.transform.localPosition = new Vector3(i * cardSpacing, 0, 0);
 
-            // Asegurarse de que la carta mantenga su rotación original del prefab
-            // Establecer a la rotación original del prefab si es necesario
+            // Asegurarse de que la carta mantenga su rotaciï¿½n original del prefab
+            // Establecer a la rotaciï¿½n original del prefab si es necesario
             card.transform.rotation = Quaternion.identity;
+        }
+    }
+    /// <summary>
+    /// El metodo de robo que se ejecuta a principio de la fase de inicio.
+    /// </summary>
+    private void Draw(){
+            MoveLastCardsToHand(drawCards);
+    }
+
+    /// <summary>
+    /// El metodo de mulligan
+    /// </summary>
+    private void Mulligan(int handNumber){
+        if(HandDeck.Count >= handNumber){
+            for (int i = 0; i < handNumber; i++)
+            {
+                // Obtener la ultima carta en el mazo
+                GameObject originalCard = HandDeck[HandDeck.Count - 1];
+
+                // Quitar la carta de la lista de la mano.
+                HandDeck.RemoveAt(HandDeck.Count - 1);
+
+                // Instanciar una nueva carta del prefab
+                GameObject newCard = Instantiate(cardPrefab, handArea);
+
+                // Establecer las propiedades de la nueva carta basadas en la original
+                newCard.name = originalCard.name;
+                // TODO: Asignar el resto de atributos de las cartas
+                
+                //Destruye el objeto de la carta que has retirado para que no se quede una carta vacia en la mano.
+                Destroy(originalCard);
+                
+                // Agregar la nueva carta a la mano e insertar al principio para mantener la mï¿½s reciente a la izquierda
+                DrawDeck.Insert(0, newCard);
+            }
+        drawCards = (handNumber - 1);
+        if(handNumber < 2)
+        {
+            // TODO: Desactivar el boton de mulligan
+        }
+        this.Draw();
         }
     }
 
@@ -113,14 +156,19 @@ public class DeckAndHandManager : MonoBehaviour
         InitializeDeck(10);
     }
     /// <summary>
-    /// Permite mover las últimas cartas a la mano al presionar el botón derecho del ratón
+    /// Permite mover las ï¿½ltimas cartas a la mano al presionar el botï¿½n derecho del ratï¿½n
     /// </summary>
     private void Update()
     {
-        // Si se presiona el botón derecho del ratón en el editor
-        if (Input.GetMouseButtonDown(1))
+        // Si se presiona el botï¿½n derecho del ratï¿½n en el editor
+        if (Input.GetMouseButtonDown(0))
         {
-            MoveLastCardsToHand();
+             Draw();
+        }
+
+         if (Input.GetMouseButtonDown(1))
+        {
+             Mulligan(HandDeck.Count);
         }
     }
 #endif

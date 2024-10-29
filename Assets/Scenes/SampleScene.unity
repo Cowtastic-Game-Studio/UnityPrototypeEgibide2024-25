@@ -132,7 +132,6 @@ GameObject:
   m_Component:
   - component: {fileID: 69565771}
   - component: {fileID: 69565770}
-  - component: {fileID: 69565772}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -207,22 +206,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 81.491, y: 0, z: 0}
---- !u!114 &69565772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69565769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 974993a2ad8a241489f04d3efe2e1b2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  deck: []
-  hand: []
-  handArea: {fileID: 69565771}
-  cardSpacing: 30
 --- !u!1 &99736614
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,11 +252,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 742497270}
-  deck: []
-  hand: []
+  DrawDeck: []
+  HandDeck: []
   deckArea: {fileID: 631927308}
   handArea: {fileID: 69565771}
-  cardSpacing: 1
+  cardSpacing: 1.2
+  drawCards: 5
 --- !u!114 &99736618
 MonoBehaviour:
   m_ObjectHideFlags: 0
