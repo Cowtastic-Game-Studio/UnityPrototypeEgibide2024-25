@@ -39,7 +39,7 @@ public class DeckAndHandManager : MonoBehaviour
     /// <summary>
     /// Crea un mazo con un numero de cartas a especificar para hacer pruebas.
     /// </summary>
-    void initializeDeck(int numberOfCards)
+    void InitializeDeck(int numberOfCards)
     {
         for(int i = 0; i < numberOfCards; i++)
         {
