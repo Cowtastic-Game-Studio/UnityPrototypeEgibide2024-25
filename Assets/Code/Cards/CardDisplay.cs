@@ -23,20 +23,24 @@ public class CardDisplay : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        card.Print();
+        if (card != null)
+        {
 
-        // Configuración básica de texto y sprites
-        nameText.text = card.name;
-        descriptionText.text = card.description;
-        artworkImage.sprite = card.artwork;
-        baseCardImage.sprite = card.baseCard;
-        actionPointsText.text = card.actionPointsCost.ToString();
+            card.Print();
 
-        // Configuración de textos para los recursos requeridos y producidos
-        requieredTypeText.text = FormatResources(card.requiredResources, true);
-        requieredQuantityText.text = FormatResources(card.requiredResources, false);
-        producedTypeText.text = FormatResources(card.producedResources, true);
-        producedQuantityText.text = FormatResources(card.producedResources, false);
+            // Configuración básica de texto y sprites
+            nameText.text = card.name;
+            descriptionText.text = card.description;
+            artworkImage.sprite = card.artwork;
+            baseCardImage.sprite = card.baseCard;
+            actionPointsText.text = card.actionPointsCost.ToString();
+
+            // Configuración de textos para los recursos requeridos y producidos
+            requieredTypeText.text = FormatResources(card.requiredResources, true);
+            requieredQuantityText.text = FormatResources(card.requiredResources, false);
+            producedTypeText.text = FormatResources(card.producedResources, true);
+            producedQuantityText.text = FormatResources(card.producedResources, false);
+        }
     }
 
     // Método para formatear los recursos en un string
