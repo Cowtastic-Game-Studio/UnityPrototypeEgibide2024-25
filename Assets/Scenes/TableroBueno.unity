@@ -1467,11 +1467,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 345353864946811313, guid: a2278575cc373484ea469a2e1548e931, type: 3}
-  deck: []
-  hand: []
+  DrawDeck: []
+  HandDeck: []
   deckArea: {fileID: 287047169}
   handArea: {fileID: 1255965408}
   cardSpacing: 0.4
+  drawCards: 5
 --- !u!114 &566125683
 MonoBehaviour:
   m_ObjectHideFlags: 0
