@@ -1,20 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-
-[Serializable]
-public class ResourceAmount : MonoBehaviour
+[System.Serializable]
+public struct ResourceAmount
 {
     #region Propiedades de clase
     /// <summary>
     /// Tipo de recurso
     /// </summary>
-    private GameResource resourceType;
+    public GameResource resourceType;
 
     /// <summary>
     /// Cantidad del recurso
     /// </summary>
-    private int quantity;
+    public int resourceQuantity;
     #endregion
 }
