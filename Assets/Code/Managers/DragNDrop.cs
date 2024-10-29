@@ -43,7 +43,7 @@ namespace CowtasticGameStudio.UI
         /// <summary>
         /// Altura adicional para colocar el objeto sobre el "Place"
         /// </summary>
-        public float placementHeightOffset = 1f;
+        public float placementHeightOffset = 0.5f;
         /// <summary>
         /// Guarda el color original para su posterior restauración
         /// </summary>
