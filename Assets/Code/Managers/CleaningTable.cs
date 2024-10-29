@@ -12,23 +12,23 @@ public class CleaningTable : MonoBehaviour
     /// </summary>
     private void WipeBoard()
     {
-        // Get all GameObjects with the "Card" tag in the scene
+        // Busca todas las cartas
         GameObject[] cardsInScene = GameObject.FindGameObjectsWithTag("Carta");
 
         foreach (GameObject card in cardsInScene)
         {
-            // Perform a raycast downward from each card to check if it's over a "Place"
+            // Usa un raycast desde cada carta para verificar si estan colocadas en el tablero
             Ray ray = new Ray(card.transform.position, Vector3.down);
             if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.CompareTag("Place"))
             {
 
-                // Set Descartes as the new parent
+                // Les pone Descartes como nuevo padre
                 card.transform.SetParent(descartes.transform);
-                // Optional: Reset local position, rotation, etc., as needed
-                card.transform.localPosition = Vector3.zero;  // Position at the center of Descartes
+                // Las mueve
+                card.transform.localPosition = Vector3.zero;
                 card.transform.localRotation = Quaternion.identity;
 
-                // Optionally disable or hide the card from the deck
+                // Si se requiere se pueden ocultar
                 // card.SetActive(false);
             }
         }
@@ -37,7 +37,7 @@ public class CleaningTable : MonoBehaviour
     void Update()
     {
 #if UNITY_EDITOR
-        // Check if "L" key is pressed and call WipeBoard
+        // Al presionar L limpia el teblero
         if (Input.GetKeyDown(KeyCode.L))
         {
             WipeBoard();

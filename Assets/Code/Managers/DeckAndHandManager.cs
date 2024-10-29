@@ -30,11 +30,6 @@ public class DeckAndHandManager : MonoBehaviour
     /// </summary>
     public float cardSpacing = 0.4f;
 
-    void Start()
-    {
-        InitializeDeck(10);  // Crear un mazo con 10 cartas
-    }
-
     /// <summary>
     /// Inicializa un mazo con un número específico de cartas, este ha sido usado para las pruebas, borrar mas adelante o intercambiarlo por el mazo en si
     /// </summary>
@@ -112,6 +107,11 @@ public class DeckAndHandManager : MonoBehaviour
     }
 
 #if UNITY_EDITOR
+    // Crear un mazo con 10 cartas
+    void Start()
+    {
+        InitializeDeck(10);
+    }
     /// <summary>
     /// Permite mover las últimas cartas a la mano al presionar el botón derecho del ratón
     /// </summary>
