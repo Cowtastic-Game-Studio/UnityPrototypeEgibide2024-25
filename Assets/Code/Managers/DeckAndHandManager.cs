@@ -1,97 +1,82 @@
 using System.Collections.Generic;
 using UnityEngine;
-#if UNITY_EDITOR
-#endif
 
 public class DeckAndHandManager : MonoBehaviour
 {
     /// <summary>
-    /// El prefab de la carta a instanciar, es decir, el modelo que se muestra en las manos
+    /// El prefab de la carta a instanciar, es decir, el modelo que se muestra en las manos.
     /// </summary>
     public GameObject cardPrefab;
 
     /// <summary>
-    /// Lista de cartas en el mazo
+    /// Lista de cartas en el mazo.
     /// </summary>
     public List<GameObject> DrawDeck = new List<GameObject>();
 
     /// <summary>
-    /// Cartas en la mano
+    /// Cartas en la mano.
     /// </summary>
     public List<GameObject> HandDeck = new List<GameObject>();
 
     /// <summary>
-    /// Lugar donde se haya el mazo
+    /// Lugar donde se encuentra el mazo.
     /// </summary>
     public Transform deckArea;
 
     /// <summary>
-    /// Lugar donde se haya la mano y se colocaran las cartas
+    /// Lugar donde se encuentra la mano y se colocarán las cartas.
     /// </summary>
     public Transform handArea;
 
     /// <summary>
-    /// Espaciado entre cartas
+    /// Espaciado entre cartas en la mano.
     /// </summary>
     public float cardSpacing = 0.4f;
 
     /// <summary>
-    /// Variable para poder decidir desde el editor la cantidad de cartas que se roban por turno.
+    /// Variable para definir desde el editor la cantidad de cartas a robar por turno.
     /// </summary>
     public int drawCards;
 
     /// <summary>
-    /// Crea un mazo con un número específico de cartas, utilizado aquí para pruebas de instanciación.
+    /// Inicializa un mazo con un número específico de cartas, para pruebas.
     /// </summary>
-    /// <param name="numberOfCards">Número de cartas a generar en el mazo para pruebas</param>
     void InitializeDeck(int numberOfCards)
     {
         for (int i = 0; i < numberOfCards; i++)
         {
-            // Instanciar un nuevo GameObject de carta en el área del mazo
+            // Instanciar un nuevo GameObject de carta
             GameObject newCard = Instantiate(cardPrefab, deckArea);
-
-            // Establece un nombre único para distinguir las cartas
+            // Establece nombre y atributos de las cartas
             newCard.name = "Carta" + (i + 1);
-
-            // Restablecer la posición inicial dentro del área de mazo
+            // Restablecer la posición dentro del área de mazo
             newCard.transform.localPosition = Vector3.zero;
-
-            // Agregar carta al mazo (lista DrawDeck)
+            // Agregar carta al mazo
             DrawDeck.Add(newCard);
         }
     }
 
     /// <summary>
-    /// Roba un número específico de cartas desde el mazo y las mueve a la mano,
-    /// destruyendo las cartas originales en el mazo para evitar duplicados en la escena.
+    /// Roba una cantidad específica de cartas desde el mazo y las mueve a la mano.
     /// </summary>
-    /// <param name="cardsToDraw">Número de cartas a robar y mover a la mano</param>
     public void MoveLastCardsToHand(int cardsToDraw)
     {
-        // Asegura que no se roben más cartas de las disponibles en el mazo
         cardsToDraw = Mathf.Min(cardsToDraw, DrawDeck.Count);
 
         for (int i = 0; i < cardsToDraw; i++)
         {
-            // Obtener la última carta en el mazo (último elemento en la lista DrawDeck)
-            GameObject originalCard = DrawDeck[DrawDeck.Count - 1];
+            // Obtener la última carta en el mazo
+            GameObject cardToMove = DrawDeck[DrawDeck.Count - 1];
 
-            // Quitar la carta del mazo (lista DrawDeck)
+            // Quitar la carta del mazo
             DrawDeck.RemoveAt(DrawDeck.Count - 1);
 
-            // Instanciar una nueva carta del prefab en el área de la mano (handArea)
-            GameObject newCard = Instantiate(cardPrefab, handArea);
+            // Cambiar la posición y padre de la carta para moverla a la mano
+            cardToMove.transform.SetParent(handArea);
+            cardToMove.transform.localPosition = new Vector3(i * cardSpacing, 0, 0);
 
-            // Establecer las propiedades de la nueva carta basadas en la original
-            newCard.name = originalCard.name;
-
-            // Destruir el objeto de la carta original para evitar duplicados en la escena
-            Destroy(originalCard);
-
-            // Agregar la nueva carta a la mano (lista HandDeck), insertándola al inicio
-            // para que la carta más reciente esté a la izquierda
-            HandDeck.Insert(0, newCard);
+            // Agregar la carta a la lista de la mano e insertar al principio
+            HandDeck.Insert(0, cardToMove);
         }
 
         // Reorganizar las cartas en la mano después de mover todas las cartas
@@ -99,29 +84,22 @@ public class DeckAndHandManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Organiza las cartas en la mano en un diseño horizontal con un espacio especificado entre cada carta,
-    /// asegurándose de que cada carta mantenga su rotación original.
+    /// Organiza las cartas en la mano en un diseño horizontal con espacio de 1.
     /// </summary>
     private void ArrangeHand()
     {
-        // Obtener la referencia de la cámara principal para orientar las cartas hacia ella
         Camera mainCamera = Camera.main;
 
         for (int i = 0; i < HandDeck.Count; i++)
         {
             GameObject card = HandDeck[i];
-
-            // Posicionar la carta en la mano, aplicando espaciado horizontal según su índice
             card.transform.localPosition = new Vector3(i * cardSpacing, 0, 0);
-
-            // Asegurarse de que la carta mantenga su rotación original del prefab
             card.transform.rotation = Quaternion.identity;
         }
     }
 
     /// <summary>
-    /// Método de robo que se ejecuta al principio de la fase de inicio, invocando
-    /// el método MoveLastCardsToHand para robar la cantidad especificada de cartas.
+    /// Método de robo que se ejecuta al inicio de la fase.
     /// </summary>
     public void Draw()
     {
@@ -129,71 +107,48 @@ public class DeckAndHandManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Método para hacer un "Mulligan", que devuelve las cartas de la mano al mazo
-    /// y permite robar de nuevo, destruyendo las cartas originales en la mano para evitar duplicados.
+    /// Método para realizar el mulligan y devolver cartas a la parte superior del mazo.
     /// </summary>
     public void Mulligan()
     {
         int handNumber = HandDeck.Count;
-
-        // Si el número de cartas en la mano es suficiente para un Mulligan
         if (HandDeck.Count >= handNumber)
         {
             for (int i = 0; i < handNumber; i++)
             {
-                // Obtener la última carta en la mano
-                GameObject originalCard = HandDeck[HandDeck.Count - 1];
-
-                // Quitar la carta de la lista de la mano
+                GameObject cardToMove = HandDeck[HandDeck.Count - 1];
                 HandDeck.RemoveAt(HandDeck.Count - 1);
 
-                // Instanciar una nueva carta en el área del mazo
-                GameObject newCard = Instantiate(cardPrefab, deckArea);
+                cardToMove.transform.SetParent(deckArea);
+                cardToMove.transform.localPosition = Vector3.zero;
 
-                // Establecer las propiedades de la nueva carta basadas en la original
-                newCard.name = originalCard.name;
-
-                // Destruir el objeto de la carta original para evitar duplicados en la escena
-                Destroy(originalCard);
-
-                // Agregar la nueva carta al mazo (lista DrawDeck) al inicio
-                DrawDeck.Insert(0, newCard);
+                DrawDeck.Insert(0, cardToMove);
             }
-
-            // Actualizar la cantidad de cartas para robar en el próximo Draw
             drawCards = (handNumber - 1);
-
             if (handNumber < 2)
             {
-                // TODO: Desactivar el botón de Mulligan si se cumplen las condiciones
+                // Desactivar botón de mulligan si es necesario
             }
-
-            // Ejecuta un nuevo Draw después del Mulligan
             this.Draw();
         }
     }
 
 #if UNITY_EDITOR
-    /// <summary>
-    /// Inicializa el mazo con 10 cartas al iniciar el juego en modo Editor para pruebas.
-    /// </summary>
     void Start()
     {
-        InitializeDeck(10);
+        InitializeDeck(10); // Crea un mazo con 10 cartas para pruebas
     }
 
     /// <summary>
-    /// Controles para hacer pruebas en modo Editor: Click derecho para Draw y click central para Mulligan.
+    /// Controles para hacer pruebas desde el editor.
     /// </summary>
     private void Update()
     {
-        // Prueba para ejecutar el método Draw cuando se presiona el botón derecho del ratón
         if (Input.GetMouseButtonDown(1))
         {
             Draw();
         }
 
-        // Prueba para ejecutar el método Mulligan cuando se presiona el botón central del ratón
         if (Input.GetMouseButtonDown(2))
         {
             Mulligan();
