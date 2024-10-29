@@ -1,10 +1,15 @@
 using System;
+using UnityEngine.UI;
 
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class MarketPhase : IGamePhaseWUndo
     {
+
+        
+
+        public Button cowPage,CustomerPage,WheatPage;
         public ActionManager<ICommand> ActionManager { get; private set; }
 
         public MarketPhase()
@@ -25,6 +30,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             Console.WriteLine("Executing Market Phase");
 
         }
+   
 
         public void EndPhase()
         {
