@@ -1,20 +1,22 @@
-    public class StartDayPhase : IGamePhase
+using CowtasticGameStudio.MuuliciousHarvest;
+using UnityEngine.XR;
+
+public class StartDayPhase : IGamePhase
     {
     	public DeckAndHandManager hand;
         public void EnterPhase()
         {
-            // L�gica de inicializaci�n
-            Debug.Log("Empieza el d�a. Roba 5 cartas.");
+            // Llama a Robo
             hand.Draw();
         }
 
         public void ExecutePhase()
         {
-            // L�gica principal, lo que sucede durante esta fase
+            hand.Mulligan();
         }
 
         public void EndPhase()
         {
-            Debug.Log("Termina la fase de empezar el d�a.");
+            
         }
-
+    }
