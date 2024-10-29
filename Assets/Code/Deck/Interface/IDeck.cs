@@ -14,8 +14,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Tabletop
         #endregion
 
         #region Methods
-
-
         /// <summary>
         /// Barajea las cartas
         /// </summary>
@@ -32,7 +30,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Tabletop
         /// </summary>
         /// <param name="card">Carta a colocar</param>
         public void Place(ICard card);
-
 
         #endregion
 
