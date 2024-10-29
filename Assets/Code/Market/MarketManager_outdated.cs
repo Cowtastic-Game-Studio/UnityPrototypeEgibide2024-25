@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class MarketManager : MonoBehaviour
+public class MarketManagerOutdated : MonoBehaviour
 {
 
     //objetos de los botones para comprar
