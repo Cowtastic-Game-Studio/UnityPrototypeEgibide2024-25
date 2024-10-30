@@ -1,19 +1,22 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Client", menuName = "Cards/Client")]
-public class BaseClient : CardTemplate
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    public BaseClient()
+    [CreateAssetMenu(fileName = "New Client", menuName = "Cards/Client")]
+    public class BaseClient : CardTemplate
     {
-        name = "Client";
-        lifeCycleDays = 1;
-    }
+        public BaseClient()
+        {
+            name = "Client";
+            lifeCycleDays = 1;
+        }
 
-    private void Awake()
-    {
-        // Cargar los sprites directamente desde la carpeta Resources
-        artwork = Resources.Load<Sprite>("Cards/Client");
-        baseCard = Resources.Load<Sprite>("Base");
-    }
+        private void Awake()
+        {
+            // Cargar los sprites directamente desde la carpeta Resources
+            artwork = Resources.Load<Sprite>("Cards/Client");
+            baseCard = Resources.Load<Sprite>("Base");
+        }
 
+    }
 }

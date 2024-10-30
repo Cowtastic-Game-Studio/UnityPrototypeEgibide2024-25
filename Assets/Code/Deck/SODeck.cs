@@ -1,9 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SODeck : ScriptableObject
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    // TODO cambiar esto cuando Alba termine con el scriptObject de cartas
-    public List<ICard> Cards;
+    [CreateAssetMenu(fileName = "New Deck", menuName = "Cards/Deck")]
+    public class SODeck : ScriptableObject
+    {
+        //public List<CardTemplate> Cards;
+        public List<GameObject> Cards;
+    }
 }
