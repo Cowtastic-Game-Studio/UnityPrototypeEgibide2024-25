@@ -1,9 +1,8 @@
-using CowtasticGameStudio.MuuliciousHarvest;
-using UnityEngine.XR;
-
-public class StartDayPhase : IGamePhase
+namespace CowtasticGameStudio.MuuliciousHarvest
+{
+    public class StartDayPhase : IGamePhase
     {
-    	public DeckAndHandManager hand;
+        public DeckAndHandManager hand;
         /// <summary>
         /// Acciones a ejecutar al inicio de la fase.
         /// </summary>
@@ -15,10 +14,10 @@ public class StartDayPhase : IGamePhase
         /// <summary>
         /// Acciones a Realizar durante la fase
         /// </summary>
-                            
+
         public void ExecutePhase()
         {
-            
+
         }
         /// <summary>
         /// Funcion que llama al mulligan
@@ -33,6 +32,7 @@ public class StartDayPhase : IGamePhase
         /// </summary>
         public void EndPhase()
         {
-            
+
         }
     }
+}
