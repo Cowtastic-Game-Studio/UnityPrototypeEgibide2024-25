@@ -118,8 +118,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             for (int i = 0; i < HandDeck.Count; i++)
             {
                 GameObject card = HandDeck[i];
+
+                // Establece la posición de la carta en la mano
                 card.transform.localPosition = new Vector3(i * cardSpacing, 0, 0);
-                card.transform.rotation = Quaternion.identity;
+
+                // Asegura la rotación en (0, 0, 0)
+                card.transform.rotation = Quaternion.Euler(90, -90, 0);
             }
         }
 
