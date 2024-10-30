@@ -8,24 +8,21 @@ using UnityEngine.UI;
 
 public class MarketManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //variables de la instancia para que cuando se inicie el escena
     private static MarketManager _intance;
-     private static MarketManager GetItance =>_intance;
+    private static MarketManager GetItance =>_intance;
 
      //--listas de datos de las cartas
-     public  int[] CowCardData = new int[3];
-     public int[] SeedCardData = new int[3];
-     public int[] CustomerData = new int[3];
+    public  int[] CowCardData = new int[3];
+    public int[] SeedCardData = new int[3];
+    public int[] CustomerData = new int[3];
   
     
-     public Button wheatPage,cowPage,CustomerPage,ButtonWheat,ButtonCowBase,ButtonCowHat,ButtonCowDInner,ButtonCowBlack,ButtonCustomer;
+    public Button wheatPage,cowPage,CustomerPage,ButtonWheat,ButtonCowBase,ButtonCowHat,ButtonCowDInner,ButtonCowBlack,ButtonCustomer;
     public Button buyButton;
     public Text muuneyCount;
     private int Muuney;
-    private int CardSelector = 5;
-
     int CardPrice = 0;
-
     public static UnityEvent GetCow;
     public static UnityEvent GetWheat;
     public static UnityEvent GetCustomer;        
@@ -33,163 +30,113 @@ public class MarketManager : MonoBehaviour
     [SerializeField] private int cowAvaialable,cowHatAvaialable,cowBlackAvaialable,cowDinnerAvaialable,customerAvailable, wheatAvailable = 0;
     
     void Start()
-    {
-        /*
-        if(_intance)
         {
-            Destroy(gameObject);
+            //revisa si hay instancia del mercado activa en caso de que haiga una la cierra y la vuelve abrir 
+            if(_intance)
+                {
+                    Destroy(gameObject);
+                }
+            else
+                {
+                    _intance = this;
+                    DontDestroyOnLoad(gameObject);
+                }
+            //setea el dinero base para la prueba
+            Muuney = 20;
+            muuneyCount.text = Muuney.ToString();
+            buyButton.interactable = false;
         }
-        else
-        {
-            _intance = this;
-            DontDestroyOnLoad(gameObject);
-
-        }
-*/
-        Muuney = 20;
-        muuneyCount.text = Muuney.ToString();
-        buyButton.interactable = false;  
-
-
-        if (GetCow == null)
-        {
-            GetCow = new UnityEvent();
-        }    
-       //--evento relacionado a comprar cliente,cuando inicia el mercado , revisa si el evento esta inactivo antes de crearlo        
-        if (GetCustomer == null)
-        {
-            GetCustomer = new UnityEvent();
-        }
-        //-- evento relacionado a comprar trigo , cuando inicia el mercado , revisa si el evento esta inactivo antes de crearlo      
-        if (GetWheat == null)
-        {
-            GetWheat = new UnityEvent();
-        }
-        
-
-    }
 
 
     #region metodosMostrarCatalogo
+    //estos meteodos son los reponsable de ocultar los productos del mercado
     public void ShowWheat()
-    {
-        //--vacas
-        ButtonCowBase.gameObject.SetActive(false);
-        ButtonCowDInner.gameObject.SetActive(false);
-        ButtonCowBlack.gameObject.SetActive(false);
-
-        ButtonCowHat.gameObject.SetActive(false);
-        //--cultivos     
-        
-        ButtonWheat.gameObject.SetActive(true);
-        //--clientes
-        ButtonCustomer.gameObject.SetActive(false);
-
-    }
+        {
+            //--vacas
+            ButtonCowBase.gameObject.SetActive(false);
+            ButtonCowDInner.gameObject.SetActive(false);
+            ButtonCowBlack.gameObject.SetActive(false);
+            ButtonCowHat.gameObject.SetActive(false);
+            //--cultivos                 
+            ButtonWheat.gameObject.SetActive(true);
+            //--clientes
+            ButtonCustomer.gameObject.SetActive(false);
+        }
 
     public void ShowCow()
-    {
-       ButtonCowBase.gameObject.SetActive(true);
-
-        ButtonCowDInner.gameObject.SetActive(true);
-        ButtonCowBlack.gameObject.SetActive(true);
-
-        ButtonCowHat.gameObject.SetActive(true);
-        
-        ButtonWheat.gameObject.SetActive(false);
-        ButtonCustomer.gameObject.SetActive(false);
-    }
+        {
+            //--vacas
+            ButtonCowBase.gameObject.SetActive(true);
+            ButtonCowDInner.gameObject.SetActive(true);
+            ButtonCowBlack.gameObject.SetActive(true);
+            ButtonCowHat.gameObject.SetActive(true);
+            //--cultivos  
+            ButtonWheat.gameObject.SetActive(false);
+            //--clientes
+            ButtonCustomer.gameObject.SetActive(false);
+        }
 
     public void ShowCustomer()
-    {
-          ButtonCowBase.gameObject.SetActive(false);
-
-        ButtonCowDInner.gameObject.SetActive(false);
-        ButtonCowBlack.gameObject.SetActive(false);
-
-        ButtonCowHat.gameObject.SetActive(false);
-        
-        ButtonWheat.gameObject.SetActive(false);
-        ButtonCustomer.gameObject.SetActive(true);
-    }
-    #endregion
+        {   
+            //--vacas
+            ButtonCowBase.gameObject.SetActive(false);
+            ButtonCowDInner.gameObject.SetActive(false);
+            ButtonCowBlack.gameObject.SetActive(false);
+            ButtonCowHat.gameObject.SetActive(false);
+            //--cultivos     
+            ButtonWheat.gameObject.SetActive(false);
+            //--clientes
+            ButtonCustomer.gameObject.SetActive(true);
+        }
+        #endregion
     #region metodosComprarCartas
-
-    //--vacas
-      public void GetCowCardData(int[] cardCow)
+    //metodos que se ejecutan para obtener los datos de los objetos de las cartas y efectuar la compra dle item
+       public void GetCowCardData(int[] cardCow)
         {
             for(int a  =0; a < cardCow.Length; a ++ )
                 {
-                    CowCardData[a] = cardCow[a];
-
-                    Debug.Log(CowCardData[a]);              
-                
+                    CowCardData[a] = cardCow[a];                        
                 }
-                extractCowCardData(); 
-            
+                extractCowCardData();             
         }
 
-         public void GetSeedCardData(int[] cardSeed)
+    public void GetSeedCardData(int[] cardSeed)
         {
             for(int a  =0; a < cardSeed.Length; a ++ )
                 {
-                    SeedCardData[a] = cardSeed[a];                 
-                
-                
+                    SeedCardData[a] = cardSeed[a];      
                 }
-                extractSeedCardData(); 
-            
+                extractSeedCardData();            
         }
     public void GetCusomterData(int[] cardCustomer)
-    {
+        {
             for(int a  =0; a < cardCustomer.Length; a ++ )
                 {
-                    CustomerData[a] = cardCustomer[a];                 
-                
-                
+                    CustomerData[a] = cardCustomer[a];          
                 }
                 extractCustomerCardData(); 
-    }
-
+        }
+    //metodos que extraen el valor del precio de la carta objetivo
     public void extractCowCardData()
-    {
-       CardPrice =  CowCardData[1];
-       
-    }
-     public void extractCustomerCardData()
-    {
-       CardPrice =  CustomerData[0];
-       
-    }
+        {
+        CardPrice =  CowCardData[1];       
+        }
+    public void extractCustomerCardData()
+        {
+        CardPrice =  CustomerData[0];       
+        }
     public void extractSeedCardData()
-    {
-        CardPrice = SeedCardData[0];
-    }
+        {
+            CardPrice = SeedCardData[0];
+        }
 
    public void BuyCard()
-    {
-        
-        if(CowCardData !=null)
-        {
-            
-        
-            Muuney = Muuney -CardPrice;
-
-            Debug.Log(CardPrice);       
-             
-        
-            muuneyCount.text = Muuney.ToString();
-            buyButton.interactable =false;
-        
+        {     
+        Muuney = Muuney -CardPrice;
+        muuneyCount.text = Muuney.ToString();
+        buyButton.interactable =false;
         }
-        else
-        {
-            Debug.Log("ñow");
-            buyButton.interactable =false;
-
-        }
-    }
-      //--vacas
+     
     #endregion
 
 }
