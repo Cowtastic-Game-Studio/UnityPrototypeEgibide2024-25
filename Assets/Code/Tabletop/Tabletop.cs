@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Code.GamePhases;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -21,6 +22,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public TarvernZone Taverna;
 
         public DeckAndHandManager DeckAndHandManager;
+
+        public StorageManager storageManager;
 
         List<ICard> ICardsManager.Hand => throw new System.NotImplementedException();
 
