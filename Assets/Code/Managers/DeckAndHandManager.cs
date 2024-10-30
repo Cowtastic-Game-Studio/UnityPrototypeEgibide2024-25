@@ -1,8 +1,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Define el estado actual de cada carta
+/// </summary>
+public enum CardState
+{
+    onDeck,
+    onHand,
+    onTable
+}
+
+/// <summary>
+/// Manages moving cards between decks and hands
+/// </summary>
 public class DeckAndHandManager : MonoBehaviour
 {
+    /// <summary>
+    /// Estado de la carta
+    /// </summary>
+    public CardState state;
+
     /// <summary>
     /// El prefab de la carta a instanciar, es decir, el modelo que se muestra en las manos.
     /// </summary>
@@ -37,6 +55,16 @@ public class DeckAndHandManager : MonoBehaviour
     /// Variable para definir desde el editor la cantidad de cartas a robar por turno.
     /// </summary>
     public int drawCards;
+
+    /// <summary>
+    /// Define el estado actual de cada carta
+    /// </summary>
+    public enum CardState
+    {
+        onDeck,
+        onHand,
+        onTable
+    }
 
     /// <summary>
     /// Inicializa un mazo con un número específico de cartas, para pruebas.
