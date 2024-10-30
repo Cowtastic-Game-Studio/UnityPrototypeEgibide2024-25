@@ -1466,7 +1466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e58ee2eec5ea7f44a9c202d84cd01a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 9144022221344764890, guid: bf03e2b6099c154418439f6a8e406750, type: 3}
+  cardPrefab: {fileID: 345353864946811313, guid: a2278575cc373484ea469a2e1548e931, type: 3}
   DrawDeck: []
   HandDeck: []
   deckArea: {fileID: 287047169}
