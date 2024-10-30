@@ -1646,6 +1646,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 566125684}
+  - component: {fileID: 566125688}
+  - component: {fileID: 566125687}
   - component: {fileID: 566125683}
   - component: {fileID: 566125682}
   - component: {fileID: 566125685}
@@ -1734,6 +1736,36 @@ MonoBehaviour:
   actionPointTextUI: {fileID: 1692233495}
   mulliganButton: {fileID: 71420113}
   actionPointsPanel: {fileID: 1850745887}
+--- !u!114 &566125687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566125681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8615ceeef1345dd4d990351f9f7f9879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartDeck: {fileID: 0}
+  Farm: {fileID: 0}
+  Stables: {fileID: 0}
+  Taverna: {fileID: 0}
+  DeckAndHandManager: {fileID: 566125682}
+--- !u!114 &566125688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566125681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e45737d28a8e2f4682209600c2ddc1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tabletop: {fileID: 566125687}
 --- !u!1001 &589107574
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5359,7 +5391,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1954180295}
   - {fileID: 1098348447}
+  - {fileID: 566125684}
   - {fileID: 955672992}
   - {fileID: 1011660057}
   - {fileID: 513512580}
-  - {fileID: 566125684}
