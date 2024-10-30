@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class GameManager : MonoBehaviour
@@ -8,6 +9,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public GamePhaseManager GamePhaseManager { get; private set; }
         public GameCalendar GameCalendar { get; private set; }
+
+        public Tabletop Tabletop { get; private set; }
+
         // Puedes añadir más gestores aquí (AudioManager, UIManager, etc.)
 
         private void Awake()

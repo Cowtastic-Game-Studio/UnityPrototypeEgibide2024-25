@@ -22,6 +22,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             // Código que define la lógica de la fase
             Console.WriteLine("Executing Action Points Phase");
+            ICard card = null;
+            GameManager.Instance.Tabletop.OnCardUseActionPoints(card);
 
         }
 

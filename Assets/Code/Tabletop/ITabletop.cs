@@ -1,6 +1,6 @@
-﻿namespace CowtasticGameStudio.MuuliciousHarvest.Tabletop
+﻿namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    internal interface ITabletop
+    public interface ITabletop
     {
         #region Methods
 
@@ -8,8 +8,8 @@
         /// Aplica los puntos de accion de la carta
         /// </summary>
         /// <param name="card">Carta</param>
-        public void UseCardActionPoints(ICard card);
-        
+        public void OnCardUseActionPoints(ICard card);
+
         #endregion
 
     }

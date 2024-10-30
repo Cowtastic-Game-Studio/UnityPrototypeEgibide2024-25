@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
-namespace CowtasticGameStudio.MuuliciousHarvest.Tabletop
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    class Tabletop : MonoBehaviour, ITabletop, ICardsManager
+    public class Tabletop : MonoBehaviour, ITabletop, ICardsManager
     {
         #region Properties
         public IDeck Deck { get; }
@@ -23,6 +22,21 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Tabletop
 
 
         #endregion
+
+        //public static Tabletop Instance { get; private set; }
+
+        //private void Awake()
+        //{
+        //    if (Instance != null && Instance != this)
+        //    {
+        //        Destroy(gameObject);
+        //        return;
+        //    }
+
+        //    Instance = this;
+        //    // Para mantenerlo entre escenas, creo que no sera necesario !!!
+        //    DontDestroyOnLoad(gameObject);
+        //}
 
         #region Public methods
         public void CleanPlayerCards()
@@ -50,7 +64,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Tabletop
 
         }
 
-        public void UseCardActionPoints(ICard card)
+        public void OnCardUseActionPoints(ICard card)
         {
 
         }
