@@ -2,14 +2,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class StartDayPhase : IGamePhase
     {
-        public DeckAndHandManager hand;
         /// <summary>
         /// Acciones a ejecutar al inicio de la fase.
         /// </summary>
         public void EnterPhase()
         {
             // Llama a Robo
-            hand.Draw();
+            GameManager.Instance.Tabletop.DeckAndHandManager.Draw();
         }
         /// <summary>
         /// Acciones a Realizar durante la fase
@@ -25,7 +24,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void Mulligan()
         {
             //Llama a Mulligan
-            hand.Mulligan();
+            GameManager.Instance.Tabletop.DeckAndHandManager.Mulligan();
         }
         /// <summary>
         /// Acciones a ejecutar al finalizar la fase

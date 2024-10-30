@@ -20,23 +20,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public TarvernZone Taverna;
 
+        public DeckAndHandManager DeckAndHandManager { get; private set; }
+
+        List<ICard> ICardsManager.Hand => throw new System.NotImplementedException();
 
         #endregion
 
-        //public static Tabletop Instance { get; private set; }
+        private void Awake()
+        {
 
-        //private void Awake()
-        //{
-        //    if (Instance != null && Instance != this)
-        //    {
-        //        Destroy(gameObject);
-        //        return;
-        //    }
-
-        //    Instance = this;
-        //    // Para mantenerlo entre escenas, creo que no sera necesario !!!
-        //    DontDestroyOnLoad(gameObject);
-        //}
+        }
 
         #region Public methods
         public void CleanPlayerCards()
