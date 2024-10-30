@@ -11,12 +11,20 @@ public class MarketManager : MonoBehaviour
     // Start is called before the first frame update
     private static MarketManager _intance;
      private static MarketManager GetItance =>_intance;
+
+     //--listas de datos de las cartas
+     public  int[] CowCardData = new int[3];
+     public int[] SeedCardData = new int[3];
+     public int[] CustomerData = new int[3];
+  
     
      public Button wheatPage,cowPage,CustomerPage,ButtonWheat,ButtonCowBase,ButtonCowHat,ButtonCowDInner,ButtonCowBlack,ButtonCustomer;
     public Button buyButton;
     public Text muuneyCount;
     private int Muuney;
     private int CardSelector = 5;
+
+    int CardPrice = 0;
 
     public static UnityEvent GetCow;
     public static UnityEvent GetWheat;
@@ -26,6 +34,7 @@ public class MarketManager : MonoBehaviour
     
     void Start()
     {
+        /*
         if(_intance)
         {
             Destroy(gameObject);
@@ -36,7 +45,7 @@ public class MarketManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
         }
-
+*/
         Muuney = 20;
         muuneyCount.text = Muuney.ToString();
         buyButton.interactable = false;  
@@ -56,13 +65,10 @@ public class MarketManager : MonoBehaviour
         {
             GetWheat = new UnityEvent();
         }
-        InvokeRepeating(nameof(PrintValue), 0, 1);
+        
 
     }
-    void PrintValue()
-    {
-         Debug.Log("Value: " + CardSelector);
-    }
+
 
     #region metodosMostrarCatalogo
     public void ShowWheat()
@@ -110,62 +116,78 @@ public class MarketManager : MonoBehaviour
     #region metodosComprarCartas
 
     //--vacas
-    public void BuyCowHatCow()
-    {
-        CardSelector = 2;
-        Debug.Log("cow hat selected");
-         Debug.Log(CardSelector);
-        buyButton.interactable = true;
-    }
-    public void BuyCowBlackCow()
-    {
-        CardSelector = 4;
-        Debug.Log("Cow black selected");
-         Debug.Log(CardSelector);
-        buyButton.interactable = true;
-    }
-    public void BuyCowDinnerCow()
-    {
-        CardSelector = 3;
-        Debug.Log("Cow dinnerbone selected");
-         Debug.Log(CardSelector);
-        buyButton.interactable = true;
-    }
-    public void BuyCowCow()
-    {
-        CardSelector = 1;
-        Debug.Log("default cow selected");
-        Debug.Log(CardSelector);
-        buyButton.interactable = true;
-
-    }       
-
-    public void getCardData(Enum cardtype)
-    {
-        
-    } 
-
-    public void BuyCard()
-    {//revisa que carta fue seleccionada y la compra en caso de que haiga muuney disponible
-     Debug.Log("card selected" + CardSelector);
-        if(CardSelector == 1)
-            {
-                if(Muuney >1)
-                    {
-                    Muuney -= 1;
-                    muuneyCount.text = Muuney.ToString();
-                    buyButton.interactable = false   ;
-                    Debug.Log(Muuney);
-                    cowAvaialable++;
-                }
-                
-            }
-        
-        else 
+      public void GetCowCardData(int[] cardCow)
         {
-            Debug.Log("ÑOWWWW"); 
-            buyButton.interactable = false   ;     
-            }
+            for(int a  =0; a < cardCow.Length; a ++ )
+                {
+                    CowCardData[a] = cardCow[a];
+
+                    Debug.Log(CowCardData[a]);              
+                
+                }
+                extractCowCardData(); 
+            
+        }
+
+         public void GetSeedCardData(int[] cardSeed)
+        {
+            for(int a  =0; a < cardSeed.Length; a ++ )
+                {
+                    SeedCardData[a] = cardSeed[a];                 
+                
+                
+                }
+                extractSeedCardData(); 
+            
+        }
+    public void GetCusomterData(int[] cardCustomer)
+    {
+            for(int a  =0; a < cardCustomer.Length; a ++ )
+                {
+                    CustomerData[a] = cardCustomer[a];                 
+                
+                
+                }
+                extractCustomerCardData(); 
+    }
+
+    public void extractCowCardData()
+    {
+       CardPrice =  CowCardData[1];
+       
+    }
+     public void extractCustomerCardData()
+    {
+       CardPrice =  CustomerData[0];
+       
+    }
+    public void extractSeedCardData()
+    {
+        CardPrice = SeedCardData[0];
+    }
+
+   public void BuyCard()
+    {
+        
+        if(CowCardData !=null)
+        {
+            
+        
+            Muuney = Muuney -CardPrice;
+
+            Debug.Log(CardPrice);       
+             
+        
+            muuneyCount.text = Muuney.ToString();
+            buyButton.interactable =false;
+        
+        }
+        else
+        {
+            Debug.Log("ñow");
+            buyButton.interactable =false;
+
+        }
     }
       //--vacas
     #endregion
