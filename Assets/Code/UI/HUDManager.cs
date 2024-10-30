@@ -7,9 +7,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     /// <summary>
     /// Clase que gestiona interfaz grafica del jugador
     /// </summary>
-    public class GUIManager : MonoBehaviour
+    public class HUDManager : MonoBehaviour
     {
         //TODO: Hacer un checkeo en el start, para comprobar que todas las propiedades externas esten asignadas. si no lanzar excepcion
+        //TODO: Añadir descripcion de la fase en cada fase para obtenerla de la propia clase
+        //TODO: Cada fase como singleton?
 
         #region Properties
 
@@ -41,15 +43,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         #endregion
 
         #region Unity methods
-
-        #endregion
-
         private void Start()
         {
-            this.gamePhaseManager  = GameManager.Instance.GamePhaseManager;
+            this.gamePhaseManager = GameManager.Instance.GamePhaseManager;
             UpdateGUI(this.gamePhaseManager.CurrentPhase);
         }
 
+        #endregion
 
         #region Events Handlers
 
