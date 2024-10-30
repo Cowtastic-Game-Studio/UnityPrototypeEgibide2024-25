@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa0e6f64fea4604f856e8d368b94e93, type: 3}
+  m_Name: Client
+  m_EditorClassIdentifier: 
+  name: Client
+  description: Dame mi bebida
+  artwork: {fileID: 21300000, guid: 20fda1733aaed114f92755c3cf4b1df7, type: 3}
+  baseCard: {fileID: 21300000, guid: 3381212bab47d73469e383e6f98f5d64, type: 3}
+  actionPointsCost: 2
+  lifeCycleDays: 1
+  requiredResources:
+  - resourceType: 2
+    resourceQuantity: 1
+  producedResources:
+  - resourceType: 1
+    resourceQuantity: 2
+  marketCost: 3

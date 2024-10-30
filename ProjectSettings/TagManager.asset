@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Carta
   - Place
+  - CardClient
+  - CardCow
+  - CardSeed
   layers:
   - Default
   - TransparentFX
