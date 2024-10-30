@@ -1,14 +1,25 @@
 using UnityEngine;
 
-namespace CowtasticGameStudio.MuuliciousHarvest
+namespace CowtasticGameStudio.MuuliciousHarvest.Managers
 {
+    /// <summary>
+    /// Clase que gestiona el game loop principal
+    /// </summary>
     public class GameManager : MonoBehaviour
     {
+        #region Properties
+
         public static GameManager Instance { get; private set; }
 
-        public GamePhaseManager GamePhaseManager { get; private set; }
+        public GamePhaseManager GamePhaseManager;
+
         public GameCalendar GameCalendar { get; private set; }
-        // Puedes añadir más gestores aquí (AudioManager, UIManager, etc.)
+
+        //TODO: Puedes añadir más gestores aquí (AudioManager, UIManager, etc.)
+
+        #endregion
+
+        #region Unity methods
 
         private void Awake()
         {
@@ -21,18 +32,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             Instance = this;
             // Para mantenerlo entre escenas, creo que no sera necesario !!!
             DontDestroyOnLoad(gameObject);
-
+                        
             InitializeManagers();
-        }
 
-        private void InitializeManagers()
-        {
-            // Instanciar cualquier otro sistema que quieras manejar desde aquí
-            GamePhaseManager = new GamePhaseManager();
-            GameCalendar = new GameCalendar();
-            // Instanciar otros managers si es necesario
 
-            addCalendarEvents();
+
         }
 
         private void Update()
@@ -52,12 +56,37 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             #endregion
         }
 
-        private void addCalendarEvents()
+        #endregion
+
+        #region Private methods
+
+        /// <summary>
+        /// Inicializa los gestores auxiliares
+        /// </summary>
+        private void InitializeManagers()
+        {
+            // Instanciar cualquier otro sistema que quieras manejar desde aquí
+            GamePhaseManager = new GamePhaseManager();
+            GameCalendar = new GameCalendar();
+
+            //TODO: Instanciar otros managers si es necesario
+
+            AddCalendarEvents();
+        }
+
+        /// <summary>
+        /// Añade eventos al calendario
+        /// </summary>
+        private void AddCalendarEvents()
         {
             GameCalendar.AddCalendarEvent(new HarvestDayEvent());
             GameCalendar.AddCalendarEvent(new CowDayEvent());
             GameCalendar.AddCalendarEvent(new PlagueEvent());
             GameCalendar.AddCalendarEvent(new BrokenFridgeEvent());
         }
+
+        #endregion
+
+
     }
 }
