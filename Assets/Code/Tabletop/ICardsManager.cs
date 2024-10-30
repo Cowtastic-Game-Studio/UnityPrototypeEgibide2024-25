@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CowtasticGameStudio.MuuliciousHarvest.Tabletop
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
     internal interface ICardsManager
     {
