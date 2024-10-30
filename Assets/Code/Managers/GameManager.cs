@@ -1,25 +1,19 @@
+using System;
 using UnityEngine;
 
-namespace CowtasticGameStudio.MuuliciousHarvest.Managers
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    /// <summary>
-    /// Clase que gestiona el game loop principal
-    /// </summary>
     public class GameManager : MonoBehaviour
     {
-        #region Properties
-
         public static GameManager Instance { get; private set; }
 
-        public GamePhaseManager GamePhaseManager;
-
+        public GamePhaseManager GamePhaseManager { get; private set; }
         public GameCalendar GameCalendar { get; private set; }
 
-        //TODO: Puedes añadir más gestores aquí (AudioManager, UIManager, etc.)
+        public Tabletop Tabletop;
 
-        #endregion
-
-        #region Unity methods
+        // Evento global para manejar clics en cartas
+        public event Action<GameObject> OnCardClickedGlobal;
 
         private void Awake()
         {
@@ -30,22 +24,20 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Managers
             }
 
             Instance = this;
-            // Para mantenerlo entre escenas, creo que no sera necesario !!!
             DontDestroyOnLoad(gameObject);
-                        
             InitializeManagers();
+        }
 
-
-
+        private void InitializeManagers()
+        {
+            GamePhaseManager = new GamePhaseManager();
+            GameCalendar = new GameCalendar();
+            addCalendarEvents();
         }
 
         private void Update()
         {
-            // Puedes delegar el Update a los distintos sistemas si es necesario
-            if (GamePhaseManager != null)
-            {
-                GamePhaseManager.Update();
-            }
+            GamePhaseManager?.Update();
 
             #region CheatCodes
             if (Input.GetKeyDown(KeyCode.N))
@@ -56,28 +48,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Managers
             #endregion
         }
 
-        #endregion
-
-        #region Private methods
-
-        /// <summary>
-        /// Inicializa los gestores auxiliares
-        /// </summary>
-        private void InitializeManagers()
-        {
-            // Instanciar cualquier otro sistema que quieras manejar desde aquí
-            GamePhaseManager = new GamePhaseManager();
-            GameCalendar = new GameCalendar();
-
-            //TODO: Instanciar otros managers si es necesario
-
-            AddCalendarEvents();
-        }
-
-        /// <summary>
-        /// Añade eventos al calendario
-        /// </summary>
-        private void AddCalendarEvents()
+        private void addCalendarEvents()
         {
             GameCalendar.AddCalendarEvent(new HarvestDayEvent());
             GameCalendar.AddCalendarEvent(new CowDayEvent());
@@ -85,8 +56,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Managers
             GameCalendar.AddCalendarEvent(new BrokenFridgeEvent());
         }
 
-        #endregion
-
-
+        // Método para invocar el evento de clic de carta
+        public void CardClicked(GameObject cardGameObject)
+        {
+            OnCardClickedGlobal?.Invoke(cardGameObject);
+        }
     }
 }

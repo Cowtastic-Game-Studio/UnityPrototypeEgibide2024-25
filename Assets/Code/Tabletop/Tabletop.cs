@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
-namespace CowtasticGameStudio.MuuliciousHarvest.Tabletop
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    class Tabletop : MonoBehaviour, ITabletop, ICardsManager
+    public class Tabletop : MonoBehaviour, ITabletop, ICardsManager
     {
         #region Properties
         public IDeck Deck { get; }
@@ -21,8 +20,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Tabletop
 
         public TarvernZone Taverna;
 
+        public DeckAndHandManager DeckAndHandManager;
+
+        List<ICard> ICardsManager.Hand => throw new System.NotImplementedException();
 
         #endregion
+
+        private void Awake()
+        {
+
+        }
 
         #region Public methods
         public void CleanPlayerCards()
@@ -50,7 +57,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Tabletop
 
         }
 
-        public void UseCardActionPoints(ICard card)
+        public void OnCardUseActionPoints(ICard card)
         {
 
         }

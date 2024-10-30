@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace CowtasticGameStudio.MuuliciousHarvest.Tabletop
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    internal interface IDeck
+    public interface IDeck
     {
         #region Propiedades
 

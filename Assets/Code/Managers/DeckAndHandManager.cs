@@ -1,182 +1,188 @@
 using System.Collections.Generic;
 using UnityEngine;
-#if UNITY_EDITOR
-#endif
 
-public class DeckAndHandManager : MonoBehaviour
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    /// <summary>
-    /// El prefab de la carta a instanciar, es decir, el modelo que se muestra en las manos
-    /// </summary>
-    public GameObject cardPrefab;
-    /// <summary>
-    /// Lista de cartas en el mazo
-    /// </summary>
-    public List<GameObject> DrawDeck = new List<GameObject>();
-    /// <summary>
-    /// Cartas en la mano
-    /// </summary>
-    public List<GameObject> HandDeck = new List<GameObject>();
-    /// <summary>
-    /// Lugar donde se haya el mazo
-    /// </summary>
-    public Transform deckArea;
-    /// <summary>
-    /// Lugar donde se haya la mano y se colocaran las cartas
-    /// </summary>
-    public Transform handArea;
-    /// <summary>
-    /// Espaciado entre cartas
-    /// </summary>
-    public float cardSpacing = 0.4f;
-
-    /// <summary>
-    /// Variable para poder decidir desde el editor la cantidad de cartas que se roban por turno.
-    /// </summary>
-    public int drawCards = 5;
-
-    /// <summary>
-    /// Crea un mazo con un numero de cartas a especificar para hacer pruebas.
-    /// </summary>
-    void InitializeDeck(int numberOfCards)
+    public class DeckAndHandManager : MonoBehaviour
     {
-        for (int i = 0; i < numberOfCards; i++)
+        /// <summary>
+        /// El prefab de la carta a instanciar, es decir, el modelo que se muestra en las manos.
+        /// </summary>
+        public GameObject cardPrefab;
+
+        public SODeck initialCards;
+
+        /// <summary>
+        /// Lista de cartas en el mazo.
+        /// </summary>
+        public List<GameObject> DrawDeck = new List<GameObject>();
+
+        /// <summary>
+        /// Cartas en la mano.
+        /// </summary>
+        public List<GameObject> HandDeck = new List<GameObject>();
+
+        /// <summary>
+        /// Lugar donde se encuentra el mazo.
+        /// </summary>
+        public Transform deckArea;
+
+        /// <summary>
+        /// Lugar donde se encuentra la mano y se colocar�n las cartas.
+        /// </summary>
+        public Transform handArea;
+
+        /// <summary>
+        /// Espaciado entre cartas en la mano.
+        /// </summary>
+        public float cardSpacing = 0.4f;
+
+        /// <summary>
+        /// Variable para definir desde el editor la cantidad de cartas a robar por turno.
+        /// </summary>
+        public int drawCards = 5;
+
+        /// <summary>
+        /// Inicializa un mazo con un n�mero espec�fico de cartas, para pruebas.
+        /// </summary>
+        void InitializeDeck(int numberOfCards)
         {
-            //Instanciar un nuevo gameObject de carta
-            GameObject newCard = Instantiate(cardPrefab, deckArea);
-            //Establece nombre y atributos de las cartas
-            newCard.name = "Carta" + (i + 1);
-            //Restablecer la posiion dentro del area de mazo
-            newCard.transform.localPosition = Vector3.zero;
-            //Agregar carta al mazo
-            DrawDeck.Add(newCard);
-        }
-    }
+            //for (int i = 0; i < numberOfCards; i++)
+            //{
+            //    // Instanciar un nuevo GameObject de carta
+            //    GameObject newCard = Instantiate(cardPrefab, deckArea);
+            //    // Establece nombre y atributos de las cartas
+            //    newCard.name = "Carta" + (i + 1);
+            //    // Restablecer la posici�n dentro del �rea de mazo
+            //    newCard.transform.localPosition = Vector3.zero;
+            //    // Agregar carta al mazo
+            //    DrawDeck.Add(newCard);
+            //}
 
-
-    /// <summary>
-    /// La quid de la cuestion, esto se encarga de robar las ultimas cartas del mazo, y de trasladarlas a la mano. Otra funcion las ordena y coloca mas adelante
-    /// </summary>
-    public void MoveLastCardsToHand(int cardsToDraw)
-    {
-        // Mover hasta el numero de cartas que recibe, o menos si el mazo tiene menos de dicho numero
-        cardsToDraw = Mathf.Min(cardsToDraw, DrawDeck.Count);
-
-        for (int i = 0; i < cardsToDraw; i++)
-        {
-            // Obtener la ultima carta en el mazo
-            GameObject originalCard = DrawDeck[DrawDeck.Count - 1];
-
-            // Quitar la carta del mazo
-            DrawDeck.RemoveAt(DrawDeck.Count - 1);
-
-            // Instanciar una nueva carta del prefab
-            GameObject newCard = Instantiate(cardPrefab, handArea);
-
-            // Establecer las propiedades de la nueva carta basadas en la original
-            newCard.name = originalCard.name;
-            // TODO: Asignar el resto de atributos de las cartas dependiendo de que tipo sea agregas unos los atributos.
-
-            //Destruye el objeto de la carta que has retirado para que no se quede una carta vacia en la mano.
-            Destroy(originalCard);
-
-            // Agregar la nueva carta a la mano e insertar al principio para mantener la mas reciente a la izquierda
-            HandDeck.Insert(0, newCard);
-        }
-
-        // Reorganizar las cartas en la mano despues de mover todas las cartas
-        ArrangeHand();
-    }
-
-    /// <summary>
-    /// Organiza las cartas en la mano en un diseno horizontal con espacio de 1, es el encargado principal de ello
-    /// </summary>
-    private void ArrangeHand()
-    {
-        // Obtener la referencia de la camara principal para que estan mirando a la camara
-        Camera mainCamera = Camera.main;
-
-        for (int i = 0; i < HandDeck.Count; i++)
-        {
-            GameObject card = HandDeck[i];
-            // Posicionar la carta segun su indice y espacio
-            card.transform.localPosition = new Vector3(i * cardSpacing, 0, 0);
-
-            // Asegurarse de que la carta mantenga su rotacion original del prefab
-            // Establecer a la rotacion original del prefab si es necesario
-            card.transform.rotation = Quaternion.identity;
-        }
-    }
-    /// <summary>
-    /// El metodo de robo que se ejecuta a principio de la fase de inicio.
-    /// </summary>
-    public void Draw()
-    {
-        MoveLastCardsToHand(drawCards);
-    }
-
-    /// <summary>
-    /// El metodo de mulligan
-    /// </summary>
-    public void Mulligan()
-    {
-        int handNumber = HandDeck.Count;
-        if (HandDeck.Count >= handNumber)
-        {
-            for (int i = 0; i < handNumber; i++)
+            // Verifica que el ScriptableObject esté asignado y que la lista de cartas no esté vacía
+            if (initialCards == null || initialCards.Cards == null || initialCards.Cards.Count == 0)
             {
-                // Obtener la ultima carta en el mazo
-                GameObject originalCard = HandDeck[HandDeck.Count - 1];
-
-                // Quitar la carta de la lista de la mano.
-                HandDeck.RemoveAt(HandDeck.Count - 1);
-
-                // Instanciar una nueva carta del prefab
-                GameObject newCard = Instantiate(cardPrefab, handArea);
-
-                // Establecer las propiedades de la nueva carta basadas en la original
-                newCard.name = originalCard.name;
-                // TODO: Asignar el resto de atributos de las cartas
-
-                //Destruye el objeto de la carta que has retirado para que no se quede una carta vacia en la mano.
-                Destroy(originalCard);
-
-                // Agregar la nueva carta a la mano e insertar al principio para mantener la mas reciente a la izquierda
-                DrawDeck.Insert(0, newCard);
+                Debug.LogError("El deck inicial (initialCards) no está asignado o está vacío.");
+                return;
             }
-            drawCards = (handNumber - 1);
-            if (handNumber < 2)
+
+            // Recorre cada carta en el ScriptableObject y crea una instancia
+            foreach (GameObject card in initialCards.Cards)
             {
-                // TODO: Desactivar el boton de mulligan
+                // Instancia la carta desde el ScriptableObject
+                GameObject newCard = Instantiate(card, deckArea);
+
+                // Restablece la posición de la carta dentro del área de mazo
+                newCard.transform.localPosition = Vector3.zero;
+
+                // Agrega la carta al mazo
+                DrawDeck.Add(newCard);
             }
-            this.Draw();
         }
-    }
+
+
+        /// <summary>
+        /// Roba una cantidad espec�fica de cartas desde el mazo y las mueve a la mano.
+        /// </summary>
+        public void MoveLastCardsToHand(int cardsToDraw)
+        {
+            cardsToDraw = Mathf.Min(cardsToDraw, DrawDeck.Count);
+
+            for (int i = 0; i < cardsToDraw; i++)
+            {
+                // Obtener la �ltima carta en el mazo
+                GameObject cardToMove = DrawDeck[DrawDeck.Count - 1];
+
+                // Quitar la carta del mazo
+                DrawDeck.RemoveAt(DrawDeck.Count - 1);
+
+                // Cambiar la posici�n y padre de la carta para moverla a la mano
+                cardToMove.transform.SetParent(handArea);
+                cardToMove.transform.localPosition = new Vector3(i * cardSpacing, 0, 0);
+
+                // Agregar la carta a la lista de la mano e insertar al principio
+                HandDeck.Insert(0, cardToMove);
+            }
+
+            // Reorganizar las cartas en la mano despu�s de mover todas las cartas
+            ArrangeHand();
+        }
+
+        /// <summary>
+        /// Organiza las cartas en la mano en un dise�o horizontal con espacio de 1.
+        /// </summary>
+        private void ArrangeHand()
+        {
+            Camera mainCamera = Camera.main;
+
+            for (int i = 0; i < HandDeck.Count; i++)
+            {
+                GameObject card = HandDeck[i];
+
+                // Establece la posición de la carta en la mano
+                card.transform.localPosition = new Vector3(i * cardSpacing, 0, 0);
+
+                // Asegura la rotación en (0, 0, 0)
+                card.transform.rotation = Quaternion.Euler(90, -90, 0);
+            }
+        }
+
+        /// <summary>
+        /// M�todo de robo que se ejecuta al inicio de la fase.
+        /// </summary>
+        public void Draw()
+        {
+            MoveLastCardsToHand(drawCards);
+        }
+
+        /// <summary>
+        /// M�todo para realizar el mulligan y devolver cartas a la parte superior del mazo.
+        /// </summary>
+        public void Mulligan()
+        {
+            int handNumber = HandDeck.Count;
+            if (HandDeck.Count >= handNumber)
+            {
+                for (int i = 0; i < handNumber; i++)
+                {
+                    GameObject cardToMove = HandDeck[HandDeck.Count - 1];
+                    HandDeck.RemoveAt(HandDeck.Count - 1);
+
+                    cardToMove.transform.SetParent(deckArea);
+                    cardToMove.transform.localPosition = Vector3.zero;
+
+                    DrawDeck.Insert(0, cardToMove);
+                }
+                drawCards = (handNumber - 1);
+                if (handNumber < 2)
+                {
+                    // Desactivar bot�n de mulligan si es necesario
+                }
+                this.Draw();
+            }
+        }
 
 #if UNITY_EDITOR
-    // Crear un mazo con 10 cartas
-    void Start()
-    {
-        InitializeDeck(10);
-    }
-    /// <summary>
-    /// Permite mover las �ltimas cartas a la mano al presionar el bot�n derecho del rat�n
-    /// </summary>
-
-    private void Update()
-    {
-        //Esto son inputs para probar la funcionalidad, destruirlos en cuanto este mapeado con botones.
-        // Si se presiona el boton izquierdo del raton en el editor
-        if (Input.GetMouseButtonDown(0))
+        void Start()
         {
-            Draw();
+            InitializeDeck(10); // Crea un mazo con 10 cartas para pruebas
         }
 
-        // Si se presiona el boton derecho del raton en el editor
-        if (Input.GetMouseButtonDown(1))
+        /// <summary>
+        /// Controles para hacer pruebas desde el editor.
+        /// </summary>
+        private void Update()
         {
-            Mulligan();
+            if (Input.GetMouseButtonDown(1))
+            {
+                Draw();
+            }
+
+            if (Input.GetMouseButtonDown(2))
+            {
+                Mulligan();
+            }
         }
-    }
 #endif
+    }
 }

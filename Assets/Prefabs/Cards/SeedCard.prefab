@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SeedCard
       objectReference: {fileID: 0}
+    - target: {fileID: 9144022221344764890, guid: bf03e2b6099c154418439f6a8e406750, type: 3}
+      propertyPath: m_TagString
+      value: CardSeed
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

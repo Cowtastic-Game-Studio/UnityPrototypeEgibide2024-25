@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 71420116}
   - component: {fileID: 71420115}
   m_Layer: 5
-  m_Name: MulliganButton
+  m_Name: Mulligan-Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,9 +205,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1011660059}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnMulliganButtonClick
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: CowtasticGameStudio.MuuliciousHarvest.GamePhaseManager,
+          Assembly-CSharp
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1028,7 +1029,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 287047168}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.013242462, z: -0, w: 0.9999123}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.381, y: -4.398, z: -2.261}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1645,10 +1646,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 566125684}
+  - component: {fileID: 566125688}
+  - component: {fileID: 566125687}
   - component: {fileID: 566125683}
   - component: {fileID: 566125682}
   - component: {fileID: 566125685}
-  - component: {fileID: 566125687}
+  - component: {fileID: 566125686}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1668,7 +1671,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e58ee2eec5ea7f44a9c202d84cd01a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 9144022221344764890, guid: bf03e2b6099c154418439f6a8e406750, type: 3}
+  cardPrefab: {fileID: 345353864946811313, guid: a2278575cc373484ea469a2e1548e931, type: 3}
+  initialCards: {fileID: 11400000, guid: b941c1910a3a9534387a351b2fe08561, type: 2}
   DrawDeck: []
   HandDeck: []
   deckArea: {fileID: 287047169}
@@ -1716,7 +1720,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   descartes: {fileID: 1364878054}
+--- !u!114 &566125686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566125681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce5d9219a9ea07947b2035183b08b84c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPhaseTextUI: {fileID: 1802482428}
+  actionPointTextUI: {fileID: 1692233495}
+  mulliganButton: {fileID: 71420113}
+  actionPointsPanel: {fileID: 1850745887}
 --- !u!114 &566125687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566125681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8615ceeef1345dd4d990351f9f7f9879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartDeck: {fileID: 0}
+  Farm: {fileID: 0}
+  Stables: {fileID: 0}
+  Taverna: {fileID: 0}
+  DeckAndHandManager: {fileID: 566125682}
+--- !u!114 &566125688
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1728,6 +1765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e45737d28a8e2f4682209600c2ddc1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Tabletop: {fileID: 566125687}
 --- !u!1001 &589107574
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1826,7 +1864,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606024193}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.013242462, z: -0, w: 0.9999123}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.4082365, y: 14.832359, z: -1.4374517}
   m_LocalScale: {x: 3.8521862, y: 3.8521862, z: 3.8521862}
   m_ConstrainProportionsScale: 0
@@ -2443,7 +2481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7302167614544630744, guid: 7ab2776ef9f434e4fa0da8aca93abde4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7302167614544630744, guid: 7ab2776ef9f434e4fa0da8aca93abde4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2803,9 +2841,8 @@ GameObject:
   - component: {fileID: 1011660055}
   - component: {fileID: 1011660054}
   - component: {fileID: 1011660058}
-  - component: {fileID: 1011660059}
   m_Layer: 5
-  m_Name: PhaseGUI
+  m_Name: CanvasGIU
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2909,22 +2946,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81938e7b9076d8d4abb6d20d4af2a9c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1011660059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1011660053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 644af868d2329d94eb58e8d07cf65639, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentPhaseTextUI: {fileID: 1802482428}
-  actionPointTextUI: {fileID: 1692233495}
-  mulliganButton: {fileID: 71420113}
-  actionPointsPanel: {fileID: 1850745887}
 --- !u!1 &1069529264
 GameObject:
   m_ObjectHideFlags: 0
@@ -3286,13 +3307,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1255965407}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12342296, y: 0.69647044, z: 0.122185364, w: -0.6962518}
-  m_LocalPosition: {x: -0.393, y: -4.3930025, z: -1.802}
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: -0.35, y: -4.3930025, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 606024194}
-  m_LocalEulerAnglesHint: {x: -20.003, y: 269.963, z: 0.108}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
 --- !u!1 &1290092026
 GameObject:
   m_ObjectHideFlags: 0
@@ -3620,7 +3641,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1364878054}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.013242462, z: -0, w: 0.9999123}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.40675053, y: -4.423275, z: 2.2247918}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3734,7 +3755,7 @@ GameObject:
   - component: {fileID: 1478785484}
   - component: {fileID: 1478785483}
   m_Layer: 5
-  m_Name: CurrentPhasePanel
+  m_Name: FaseActual-Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4125,7 +4146,7 @@ GameObject:
   - component: {fileID: 1692233496}
   - component: {fileID: 1692233495}
   m_Layer: 5
-  m_Name: ActionPointsTextBox
+  m_Name: FaseAcrual-Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4349,7 +4370,7 @@ GameObject:
   - component: {fileID: 1802482429}
   - component: {fileID: 1802482428}
   m_Layer: 5
-  m_Name: CurrentPhaseTextBox
+  m_Name: FaseActual-Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4755,7 +4776,7 @@ GameObject:
   - component: {fileID: 1850745890}
   - component: {fileID: 1850745889}
   m_Layer: 5
-  m_Name: ActionPointsPanel
+  m_Name: PuntosDeAccion-Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4832,7 +4853,7 @@ GameObject:
   - component: {fileID: 1854647923}
   - component: {fileID: 1854647922}
   m_Layer: 5
-  m_Name: NextPhaseButton
+  m_Name: SiguienteFase-Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4902,9 +4923,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1011660059}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OnNextPhaseButtonClick
+      - m_Target: {fileID: 566125686}
+        m_TargetAssemblyTypeName: CowtasticGameStudio.MuuliciousHarvest.GamePhaseManager,
+          Assembly-CSharp
+        m_MethodName: NextPhase
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5249,13 +5271,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1954180292}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.37190846, y: -0.60011905, z: 0.36940527, w: 0.6042193}
-  m_LocalPosition: {x: 3.23, y: 5.44, z: 0.63}
+  m_LocalRotation: {x: 0.3799282, y: -0.59636784, z: 0.3799282, w: 0.59636784}
+  m_LocalPosition: {x: 3, y: 6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 63.228, y: -89.608, z: 0.003}
+  m_LocalEulerAnglesHint: {x: 65, y: -90, z: 0}
 --- !u!1 &2037062482
 GameObject:
   m_ObjectHideFlags: 0
@@ -5369,7 +5391,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1954180295}
   - {fileID: 1098348447}
+  - {fileID: 566125684}
   - {fileID: 955672992}
   - {fileID: 1011660057}
   - {fileID: 513512580}
-  - {fileID: 566125684}
