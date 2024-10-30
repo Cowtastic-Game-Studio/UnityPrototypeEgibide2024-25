@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
-namespace Assets.Code.GamePhases
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class StorageManager : IStorage
     {
@@ -24,6 +25,11 @@ namespace Assets.Code.GamePhases
         /// <returns>Devuelve true si hay PA. False si no hay.</returns>
         public bool CheckActionPoints(int nAP)
         {
+            if (Resource < nAP)
+            {
+                return false;
+            }
+
             return true;
         }
 
@@ -35,8 +41,28 @@ namespace Assets.Code.GamePhases
         /// <returns>Devuelve true si hay recursos y espacio suficiente.</returns>
         public bool CheckResources(List<ResourceAmount> requiredResources, List<ResourceAmount> producedResources)
         {
+
+            int requireQuantity = requiredResources[0].resourceQuantity;
+            int leftResources = Resource - requireQuantity;
+
+            if (requireQuantity > Resource || leftResources < 0)
+            {
+                Debug.Log("No hay suficientes recursos");
+                return false;
+            }
+
+            int producedQuantity = producedResources[0].resourceQuantity;
+            int newResources = producedQuantity + Resource;
+
+            if (newResources > MaxResources)
+            {
+                Debug.Log("No hay suficientes espacio para almacenar el recurso.");
+                return false;
+            }
+
             _requiredResources = requiredResources;
-            _producedResources = producedResources;
+            _producedResources = requiredResources;
+
             return true;
         }
 
@@ -46,7 +72,28 @@ namespace Assets.Code.GamePhases
         /// <returns>Devuelve true si se ha podido hacer la acción.</returns>
         public bool ProduceResources()
         {
+            int requireQuantity = _requiredResources[0].resourceQuantity;
+            GameResource requireType = _requiredResources[0].resourceType;
+
+            RemoveResource(requireQuantity, requireType);
+
+            int producedQuantity = _producedResources[0].resourceQuantity;
+            GameResource producedType = _producedResources[0].resourceType;
+
+            AddResources(producedQuantity, producedType);
+
             return false;
+        }
+
+        private int AddResources(int quantity, GameResource type)
+        {
+
+            return 0;
+        }
+
+        private int RemoveResource(int quantity, GameResource type)
+        {
+            return 0;
         }
 
         private void AddLevel()
@@ -60,15 +107,7 @@ namespace Assets.Code.GamePhases
         }
 
 
-        private int Add()
-        {
-            return 0;
-        }
 
-        private int Remove()
-        {
-            return 0;
-        }
 
     }
 }

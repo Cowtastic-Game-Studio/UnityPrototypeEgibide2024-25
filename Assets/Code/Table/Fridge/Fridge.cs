@@ -1,42 +1,48 @@
 using UnityEngine;
 
-public class Fridge : MonoBehaviour, IStorage
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    #region Propiedades
-
-    public GameResource Type { get; }
-    public int MaxResources { get; }
-    public int Level { get; }
-    public int Resource { get; }
-
-    #endregion
-
-    #region Constructor
-
-    /// <summary>
-    /// Constructor del almacen
-    /// </summary>
-    public Fridge()
+    public class Fridge : MonoBehaviour, IStorage
     {
-        // Le indicamos que el tipo del recurso es
-        Type = GameResource.Milk;
+        #region Propiedades
+
+        public GameResource Type { get; }
+        public int MaxResources { get; }
+        public int Level { get; }
+        public int Resource { get; }
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Constructor del almacen
+        /// </summary>
+        public Fridge()
+        {
+            // Le indicamos que el tipo del recurso es
+            Type = GameResource.Milk;
+            MaxResources = 3;
+            Level = 1;
+            Resource = 0;
+        }
+
+        #endregion
+
+        #region Metodos
+
+        // Start is called before the first frame update
+        void Start()
+        {
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Metodos
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    #endregion
 }

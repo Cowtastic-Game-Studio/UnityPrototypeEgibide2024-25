@@ -1,42 +1,48 @@
 using UnityEngine;
 
-public class PAStorage : MonoBehaviour, IStorage
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    #region Propiedades
-
-    public GameResource Type { get; }
-    public int MaxResources { get; }
-    public int Level { get; }
-    public int Resource { get; }
-
-    #endregion
-
-    #region Constructor
-
-    /// <summary>
-    /// Constructor del almacen
-    /// </summary>
-    public PAStorage()
+    public class PAStorage : MonoBehaviour, IStorage
     {
-        // Le indicamos que el tipo del recurso es
-        Type = GameResource.Cereal;
+        #region Propiedades
+
+        public GameResource Type { get; }
+        public int MaxResources { get; }
+        public int Level { get; }
+        public int Resource { get; }
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Constructor del almacen
+        /// </summary>
+        public PAStorage()
+        {
+            // Le indicamos que el tipo del recurso es
+            Type = GameResource.Cereal;
+            MaxResources = 6;
+            Level = 1;
+            Resource = 0;
+        }
+
+        #endregion
+
+        #region Metodos
+
+        // Start is called before the first frame update
+        void Start()
+        {
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        #endregion
     }
-
-    #endregion
-
-    #region Metodos
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    #endregion
 }

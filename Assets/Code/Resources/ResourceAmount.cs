@@ -1,15 +1,18 @@
-[System.Serializable]
-public struct ResourceAmount
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    #region Propiedades de clase
-    /// <summary>
-    /// Tipo de recurso
-    /// </summary>
-    public GameResource resourceType;
+    [System.Serializable]
+    public struct ResourceAmount
+    {
+        #region Propiedades de clase
+        /// <summary>
+        /// Tipo de recurso
+        /// </summary>
+        public GameResource resourceType;
 
-    /// <summary>
-    /// Cantidad del recurso
-    /// </summary>
-    public int resourceQuantity;
-    #endregion
+        /// <summary>
+        /// Cantidad del recurso
+        /// </summary>
+        public int resourceQuantity;
+        #endregion
+    }
 }
