@@ -9,7 +9,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public GamePhaseManager GamePhaseManager { get; private set; }
         public GameCalendar GameCalendar { get; private set; }
-        public Tabletop Tabletop { get; private set; }
+
+        public Tabletop Tabletop;
 
         // Evento global para manejar clics en cartas
         public event Action<GameObject> OnCardClickedGlobal;

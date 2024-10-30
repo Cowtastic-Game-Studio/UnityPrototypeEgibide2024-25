@@ -20,7 +20,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public TarvernZone Taverna;
 
-        public DeckAndHandManager DeckAndHandManager { get; private set; }
+        public DeckAndHandManager DeckAndHandManager;
 
         List<ICard> ICardsManager.Hand => throw new System.NotImplementedException();
 
