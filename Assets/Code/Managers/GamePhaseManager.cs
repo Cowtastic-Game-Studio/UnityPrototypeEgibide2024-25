@@ -7,7 +7,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public IGamePhase CurrentPhase { get; private set; }
 
 
-        public void Start()
+        public GamePhaseManager()
         {
             SetPhase(new StartDayPhase());
         }

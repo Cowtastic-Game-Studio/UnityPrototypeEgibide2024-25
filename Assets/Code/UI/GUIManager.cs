@@ -36,13 +36,18 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <summary>
         /// Referencia al GamePhaseManager
         /// </summary>
+        private GamePhaseManager gamePhaseManager;
 
-        [SerializeField] private GamePhaseManager gamePhaseManager;
+        #endregion
+
+        #region Unity methods
 
         #endregion
 
         private void Start()
         {
+            this.gamePhaseManager  = GameManager.Instance.GamePhaseManager;
+            UpdateGUI(this.gamePhaseManager.CurrentPhase);
         }
 
 
@@ -54,28 +59,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void OnNextPhaseButtonClick()
         {
             this.gamePhaseManager.NextPhase();
-
-            if (this.gamePhaseManager.CurrentPhase is StartDayPhase)
-            {
-                HideMulliganButton();
-                UpdateCurrentPhase("Place cards phase");
-            }
-            else if (this.gamePhaseManager.CurrentPhase is PlaceCardsPhase)
-            {
-                ShowActionPointsPanel();
-                UpdateCurrentPhase("Action points phase");
-            }
-            else if (this.gamePhaseManager.CurrentPhase is ActionPointsPhase)
-            {
-                HideActionPointsPanel();
-                UpdateCurrentPhase("Market phase");
-            }
-            else if (this.gamePhaseManager.CurrentPhase is MarketPhase)
-            {
-                ShowMulliganButton();
-                UpdateCurrentPhase("Start day phase");
-            }
-
+            UpdateGUI(this.gamePhaseManager.CurrentPhase);
         }
 
         /// <summary>
@@ -89,6 +73,34 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         #endregion
 
         #region Private methods
+
+        /// <summary>
+        /// Actualiza la GUI
+        /// </summary>
+        /// <param name="currentPhase"></param>
+        private void UpdateGUI(IGamePhase currentPhase)
+        {
+            if (currentPhase is StartDayPhase)
+            {
+                HideMulliganButton();
+                UpdateCurrentPhase("Place cards phase");
+            }
+            else if (currentPhase is PlaceCardsPhase)
+            {
+                ShowActionPointsPanel();
+                UpdateCurrentPhase("Action points phase");
+            }
+            else if (currentPhase is ActionPointsPhase)
+            {
+                HideActionPointsPanel();
+                UpdateCurrentPhase("Market phase");
+            }
+            else if (currentPhase is MarketPhase)
+            {
+                ShowMulliganButton();
+                UpdateCurrentPhase("Start day phase");
+            }
+        }
 
         /// <summary>
         /// Metodo que actualiza el texto de la fase actual 

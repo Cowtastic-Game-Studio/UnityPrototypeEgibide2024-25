@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 71420116}
   - component: {fileID: 71420115}
   m_Layer: 5
-  m_Name: Mulligan-Button
+  m_Name: MulliganButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,10 +205,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CowtasticGameStudio.MuuliciousHarvest.GamePhaseManager,
+      - m_Target: {fileID: 1011660058}
+        m_TargetAssemblyTypeName: CowtasticGameStudio.MuuliciousHarvest.GUIManager,
           Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: OnMulliganButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1651,7 +1651,6 @@ GameObject:
   - component: {fileID: 566125683}
   - component: {fileID: 566125682}
   - component: {fileID: 566125685}
-  - component: {fileID: 566125686}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1720,22 +1719,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   descartes: {fileID: 1364878054}
---- !u!114 &566125686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 566125681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce5d9219a9ea07947b2035183b08b84c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentPhaseTextUI: {fileID: 1802482428}
-  actionPointTextUI: {fileID: 1692233495}
-  mulliganButton: {fileID: 71420113}
-  actionPointsPanel: {fileID: 1850745887}
 --- !u!114 &566125687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2842,7 +2825,7 @@ GameObject:
   - component: {fileID: 1011660054}
   - component: {fileID: 1011660058}
   m_Layer: 5
-  m_Name: CanvasGIU
+  m_Name: GUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2943,9 +2926,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1011660053}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81938e7b9076d8d4abb6d20d4af2a9c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 644af868d2329d94eb58e8d07cf65639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPhaseTextUI: {fileID: 1802482428}
+  actionPointTextUI: {fileID: 1692233495}
+  mulliganButton: {fileID: 71420113}
+  actionPointsPanel: {fileID: 1850745887}
 --- !u!1 &1069529264
 GameObject:
   m_ObjectHideFlags: 0
@@ -3755,7 +3742,7 @@ GameObject:
   - component: {fileID: 1478785484}
   - component: {fileID: 1478785483}
   m_Layer: 5
-  m_Name: FaseActual-Panel
+  m_Name: CurrentPhasePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4146,7 +4133,7 @@ GameObject:
   - component: {fileID: 1692233496}
   - component: {fileID: 1692233495}
   m_Layer: 5
-  m_Name: FaseAcrual-Text (TMP)
+  m_Name: ActionPointsTextbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4370,7 +4357,7 @@ GameObject:
   - component: {fileID: 1802482429}
   - component: {fileID: 1802482428}
   m_Layer: 5
-  m_Name: FaseActual-Text (TMP)
+  m_Name: CurrentPhaseTextbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4776,7 +4763,7 @@ GameObject:
   - component: {fileID: 1850745890}
   - component: {fileID: 1850745889}
   m_Layer: 5
-  m_Name: PuntosDeAccion-Panel
+  m_Name: ActionPointsPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4853,7 +4840,7 @@ GameObject:
   - component: {fileID: 1854647923}
   - component: {fileID: 1854647922}
   m_Layer: 5
-  m_Name: SiguienteFase-Button
+  m_Name: NextPhaseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4923,10 +4910,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 566125686}
-        m_TargetAssemblyTypeName: CowtasticGameStudio.MuuliciousHarvest.GamePhaseManager,
+      - m_Target: {fileID: 1011660058}
+        m_TargetAssemblyTypeName: CowtasticGameStudio.MuuliciousHarvest.GUIManager,
           Assembly-CSharp
-        m_MethodName: NextPhase
+        m_MethodName: OnNextPhaseButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
