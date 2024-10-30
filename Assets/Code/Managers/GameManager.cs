@@ -45,6 +45,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 GameCalendar.NextDay();
                 Debug.Log("NextDay: " + GameCalendar.CurrentDay);
             }
+
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                ICard card = null;
+                Tabletop.OnCardUseActionPoints(card);
+            }
             #endregion
         }
 

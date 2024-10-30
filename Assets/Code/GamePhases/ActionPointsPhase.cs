@@ -22,7 +22,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void ExecutePhase()
         {
-            Console.WriteLine("Executing Action Points Phase");
+            // Cï¿½digo que define la lï¿½gica de la fase
+            //check clickn card(de algun sitio)
+            ICard card = null;
+            GameManager.Instance.Tabletop.OnCardUseActionPoints(card);
+            //checkap
+            //comprobnar npa con el card
+            //checkresources(nresources card)->nresources
+            //
+
+
         }
 
         public void EndPhase()
@@ -36,7 +45,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void OnCardClickedHandler(GameObject cardGameObject)
         {
             Console.WriteLine($"Card clicked: {cardGameObject.name}");
-            // Lógica específica al hacer clic en una carta
+            // Lï¿½gica especï¿½fica al hacer clic en una carta
         }
     }
 }
