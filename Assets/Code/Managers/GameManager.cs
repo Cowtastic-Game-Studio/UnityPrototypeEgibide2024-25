@@ -1,5 +1,5 @@
+using System;
 using UnityEngine;
-
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
@@ -9,10 +9,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public GamePhaseManager GamePhaseManager { get; private set; }
         public GameCalendar GameCalendar { get; private set; }
-
         public Tabletop Tabletop { get; private set; }
 
-        // Puedes añadir más gestores aquí (AudioManager, UIManager, etc.)
+        // Evento global para manejar clics en cartas
+        public event Action<GameObject> OnCardClickedGlobal;
 
         private void Awake()
         {
@@ -23,29 +23,20 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
 
             Instance = this;
-            // Para mantenerlo entre escenas, creo que no sera necesario !!!
             DontDestroyOnLoad(gameObject);
-
             InitializeManagers();
         }
 
         private void InitializeManagers()
         {
-            // Instanciar cualquier otro sistema que quieras manejar desde aquí
             GamePhaseManager = new GamePhaseManager();
             GameCalendar = new GameCalendar();
-            // Instanciar otros managers si es necesario
-
             addCalendarEvents();
         }
 
         private void Update()
         {
-            // Puedes delegar el Update a los distintos sistemas si es necesario
-            if (GamePhaseManager != null)
-            {
-                GamePhaseManager.Update();
-            }
+            GamePhaseManager?.Update();
 
             #region CheatCodes
             if (Input.GetKeyDown(KeyCode.N))
@@ -62,6 +53,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GameCalendar.AddCalendarEvent(new CowDayEvent());
             GameCalendar.AddCalendarEvent(new PlagueEvent());
             GameCalendar.AddCalendarEvent(new BrokenFridgeEvent());
+        }
+
+        // Método para invocar el evento de clic de carta
+        public void CardClicked(GameObject cardGameObject)
+        {
+            OnCardClickedGlobal?.Invoke(cardGameObject);
         }
     }
 }

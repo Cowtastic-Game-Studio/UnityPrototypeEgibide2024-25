@@ -28,7 +28,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (card != null)
             {
 
-                card.Print();
+                //card.Print();
 
                 // Configuración básica de texto y sprites
                 nameText.text = card.name;

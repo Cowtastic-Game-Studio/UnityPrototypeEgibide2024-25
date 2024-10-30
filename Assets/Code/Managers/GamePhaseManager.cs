@@ -30,7 +30,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             else if (currentPhase is MarketPhase)
             {
-                SetPhase(new StartDayPhase()); // Comienza un nuevo día
+                SetPhase(new StartDayPhase());
             }
         }
 
