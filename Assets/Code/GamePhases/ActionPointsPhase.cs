@@ -30,6 +30,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             // Desuscribirse del evento global para evitar referencias persistentes
             GameManager.Instance.OnCardClickedGlobal -= OnCardClickedHandler;
+
+            GameManager.Instance.Tabletop.CardManager.WipeBoard();
         }
 
         private void OnCardClickedHandler(ICard card)

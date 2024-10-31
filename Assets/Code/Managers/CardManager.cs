@@ -19,7 +19,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private List<GameObject> handDeck = new List<GameObject>();
 
         /// <summary>
-        /// Lugar donde se encuentra el mazo.
+        /// Cartas jugadas en la mesa.
+        /// </summary>
+        private List<GameObject> playedCards = new List<GameObject>();
+
+        /// <summary>
+        /// Lugar donde se encuentra el mazo de robo.
         /// </summary>
         public Transform deckArea;
 
@@ -27,6 +32,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// Lugar donde se encuentra la mano y se colocar�n las cartas.
         /// </summary>
         public Transform handArea;
+
+        /// <summary>
+        /// Lugar donde se encuentra el mazo de descarte.
+        /// </summary>
+        public Transform discardDeckArea;
 
         /// <summary>
         /// Espaciado entre cartas en la mano.
@@ -39,9 +49,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public int drawCards = 5;
 
         // Implementación de la interfaz ICardsManager
-        public IDeck Deck => new CardDeck(drawDeck.ConvertAll(card => card.GetComponent<ICard>()));
-        public List<ICard> Hand => handDeck.ConvertAll(card => card.GetComponent<ICard>());
-        public IDeck DiscardPile => new CardDeck(); // Para simplificar, puedes implementar un manejo real de descarte
+        public IDeck DrawDeck => new CardDeck(drawDeck.ConvertAll(card => card.GetComponent<ICard>()));
+        public List<ICard> HandDeck => handDeck.ConvertAll(card => card.GetComponent<ICard>());
+        public IDeck DiscardDeck => new CardDeck(); // Para simplificar, puedes implementar un manejo real de descarte
 
         private void Start()
         {
@@ -159,12 +169,79 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
 
         /// <summary>
+        /// Jugar una carta desde la mano y agregarla a las cartas jugadas.
+        /// </summary>
+        public void PlayCard(GameObject card)
+        {
+            if (handDeck.Contains(card))
+            {
+                handDeck.Remove(card);
+                card.transform.SetParent(discardDeckArea);
+                playedCards.Add(card);
+                // Opcional: Actualiza la posición de la carta en el tablero
+                card.transform.localPosition = Vector3.zero;
+            }
+        }
+
+        /// <summary>
+        /// Mueve una carta desde la mano al mazo de descarte.
+        /// </summary>
+        /// <param name="card">La carta que se desea descartar.</param>
+        public void DiscardCardFromHand(GameObject card)
+        {
+            if (handDeck.Contains(card))
+            {
+                handDeck.Remove(card); // Remueve la carta de la mano
+                card.transform.SetParent(discardDeckArea); // Mueve la carta al área de descarte
+                card.transform.localPosition = Vector3.zero; // Ajusta la posición según sea necesario
+                card.transform.localRotation = Quaternion.identity; // Restablece la rotación si es necesario
+            }
+            else
+            {
+                Debug.LogWarning("La carta no se encuentra en la mano.");
+            }
+        }
+
+        /// <summary>
+        /// Descarta todas las cartas de la mano.
+        /// </summary>
+        public void DiscardHand()
+        {
+            // Iterar sobre una copia de handDeck para evitar modificar la lista mientras la recorremos.
+            List<GameObject> cardsToDiscard = new List<GameObject>(handDeck);
+
+            foreach (GameObject card in cardsToDiscard)
+            {
+                DiscardCardFromHand(card);
+            }
+        }
+
+
+        /// <summary>
+        /// Limpia las cartas de la mesa y las coloca en el mazo de descarte.
+        /// </summary>
+        public void WipeBoard()
+        {
+            foreach (GameObject card in playedCards)
+            {
+                // Mueve la carta al mazo de descarte
+                card.transform.SetParent(discardDeckArea);
+                card.transform.localPosition = Vector3.zero;
+                card.transform.localRotation = Quaternion.identity;
+            }
+
+            // Limpia la lista de cartas jugadas
+            playedCards.Clear();
+        }
+
+
+        /// <summary>
         /// Limpia las cartas
         /// </summary>
         public void CleanPlayerCards()
         {
             handDeck.Clear();
-            drawDeck.Clear(); // Asegúrate de manejar el mazo de descarte también si es necesario
+            drawDeck.Clear();
         }
 
 #if UNITY_EDITOR

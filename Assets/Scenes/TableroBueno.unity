@@ -1650,8 +1650,6 @@ GameObject:
   - component: {fileID: 566125687}
   - component: {fileID: 566125689}
   - component: {fileID: 566125683}
-  - component: {fileID: 566125682}
-  - component: {fileID: 566125685}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1659,26 +1657,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &566125682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 566125681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e58ee2eec5ea7f44a9c202d84cd01a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 345353864946811313, guid: a2278575cc373484ea469a2e1548e931, type: 3}
-  initialCards: {fileID: 11400000, guid: b941c1910a3a9534387a351b2fe08561, type: 2}
-  DrawDeck: []
-  HandDeck: []
-  deckArea: {fileID: 287047169}
-  handArea: {fileID: 1255965408}
-  cardSpacing: 0.4
-  drawCards: 5
 --- !u!114 &566125683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1707,19 +1685,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &566125685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 566125681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56a271e392768ce458019fe3ea58a2b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  descartes: {fileID: 1364878054}
 --- !u!114 &566125687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1764,6 +1729,7 @@ MonoBehaviour:
   initialCards: {fileID: 11400000, guid: b941c1910a3a9534387a351b2fe08561, type: 2}
   deckArea: {fileID: 287047169}
   handArea: {fileID: 1255965408}
+  discardDeckArea: {fileID: 1364878055}
   cardSpacing: 0.4
   drawCards: 5
 --- !u!1001 &589107574
