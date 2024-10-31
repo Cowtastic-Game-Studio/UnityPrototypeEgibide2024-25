@@ -48,6 +48,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             this.gamePhaseManager = GameManager.Instance.GamePhaseManager;
             UpdateGUI(this.gamePhaseManager.CurrentPhase);
+
+            //hide
+            HideActionPointsPanel();
+            HideMulliganButton();
         }
 
         #endregion
@@ -83,23 +87,27 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (currentPhase is StartDayPhase)
             {
-                HideMulliganButton();
+                //HideMulliganButton();
                 //UpdateCurrentPhase("Place cards phase");
+                ShowMulliganButton();
             }
             else if (currentPhase is PlaceCardsPhase)
             {
-                ShowActionPointsPanel();
+                //ShowActionPointsPanel();
                 //UpdateCurrentPhase("Action points phase");
+                HideMulliganButton();
             }
             else if (currentPhase is ActionPointsPhase)
             {
-                HideActionPointsPanel();
+                //HideActionPointsPanel();
                 //UpdateCurrentPhase("Market phase");
+                ShowActionPointsPanel();
             }
             else if (currentPhase is MarketPhase)
             {
-                ShowMulliganButton();
+                //ShowMulliganButton();
                 //UpdateCurrentPhase("Start day phase");
+                HideActionPointsPanel();
             }
 
             string phaseName = currentPhase.GetType().Name;
