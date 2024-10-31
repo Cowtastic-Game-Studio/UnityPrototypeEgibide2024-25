@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 
@@ -83,23 +84,29 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (currentPhase is StartDayPhase)
             {
                 HideMulliganButton();
-                UpdateCurrentPhase("Place cards phase");
+                //UpdateCurrentPhase("Place cards phase");
             }
             else if (currentPhase is PlaceCardsPhase)
             {
                 ShowActionPointsPanel();
-                UpdateCurrentPhase("Action points phase");
+                //UpdateCurrentPhase("Action points phase");
             }
             else if (currentPhase is ActionPointsPhase)
             {
                 HideActionPointsPanel();
-                UpdateCurrentPhase("Market phase");
+                //UpdateCurrentPhase("Market phase");
             }
             else if (currentPhase is MarketPhase)
             {
                 ShowMulliganButton();
-                UpdateCurrentPhase("Start day phase");
+                //UpdateCurrentPhase("Start day phase");
             }
+
+            string phaseName = currentPhase.GetType().Name;
+            // Agregar un espacio antes de cada letra mayúscula, excepto la primera
+            phaseName = Regex.Replace(phaseName, "(?<!^)([A-Z])", " $1");
+
+            UpdateCurrentPhase(phaseName);
         }
 
         /// <summary>

@@ -9,7 +9,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public GamePhaseManager()
         {
-            SetPhase(new StartDayPhase());
+            SetPhase(new SetUpPhase());
         }
 
         public void SetPhase(IGamePhase newPhase)
@@ -18,6 +18,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 CurrentPhase.EndPhase();
             }
+
+            // Debug log para obtener el nombre de la clase de newPhase
+            Debug.Log("Estableciendo nueva fase: " + newPhase.GetType().Name);
+
             CurrentPhase = newPhase;
             CurrentPhase.EnterPhase();
         }
@@ -25,27 +29,24 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void NextPhase()
         {
             //TODO: Sprint2 Check antes de pasar a la siguiente fase
-
-
-            Debug.Log("enter next phase");
+            if (CurrentPhase is SetUpPhase)
+            {
+                SetPhase(new StartDayPhase());
+            }
             if (CurrentPhase is StartDayPhase)
             {
-                Debug.Log("estas en la fase de PlaceCardsPhase");
                 SetPhase(new PlaceCardsPhase());
             }
             else if (CurrentPhase is PlaceCardsPhase)
             {
-                Debug.Log("estas en la fase de ActionPointsPhase");
                 SetPhase(new ActionPointsPhase());
             }
             else if (CurrentPhase is ActionPointsPhase)
             {
-                Debug.Log("estas en la fase de MarketPhase");
                 SetPhase(new MarketPhase());
             }
             else if (CurrentPhase is MarketPhase)
             {
-                Debug.Log("estas en la fase de StartDayPhase");
                 SetPhase(new StartDayPhase());
             }
         }
