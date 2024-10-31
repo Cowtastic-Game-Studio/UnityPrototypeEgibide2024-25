@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: card
       value: 
       objectReference: {fileID: 11400000, guid: dcdefe3b6f64e1f4f92f2ea9a3f52dbb, type: 2}
+    - target: {fileID: 3934345919103901975, guid: bf03e2b6099c154418439f6a8e406750, type: 3}
+      propertyPath: template
+      value: 
+      objectReference: {fileID: 11400000, guid: dcdefe3b6f64e1f4f92f2ea9a3f52dbb, type: 2}
     - target: {fileID: 6323409225200614055, guid: bf03e2b6099c154418439f6a8e406750, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

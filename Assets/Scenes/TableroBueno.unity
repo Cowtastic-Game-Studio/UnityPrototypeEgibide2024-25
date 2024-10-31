@@ -1648,6 +1648,7 @@ GameObject:
   - component: {fileID: 566125684}
   - component: {fileID: 566125688}
   - component: {fileID: 566125687}
+  - component: {fileID: 566125689}
   - component: {fileID: 566125683}
   - component: {fileID: 566125682}
   - component: {fileID: 566125685}
@@ -1731,11 +1732,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8615ceeef1345dd4d990351f9f7f9879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartDeck: {fileID: 0}
+  CardManager: {fileID: 566125689}
   Farm: {fileID: 0}
   Stables: {fileID: 0}
   Taverna: {fileID: 0}
-  DeckAndHandManager: {fileID: 566125682}
 --- !u!114 &566125688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1749,6 +1749,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tabletop: {fileID: 566125687}
+--- !u!114 &566125689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566125681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e45d587d788ebca4087fa460aedf981c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialCards: {fileID: 11400000, guid: b941c1910a3a9534387a351b2fe08561, type: 2}
+  deckArea: {fileID: 287047169}
+  handArea: {fileID: 1255965408}
+  cardSpacing: 0.4
+  drawCards: 5
 --- !u!1001 &589107574
 PrefabInstance:
   m_ObjectHideFlags: 0

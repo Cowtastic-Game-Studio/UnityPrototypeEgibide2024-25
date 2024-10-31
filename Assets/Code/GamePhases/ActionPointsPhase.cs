@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
@@ -33,9 +32,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GameManager.Instance.OnCardClickedGlobal -= OnCardClickedHandler;
         }
 
-        private void OnCardClickedHandler(GameObject cardGameObject)
+        private void OnCardClickedHandler(ICard card)
         {
-            Console.WriteLine($"Card clicked: {cardGameObject.name}");
+            Console.WriteLine($"Card clicked: {card.Name}");
             // Lógica específica al hacer clic en una carta
         }
     }
