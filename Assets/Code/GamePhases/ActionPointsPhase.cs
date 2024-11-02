@@ -6,10 +6,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     public class ActionPointsPhase : IGamePhaseWUndo
     {
         public ActionManager<ICommand> ActionManager { get; private set; }
-
-        private ICard selectedCard;  // Variable para almacenar la carta seleccionada
+        /// <summary>
+        /// Carta seleccionada
+        /// </summary>
+        private ICard selectedCard;
         bool hasActionPoints;
         bool hasResources;
+        bool isProduced;
 
         public ActionPointsPhase()
         {
@@ -24,17 +27,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GameManager.Instance.OnCardClickedGlobal += OnCardClickedHandler;
         }
 
-
-
-        // C�digo que define la l�gica de la fase
-        //check clickn card(de algun sitio)
-
-        //GameManager.Instance.Tabletop.OnCardUseActionPoints();
-        //checkap
-        //comprobnar npa con el card
-        //checkresources(nresources card)->nresources
-        //
-
+       
         public void ExecutePhase()
         {
             Console.WriteLine("Executing Action Points Phase Logic.");
@@ -59,22 +52,26 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     if (hasResources)
                     {
                         // Ejecutar la acción de la carta y producir/consumir los recursos necesarios
-                        GameManager.Instance.Tabletop.StorageManager.ProduceResources();
+                        isProduced = GameManager.Instance.Tabletop.StorageManager.ProduceResources();
                         Console.WriteLine($"Action executed for card {selectedCard.Name}.");
+                        if (isProduced)
+                        {
+                            Console.WriteLine("Resources have been produced :)");
+                        }
                     }
                     else
                     {
-                        Console.WriteLine($"Not enough resources to use card {selectedCard.Name}.");
+                        Console.WriteLine($"Not enough resources.");
                     }
                 }
                 else
                 {
-                    Console.WriteLine($"Not enough action points to use card {selectedCard.Name}.");
+                    Console.WriteLine($"Not enough action points.");
                 }
             }
             else
             {
-                Console.WriteLine("No card has been selected.");
+                Console.WriteLine("No card selected.");
             }
         }
 
@@ -86,31 +83,23 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Desuscribirse del evento global para evitar referencias persistentes
             GameManager.Instance.OnCardClickedGlobal -= OnCardClickedHandler;
 
+            // Limpiar el tablero
             GameManager.Instance.Tabletop.CardManager.WipeBoard();
         }
 
         private void OnCardClickedHandler(ICard card)
         {
+            //comprobar que si se ha seleccionado una carta
             if (card != null)
             {
-                //ICard card = cardGameObject.GetComponent<ICard>();
-
-                if (card != null)
-                {
-                    Console.WriteLine($"Card {card.Name} clicked in Action Points Phase.");
-                    selectedCard = card;  // Almacena la carta seleccionada
-
-
-                }
-                else
-                {
-                    Console.WriteLine("The clicked GameObject does not have an ICard component.");
-                }
+                Console.WriteLine($"Card selected: {card.Name}");
+                selectedCard = card;  // Almacena la carta seleccionada                   
             }
             else
             {
-                Console.WriteLine("No GameObject was clicked.");
+                Console.WriteLine("No card selected.");
             }
+
         }
 
 
