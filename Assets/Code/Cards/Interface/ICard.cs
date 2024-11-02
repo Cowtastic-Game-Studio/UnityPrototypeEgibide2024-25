@@ -1,18 +1,22 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class ICard : MonoBehaviour
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    // Start is called before the first frame update
-    void Start()
+    public interface ICard
     {
-        
-    }
+        string Name { get; }
+        string Description { get; }
+        int ActionPointsCost { get; }
+        int LifeCycleDays { get; }
+        int MarketCost { get; }
+        List<ResourceAmount> RequiredResources { get; }
+        List<ResourceAmount> ProducedResources { get; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        bool IsActive { get; }
+        void Activate();
+        void Deactivate();
+
+        void Print();
+        void OnCardClicked();
     }
 }

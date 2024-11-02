@@ -8,7 +8,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void EnterPhase()
         {
             // Llama a Robo
-            GameManager.Instance.Tabletop.DrawFromDeck();
+            GameManager.Instance.Tabletop.CardManager.DrawFromDeck();
         }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void Mulligan()
         {
             //Llama a Mulligan
-            GameManager.Instance.Tabletop.Mulligan();
+            GameManager.Instance.Tabletop.CardManager.Mulligan();
         }
 
         /// <summary>

@@ -1,14 +1,14 @@
 using System;
 
-using UnityEngine;
-
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class ActionPointsPhase : IGamePhaseWUndo
     {
         public ActionManager<ICommand> ActionManager { get; private set; }
-        public StorageManager storageManager;
-        public Tabletop Tabletop;
+        
+        private ICard selectedCard;  // Variable para almacenar la carta seleccionada
+        bool hasActionPoints;
+        bool hasResources;
 
         public ActionPointsPhase()
         {
@@ -23,65 +23,89 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GameManager.Instance.OnCardClickedGlobal += OnCardClickedHandler;
         }
 
+
+
+        // C�digo que define la l�gica de la fase
+        //check clickn card(de algun sitio)
+
+        //GameManager.Instance.Tabletop.OnCardUseActionPoints();
+        //checkap
+        //comprobnar npa con el card
+        //checkresources(nresources card)->nresources
+        //
+
         public void ExecutePhase()
         {
-            ICard card = null;
-            // C�digo que define la l�gica de la fase
-            //check clickn card(de algun sitio)
+            Console.WriteLine("Executing Action Points Phase Logic.");
 
-            //GameManager.Instance.Tabletop.OnCardUseActionPoints();
-            //checkap
-            //comprobnar npa con el card
-            //checkresources(nresources card)->nresources
-            //
+            // Comprobar si hay una carta seleccionada
+            if (selectedCard != null)
+            {
+                // Verificar si hay suficientes puntos de acción para usar la carta
+                hasActionPoints = GameManager.Instance.Tabletop.StorageManager.CheckActionPoints(selectedCard.ActionPointsCost);
 
-            //if (cardGameObject != null)
-            //{
-            //    // Verificar puntos de acción en requiredList
-            //    bool hasActionPoints = storageManager.CheckActionPoints(card.);
+                if (hasActionPoints)
+                {
+                    // Verificar si hay suficientes recursos para la acción de la carta
+                    hasResources = GameManager.Instance.Tabletop.StorageManager.CheckResources(selectedCard.RequiredResources, selectedCard.ProducedResources);
 
-            //    if (hasActionPoints)
-            //    {
-            //        // Verificar recursos necesarios
-            //        bool hasResources = GameManager.Instance.Tabletop.storageManager.CheckResources(cardgameobject.requiredResources[], );
-
-            //        if (hasResources)
-            //        {
-            //            // Producir recursos o realizar la acción necesaria
-            //            storageManager.ProduceResources(card);
-            //            Console.WriteLine("Action points and resources have been checked and resources produced.");
-            //        }
-            //        else
-            //        {
-            //            Console.WriteLine("Not enough resources for the card action.");
-            //        }
-            //    }
-            //    else
-            //    {
-            //        Console.WriteLine("Not enough action points for the card action.");
-            //    }
-            //}
-            //else
-            //{
-            //    Console.WriteLine("No card provided to use action points.");
-            //}
+                    if (hasResources)
+                    {
+                        // Ejecutar la acción de la carta y producir/consumir los recursos necesarios
+                        GameManager.Instance.Tabletop.StorageManager.ProduceResources();
+                        Console.WriteLine($"Action executed for card {selectedCard.Name}.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Not enough resources to use card {selectedCard.Name}.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Not enough action points to use card {selectedCard.Name}.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No card has been selected.");
+            }
         }
+
+
         public void EndPhase()
         {
             Console.WriteLine("Ending Action Points Phase");
 
             // Desuscribirse del evento global para evitar referencias persistentes
             GameManager.Instance.OnCardClickedGlobal -= OnCardClickedHandler;
+
+            GameManager.Instance.Tabletop.CardManager.WipeBoard();
         }
 
-        private void OnCardClickedHandler(GameObject cardGameObject)
+        private void OnCardClickedHandler(ICard card)
         {
-            Console.WriteLine($"Card clicked: {cardGameObject.name}");
-            if (cardGameObject != null)
+            if (card != null)
             {
+                //ICard card = cardGameObject.GetComponent<ICard>();
 
+                if (card != null)
+                {
+                    Console.WriteLine($"Card {card.Name} clicked in Action Points Phase.");
+                    selectedCard = card;  // Almacena la carta seleccionada
+
+                   
+                }
+                else
+                {
+                    Console.WriteLine("The clicked GameObject does not have an ICard component.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No GameObject was clicked.");
             }
         }
+
 
 
     }

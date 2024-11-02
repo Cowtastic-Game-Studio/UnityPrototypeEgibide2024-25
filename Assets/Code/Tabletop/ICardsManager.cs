@@ -6,11 +6,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     {
         #region Properties
 
-        public IDeck Deck { get; }
+        public IDeck DrawDeck { get; }
 
-        public List<ICard> Hand { get; }
+        public List<ICard> HandDeck { get; }
 
-        public IDeck DiscardPile { get; }
+        public IDeck DiscardDeck { get; }
 
         #endregion
 

@@ -1,17 +1,15 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 using UnityEngine;
 
+
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    public class Tabletop : MonoBehaviour, ITabletop, ICardsManager
+    public class Tabletop : MonoBehaviour, ITabletop
     {
         #region Properties
-        public IDeck Deck { get; }
-        public IDeck DiscardPile { get; }
 
-        public SODeck StartDeck;
-        public List<ICard> Hand { get; }
+        public CardManager CardManager;
 
         public FarmZone Farm;
 
@@ -21,14 +19,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         //public DeckAndHandManager DeckAndHandManager;
 
-        public StorageManager storageManager;
-
-        List<ICard> ICardsManager.Hand => throw new System.NotImplementedException();
+        public StorageManager StorageManager;
+        
+        //List<ICard> ICardsManager.Hand => throw new System.NotImplementedException();
 
         #endregion
 
         private void Awake()
         {
+            StorageManager = new StorageManager();
+            //CardManager = new CardManager();
 
         }
 

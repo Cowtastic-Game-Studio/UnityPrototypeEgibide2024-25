@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 71420116}
   - component: {fileID: 71420115}
   m_Layer: 5
-  m_Name: Mulligan-Button
+  m_Name: MulliganButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,10 +205,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CowtasticGameStudio.MuuliciousHarvest.GamePhaseManager,
+      - m_Target: {fileID: 1011660058}
+        m_TargetAssemblyTypeName: CowtasticGameStudio.MuuliciousHarvest.GUIManager,
           Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: OnMulliganButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1648,10 +1648,8 @@ GameObject:
   - component: {fileID: 566125684}
   - component: {fileID: 566125688}
   - component: {fileID: 566125687}
+  - component: {fileID: 566125689}
   - component: {fileID: 566125683}
-  - component: {fileID: 566125682}
-  - component: {fileID: 566125685}
-  - component: {fileID: 566125686}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -1659,26 +1657,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &566125682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 566125681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e58ee2eec5ea7f44a9c202d84cd01a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 345353864946811313, guid: a2278575cc373484ea469a2e1548e931, type: 3}
-  initialCards: {fileID: 11400000, guid: b941c1910a3a9534387a351b2fe08561, type: 2}
-  DrawDeck: []
-  HandDeck: []
-  deckArea: {fileID: 287047169}
-  handArea: {fileID: 1255965408}
-  cardSpacing: 0.4
-  drawCards: 5
 --- !u!114 &566125683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1707,35 +1685,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &566125685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 566125681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56a271e392768ce458019fe3ea58a2b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  descartes: {fileID: 1364878054}
---- !u!114 &566125686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 566125681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce5d9219a9ea07947b2035183b08b84c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentPhaseTextUI: {fileID: 1802482428}
-  actionPointTextUI: {fileID: 1692233495}
-  mulliganButton: {fileID: 71420113}
-  actionPointsPanel: {fileID: 1850745887}
 --- !u!114 &566125687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1748,11 +1697,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8615ceeef1345dd4d990351f9f7f9879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartDeck: {fileID: 0}
+  CardManager: {fileID: 566125689}
   Farm: {fileID: 0}
   Stables: {fileID: 0}
   Taverna: {fileID: 0}
-  DeckAndHandManager: {fileID: 566125682}
 --- !u!114 &566125688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1766,6 +1714,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Tabletop: {fileID: 566125687}
+--- !u!114 &566125689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566125681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e45d587d788ebca4087fa460aedf981c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialCards: {fileID: 11400000, guid: b941c1910a3a9534387a351b2fe08561, type: 2}
+  deckArea: {fileID: 287047169}
+  handArea: {fileID: 1255965408}
+  discardDeckArea: {fileID: 1364878055}
+  cardSpacing: 0.4
+  drawCards: 5
 --- !u!1001 &589107574
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2842,7 +2808,7 @@ GameObject:
   - component: {fileID: 1011660054}
   - component: {fileID: 1011660058}
   m_Layer: 5
-  m_Name: CanvasGIU
+  m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2943,9 +2909,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1011660053}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81938e7b9076d8d4abb6d20d4af2a9c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 644af868d2329d94eb58e8d07cf65639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPhaseTextUI: {fileID: 1802482428}
+  actionPointTextUI: {fileID: 1692233495}
+  mulliganButton: {fileID: 71420113}
+  actionPointsPanel: {fileID: 1850745887}
 --- !u!1 &1069529264
 GameObject:
   m_ObjectHideFlags: 0
@@ -3755,7 +3725,7 @@ GameObject:
   - component: {fileID: 1478785484}
   - component: {fileID: 1478785483}
   m_Layer: 5
-  m_Name: FaseActual-Panel
+  m_Name: CurrentPhasePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4146,7 +4116,7 @@ GameObject:
   - component: {fileID: 1692233496}
   - component: {fileID: 1692233495}
   m_Layer: 5
-  m_Name: FaseAcrual-Text (TMP)
+  m_Name: ActionPointsTextbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4370,7 +4340,7 @@ GameObject:
   - component: {fileID: 1802482429}
   - component: {fileID: 1802482428}
   m_Layer: 5
-  m_Name: FaseActual-Text (TMP)
+  m_Name: CurrentPhaseTextbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4776,7 +4746,7 @@ GameObject:
   - component: {fileID: 1850745890}
   - component: {fileID: 1850745889}
   m_Layer: 5
-  m_Name: PuntosDeAccion-Panel
+  m_Name: ActionPointsPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4853,7 +4823,7 @@ GameObject:
   - component: {fileID: 1854647923}
   - component: {fileID: 1854647922}
   m_Layer: 5
-  m_Name: SiguienteFase-Button
+  m_Name: NextPhaseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4923,10 +4893,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 566125686}
-        m_TargetAssemblyTypeName: CowtasticGameStudio.MuuliciousHarvest.GamePhaseManager,
+      - m_Target: {fileID: 1011660058}
+        m_TargetAssemblyTypeName: CowtasticGameStudio.MuuliciousHarvest.GUIManager,
           Assembly-CSharp
-        m_MethodName: NextPhase
+        m_MethodName: OnNextPhaseButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
