@@ -43,26 +43,92 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public bool CheckResources(List<ResourceAmount> requiredResources, List<ResourceAmount> producedResources)
         {
 
-            int requireQuantity = requiredResources[0].resourceQuantity;
-            int leftResources = Resource - requireQuantity;
+            foreach (ResourceAmount resource in requiredResources)
+            {
+                int requireQuantity = resource.resourceQuantity;
+                GameResource requireType = resource.resourceType;
 
-            if (requireQuantity > Resource || leftResources < 0)
+                var storage = GetStorage<IStorage>(requireType);
+
+                if (!CheckStorage(requireQuantity, requireType))
+                {
+                    return false;
+                }
+            }
+
+            /*int requireQuantity = requiredResources[0].resourceQuantity;
+            GameResource requireType = requiredResources[0].resourceType;
+
+            CheckStorage(requireQuantity, requireType);*/
+
+
+            foreach (ResourceAmount resource in producedResources)
+            {
+                int producedQuantity = resource.resourceQuantity;
+                GameResource producedType = resource.resourceType;
+
+                var storage = GetStorage<IStorage>(producedType);
+
+                if (!CheckMaxStorage(producedQuantity, producedType))
+                {
+                    return false;
+                }
+            }
+
+            /*   int producedQuantity = producedResources[0].resourceQuantity;
+               CheckMaxStorage();
+               int newResources = producedQuantity + Resource;
+
+               if (newResources > MaxResources)
+               {
+                   Debug.Log("No hay suficientes espacio para almacenar el recurso.");
+                   return false;
+               }*/
+
+            _requiredResources = requiredResources;
+            _producedResources = requiredResources;
+
+            return true;
+        }
+
+        private T GetStorage<T>(GameResource type) where T : class
+        {
+            switch (type)
+            {
+                case GameResource.ActionPoints:
+                    return _paStorage as T;
+                case GameResource.Muuney:
+                    return _bankStorage as T;
+                case GameResource.Milk:
+                    return _fridgeStorage as T;
+                case GameResource.Cereal:
+                    return _silo as T;
+                default:
+                    return null;
+            }
+        }
+
+        private bool CheckStorage(int quantity, GameResource type)
+        {
+            int leftResources = Resource - quantity;
+            if (quantity > Resource || leftResources < 0)
             {
                 Debug.Log("No hay suficientes recursos");
                 return false;
             }
 
-            int producedQuantity = producedResources[0].resourceQuantity;
-            int newResources = producedQuantity + Resource;
+            return true;
+        }
+
+        private bool CheckMaxStorage(int quantity, GameResource type)
+        {
+            int newResources = quantity + Resource;
 
             if (newResources > MaxResources)
             {
                 Debug.Log("No hay suficientes espacio para almacenar el recurso.");
                 return false;
             }
-
-            _requiredResources = requiredResources;
-            _producedResources = requiredResources;
 
             return true;
         }
