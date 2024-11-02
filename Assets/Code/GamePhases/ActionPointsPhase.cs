@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
@@ -71,15 +70,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             // Desuscribirse del evento global para evitar referencias persistentes
             GameManager.Instance.OnCardClickedGlobal -= OnCardClickedHandler;
+
+            GameManager.Instance.Tabletop.CardManager.WipeBoard();
         }
 
-        private void OnCardClickedHandler(GameObject cardGameObject)
+        private void OnCardClickedHandler(ICard card)
         {
-            Console.WriteLine($"Card clicked: {cardGameObject.name}");
-            if (cardGameObject != null)
-            {
-
-            }
+            Console.WriteLine($"Card clicked: {card.Name}");
+            // L�gica espec�fica al hacer clic en una carta
         }
 
 

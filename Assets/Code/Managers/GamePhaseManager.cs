@@ -1,120 +1,64 @@
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    public class GamePhaseManager: MonoBehaviour
+    public class GamePhaseManager
     {
-        private IGamePhase currentPhase;
-        [SerializeField] private TMP_Text currentPhaseTextUI;
-        [SerializeField] private TMP_Text actionPointTextUI;
-        [SerializeField] private GameObject mulliganButton;
-        [SerializeField] private GameObject actionPointsPanel;
+        public IGamePhase CurrentPhase { get; private set; }
 
-        public void Start()
+
+        public GamePhaseManager()
         {
-            SetPhase(new StartDayPhase());
+            SetPhase(new SetUpPhase());
         }
 
         public void SetPhase(IGamePhase newPhase)
         {
-            if (currentPhase != null)
+            if (CurrentPhase != null)
             {
-                currentPhase.EndPhase();
+                CurrentPhase.EndPhase();
             }
-            currentPhase = newPhase;
-            currentPhase.EnterPhase();
-            HideAPPanel();
-            UpdateCurrentPhase("Start day phase");
+
+            // Debug log para obtener el nombre de la clase de newPhase
+            Debug.Log("Estableciendo nueva fase: " + newPhase.GetType().Name);
+
+            CurrentPhase = newPhase;
+            CurrentPhase.EnterPhase();
         }
 
         public void NextPhase()
         {
-            Debug.Log("enter next phase");
-            if (currentPhase is StartDayPhase)
+            //TODO: Sprint2 Check antes de pasar a la siguiente fase
+            if (CurrentPhase is SetUpPhase)
             {
-                Debug.Log("estas en la fase de PlaceCardsPhase");
+                SetPhase(new StartDayPhase());
+            }
+            if (CurrentPhase is StartDayPhase)
+            {
                 SetPhase(new PlaceCardsPhase());
-                HideMulliganButton();
-                UpdateCurrentPhase("Place cards phase");
             }
-            else if (currentPhase is PlaceCardsPhase)
+            else if (CurrentPhase is PlaceCardsPhase)
             {
-                Debug.Log("estas en la fase de ActionPointsPhase");
                 SetPhase(new ActionPointsPhase());
-                ShowAPPanel();
-                UpdateCurrentPhase("Action points phase");
             }
-            else if (currentPhase is ActionPointsPhase)
+            else if (CurrentPhase is ActionPointsPhase)
             {
-                Debug.Log("estas en la fase de MarketPhase");
                 SetPhase(new MarketPhase());
-                HideAPPanel();
-                UpdateCurrentPhase("Market phase");
             }
-            else if (currentPhase is MarketPhase)
+            else if (CurrentPhase is MarketPhase)
             {
-                Debug.Log("estas en la fase de StartDayPhase");
-                SetPhase(new StartDayPhase()); // Comienza un nuevo d�a
-                ShowMulliganButton();
-                UpdateCurrentPhase("Start day phase");
+                SetPhase(new StartDayPhase());
             }
         }
 
         public void Update()
         {
-            if (currentPhase != null)
+            if (CurrentPhase != null)
             {
-                currentPhase.ExecutePhase();
+                CurrentPhase.ExecutePhase();
             }
         }
 
-        #region Metodos publicos de la clase
 
-        /// <summary>
-        /// Metodo que actualiza el texto de la fase actual 
-        /// </summary>
-        /// <param name="phase">Texto que indica la fase actual</param>
-        public void UpdateCurrentPhase(string phase)
-        {
-            currentPhaseTextUI.text = phase;
-        }
-
-        /// <summary>
-        /// Metodo que actualiza el texto de los puntos de acciones 
-        /// </summary>
-        /// <param name="points">Cantidad de los puntos de accion actuales</param>
-        public void UpdateActionPoints(int points)
-        {
-            actionPointTextUI.text = points.ToString() + " AP";
-        }
-
-        public void NextPhaseButton()
-        {
-            NextPhase();
-        }
-
-        public void HideMulliganButton()
-        {
-            mulliganButton.SetActive(false);
-        }
-
-        public void ShowMulliganButton()
-        {
-            mulliganButton.SetActive(true);
-        }
-
-        public void HideAPPanel()
-        {
-            actionPointsPanel.SetActive(false);
-        }
-
-        public void ShowAPPanel()
-        {
-            actionPointsPanel.SetActive(true);
-        }
-
-        #endregion
     }
 }

@@ -13,7 +13,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public Tabletop Tabletop;
 
         // Evento global para manejar clics en cartas
-        public event Action<GameObject> OnCardClickedGlobal;
+        public event Action<ICard> OnCardClickedGlobal;
 
         private void Awake()
         {
@@ -63,9 +63,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
 
         // Método para invocar el evento de clic de carta
-        public void CardClicked(GameObject cardGameObject)
+        public void CardClicked(ICard card)
         {
-            OnCardClickedGlobal?.Invoke(cardGameObject);
+            OnCardClickedGlobal?.Invoke(card);
         }
     }
 }

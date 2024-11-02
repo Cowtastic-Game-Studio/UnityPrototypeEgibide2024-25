@@ -8,7 +8,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void EnterPhase()
         {
             // Llama a Robo
-            GameManager.Instance.Tabletop.DeckAndHandManager.Draw();
+            GameManager.Instance.Tabletop.CardManager.DrawFromDeck();
         }
         /// <summary>
         /// Acciones a Realizar durante la fase
@@ -24,7 +24,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void Mulligan()
         {
             //Llama a Mulligan
-            GameManager.Instance.Tabletop.DeckAndHandManager.Mulligan();
+            GameManager.Instance.Tabletop.CardManager.Mulligan();
         }
         /// <summary>
         /// Acciones a ejecutar al finalizar la fase

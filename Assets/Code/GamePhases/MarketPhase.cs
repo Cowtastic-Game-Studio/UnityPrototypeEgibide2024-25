@@ -32,7 +32,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             Console.WriteLine("Ending Market Phase");
 
             //pasar al siguiente dia
-            //GameManager.Instance.GameCalendar.NextDay();
+            GameManager.Instance.GameCalendar.NextDay();
         }
     }
 }
