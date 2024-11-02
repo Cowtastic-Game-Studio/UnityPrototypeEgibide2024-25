@@ -2,7 +2,7 @@
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    internal interface ICardsManager
+    public interface ICardsManager
     {
         #region Properties
 

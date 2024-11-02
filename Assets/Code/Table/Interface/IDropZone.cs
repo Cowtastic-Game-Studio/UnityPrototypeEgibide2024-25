@@ -1,18 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface IDropZone<IEntity>
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    #region Propiedades
-    /// <summary>
-    /// Si esta activo o no
-    /// </summary>
-    bool IsActive { get; }
+    public interface IDropZone<IEntity>
+    {
+        #region Propiedades
 
-    /// <summary>
-    /// El tipo de la zona
-    /// </summary>
-    IEntity Type { get; }
-    #endregion
+        bool IsActive { get; }
+        IEntity Type { get; }
+
+        #endregion
+    }
 }

@@ -1,4 +1,5 @@
 using System;
+
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -6,7 +7,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance { get; private set; }
-
         public GamePhaseManager GamePhaseManager { get; private set; }
         public GameCalendar GameCalendar { get; private set; }
 

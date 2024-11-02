@@ -6,29 +6,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     [CreateAssetMenu(fileName = "New Card", menuName = "Cards/CardTemplate")]
     public class CardTemplate : ScriptableObject
     {
-        [SerializeField]
-        public new string name;
-        //[SerializeField]
-        //private new string cardType
-        [SerializeField]
-        public string description;
-
-        [SerializeField]
         public Sprite artwork;
-        [SerializeField]
         public Sprite baseCard;
 
-        [SerializeField]
+        //public new string cardType
+        public new string name;
+        public string description;
         public int actionPointsCost;
-        [SerializeField]
         public int lifeCycleDays;
-
-        [SerializeField]
         public List<ResourceAmount> requiredResources;
-        [SerializeField]
         public List<ResourceAmount> producedResources;
-
-        [SerializeField]
         public int marketCost;
 
         public void Print()

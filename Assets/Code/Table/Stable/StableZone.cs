@@ -1,24 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class StableZone : MonoBehaviour, IDropZone<Seed>
     {
-        #region Propiedades de la clase
-        /// <summary>
-        /// Si esta activo o no
-        /// </summary>
-        public bool IsActive { get; }
+        #region Propiedades
 
-        /// <summary>
-        /// El tipo de la zona
-        /// </summary>
+        public bool IsActive { get; }
         public Seed Type { get; }
+
         #endregion
 
-        #region Metodos de la clase
+        #region Metodos
         // Start is called before the first frame update
         void Start()
         {
@@ -30,6 +23,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
 
         }
+
         #endregion
     }
 }

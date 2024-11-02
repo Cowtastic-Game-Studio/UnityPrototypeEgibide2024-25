@@ -1,7 +1,10 @@
-public enum GameResource
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    ActionPoints,
-    Muuney,
-    Milk,
-    Cereal
+    public enum GameResource
+    {
+        ActionPoints,
+        Muuney,
+        Milk,
+        Cereal
+    }
 }

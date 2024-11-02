@@ -5,9 +5,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     [CreateAssetMenu(fileName = "New Client", menuName = "Cards/Client")]
     public class BaseClient : CardTemplate
     {
+        
         public BaseClient()
         {
             name = "Client";
+            
             lifeCycleDays = 1;
         }
 

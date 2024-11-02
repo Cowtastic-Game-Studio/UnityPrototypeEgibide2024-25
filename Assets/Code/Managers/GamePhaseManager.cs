@@ -1,10 +1,10 @@
 using TMPro;
-using Unity.VisualScripting;
+
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    public class GamePhaseManager: MonoBehaviour
+    public class GamePhaseManager : MonoBehaviour
     {
         private IGamePhase currentPhase;
         [SerializeField] private TMP_Text currentPhaseTextUI;

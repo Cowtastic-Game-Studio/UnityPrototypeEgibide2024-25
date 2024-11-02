@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class Seed : MonoBehaviour, IEntity
     {
-        #region Propiedades de clase
+        #region Propiedades
         /// <summary>
         /// Cantidad de dias que dura el recurso
         /// </summary>
@@ -23,7 +21,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public ResourceAmount RequiredResources { get; }
         #endregion
 
-        #region Metodos de clase
+        #region Metodos
         // Start is called before the first frame update
         void Start()
         {

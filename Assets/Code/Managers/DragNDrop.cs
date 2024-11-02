@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CowtasticGameStudio.UI
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
     /// <summary>
     /// Drag and drop + detección de puntos de anclaje
@@ -36,7 +36,6 @@ namespace CowtasticGameStudio.UI
         private Vector3 originalPosition;
 
         #endregion
-
 
         #region Detección de puntos de anclaje
 

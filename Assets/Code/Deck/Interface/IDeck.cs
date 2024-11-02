@@ -6,10 +6,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     {
         #region Propiedades
 
-        /// <summary>
-        /// Pila de cartas
-        /// </summary>
-        public Stack<ICard> Cards { get; }
+        public Stack<ICard> CardsStack { get; }
 
         #endregion
 

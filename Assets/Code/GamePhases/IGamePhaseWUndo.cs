@@ -1,4 +1,3 @@
-
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public interface IGamePhaseWUndo : IGamePhase

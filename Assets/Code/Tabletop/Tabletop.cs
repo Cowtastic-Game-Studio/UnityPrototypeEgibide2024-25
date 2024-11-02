@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -7,12 +8,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     {
         #region Properties
         public IDeck Deck { get; }
-
-        public List<ICard> Hand { get; }
-
         public IDeck DiscardPile { get; }
 
         public SODeck StartDeck;
+        public List<ICard> Hand { get; }
 
         public FarmZone Farm;
 
@@ -20,7 +19,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public TarvernZone Taverna;
 
-        public DeckAndHandManager DeckAndHandManager;
+        //public DeckAndHandManager DeckAndHandManager;
 
         public StorageManager storageManager;
 

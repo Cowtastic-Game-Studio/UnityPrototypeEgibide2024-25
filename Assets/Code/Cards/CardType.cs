@@ -1,6 +1,9 @@
-public enum CardType
+namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    Cow,
-    Seed,
-    Customer
+    public enum CardType
+    {
+        Cow,
+        Seed,
+        Customer
+    }
 }

@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
-
     //[CreateAssetMenu(fileName = "NewCalendarEvent", menuName = "Calendar/Event")]
     public abstract class CalendarEvent // : ScriptableObject
     {
