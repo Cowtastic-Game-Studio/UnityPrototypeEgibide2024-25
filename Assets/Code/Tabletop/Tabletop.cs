@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
@@ -16,11 +18,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         //public DeckAndHandManager DeckAndHandManager;
 
-        public StorageManager storageManager;
+        public StorageManager StorageManager;
+        
+        //List<ICard> ICardsManager.Hand => throw new System.NotImplementedException();
+
         #endregion
 
         private void Awake()
         {
+            StorageManager = new StorageManager();
+            //CardManager = new CardManager();
 
         }
 

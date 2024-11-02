@@ -1,5 +1,7 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
@@ -48,8 +50,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             if (Input.GetKeyDown(KeyCode.C))
             {
-                ICard card = null;
-                Tabletop.OnCardUseActionPoints(card);
+                // Selecciona una carta; aquï¿½ puedes definir una lï¿½gica para elegir una carta especï¿½fica
+
+                CardClicked(Tabletop.CardManager.HandDeck[0]); // Invoca el evento de clic de carta
+
+
             }
             #endregion
         }
@@ -62,7 +67,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GameCalendar.AddCalendarEvent(new BrokenFridgeEvent());
         }
 
-        // Método para invocar el evento de clic de carta
+        // Mï¿½todo para invocar el evento de clic de carta
         public void CardClicked(ICard card)
         {
             OnCardClickedGlobal?.Invoke(card);
