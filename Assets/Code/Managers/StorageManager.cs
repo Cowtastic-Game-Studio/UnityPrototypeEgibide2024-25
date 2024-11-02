@@ -4,17 +4,12 @@ using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    public class StorageManager : IStorage
+    public class StorageManager : MonoBehaviour
     {
-        private PAStorage _paStorage;
-        private Bank _bankStorage;
-        private Fridge _fridgeStorage;
-        private Silo _silo;
-
-        public GameResource Type { get; }
-        public int MaxResources { get; }
-        public int Level { get; }
-        public int Resource { get; }
+        [SerializeField] private PAStorage _paStorage;
+        [SerializeField] private Bank _bankStorage;
+        [SerializeField] private Fridge _fridgeStorage;
+        [SerializeField] private Silo _silo;
 
         private List<ResourceAmount> _requiredResources;
         private List<ResourceAmount> _producedResources;
@@ -26,7 +21,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <returns>Devuelve true si hay PA. False si no hay.</returns>
         public bool CheckActionPoints(int nAP)
         {
-            if (Resource < nAP)
+            if (_paStorage.Resource < nAP)
             {
                 return false;
             }
@@ -50,17 +45,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 var storage = GetStorage<IStorage>(requireType);
 
-                if (!CheckStorage(requireQuantity, requireType))
+                if (!CheckStorage(requireQuantity, storage))
                 {
                     return false;
                 }
             }
-
-            /*int requireQuantity = requiredResources[0].resourceQuantity;
-            GameResource requireType = requiredResources[0].resourceType;
-
-            CheckStorage(requireQuantity, requireType);*/
-
 
             foreach (ResourceAmount resource in producedResources)
             {
@@ -69,28 +58,54 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 var storage = GetStorage<IStorage>(producedType);
 
-                if (!CheckMaxStorage(producedQuantity, producedType))
+                if (!CheckMaxStorage(producedQuantity, storage))
                 {
                     return false;
                 }
             }
 
-            /*   int producedQuantity = producedResources[0].resourceQuantity;
-               CheckMaxStorage();
-               int newResources = producedQuantity + Resource;
-
-               if (newResources > MaxResources)
-               {
-                   Debug.Log("No hay suficientes espacio para almacenar el recurso.");
-                   return false;
-               }*/
-
             _requiredResources = requiredResources;
-            _producedResources = requiredResources;
+            _producedResources = producedResources;
 
             return true;
         }
 
+        /// <summary>
+        /// Realiza la acción de producir recursos.
+        /// </summary>
+        /// <returns>Devuelve true si se ha podido hacer la acción.</returns>
+        public bool ProduceResources()
+        {
+            foreach (ResourceAmount resource in _requiredResources)
+            {
+                int requireQuantity = resource.resourceQuantity;
+                GameResource requireType = resource.resourceType;
+
+                var storage = GetStorage<IStorage>(requireType);
+
+                RemoveResource(requireQuantity, storage);
+            }
+
+            foreach (ResourceAmount resource in _producedResources)
+            {
+                int producedQuantity = resource.resourceQuantity;
+                GameResource producedType = resource.resourceType;
+
+                var storage = GetStorage<IStorage>(producedType);
+
+
+                AddResources(producedQuantity, storage);
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Metodo para obtener el almacenamiento de un recurso.
+        /// </summary>
+        /// <typeparam name="T">La clase obtenida</typeparam>
+        /// <param name="type">Los tipos de GameResource</param>
+        /// <returns>Una clase</returns>
         private T GetStorage<T>(GameResource type) where T : class
         {
             switch (type)
@@ -108,10 +123,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
-        private bool CheckStorage(int quantity, GameResource type)
+        /// <summary>
+        /// Comprueba si hay suficientes recursos para realizar la acción.
+        /// </summary>
+        /// <param name="quantity">La cantidad que pide</param>
+        /// <param name="storage">El almacen</param>
+        /// <returns>Devuelve true si hay recursos suficientes.</returns>
+        private bool CheckStorage(int quantity, IStorage storage)
         {
-            int leftResources = Resource - quantity;
-            if (quantity > Resource || leftResources < 0)
+            int leftResources = storage.Resource - quantity;
+            if (quantity > storage.Resource || leftResources < 0)
             {
                 Debug.Log("No hay suficientes recursos");
                 return false;
@@ -120,11 +141,17 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return true;
         }
 
-        private bool CheckMaxStorage(int quantity, GameResource type)
+        /// <summary>
+        /// Comprueba si hay suficiente espacio para almacenar el recurso.
+        /// </summary>
+        /// <param name="quantity">La cantidad que pide</param>
+        /// <param name="storage">El almacen</param>
+        /// <returns>Devuelve true si se aun hay espacio suficiente.</returns>
+        private bool CheckMaxStorage(int quantity, IStorage storage)
         {
-            int newResources = quantity + Resource;
+            int newResources = quantity + storage.Resource;
 
-            if (newResources > MaxResources)
+            if (newResources > storage.MaxResources)
             {
                 Debug.Log("No hay suficientes espacio para almacenar el recurso.");
                 return false;
@@ -133,48 +160,24 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return true;
         }
 
-        /// <summary>
-        /// Realiza la acción de producir recursos.
-        /// </summary>
-        /// <returns>Devuelve true si se ha podido hacer la acción.</returns>
-        public bool ProduceResources()
+        private void AddResources(int quantity, IStorage storage)
         {
-            int requireQuantity = _requiredResources[0].resourceQuantity;
-            GameResource requireType = _requiredResources[0].resourceType;
-
-            RemoveResource(requireQuantity, requireType);
-
-            int producedQuantity = _producedResources[0].resourceQuantity;
-            GameResource producedType = _producedResources[0].resourceType;
-
-            AddResources(producedQuantity, producedType);
-
-            return false;
+            storage.Resource += quantity;
         }
 
-        private int AddResources(int quantity, GameResource type)
+        private void RemoveResource(int quantity, IStorage storage)
         {
-
-            return 0;
-        }
-
-        private int RemoveResource(int quantity, GameResource type)
-        {
-            return 0;
+            storage.Resource -= quantity;
         }
 
         private void AddLevel()
         {
-
+            // TODO: Implementar
         }
 
         private void UpgradeStorage()
         {
-
+            // TODO: Implementar
         }
-
-
-
-
     }
 }

@@ -7,23 +7,24 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <summary>
         /// Máximo de recursos que puede almacenar.
         /// </summary>
-        public GameResource Type { get; }
+        public GameResource Type { get; set; }
 
         /// <summary>
         /// Máximo de recursos que puede almacenar.
         /// </summary>
-        public int MaxResources { get; }
+        public int MaxResources { get; set; }
 
         /// <summary>
         /// Nivel del almacenamiento.
         /// </summary>
-        public int Level { get; }
+        public int Level { get; set; }
 
         /// <summary>
         /// Cantidad de recursos actualmente almacenados.
         /// </summary>
-        public int Resource { get; }
+        public int Resource { get; set; }
 
         #endregion
+
     }
 }

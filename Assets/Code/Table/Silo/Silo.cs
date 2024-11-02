@@ -6,10 +6,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     {
         #region Propiedades
 
-        public GameResource Type { get; }
-        public int MaxResources { get; }
-        public int Level { get; }
-        public int Resource { get; }
+        public GameResource Type { get; set; }
+        public int MaxResources { get; set; }
+        public int Level { get; set; }
+        public int Resource { get; set; }
 
         #endregion
 
@@ -23,7 +23,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             Type = GameResource.Cereal;
             MaxResources = 5;
             Level = 1;
-            Resource = 0;
+            Resource = 3;
         }
 
         #endregion

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 using UnityEngine;
 
 
@@ -20,7 +18,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         //public DeckAndHandManager DeckAndHandManager;
 
         public StorageManager StorageManager;
-        
+
         //List<ICard> ICardsManager.Hand => throw new System.NotImplementedException();
 
         #endregion

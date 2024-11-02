@@ -1,11 +1,12 @@
 using System;
+using System.Collections.Generic;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class ActionPointsPhase : IGamePhaseWUndo
     {
         public ActionManager<ICommand> ActionManager { get; private set; }
-        
+
         private ICard selectedCard;  // Variable para almacenar la carta seleccionada
         bool hasActionPoints;
         bool hasResources;
@@ -46,8 +47,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 if (hasActionPoints)
                 {
+                    List<ResourceAmount> requiredResources = new List<ResourceAmount>();
+                    requiredResources.Add(new ResourceAmount { resourceQuantity = 1, resourceType = GameResource.Cereal });
+
+                    List<ResourceAmount> producedResources = new List<ResourceAmount>();
+                    producedResources.Add(new ResourceAmount { resourceQuantity = 1, resourceType = GameResource.Milk });
+
                     // Verificar si hay suficientes recursos para la acción de la carta
-                    hasResources = GameManager.Instance.Tabletop.StorageManager.CheckResources(selectedCard.RequiredResources, selectedCard.ProducedResources);
+                    hasResources = GameManager.Instance.Tabletop.StorageManager.CheckResources(requiredResources, producedResources);
 
                     if (hasResources)
                     {
@@ -93,7 +100,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     Console.WriteLine($"Card {card.Name} clicked in Action Points Phase.");
                     selectedCard = card;  // Almacena la carta seleccionada
 
-                   
+
                 }
                 else
                 {
