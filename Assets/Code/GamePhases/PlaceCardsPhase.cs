@@ -22,7 +22,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             // C�digo que define la l�gica de la fase
             Console.WriteLine("Executing Place Cards Phase");
-
+            // Manejar la entrada del mouse
+            GameManager.Instance.Tabletop.CardManager.HandleMouseInput();
         }
 
         public void EndPhase()

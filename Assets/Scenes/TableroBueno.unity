@@ -1737,7 +1737,6 @@ GameObject:
   - component: {fileID: 566125688}
   - component: {fileID: 566125687}
   - component: {fileID: 566125689}
-  - component: {fileID: 566125683}
   - component: {fileID: 566125690}
   m_Layer: 0
   m_Name: Manager
@@ -1746,19 +1745,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &566125683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 566125681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af334df05ce5aae43bd922645f741dab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  placementHeightOffset: 0.2
 --- !u!4 &566125684
 Transform:
   m_ObjectHideFlags: 0
@@ -1822,6 +1808,7 @@ MonoBehaviour:
   discardDeckArea: {fileID: 1364878055}
   cardSpacing: 0.5
   drawCards: 5
+  placementHeightOffset: 0.2
 --- !u!114 &566125690
 MonoBehaviour:
   m_ObjectHideFlags: 0

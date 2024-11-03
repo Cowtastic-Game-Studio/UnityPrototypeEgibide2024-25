@@ -76,6 +76,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public IDeck PlayedDeck => playedCardsDeck;
         public IDeck DiscardDeck => discardDeck;
 
+        // Variables para Drag & Drop
+        private bool isDragging = false;
+        private Transform draggedObject;
+        private Vector3 dragOffset;
+        private float objectZDepth;
+        private float fixedYPosition;
+        private Vector3 originalPosition;
+        private Color originalColor;
+        private bool isOverPlace = false;
+        public float placementHeightOffset = 0.2f;
 
         private void Start()
         {
@@ -310,6 +320,161 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     discardDeck.Place(card);
                     break;
             }
+        }
+
+        //drag and drop
+        public void HandleMouseInput()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                HandleMouseDown();
+            }
+            if (isDragging)
+            {
+                HandleMouseDrag();
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                HandleMouseUp();
+            }
+        }
+
+        private bool IsCardTag(string tag)
+        {
+            return tag == "CardCow" || tag == "CardSeed" || tag == "CardClient";
+        }
+
+        private void HandleMouseDown()
+        {
+            RaycastHit hit;
+            if (RaycastFromMouse(out hit) && IsCardTag(hit.collider.tag))
+            {
+                StartDragging(hit.collider.transform);
+            }
+        }
+
+        private void HandleMouseDrag()
+        {
+            Vector3 mousePosition = GetMouseWorldPosition();
+
+            if (IsMouseOverPlace(out RaycastHit hitBelow))
+            {
+                if (!isOverPlace)
+                {
+                    ChangeColor(Color.black);
+                    isOverPlace = true;
+                }
+            }
+            else
+            {
+                if (isOverPlace)
+                {
+                    RevertColor();
+                    isOverPlace = false;
+                }
+            }
+
+            UpdateObjectPosition(mousePosition);
+        }
+
+        private void HandleMouseUp()
+        {
+            if (draggedObject != null)
+            {
+                if (IsMouseOverPlace(out RaycastHit hitBelow))
+                {
+                    SnapToPlace(hitBelow);
+                }
+                else
+                {
+                    ReturnToOriginalPosition();
+                }
+                StopDragging();
+            }
+        }
+
+        private void StartDragging(Transform objectToDrag)
+        {
+            draggedObject = objectToDrag;
+            isDragging = true;
+            objectZDepth = Camera.main.WorldToScreenPoint(draggedObject.position).z;
+            fixedYPosition = draggedObject.position.y + 1;
+            originalPosition = draggedObject.position;
+
+            Vector3 mousePosition = GetMouseWorldPosition();
+            dragOffset = draggedObject.position - new Vector3(mousePosition.x, 0, mousePosition.z);
+
+            Renderer renderer = draggedObject.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                originalColor = renderer.material.color;
+            }
+        }
+
+        private void StopDragging()
+        {
+            isDragging = false;
+            if (isOverPlace)
+            {
+                RevertColor();
+                isOverPlace = false;
+            }
+            draggedObject = null;
+        }
+
+        private void UpdateObjectPosition(Vector3 mousePosition)
+        {
+            draggedObject.position = new Vector3(mousePosition.x + dragOffset.x, fixedYPosition, mousePosition.z + dragOffset.z);
+        }
+
+        private Vector3 GetMouseWorldPosition()
+        {
+            Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, objectZDepth);
+            return Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+        }
+
+        private bool RaycastFromMouse(out RaycastHit hit)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            return Physics.Raycast(ray, out hit);
+        }
+
+        private bool IsMouseOverPlace(out RaycastHit hitBelow)
+        {
+            Ray downwardRay = new Ray(draggedObject.position, Vector3.down);
+            return Physics.Raycast(downwardRay, out hitBelow) && hitBelow.collider.CompareTag("Place");
+        }
+
+        private void ChangeColor(Color color)
+        {
+            Renderer renderer = draggedObject.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.material.color = color;
+            }
+        }
+
+        private void RevertColor()
+        {
+            Renderer renderer = draggedObject.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.material.color = originalColor;
+            }
+        }
+
+        private void SnapToPlace(RaycastHit hitBelow)
+        {
+            // Obtener el centro del collider del objeto golpeado
+            Vector3 hitPosition = hitBelow.collider.bounds.center;
+
+            // Colocar el objeto arrastrado en el mismo centro que el objeto golpeado
+            draggedObject.position = new Vector3(hitPosition.x, hitPosition.y, hitPosition.z + placementHeightOffset);
+        }
+
+        private void ReturnToOriginalPosition()
+        {
+            draggedObject.position = originalPosition;
         }
     }
 }
