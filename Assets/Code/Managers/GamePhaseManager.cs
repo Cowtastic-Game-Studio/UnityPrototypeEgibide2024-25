@@ -4,6 +4,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class GamePhaseManager
     {
+        //TODO: Añadir contador de turnos(dias)
+
         public IGamePhase CurrentPhase { get; private set; }
 
 

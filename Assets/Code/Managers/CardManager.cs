@@ -59,6 +59,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public int drawCards = 5;
 
         // Implementación de la interfaz ICardsManager
+        //TODO: revisar esto en clase, usar las Propiedades en mayus, da problemas si no se gestiona bien
         public IDeck DrawDeck => new CardDeck(drawDeck.ConvertAll(card => card.GetComponent<ICard>()));
         public List<ICard> HandDeck => handDeck.ConvertAll(card => card.GetComponent<ICard>());
         public IDeck DiscardDeck => new CardDeck(); // Para simplificar, puedes implementar un manejo real de descarte

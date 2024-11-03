@@ -7,6 +7,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     /// </summary>
     public class DragNDrop : MonoBehaviour
     {
+        //TODO: mejorar la deteccion del D&D para evitar usar el update
+
+
         #region Variables Drag & Drop
 
         /// <summary>

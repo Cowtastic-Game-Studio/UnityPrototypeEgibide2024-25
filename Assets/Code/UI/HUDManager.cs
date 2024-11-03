@@ -12,6 +12,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     {
         //TODO: Hacer un checkeo en el start, para comprobar que todas las propiedades externas esten asignadas. si no lanzar excepcion
         //TODO: Cada fase como singleton?
+        //TODO: Añadir visor de turno actual(dia)
+
 
         #region Properties
 
