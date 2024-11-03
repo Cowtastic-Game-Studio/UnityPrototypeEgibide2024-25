@@ -3,6 +3,16 @@ using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
+    /// <summary>
+    /// Define el estado actual de cada carta
+    /// </summary>
+    public enum CardState
+    {
+        onDeck,
+        onHand,
+        onTable
+    }
+
     public class CardManager : MonoBehaviour, ICardsManager
     {
         [SerializeField]
@@ -147,12 +157,35 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void Mulligan()
         {
-            foreach (var card in handDeck)
+            int handNumber = HandDeck.Count;
+
+
+            if (HandDeck.Count >= handNumber)
             {
-                // Suponiendo que se maneja una pila de descarte, debes implementar la lógica aquí.
+                for (int i = 0; i < handNumber; i++)
+                {
+                    GameObject cardToMove = handDeck[handDeck.Count - 1];
+                    handDeck.RemoveAt(handDeck.Count - 1);
+
+                    cardToMove.transform.SetParent(deckArea);
+                    cardToMove.transform.localPosition = Vector3.zero;
+
+                    drawDeck.Insert(0, cardToMove);
+                }
+                drawCards = (handNumber - 1);
+                if (handNumber < 2)
+                {
+                    // Desactivar botón de mulligan si es necesario
+                }
+                this.DrawFromDeck();
             }
-            handDeck.Clear();
-            DrawFromDeck();
+
+            //foreach (var card in handDeck)
+            //{
+            //    // Suponiendo que se maneja una pila de descarte, debes implementar la lógica aquí.
+            //}
+            //handDeck.Clear();
+            //DrawFromDeck();
         }
 
         /// <summary>
@@ -255,10 +288,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 DrawFromDeck();
             }
 
-            if (Input.GetMouseButtonDown(2))
-            {
-                Mulligan();
-            }
+            //if (Input.GetMouseButtonDown(2))
+            //{
+            //    Mulligan();
+            //}
         }
 #endif
     }
