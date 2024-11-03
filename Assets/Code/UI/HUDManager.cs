@@ -11,7 +11,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     public class HUDManager : MonoBehaviour
     {
         //TODO: Hacer un checkeo en el start, para comprobar que todas las propiedades externas esten asignadas. si no lanzar excepcion
-        //TODO: Añadir descripcion de la fase en cada fase para obtenerla de la propia clase
         //TODO: Cada fase como singleton?
 
         #region Properties
@@ -47,11 +46,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void Start()
         {
             this.gamePhaseManager = GameManager.Instance.GamePhaseManager;
-            UpdateGUI(this.gamePhaseManager.CurrentPhase);
-
-            //hide
-            HideActionPointsPanel();
-            HideMulliganButton();
+            UpdateGUI(this.gamePhaseManager.CurrentPhase);  
         }
 
         #endregion
@@ -72,7 +67,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void OnMulliganButtonClick()
         {
-            //TODO: Añadir llamada a Mulligan
+            GameManager.Instance.Tabletop.CardManager.Mulligan();
         }
 
         #endregion
@@ -85,72 +80,86 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <param name="currentPhase"></param>
         private void UpdateGUI(IGamePhase currentPhase)
         {
-            if (currentPhase is StartDayPhase)
+            //Dependiendo de la fase  modifica la GUI
+            if (currentPhase is SetUpPhase)
             {
-                //HideMulliganButton();
-                //UpdateCurrentPhase("Place cards phase");
+                HideActionPointsPanel();
+                HideMulliganButton();
+            }
+            else if (currentPhase is StartDayPhase)
+            {
                 ShowMulliganButton();
             }
             else if (currentPhase is PlaceCardsPhase)
             {
-                //ShowActionPointsPanel();
-                //UpdateCurrentPhase("Action points phase");
                 HideMulliganButton();
             }
             else if (currentPhase is ActionPointsPhase)
             {
-                //HideActionPointsPanel();
-                //UpdateCurrentPhase("Market phase");
                 ShowActionPointsPanel();
             }
             else if (currentPhase is MarketPhase)
             {
-                //ShowMulliganButton();
-                //UpdateCurrentPhase("Start day phase");
                 HideActionPointsPanel();
             }
 
-            string phaseName = currentPhase.GetType().Name;
-            // Agregar un espacio antes de cada letra mayúscula, excepto la primera
-            phaseName = Regex.Replace(phaseName, "(?<!^)([A-Z])", " $1");
-
-            UpdateCurrentPhase(phaseName);
+            //Actualiza el texto de la fase
+            UpdatePhaseText(currentPhase);
         }
 
         /// <summary>
         /// Metodo que actualiza el texto de la fase actual 
         /// </summary>
         /// <param name="phase">Texto que indica la fase actual</param>
-        public void UpdateCurrentPhase(string phase)
+        private void UpdatePhaseText(IGamePhase currentPhase)
         {
-            currentPhaseTextUI.text = phase;
+            string phaseName;
+
+            phaseName = currentPhase.GetType().Name;
+
+            // Agregar un espacio antes de cada letra mayúscula, excepto la primera
+            phaseName = Regex.Replace(phaseName, "(?<!^)([A-Z])", " $1");
+
+            currentPhaseTextUI.text = phaseName;
         }
 
         /// <summary>
-        /// Metodo que actualiza el texto de los puntos de acciones 
+        /// Metodo que actualiza el texto de los puntos de accion
         /// </summary>
         /// <param name="points">Cantidad de los puntos de accion actuales</param>
-        public void UpdateActionPoints(int points)
+        private void UpdateActionPoints(int points)
         {
             actionPointTextUI.text = points.ToString() + " PA";
         }
 
-        public void HideMulliganButton()
+        /// <summary>
+        /// Oculta el boton del mulligan
+        /// </summary>
+        private void HideMulliganButton()
         {
             mulliganButton.SetActive(false);
         }
 
-        public void ShowMulliganButton()
+        /// <summary>
+        /// Muestra el boton del mulligan
+        /// </summary>
+        private void ShowMulliganButton()
         {
             mulliganButton.SetActive(true);
         }
 
-        public void HideActionPointsPanel()
+        /// <summary>
+        /// Oculta el panel de puntos de accion
+        /// </summary>
+        private void HideActionPointsPanel()
         {
             actionPointsPanel.SetActive(false);
         }
 
-        public void ShowActionPointsPanel()
+        /// <summary>
+        /// Muestra el panel de puntos de accion
+        /// </summary>
+        private void ShowActionPointsPanel()
         {
             actionPointsPanel.SetActive(true);
         }
