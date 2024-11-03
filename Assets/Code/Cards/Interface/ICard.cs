@@ -4,6 +4,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public interface ICard
     {
+        CardState State { get; set; }
+
         string Name { get; }
         string Description { get; }
         int ActionPointsCost { get; }

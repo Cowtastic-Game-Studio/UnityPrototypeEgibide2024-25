@@ -1790,7 +1790,7 @@ MonoBehaviour:
   Farm: {fileID: 0}
   Stables: {fileID: 0}
   Taverna: {fileID: 0}
-  StorageManager: {fileID: 0}
+  StorageManager: {fileID: 566125690}
 --- !u!114 &566125688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1820,7 +1820,7 @@ MonoBehaviour:
   deckArea: {fileID: 287047169}
   handArea: {fileID: 1255965408}
   discardDeckArea: {fileID: 1364878055}
-  cardSpacing: 0.4
+  cardSpacing: 0.5
   drawCards: 5
 --- !u!114 &566125690
 MonoBehaviour:
@@ -3463,7 +3463,7 @@ Transform:
   m_GameObject: {fileID: 1255965407}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: -0.35, y: -4.3930025, z: 0}
+  m_LocalPosition: {x: -0.35, y: -4.3930025, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -1,34 +1,44 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public interface IDeck
     {
-        #region Propiedades
+        #region Properties
 
-        public Stack<ICard> Cards { get; }
+        /// <summary>
+        /// Obtiene la pila de cartas como GameObjects.
+        /// </summary>
+        public Stack<GameObject> Cards { get; }
 
         #endregion
 
         #region Methods
         /// <summary>
-        /// Barajea las cartas
+        /// Barajea las cartas en el mazo.
         /// </summary>
         public void Shuffle();
 
         /// <summary>
-        /// Obtiene la carta superior del mazo
+        /// Roba la carta superior del mazo.
         /// </summary>
-        /// <returns>Devuelve la carta robada</returns>
-        public ICard Draw();
+        /// <returns>Devuelve el GameObject de la carta robada.</returns>
+        public GameObject Draw();
 
         /// <summary>
-        /// Coloca la carta en la parte superior del mazo
+        /// Coloca una carta en la parte superior del mazo.
         /// </summary>
-        /// <param name="card">Carta a colocar</param>
-        public void Place(ICard card);
+        /// <param name="card">El GameObject de la carta a colocar.</param>
+        public void Place(GameObject card);
+
+
+        /// <summary>
+        /// Roba la carta superior del mazo.
+        /// </summary>
+        /// <returns>Devuelve una copia de la carta superior</returns>
+        public GameObject Peek();
 
         #endregion
-
     }
 }

@@ -25,7 +25,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void Awake()
         {
-            StorageManager = new StorageManager();
+            //StorageManager = new StorageManager();
             //CardManager = new CardManager();
 
         }

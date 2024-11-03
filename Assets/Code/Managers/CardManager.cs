@@ -10,7 +10,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     {
         onDeck,
         onHand,
-        onTable
+        onTable,
+        onDiscard
     }
 
     public class CardManager : MonoBehaviour, ICardsManager
@@ -19,50 +20,62 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private SODeck initialCards;
 
         /// <summary>
-        /// Lista de cartas en el mazo.
+        /// Mazo de cartas.
         /// </summary>
-        private List<GameObject> drawDeck = new List<GameObject>();
+        private IDeck drawDeck;
 
         /// <summary>
         /// Cartas en la mano.
         /// </summary>
-        private List<GameObject> handDeck = new List<GameObject>();
+        public IDeck handDeck;
 
         /// <summary>
         /// Cartas jugadas en la mesa.
         /// </summary>
-        private List<GameObject> playedCards = new List<GameObject>();
+        private IDeck playedCardsDeck;
+
+        /// <summary>
+        /// Cartas del descarte.
+        /// </summary>
+        private IDeck discardDeck;
 
         /// <summary>
         /// Lugar donde se encuentra el mazo de robo.
         /// </summary>
-        public Transform deckArea;
+        [SerializeField]
+        private Transform deckArea;
 
         /// <summary>
         /// Lugar donde se encuentra la mano y se colocar�n las cartas.
         /// </summary>
-        public Transform handArea;
+        [SerializeField]
+        private Transform handArea;
 
         /// <summary>
         /// Lugar donde se encuentra el mazo de descarte.
         /// </summary>
-        public Transform discardDeckArea;
+        [SerializeField]
+        private Transform discardDeckArea;
 
         /// <summary>
         /// Espaciado entre cartas en la mano.
         /// </summary>
-        public float cardSpacing = 0.4f;
+        [SerializeField]
+        private float cardSpacing = 0.4f;
 
         /// <summary>
         /// Variable para definir desde el editor la cantidad de cartas a robar por turno.
         /// </summary>
-        public int drawCards = 5;
+        [SerializeField]
+        private int drawCards = 5;
 
-        // Implementación de la interfaz ICardsManager
         //TODO: revisar esto en clase, usar las Propiedades en mayus, da problemas si no se gestiona bien
-        public IDeck DrawDeck => new CardDeck(drawDeck.ConvertAll(card => card.GetComponent<ICard>()));
-        public List<ICard> HandDeck => handDeck.ConvertAll(card => card.GetComponent<ICard>());
-        public IDeck DiscardDeck => new CardDeck(); // Para simplificar, puedes implementar un manejo real de descarte
+        // Properties implementing ICardsManager
+        public IDeck DrawDeck => drawDeck;
+        public IDeck HandDeck => handDeck;
+        public IDeck PlayedDeck => playedCardsDeck;
+        public IDeck DiscardDeck => discardDeck;
+
 
         private void Start()
         {
@@ -81,76 +94,75 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 return;
             }
 
+            // Inicializa los mazos
+            drawDeck = new CardDeck();
+            handDeck = new CardDeck();
+            playedCardsDeck = new CardDeck();
+            discardDeck = new CardDeck();
+
             // Recorre cada carta en el ScriptableObject y crea una instancia
             foreach (GameObject card in initialCards.Cards)
             {
-                // Instancia la carta desde el ScriptableObject
                 GameObject newCard = Instantiate(card, deckArea);
                 newCard.transform.localPosition = Vector3.zero;
 
                 // Agrega la carta al mazo
-                drawDeck.Add(newCard);
+                drawDeck.Place(newCard);
             }
         }
 
-        /// <summary>
-        /// Lleva cartas del mazo de robo a la mano
-        /// </summary>
         public void DrawFromDeck()
         {
             MoveLastCardsToHand(drawCards);
         }
 
-        /// <summary>
-        /// Roba una cantidad específica de cartas desde el mazo y las mueve a la mano.
-        /// </summary>
         private void MoveLastCardsToHand(int cardsToDraw)
         {
-            cardsToDraw = Mathf.Min(cardsToDraw, drawDeck.Count);
+            cardsToDraw = Mathf.Min(cardsToDraw, drawDeck.Cards.Count);
 
             for (int i = 0; i < cardsToDraw; i++)
             {
-                // Obtener la última carta en el mazo
-                GameObject cardToMove = drawDeck[drawDeck.Count - 1];
+                GameObject cardToMove = drawDeck.Draw();
+                if (cardToMove != null)
+                {
+                    // Cambiar la posición y padre de la carta para moverla a la mano
+                    cardToMove.transform.SetParent(handArea);
+                    cardToMove.transform.localPosition = new Vector3(i * cardSpacing, 0, 0);
 
-                // Quitar la carta del mazo
-                drawDeck.RemoveAt(drawDeck.Count - 1);
-
-                // Cambiar la posición y padre de la carta para moverla a la mano
-                cardToMove.transform.SetParent(handArea);
-                cardToMove.transform.localPosition = new Vector3(i * cardSpacing, 0, 0);
-
-                // Agregar la carta a la lista de la mano
-                handDeck.Insert(0, cardToMove);
+                    // Agregar la carta a la lista de la mano
+                    //handDeck.Place(cardToMove);
+                    SetCardState(cardToMove, CardState.onHand);
+                }
             }
 
             // Organizar las cartas en la mano
             ArrangeHand();
         }
 
-        /// <summary>
-        /// Organiza las cartas en la mano en un diseño horizontal con el espacio definido.
-        /// </summary>
         private void ArrangeHand()
         {
-            for (int i = 0; i < handDeck.Count; i++)
+            // Crea una lista temporal de cartas en la mano
+            List<GameObject> cardsInHand = new List<GameObject>(handDeck.Cards.ToArray());
+
+            for (int i = 0; i < cardsInHand.Count; i++)
             {
-                GameObject card = handDeck[i];
-
-                // Establece la posición de la carta en la mano
-                card.transform.localPosition = new Vector3(i * cardSpacing, 0, 0);
-
-                // Asegura la rotación en (0, 0, 0)
-                card.transform.rotation = Quaternion.Euler(90, -90, 0);
+                GameObject card = cardsInHand[i]; // Obtén la carta de la lista temporal
+                if (card != null)
+                {
+                    // Cambia la posición de la carta en la mano
+                    card.transform.localPosition = new Vector3(i * cardSpacing, 0, 0);
+                    card.transform.rotation = Quaternion.Euler(90, -90, 0);
+                }
             }
         }
+
 
         /// <summary>
         /// Barajea las cartas del mazo de descarte y la mueve al mazo de robo
         /// </summary>
         public void ShuffleDiscardDeck()
         {
-            // Aquí deberías implementar la lógica para barajar el mazo de descarte
+            // TODO: implementar la lógica para barajar el mazo de descarte
         }
 
         /// <summary>
@@ -158,35 +170,24 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void Mulligan()
         {
-            int handNumber = HandDeck.Count;
+            int handNumber = handDeck.Cards.Count;
 
-
-            if (HandDeck.Count >= handNumber)
+            if (handNumber > 0)
             {
                 for (int i = 0; i < handNumber; i++)
                 {
-                    GameObject cardToMove = handDeck[handDeck.Count - 1];
-                    handDeck.RemoveAt(handDeck.Count - 1);
+                    GameObject cardToMove = handDeck.Draw();
+                    if (cardToMove != null)
+                    {
+                        cardToMove.transform.SetParent(deckArea);
+                        cardToMove.transform.localPosition = Vector3.zero;
 
-                    cardToMove.transform.SetParent(deckArea);
-                    cardToMove.transform.localPosition = Vector3.zero;
-
-                    drawDeck.Insert(0, cardToMove);
-                }
-                drawCards = (handNumber - 1);
-                if (handNumber < 2)
-                {
-                    // Desactivar botón de mulligan si es necesario
+                        drawDeck.Place(cardToMove);
+                        SetCardState(cardToMove, CardState.onDeck);
+                    }
                 }
                 this.DrawFromDeck();
             }
-
-            //foreach (var card in handDeck)
-            //{
-            //    // Suponiendo que se maneja una pila de descarte, debes implementar la lógica aquí.
-            //}
-            //handDeck.Clear();
-            //DrawFromDeck();
         }
 
         /// <summary>
@@ -194,11 +195,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void PutCard()
         {
-            if (handDeck.Count > 0)
+            if (handDeck.Cards.Count > 0)
             {
-                var card = handDeck[0];
-                handDeck.RemoveAt(0);
-                // Aquí deberías implementar la lógica para colocar la carta en el mazo de descarte
+                var card = handDeck.Draw();
+                if (card != null)
+                {
+                    discardDeck.Place(card);
+                    SetCardState(card, CardState.onDiscard);
+                }
             }
         }
 
@@ -207,13 +211,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void PlayCard(GameObject card)
         {
-            if (handDeck.Contains(card))
+            if (handDeck.Cards.Contains(card))
             {
-                handDeck.Remove(card);
+                handDeck.Draw();
                 card.transform.SetParent(discardDeckArea);
-                playedCards.Add(card);
-                // Opcional: Actualiza la posición de la carta en el tablero
+                playedCardsDeck.Place(card);
                 card.transform.localPosition = Vector3.zero;
+                SetCardState(card, CardState.onTable);
             }
         }
 
@@ -223,12 +227,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <param name="card">La carta que se desea descartar.</param>
         public void DiscardCardFromHand(GameObject card)
         {
-            if (handDeck.Contains(card))
+            if (handDeck.Cards.Contains(card))
             {
-                handDeck.Remove(card); // Remueve la carta de la mano
-                card.transform.SetParent(discardDeckArea); // Mueve la carta al área de descarte
-                card.transform.localPosition = Vector3.zero; // Ajusta la posición según sea necesario
-                card.transform.localRotation = Quaternion.identity; // Restablece la rotación si es necesario
+                handDeck.Draw();
+                card.transform.SetParent(discardDeckArea);
+                card.transform.localPosition = Vector3.zero;
+                SetCardState(card, CardState.onDiscard);
             }
             else
             {
@@ -236,13 +240,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
+
         /// <summary>
         /// Descarta todas las cartas de la mano.
         /// </summary>
         public void DiscardHand()
         {
             // Iterar sobre una copia de handDeck para evitar modificar la lista mientras la recorremos.
-            List<GameObject> cardsToDiscard = new List<GameObject>(handDeck);
+            List<GameObject> cardsToDiscard = new List<GameObject>(handDeck.Cards);
 
             foreach (GameObject card in cardsToDiscard)
             {
@@ -256,16 +261,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void WipeBoard()
         {
-            foreach (GameObject card in playedCards)
+            foreach (GameObject card in playedCardsDeck.Cards)
             {
-                // Mueve la carta al mazo de descarte
                 card.transform.SetParent(discardDeckArea);
                 card.transform.localPosition = Vector3.zero;
                 card.transform.localRotation = Quaternion.identity;
+                SetCardState(card, CardState.onDiscard);
             }
 
-            // Limpia la lista de cartas jugadas
-            playedCards.Clear();
+            // Reiniciar el mazo de cartas jugadas
+            playedCardsDeck = new CardDeck();
         }
 
 
@@ -274,26 +279,37 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void CleanPlayerCards()
         {
-            handDeck.Clear();
-            drawDeck.Clear();
+            // Limpiar mano
+            handDeck = new CardDeck();
+            // Limpiar mazo de robo
+            drawDeck = new CardDeck();
         }
 
-#if UNITY_EDITOR
-        /// <summary>
-        /// Controles para hacer pruebas desde el editor.
-        /// </summary>
-        private void Update()
+        /// Refactor
+        public void SetCardState(GameObject card, CardState newState)
         {
-            if (Input.GetMouseButtonDown(1))
-            {
-                DrawFromDeck();
-            }
+            var cardComponent = card.GetComponent<ICard>();
+            if (cardComponent == null) return;
 
-            //if (Input.GetMouseButtonDown(2))
-            //{
-            //    Mulligan();
-            //}
+            // Actualizar el estado de la carta
+            cardComponent.State = newState;
+
+            // Colocar la carta en el mazo correcto según el nuevo estado
+            switch (newState)
+            {
+                case CardState.onDeck:
+                    drawDeck.Place(card);
+                    break;
+                case CardState.onHand:
+                    handDeck.Place(card);
+                    break;
+                case CardState.onTable:
+                    playedCardsDeck.Place(card);
+                    break;
+                case CardState.onDiscard:
+                    discardDeck.Place(card);
+                    break;
+            }
         }
-#endif
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -7,19 +6,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     public class CardDeck : IDeck
     {
         // Implementa la pila de cartas
-        private Stack<ICard> _cards;
+        private Stack<GameObject> _cards;
 
-        public CardDeck(IEnumerable<ICard> initialCards = null)
+        public CardDeck(IEnumerable<GameObject> initialCards = null)
         {
-            _cards = initialCards != null ? new Stack<ICard>(initialCards) : new Stack<ICard>();
+            _cards = initialCards != null ? new Stack<GameObject>(initialCards) : new Stack<GameObject>();
         }
 
         // Propiedad para acceder a la pila
-        public Stack<ICard> Cards => _cards;
+        public Stack<GameObject> Cards => _cards;
 
         public void Shuffle()
         {
-            var cardsList = new List<ICard>(_cards);
+            var cardsList = new List<GameObject>(_cards);
             _cards.Clear();
 
             // Baraja la lista
@@ -36,21 +35,31 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
-        public ICard Draw()
+        public GameObject Draw()
         {
             if (_cards.Count > 0)
             {
-                ICard card = _cards.Pop();
-                // Activa la carta antes de devolverla
-                card.Activate();
+                GameObject card = _cards.Pop();
+                //TODO: Activa la carta antes de devolverla, si es necesario
                 return card;
             }
             return null;
         }
 
-        public void Place(ICard card)
+        public void Place(GameObject card)
         {
             _cards.Push(card);
+        }
+
+        // Método para obtener una copia de la carta en la parte superior sin eliminarla
+        public GameObject Peek()
+        {
+            if (_cards.Count > 0)
+            {
+                GameObject originalCard = _cards.Peek(); // Obtiene la carta en la parte superior sin quitarla
+                return Object.Instantiate(originalCard); // Clona el objeto
+            }
+            return null;
         }
     }
 }

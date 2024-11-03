@@ -1,15 +1,12 @@
-﻿using System.Collections.Generic;
-
-namespace CowtasticGameStudio.MuuliciousHarvest
+﻿namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public interface ICardsManager
     {
         #region Properties
 
         public IDeck DrawDeck { get; }
-
-        public List<ICard> HandDeck { get; }
-
+        public IDeck HandDeck { get; }
+        public IDeck PlayedDeck { get; }
         public IDeck DiscardDeck { get; }
 
         #endregion

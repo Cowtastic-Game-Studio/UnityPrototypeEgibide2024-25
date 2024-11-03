@@ -48,11 +48,43 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             if (Input.GetKeyDown(KeyCode.C))
             {
-                // Selecciona una carta; aqu� puedes definir una l�gica para elegir una carta espec�fica
+                // Selecciona una carta
+                if (Tabletop.CardManager.handDeck.Cards.Count > 0)
+                {
+                    // Selecciona la primera carta de la mano
+                    GameObject selectedCard = Tabletop.CardManager.handDeck.Peek();
 
-                CardClicked(Tabletop.CardManager.HandDeck[0]); // Invoca el evento de clic de carta
+                    // Obtener el componente ICard de la carta seleccionada
+                    ICard cardComponent = selectedCard.GetComponent<ICard>();
+
+                    if (cardComponent != null)
+                    {
+                        // Aquí puedes hacer algo con el componente ICard
+                        Debug.Log("Se ha seleccionado la carta: " + cardComponent);
+                        CardClicked(cardComponent); // O invoca el evento de clic de carta
+                    }
+                    else
+                    {
+                        Debug.LogWarning("La carta seleccionada no tiene el componente ICard.");
+                    }
+                }
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                Tabletop.CardManager.DrawFromDeck();
+            }
+
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                Tabletop.CardManager.Mulligan();
+            }
 
 
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                Tabletop.CardManager.ShuffleDiscardDeck();
             }
             #endregion
         }

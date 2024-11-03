@@ -10,6 +10,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private bool isActive;
 
+        public CardState State { get; set; } = CardState.onDeck;
         public string Name => template.name;
         public string Description => template.description;
         public int ActionPointsCost => template.actionPointsCost;
