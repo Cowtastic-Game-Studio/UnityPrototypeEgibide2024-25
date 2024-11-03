@@ -470,11 +470,40 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             // Colocar el objeto arrastrado en el mismo centro que el objeto golpeado
             draggedObject.position = new Vector3(hitPosition.x, hitPosition.y, hitPosition.z + placementHeightOffset);
+
+            // Remover la carta del handDeck
+            RemoveCardFromHand(draggedObject.gameObject);
+
+            // Cambiar el estado de la carta a 'onTable'
+            SetCardState(draggedObject.gameObject, CardState.onTable);
         }
 
         private void ReturnToOriginalPosition()
         {
             draggedObject.position = originalPosition;
+        }
+
+        private void RemoveCardFromHand(GameObject card)
+        {
+            // Usar un stack temporal para almacenar las cartas restantes
+            Stack<GameObject> tempStack = new Stack<GameObject>();
+
+            while (handDeck.Cards.Count > 0)
+            {
+                GameObject currentCard = handDeck.Draw();
+                if (currentCard != card)
+                {
+                    tempStack.Push(currentCard);
+                }
+            }
+
+            // Regresa las cartas que no fueron eliminadas al handDeck
+            while (tempStack.Count > 0)
+            {
+                handDeck.Place(tempStack.Pop());
+            }
+
+            Debug.Log($"Se ha eliminado la carta {card.name} de la mano.");
         }
     }
 }

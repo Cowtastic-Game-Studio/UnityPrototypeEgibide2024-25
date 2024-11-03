@@ -59,16 +59,21 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void OnCardClicked()
         {
-            if (IsActive)
-            {
-                // Pasar la instancia ICard
-                GameManager.Instance?.CardClicked(this);
-            }
+            //if (IsActive)
+            //{
+            // Pasar la instancia ICard
+            GameManager.Instance?.CardClicked(this);
+            //}
         }
 
+        //public void OnPointerClick(PointerEventData eventData)
         private void OnMouseDown()
         {
-            OnCardClicked();
+            // Verifica si la carta está en la layer 'CardLayer'
+            if (gameObject.layer == LayerMask.NameToLayer("CardLayer"))
+            {
+                OnCardClicked();
+            }
         }
 
         // Método para configurar la visualización en CardDisplay
