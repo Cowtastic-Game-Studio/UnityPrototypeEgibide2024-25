@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
@@ -27,7 +26,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GameManager.Instance.OnCardClickedGlobal += OnCardClickedHandler;
         }
 
-       
+
         public void ExecutePhase()
         {
             Console.WriteLine("Executing Action Points Phase Logic.");
@@ -40,14 +39,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 if (hasActionPoints)
                 {
-                    List<ResourceAmount> requiredResources = new List<ResourceAmount>();
-                    requiredResources.Add(new ResourceAmount { resourceQuantity = 1, resourceType = GameResource.Cereal });
+                    //List<ResourceAmount> requiredResources = new List<ResourceAmount>();
+                    //requiredResources.Add(new ResourceAmount { resourceQuantity = 1, resourceType = GameResource.Cereal });
 
-                    List<ResourceAmount> producedResources = new List<ResourceAmount>();
-                    producedResources.Add(new ResourceAmount { resourceQuantity = 1, resourceType = GameResource.Milk });
+                    //List<ResourceAmount> producedResources = new List<ResourceAmount>();
+                    //producedResources.Add(new ResourceAmount { resourceQuantity = 1, resourceType = GameResource.Milk });
 
                     // Verificar si hay suficientes recursos para la acción de la carta
-                    hasResources = GameManager.Instance.Tabletop.StorageManager.CheckResources(requiredResources, producedResources);
+                    hasResources = GameManager.Instance.Tabletop.StorageManager.CheckResources(selectedCard.RequiredResources, selectedCard.ProducedResources);
 
                     if (hasResources)
                     {
@@ -73,6 +72,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 Console.WriteLine("No card selected.");
             }
+
+            selectedCard = null;
         }
 
 

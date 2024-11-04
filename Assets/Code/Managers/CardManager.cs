@@ -119,6 +119,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 // Agrega la carta al mazo
                 drawDeck.Place(newCard);
             }
+
+            drawDeck.Shuffle();
         }
 
         public void DrawFromDeck()
@@ -404,11 +406,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             Vector3 mousePosition = GetMouseWorldPosition();
             dragOffset = draggedObject.position - new Vector3(mousePosition.x, 0, mousePosition.z);
 
-            Renderer renderer = draggedObject.GetComponent<Renderer>();
-            if (renderer != null)
-            {
-                originalColor = renderer.material.color;
-            }
+            //Renderer renderer = draggedObject.GetComponent<Renderer>();
+            //if (renderer != null)
+            //{
+            //    originalColor = renderer.material.color;
+            //}
         }
 
         private void StopDragging()
@@ -450,7 +452,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             Renderer renderer = draggedObject.GetComponent<Renderer>();
             if (renderer != null)
             {
-                renderer.material.color = color;
+                //renderer.material.color = color;
             }
         }
 
@@ -459,7 +461,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             Renderer renderer = draggedObject.GetComponent<Renderer>();
             if (renderer != null)
             {
-                renderer.material.color = originalColor;
+                //renderer.material.color = originalColor;
             }
         }
 

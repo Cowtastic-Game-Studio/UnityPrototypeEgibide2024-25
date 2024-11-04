@@ -31,7 +31,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // C�digo para finalizar la fase
             Console.WriteLine("Ending Place Cards Phase");
 
-            GameManager.Instance.Tabletop.CardManager.DiscardHand();
+            // GameManager.Instance.Tabletop.CardManager.DiscardHand();
         }
     }
 }
