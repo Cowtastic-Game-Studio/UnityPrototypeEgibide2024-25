@@ -62,7 +62,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             //if (IsActive)
             //{
             // Pasar la instancia ICard
-            ICard card = this;
+            ICard card = gameObject.GetComponent<ICard>(); ;
             GameManager.Instance?.CardClicked(card);
             //}
         }
