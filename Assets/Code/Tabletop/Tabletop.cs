@@ -15,6 +15,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public TarvernZone Taverna;
 
+        public HUDManager HUDManager;
+
         //public DeckAndHandManager DeckAndHandManager;
 
         public StorageManager StorageManager;

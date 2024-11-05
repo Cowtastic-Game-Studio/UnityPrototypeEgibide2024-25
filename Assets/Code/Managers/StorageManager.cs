@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 using UnityEngine;
 
@@ -6,6 +6,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class StorageManager : MonoBehaviour
     {
+        #region Variables
         [SerializeField] private PAStorage _paStorage;
         [SerializeField] private Bank _bankStorage;
         [SerializeField] private Fridge _fridgeStorage;
@@ -13,7 +14,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private List<ResourceAmount> _requiredResources;
         private List<ResourceAmount> _producedResources;
+        #endregion
 
+        private void Awake()
+        {
+            _paStorage = new PAStorage();
+            _bankStorage = new Bank();
+            _fridgeStorage = new Fridge();
+            _silo = new Silo();
+        }
+
+        #region Methods
+
+        #region Public
         /// <summary>
         /// Comprueba si hay suficientes puntos de acción para realizar la acción.
         /// </summary>
@@ -83,7 +96,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 var storage = GetStorage<IStorage>(requireType);
 
-                RemoveResource(requireQuantity, storage);
+                RemoveResources(requireQuantity, storage);
             }
 
             foreach (ResourceAmount resource in _producedResources)
@@ -99,6 +112,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             return false;
         }
+
+        #endregion
+
+        #region Private
 
         /// <summary>
         /// Metodo para obtener el almacenamiento de un recurso.
@@ -165,7 +182,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             storage.Resource += quantity;
         }
 
-        private void RemoveResource(int quantity, IStorage storage)
+        private void RemoveResources(int quantity, IStorage storage)
         {
             storage.Resource -= quantity;
         }
@@ -179,5 +196,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             // TODO: Implementar
         }
+
+        public void RestartPA() {
+            // TODO: Implementar
+        }
+
+        #endregion 
+        #endregion
     }
 }

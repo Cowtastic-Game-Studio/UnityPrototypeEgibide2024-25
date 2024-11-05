@@ -1,5 +1,6 @@
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
+    [System.Serializable]
     public struct ResourceAmount
     {
         #region Propiedades
