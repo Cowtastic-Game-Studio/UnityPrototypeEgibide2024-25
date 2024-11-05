@@ -41,6 +41,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             // Limpiar el tablero
             GameManager.Instance.Tabletop.CardManager.WipeBoard();
+
+            //ALBA: quitar cundo se arregle el poder hacer click en cartas colocadas
+            GameManager.Instance.Tabletop.CardManager.DiscardHand();
         }
 
         private void OnCardClickedHandler(ICard card)
