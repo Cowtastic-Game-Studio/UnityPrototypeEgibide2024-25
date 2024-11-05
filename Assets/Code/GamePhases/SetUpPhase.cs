@@ -32,12 +32,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// Establece los PA (RestartPA()) a los que tendria que tener el jugador al empezar la ronda
         /// </summary>
         private void NewGame()
-        {  
+        {
             // Inicializamos el deck
             GameManager.Instance.Tabletop.CardManager.InitializeDeck();
-
-            // Establecemos los PAs en su valor por defecto
-            GameManager.Instance.Tabletop.StorageManager.RestartPA();
         }
         #endregion
     }
