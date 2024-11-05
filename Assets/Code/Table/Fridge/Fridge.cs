@@ -1,8 +1,6 @@
-using UnityEngine;
-
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    public class Fridge : MonoBehaviour, IStorage
+    public class Fridge : IStorage
     {
         #region Propiedades
 
@@ -15,9 +13,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         #region Constructor
 
-        /// <summary>
-        /// Constructor del almacen
-        /// </summary>
         public Fridge()
         {
             // Le indicamos que el tipo del recurso es

@@ -1,8 +1,6 @@
-using UnityEngine;
-
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    public class Silo : MonoBehaviour, IStorage
+    public class Silo : IStorage
     {
         #region Propiedades
 
@@ -14,9 +12,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         #endregion
 
         #region Constructor
-        /// <summary>
-        /// Constructor del almacen
-        /// </summary>
         public Silo()
         {
             // Le indicamos que el tipo del recurso es
