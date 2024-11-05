@@ -37,6 +37,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         [SerializeField] private GameObject actionPointsPanel;
 
+        [SerializeField] private GameObject marketGUI;
+
+
         /// <summary>
         /// Referencia al GamePhaseManager
         /// </summary>
@@ -87,10 +90,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 HideActionPointsPanel();
                 HideMulliganButton();
+                HideMarket();
             }
             else if (currentPhase is StartDayPhase)
             {
                 ShowMulliganButton();
+                HideMarket();
             }
             else if (currentPhase is PlaceCardsPhase)
             {
@@ -103,6 +108,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             else if (currentPhase is MarketPhase)
             {
                 HideActionPointsPanel();
+                ShowMarket();
             }
 
             //Actualiza el texto de la fase
@@ -164,6 +170,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void ShowActionPointsPanel()
         {
             actionPointsPanel.SetActive(true);
+        }
+
+        private void ShowMarket()
+        {
+            marketGUI.SetActive(true);
+        }
+
+        private void HideMarket()
+        {
+            marketGUI.SetActive(false);
         }
 
         #endregion
