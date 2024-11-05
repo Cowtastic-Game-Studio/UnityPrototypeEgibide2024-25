@@ -28,6 +28,21 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [SerializeField] private TMP_Text actionPointTextUI;
 
         /// <summary>
+        /// Referencia al TextBox donde se muestra el numero de puntos de accion
+        /// </summary>
+        [SerializeField] private TMP_Text wheatResourceTextUI;
+
+        /// <summary>
+        /// Referencia al TextBox donde se muestra el numero de puntos de accion
+        /// </summary>
+        [SerializeField] private TMP_Text milkResourceTextUI;
+
+        /// <summary>
+        /// Referencia al TextBox donde se muestra el numero de puntos de accion
+        /// </summary>
+        [SerializeField] private TMP_Text bankResourceTextUI;
+
+        /// <summary>
         /// Referencia al Button de Mulligan
         /// </summary>
         [SerializeField] private GameObject mulliganButton;
@@ -48,7 +63,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void Start()
         {
             this.gamePhaseManager = GameManager.Instance.GamePhaseManager;
-            UpdateGUI(this.gamePhaseManager.CurrentPhase);  
+            UpdateGUI(this.gamePhaseManager.CurrentPhase);
         }
 
         #endregion
@@ -106,7 +121,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
 
             //Actualiza el texto de la fase
+            ShowActionPointsPanel();
+            UpdateResources();
             UpdatePhaseText(currentPhase);
+
+
         }
 
         /// <summary>
@@ -166,8 +185,27 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             actionPointsPanel.SetActive(true);
         }
 
+
+        private void UpdateResources()
+        {
+            int paMax = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.ActionPoints);
+            int wheatMax = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.Cereal);
+            int milkMax = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.Milk);
+            int muuneyMax = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.Muuney);
+
+            int pa = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.ActionPoints);
+            int wheat = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Cereal);
+            int milk = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Milk);
+            int muuney = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Muuney);
+
+            actionPointTextUI.text = "AP: " + pa.ToString() + "/" + paMax.ToString();
+            wheatResourceTextUI.text = "Wheat: " + wheat.ToString() + "/" + wheatMax.ToString();
+            milkResourceTextUI.text = "Milk: " + milk.ToString() + "/" + milkMax.ToString();
+            bankResourceTextUI.text = "Muuney: " + muuney.ToString() + "/" + muuneyMax.ToString();
+
+
+        }
+
         #endregion
-
     }
-
 }

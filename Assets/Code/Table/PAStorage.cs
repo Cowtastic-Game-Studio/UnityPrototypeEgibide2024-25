@@ -19,7 +19,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             Type = GameResource.Cereal;
             MaxResources = 6;
             Level = 1;
-            Resource = 5;
+            Resource = 6;
         }
 
         #endregion

@@ -94,7 +94,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 int requireQuantity = resource.resourceQuantity;
                 GameResource requireType = resource.resourceType;
 
-                var storage = GetStorage<IStorage>(requireType);
+                IStorage storage = GetStorage<IStorage>(requireType);
 
                 RemoveResources(requireQuantity, storage);
             }
@@ -111,6 +111,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
 
             return false;
+        }
+        public int GetResourceAmounts(GameResource type)
+        {
+            return GetStorage<IStorage>(type).Resource;
+        }
+
+        public int GetMaxResourceAmounts(GameResource type)
+        {
+            return GetStorage<IStorage>(type).MaxResources;
         }
 
         #endregion
@@ -196,8 +205,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             // TODO: Implementar
         }
-
         #endregion 
+
         #endregion
     }
 }
