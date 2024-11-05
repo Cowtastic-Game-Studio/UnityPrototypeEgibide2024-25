@@ -25,6 +25,5 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public int Resource { get; set; }
 
         #endregion
-
     }
 }
