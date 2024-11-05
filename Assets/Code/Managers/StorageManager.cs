@@ -112,14 +112,33 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             return false;
         }
+
+        /// <summary>
+        /// Obtiene la cantidad de recursos actual de un tipo.
+        /// </summary>
+        /// <param name="type">Tipo de recurso que se recoge.</param>
+        /// <returns>Devuelve la cantidad.</returns>
         public int GetResourceAmounts(GameResource type)
         {
             return GetStorage<IStorage>(type).Resource;
         }
 
+        /// <summary>
+        /// Obtiene la cantidad máxima de recursos de un tipo.
+        /// </summary>
+        /// <param name="type">Tipo de recurso que se recoge.</param>
+        /// <returns>Devuelve la cantidad máxima.</returns>
         public int GetMaxResourceAmounts(GameResource type)
         {
             return GetStorage<IStorage>(type).MaxResources;
+        }
+
+        /// <summary>
+        /// Reinicia los puntos de acción a los máximos.
+        /// </summary>
+        public void RestartPA()
+        {
+            _paStorage.Resource = _paStorage.MaxResources;
         }
 
         #endregion
@@ -207,11 +226,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
         #endregion 
 
-        public void RestartPA() {
-            // TODO: Implementar
-        }
-
         #endregion 
-        #endregion
     }
 }
