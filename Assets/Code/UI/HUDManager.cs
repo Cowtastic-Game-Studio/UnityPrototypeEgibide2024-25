@@ -12,7 +12,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     {
         //TODO: Hacer un checkeo en el start, para comprobar que todas las propiedades externas esten asignadas. si no lanzar excepcion
         //TODO: Cada fase como singleton?
-        //TODO: Añadir visor de turno actual(dia)
+        //TODO: Aï¿½adir visor de turno actual(dia)
 
 
         #region Properties
@@ -26,6 +26,21 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// Referencia al TextBox donde se muestra el numero de puntos de accion
         /// </summary>
         [SerializeField] private TMP_Text actionPointTextUI;
+
+        /// <summary>
+        /// Referencia al TextBox donde se muestra el numero de puntos de accion
+        /// </summary>
+        [SerializeField] private TMP_Text wheatResourceTextUI;
+
+        /// <summary>
+        /// Referencia al TextBox donde se muestra el numero de puntos de accion
+        /// </summary>
+        [SerializeField] private TMP_Text milkResourceTextUI;
+
+        /// <summary>
+        /// Referencia al TextBox donde se muestra el numero de puntos de accion
+        /// </summary>
+        [SerializeField] private TMP_Text bankResourceTextUI;
 
         /// <summary>
         /// Referencia al Button de Mulligan
@@ -122,7 +137,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
 
             //Actualiza el texto de la fase
+            ShowActionPointsPanel();
+            UpdateResources();
             UpdatePhaseText(currentPhase);
+
+
         }
 
         /// <summary>
@@ -135,7 +154,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             phaseName = currentPhase.GetType().Name;
 
-            // Agregar un espacio antes de cada letra mayúscula, excepto la primera
+            // Agregar un espacio antes de cada letra mayï¿½scula, excepto la primera
             phaseName = Regex.Replace(phaseName, "(?<!^)([A-Z])", " $1");
 
             currentPhaseTextUI.text = phaseName;
@@ -175,6 +194,27 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             actionPointsPanel.SetActive(true);
         }
 
+
+        private void UpdateResources()
+        {
+            int paMax = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.ActionPoints);
+            int wheatMax = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.Cereal);
+            int milkMax = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.Milk);
+            int muuneyMax = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.Muuney);
+
+            int pa = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.ActionPoints);
+            int wheat = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Cereal);
+            int milk = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Milk);
+            int muuney = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Muuney);
+
+            actionPointTextUI.text = "AP: " + pa.ToString() + "/" + paMax.ToString();
+            wheatResourceTextUI.text = "Wheat: " + wheat.ToString() + "/" + wheatMax.ToString();
+            milkResourceTextUI.text = "Milk: " + milk.ToString() + "/" + milkMax.ToString();
+            bankResourceTextUI.text = "Muuney: " + muuney.ToString() + "/" + muuneyMax.ToString();
+
+
+        }
+
         private void ShowMarket()
         {
             marketGUI.SetActive(true);
@@ -186,7 +226,5 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
 
         #endregion
-
     }
-
 }
