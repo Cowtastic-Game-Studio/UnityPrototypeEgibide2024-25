@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 using UnityEngine;
 
@@ -194,6 +194,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void UpgradeStorage()
         {
+            // TODO: Implementar
+        }
+
+        public void RestartPA() {
             // TODO: Implementar
         }
 
