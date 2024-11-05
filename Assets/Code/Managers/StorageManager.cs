@@ -179,5 +179,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             // TODO: Implementar
         }
+
+        public void RestartPA() {
+            // TODO: Implementar
+        }
     }
 }

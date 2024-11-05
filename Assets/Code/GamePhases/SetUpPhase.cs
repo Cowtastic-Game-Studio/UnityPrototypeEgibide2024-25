@@ -4,30 +4,41 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class SetUpPhase : IGamePhase
     {
+        #region Metodos publicos
+        /// <summary>
+        /// Al entrar en la fase se ejecutara NewGame() para preparar el mazo y PAs
+        /// </summary>
         public void EnterPhase()
         {
-            // Lógica de inicialización
-            Debug.Log("Fase de inicializacion de tablero. NewGame o LoadGame");
+            // Iniciamos el nuevo juego
+            NewGame();
         }
 
         public void ExecutePhase()
         {
-            // Lógica principal, lo que sucede durante esta fase
+
         }
 
         public void EndPhase()
         {
-            Debug.Log("Termina la fase de empezar el día.");
+            Debug.Log("Termina la fase de empezar el d a.");
+            Debug.Log("Termina la primera fase de todas, si me ves dos veces hay algo mal");
         }
+        #endregion
 
-        public void NewGame()
-        {
+        #region Metodos privados
+        /// <summary>
+        /// Inicia un nuevo juego preparando el deck (InitializeDeck())
+        /// Establece los PA (RestartPA()) a los que tendria que tener el jugador al empezar la ronda
+        /// </summary>
+        private void NewGame()
+        {  
+            // Inicializamos el deck
+            GameManager.Instance.Tabletop.CardManager.InitializeDeck();
 
+            // Establecemos los PAs en su valor por defecto
+            GameManager.Instance.Tabletop.StorageManager.RestartPA();
         }
-
-        public void LoadGame()
-        {
-
-        }
+        #endregion
     }
 }

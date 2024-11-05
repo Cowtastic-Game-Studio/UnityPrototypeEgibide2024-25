@@ -89,13 +89,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void Start()
         {
-            InitializeDeck();
+            // Comentado ya que la inicializacion la hace el SetUpPhase
+            //InitializeDeck();
         }
 
         /// <summary>
         /// Inicializa un mazo con cartas desde el ScriptableObject.
         /// </summary>
-        private void InitializeDeck()
+        public void InitializeDeck()
         {
             // Verifica que el ScriptableObject esté asignado y que la lista de cartas no esté vacía
             if (initialCards == null || initialCards.Cards == null || initialCards.Cards.Count == 0)
