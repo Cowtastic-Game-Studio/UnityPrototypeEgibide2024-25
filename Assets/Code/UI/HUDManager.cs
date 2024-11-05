@@ -48,7 +48,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void Start()
         {
             this.gamePhaseManager = GameManager.Instance.GamePhaseManager;
-            UpdateGUI(this.gamePhaseManager.CurrentPhase);  
+            UpdateGUI(this.gamePhaseManager.CurrentPhase);
         }
 
         #endregion
@@ -71,7 +71,17 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             GameManager.Instance.Tabletop.CardManager.Mulligan();
         }
+        #endregion
 
+
+        #region Public methods
+        /// <summary>
+        /// Oculta el boton del mulligan
+        /// </summary>
+        public void HideMulliganButton()
+        {
+            mulliganButton.SetActive(false);
+        }
         #endregion
 
         #region Private methods
@@ -134,13 +144,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             actionPointTextUI.text = points.ToString() + " PA";
         }
 
-        /// <summary>
-        /// Oculta el boton del mulligan
-        /// </summary>
-        private void HideMulliganButton()
-        {
-            mulliganButton.SetActive(false);
-        }
 
         /// <summary>
         /// Muestra el boton del mulligan

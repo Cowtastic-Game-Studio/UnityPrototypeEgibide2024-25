@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -182,7 +182,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             int handNumber = handDeck.Cards.Count;
 
-            if (handNumber > 0)
+            if (handNumber > 1)
             {
                 for (int i = 0; i < handNumber; i++)
                 {
@@ -192,12 +192,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         cardToMove.transform.SetParent(deckArea);
                         cardToMove.transform.localPosition = Vector3.zero;
 
-                        drawDeck.Place(cardToMove);
                         SetCardState(cardToMove, CardState.onDeck);
                     }
                 }
-                this.DrawFromDeck();
+                drawDeck.Shuffle();
+                this.MoveLastCardsToHand(handNumber - 1);
+
+                //esconder botón mulligan si no hay más de una carta en la mano
+                if (handDeck.Cards.Count <= 1)
+                {
+                    GameManager.Instance.Tabletop.HUDManager.HideMulliganButton();
+                }
             }
+
         }
 
         /// <summary>
