@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
@@ -9,7 +8,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <summary>
         /// Carta seleccionada
         /// </summary>
-        private ICard selectedCard;
         bool hasActionPoints;
         bool hasResources;
         bool isProduced;
@@ -27,11 +25,42 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GameManager.Instance.OnCardClickedGlobal += OnCardClickedHandler;
         }
 
-       
+
         public void ExecutePhase()
         {
-            Console.WriteLine("Executing Action Points Phase Logic.");
+            //Console.WriteLine("Executing Action Points Phase Logic.");
+        }
 
+
+        public void EndPhase()
+        {
+            Console.WriteLine("Ending Action Points Phase");
+
+            // Desuscribirse del evento global para evitar referencias persistentes
+            GameManager.Instance.OnCardClickedGlobal -= OnCardClickedHandler;
+
+            // Limpiar el tablero
+            GameManager.Instance.Tabletop.CardManager.WipeBoard();
+        }
+
+        private void OnCardClickedHandler(ICard card)
+        {
+            //comprobar que si se ha seleccionado una carta
+            if (card != null)
+            {
+                Console.WriteLine($"Card selected: {card.Name}");
+
+                CheckAgainstStorage(card);
+            }
+            else
+            {
+                Console.WriteLine("No card selected.");
+            }
+
+        }
+
+        private void CheckAgainstStorage(ICard selectedCard)
+        {
             // Comprobar si hay una carta seleccionada
             if (selectedCard != null)
             {
@@ -40,14 +69,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 if (hasActionPoints)
                 {
-                    List<ResourceAmount> requiredResources = new List<ResourceAmount>();
-                    requiredResources.Add(new ResourceAmount { resourceQuantity = 1, resourceType = GameResource.Cereal });
-
-                    List<ResourceAmount> producedResources = new List<ResourceAmount>();
-                    producedResources.Add(new ResourceAmount { resourceQuantity = 1, resourceType = GameResource.Milk });
-
                     // Verificar si hay suficientes recursos para la acción de la carta
-                    hasResources = GameManager.Instance.Tabletop.StorageManager.CheckResources(requiredResources, producedResources);
+                    hasResources = GameManager.Instance.Tabletop.StorageManager.CheckResources(selectedCard.RequiredResources, selectedCard.ProducedResources);
 
                     if (hasResources)
                     {
@@ -74,36 +97,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 Console.WriteLine("No card selected.");
             }
         }
-
-
-        public void EndPhase()
-        {
-            Console.WriteLine("Ending Action Points Phase");
-
-            // Desuscribirse del evento global para evitar referencias persistentes
-            GameManager.Instance.OnCardClickedGlobal -= OnCardClickedHandler;
-
-            // Limpiar el tablero
-            GameManager.Instance.Tabletop.CardManager.WipeBoard();
-        }
-
-        private void OnCardClickedHandler(ICard card)
-        {
-            //comprobar que si se ha seleccionado una carta
-            if (card != null)
-            {
-                Console.WriteLine($"Card selected: {card.Name}");
-                selectedCard = card;  // Almacena la carta seleccionada                   
-            }
-            else
-            {
-                Console.WriteLine("No card selected.");
-            }
-
-        }
-
-
-
     }
 
 

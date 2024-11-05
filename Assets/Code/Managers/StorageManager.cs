@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 using UnityEngine;
 
@@ -207,6 +207,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
         #endregion 
 
+        public void RestartPA() {
+            // TODO: Implementar
+        }
+
+        #endregion 
         #endregion
     }
 }

@@ -37,7 +37,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             else if (CurrentPhase is StartDayPhase)
             {
-                SetPhase(new ActionPointsPhase());
+                SetPhase(new PlaceCardsPhase());
             }
             else if (CurrentPhase is PlaceCardsPhase)
             {
