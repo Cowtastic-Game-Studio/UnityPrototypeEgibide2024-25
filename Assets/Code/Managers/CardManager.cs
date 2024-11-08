@@ -201,7 +201,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 GameObject cardGameObject = ((MonoBehaviour)card).gameObject;
                 cardGameObject.transform.SetParent(deckArea);
                 cardGameObject.transform.localPosition = Vector3.zero;
-                cardGameObject.transform.localRotation = Quaternion.identity;
+                cardGameObject.transform.localRotation = Quaternion.Euler(90f, -90f, 0f);
                 drawDeck.Place(cardGameObject); // Vuelve a colocar en el mazo
             }
             // Baraja el mazo
