@@ -110,7 +110,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 AddResources(producedQuantity, storage);
             }
 
-            return false;
+            RemoveResources(1, _paStorage);
+
+            return true;
         }
 
         /// <summary>
@@ -138,7 +140,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void RestartPA()
         {
-            _paStorage.Resource = _paStorage.MaxResources;
+            //_paStorage.Resource = _paStorage.MaxResources;
         }
 
         #endregion
