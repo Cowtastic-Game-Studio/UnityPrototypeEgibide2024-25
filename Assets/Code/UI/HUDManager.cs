@@ -52,6 +52,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         [SerializeField] private GameObject actionPointsPanel;
 
+        /// <summary>
+        /// Referencua el panel de puntos de accion
+        /// </summary>
+        [SerializeField] private GameObject resourcesPanel;
+
         [SerializeField] private GameObject marketGUI;
 
 
@@ -67,6 +72,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             this.gamePhaseManager = GameManager.Instance.GamePhaseManager;
             UpdateGUI(this.gamePhaseManager.CurrentPhase);
+            UpdateResources();
         }
 
         #endregion
@@ -134,6 +140,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             //Dependiendo de la fase  modifica la GUI
             if (currentPhase is SetUpPhase)
             {
+                ShowActionPointsPanel();
                 HideMulliganButton();
                 HideMarket();
             }
@@ -189,6 +196,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void HideActionPointsPanel()
         {
             actionPointsPanel.SetActive(false);
+            resourcesPanel.SetActive(false);
+
         }
 
         /// <summary>
