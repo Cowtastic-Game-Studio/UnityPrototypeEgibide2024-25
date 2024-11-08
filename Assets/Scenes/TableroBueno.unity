@@ -2018,7 +2018,7 @@ MonoBehaviour:
   Farm: {fileID: 0}
   Stables: {fileID: 0}
   Taverna: {fileID: 0}
-  HUDManager: {fileID: 0}
+  HUDManager: {fileID: 1011660058}
   StorageManager: {fileID: 566125690}
 --- !u!114 &566125688
 MonoBehaviour:
@@ -3369,6 +3369,7 @@ MonoBehaviour:
   bankResourceTextUI: {fileID: 68103979}
   mulliganButton: {fileID: 71420113}
   actionPointsPanel: {fileID: 1850745887}
+  resourcesPanel: {fileID: 1247059323}
   marketGUI: {fileID: 39483637}
 --- !u!1 &1069529264
 GameObject:

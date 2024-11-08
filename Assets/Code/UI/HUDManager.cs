@@ -52,6 +52,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         [SerializeField] private GameObject actionPointsPanel;
 
+        /// <summary>
+        /// Referencua el panel de puntos de accion
+        /// </summary>
+        [SerializeField] private GameObject resourcesPanel;
+
         [SerializeField] private GameObject marketGUI;
 
 
@@ -67,6 +72,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             this.gamePhaseManager = GameManager.Instance.GamePhaseManager;
             UpdateGUI(this.gamePhaseManager.CurrentPhase);
+            UpdateResources();
         }
 
         #endregion
@@ -100,6 +106,27 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             mulliganButton.SetActive(false);
         }
+
+        /// <summary>
+        /// Funcion que actualiza los recursos en la interfaz grafica.
+        /// </summary>
+        public void UpdateResources()
+        {
+            int paMax = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.ActionPoints);
+            int wheatMax = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.Cereal);
+            int milkMax = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.Milk);
+            int muuneyMax = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.Muuney);
+
+            int pa = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.ActionPoints);
+            int wheat = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Cereal);
+            int milk = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Milk);
+            int muuney = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Muuney);
+
+            actionPointTextUI.text = "AP: " + pa.ToString() + "/" + paMax.ToString();
+            wheatResourceTextUI.text = "Wheat: " + wheat.ToString() + "/" + wheatMax.ToString();
+            milkResourceTextUI.text = "Milk: " + milk.ToString() + "/" + milkMax.ToString();
+            bankResourceTextUI.text = "Muuney: " + muuney.ToString() + "/" + muuneyMax.ToString();
+        }
         #endregion
 
         #region Private methods
@@ -113,7 +140,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             //Dependiendo de la fase  modifica la GUI
             if (currentPhase is SetUpPhase)
             {
-                HideActionPointsPanel();
+                ShowActionPointsPanel();
                 HideMulliganButton();
                 HideMarket();
             }
@@ -128,7 +155,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             else if (currentPhase is ActionPointsPhase)
             {
-                ShowActionPointsPanel();
+
             }
             else if (currentPhase is MarketPhase)
             {
@@ -136,12 +163,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 ShowMarket();
             }
 
-            //Actualiza el texto de la fase
-            ShowActionPointsPanel();
-            UpdateResources();
             UpdatePhaseText(currentPhase);
-
-
         }
 
         /// <summary>
@@ -161,16 +183,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
 
         /// <summary>
-        /// Metodo que actualiza el texto de los puntos de accion
-        /// </summary>
-        /// <param name="points">Cantidad de los puntos de accion actuales</param>
-        private void UpdateActionPoints(int points)
-        {
-            actionPointTextUI.text = points.ToString() + " PA";
-        }
-
-
-        /// <summary>
         /// Muestra el boton del mulligan
         /// </summary>
         private void ShowMulliganButton()
@@ -184,6 +196,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void HideActionPointsPanel()
         {
             actionPointsPanel.SetActive(false);
+            resourcesPanel.SetActive(false);
+
         }
 
         /// <summary>
@@ -192,27 +206,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void ShowActionPointsPanel()
         {
             actionPointsPanel.SetActive(true);
-        }
-
-
-        private void UpdateResources()
-        {
-            int paMax = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.ActionPoints);
-            int wheatMax = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.Cereal);
-            int milkMax = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.Milk);
-            int muuneyMax = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.Muuney);
-
-            int pa = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.ActionPoints);
-            int wheat = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Cereal);
-            int milk = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Milk);
-            int muuney = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Muuney);
-
-            actionPointTextUI.text = "AP: " + pa.ToString() + "/" + paMax.ToString();
-            wheatResourceTextUI.text = "Wheat: " + wheat.ToString() + "/" + wheatMax.ToString();
-            milkResourceTextUI.text = "Milk: " + milk.ToString() + "/" + milkMax.ToString();
-            bankResourceTextUI.text = "Muuney: " + muuney.ToString() + "/" + muuneyMax.ToString();
-
-
         }
 
         private void ShowMarket()
