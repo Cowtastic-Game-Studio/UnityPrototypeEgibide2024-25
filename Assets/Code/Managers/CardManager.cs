@@ -510,7 +510,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             Vector3 hitPosition = hitBelow.collider.bounds.center;
 
             // Colocar el objeto arrastrado en el mismo centro que el objeto golpeado
-            draggedObject.position = new Vector3(hitPosition.x, hitPosition.y, hitPosition.z + placementHeightOffset);
+            //draggedObject.position = new Vector3(hitPosition.x, hitPosition.y, hitPosition.z + placementHeightOffset);
+            //var zvalue = hitPosition.z + placementHeightOffset;
+            //draggedObject.position = new Vector3(hitPosition.x, hitPosition.y, zvalue);
+            //draggedObject.position += new Vector3(0, 0, placementHeightOffset);
+
+            draggedObject.transform.SetParent(hitBelow.collider.gameObject.transform);
+            draggedObject.localPosition += new Vector3(hitBelow.collider.bounds.center.x / 2, hitBelow.collider.bounds.center.y / 2, -placementHeightOffset);
 
             // Remover la carta del handDeck
             RemoveCardFromHand(draggedObject.gameObject);

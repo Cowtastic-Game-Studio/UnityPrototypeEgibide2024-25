@@ -1366,7 +1366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2916330232599406391, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3943379622024280553, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2182,7 +2182,7 @@ MonoBehaviour:
   discardDeckArea: {fileID: 1364878055}
   cardSpacing: 0.5
   drawCards: 5
-  placementHeightOffset: 0.2
+  placementHeightOffset: 0.6
 --- !u!114 &566125690
 MonoBehaviour:
   m_ObjectHideFlags: 0
