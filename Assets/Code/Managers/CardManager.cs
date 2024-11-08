@@ -252,6 +252,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 handDeck.Draw();
                 card.transform.SetParent(discardDeckArea);
                 card.transform.localPosition = Vector3.zero;
+                card.transform.localRotation = Quaternion.Euler(90f, -90f, 0f);
                 SetCardState(card, CardState.onDiscard);
             }
             else
@@ -285,7 +286,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 card.transform.SetParent(discardDeckArea);
                 card.transform.localPosition = Vector3.zero;
-                card.transform.localRotation = Quaternion.identity;
+                card.transform.localRotation = Quaternion.Euler(90f, -90f, 0f);
                 SetCardState(card, CardState.onDiscard);
             }
 
