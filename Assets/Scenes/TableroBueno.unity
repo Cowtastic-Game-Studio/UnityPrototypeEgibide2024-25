@@ -176,6 +176,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e282c53df4c514ea7d4f79bac03029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &39483647 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4870324647870700456, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+  m_PrefabInstance: {fileID: 285833369}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39483637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3750721b280bf44bf4a319c5243864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &68103977
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,6 +1212,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1011660057}
     m_Modifications:
+    - target: {fileID: 271660617445124944, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 39483646}
+    - target: {fileID: 271660617445124944, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowCustomer
+      objectReference: {fileID: 0}
+    - target: {fileID: 271660617445124944, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CowtasticGameStudio.MuuliciousHarvest.MarketManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1329726428960929433, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 39483646}
+    - target: {fileID: 1329726428960929433, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BuyCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 1329726428960929433, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CowtasticGameStudio.MuuliciousHarvest.MarketManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 1601089705413765346, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1301,13 +1336,49 @@ PrefabInstance:
       propertyPath: wheat
       value: 
       objectReference: {fileID: 628881253}
+    - target: {fileID: 2562248933481424488, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 39483646}
+    - target: {fileID: 2562248933481424488, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowCow
+      objectReference: {fileID: 0}
+    - target: {fileID: 2562248933481424488, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CowtasticGameStudio.MuuliciousHarvest.MarketManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791936360951952717, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 39483647}
+    - target: {fileID: 2791936360951952717, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HatCowData
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791936360951952717, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CardItemData, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2916330232599406391, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
       propertyPath: m_Name
       value: MarketGUI
       objectReference: {fileID: 0}
     - target: {fileID: 2916330232599406391, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943379622024280553, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 39483646}
+    - target: {fileID: 3943379622024280553, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowWheat
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943379622024280553, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CowtasticGameStudio.MuuliciousHarvest.MarketManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4870324647870700456, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
       propertyPath: ccb
@@ -1328,6 +1399,66 @@ PrefabInstance:
     - target: {fileID: 5131949472497461077, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
       propertyPath: m_SortingOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305662830248977071, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 39483647}
+    - target: {fileID: 6305662830248977071, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GetSeedWheatData
+      objectReference: {fileID: 0}
+    - target: {fileID: 6305662830248977071, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CardItemData, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396632973851512655, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 39483647}
+    - target: {fileID: 6396632973851512655, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DinnerCowData
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396632973851512655, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CardItemData, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6521371445591089511, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 39483647}
+    - target: {fileID: 6521371445591089511, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BaseCowData
+      objectReference: {fileID: 0}
+    - target: {fileID: 6521371445591089511, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CardItemData, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6618605673083225669, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 39483647}
+    - target: {fileID: 6618605673083225669, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CustomerData
+      objectReference: {fileID: 0}
+    - target: {fileID: 6618605673083225669, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CardItemData, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937608638832356059, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 39483647}
+    - target: {fileID: 7937608638832356059, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BLackCowData
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937608638832356059, guid: 056a77b2d1c4abf4498390daf8b99ece, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CardItemData, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

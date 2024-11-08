@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -115,6 +116,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return true;
         }
 
+    
+
+           public void WasteMuuney( int quantity)
+        {
+            _bankStorage.Resource -= quantity;
+        }
+
         /// <summary>
         /// Obtiene la cantidad de recursos actual de un tipo.
         /// </summary>
@@ -226,8 +234,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             // TODO: Implementar
         }
-        #endregion 
 
-        #endregion 
+     
+        #endregion
+
+        #endregion
     }
 }

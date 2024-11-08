@@ -131,6 +131,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void MoveLastCardsToHand(int cardsToDraw)
         {
+            // Verificar que hay suficientes cartas en el mazo de robo
+            if (drawDeck.Cards.Count < 5)
+            {
+                ShuffleDiscardDeck();
+            }
             cardsToDraw = Mathf.Min(cardsToDraw, drawDeck.Cards.Count);
 
             for (int i = 0; i < cardsToDraw; i++)
@@ -171,11 +176,36 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
 
         /// <summary>
-        /// Barajea las cartas del mazo de descarte y la mueve al mazo de robo
+        /// Barajea las cartas del mazo de descarte y las mueve al mazo de robo
         /// </summary>
         public void ShuffleDiscardDeck()
         {
-            // TODO: implementar la lógica para barajar el mazo de descarte
+            // Convierte las cartas en el área de descarte a una lista de ICard
+            List<ICard> discardCards = new List<ICard>();
+            foreach (Transform cardTransform in discardDeckArea)
+            {
+                ICard card = cardTransform.GetComponent<ICard>();
+                if (card != null)
+                {
+                    discardCards.Add(card);
+                }
+            }
+            if (discardCards.Count == 0)
+            {
+                Debug.LogWarning("No hay cartas en el mazo de descarte para barajar.");
+                return;
+            }
+            // Mueve las cartas de nuevo al mazo de robo
+            foreach (ICard card in discardCards)
+            {
+                GameObject cardGameObject = ((MonoBehaviour)card).gameObject;
+                cardGameObject.transform.SetParent(deckArea);
+                cardGameObject.transform.localPosition = Vector3.zero;
+                cardGameObject.transform.localRotation = Quaternion.identity;
+                drawDeck.Place(cardGameObject); // Vuelve a colocar en el mazo
+            }
+            // Baraja el mazo
+            drawDeck.Shuffle();
         }
 
         /// <summary>

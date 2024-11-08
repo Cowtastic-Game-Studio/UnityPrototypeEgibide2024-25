@@ -568,6 +568,7 @@ RectTransform:
   - {fileID: 8198656724251601865}
   - {fileID: 5814850550810968864}
   - {fileID: 2870640393370117312}
+  - {fileID: 5198376264591005196}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -650,9 +651,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e282c53df4c514ea7d4f79bac03029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cow: {fileID: 0}
-  wheat: {fileID: 0}
-  customer: {fileID: 0}
+  CowCardData: 000000000000000000000000
+  SeedCardData: 000000000000000000000000
+  CustomerData: 000000000000000000000000
   wheatPage: {fileID: 3943379622024280553}
   cowPage: {fileID: 2562248933481424488}
   CustomerPage: {fileID: 271660617445124944}
@@ -664,9 +665,6 @@ MonoBehaviour:
   ButtonCustomer: {fileID: 6618605673083225669}
   buyButton: {fileID: 1329726428960929433}
   muuneyCount: {fileID: 8580576537238673624}
-  CowCardData: 000000000000000000000000
-  SeedCardData: 000000000000000000000000
-  CustomerData: 000000000000000000000000
   cowAvaialable: 0
   cowHatAvaialable: 0
   cowBlackAvaialable: 0
@@ -1603,7 +1601,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5198376264591005196}
   - {fileID: 5699243711676934544}
   - {fileID: 8450793342330624796}
   - {fileID: 2655294799857879649}
@@ -1643,16 +1640,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5420865957489493333}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 53.99991}
+  m_LocalPosition: {x: 0, y: 0, z: 53.99994}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7934822261440629610}
-  m_Father: {fileID: 5814850550810968864}
+  m_Father: {fileID: 1601089705413765346}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 552.00006, y: -320}
+  m_AnchoredPosition: {x: 552, y: -320}
   m_SizeDelta: {x: 350, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4478133367983140334
