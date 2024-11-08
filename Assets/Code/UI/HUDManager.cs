@@ -140,12 +140,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             //Dependiendo de la fase  modifica la GUI
             if (currentPhase is SetUpPhase)
             {
-                ShowActionPointsPanel();
                 HideMulliganButton();
                 HideMarket();
             }
             else if (currentPhase is StartDayPhase)
             {
+                ShowActionPointsPanel();
                 ShowMulliganButton();
                 HideMarket();
             }
@@ -206,6 +206,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void ShowActionPointsPanel()
         {
             actionPointsPanel.SetActive(true);
+            resourcesPanel.SetActive(true);
         }
 
         private void ShowMarket()
