@@ -40,7 +40,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 _intance = this;
                 DontDestroyOnLoad(gameObject);
             }
-            //setea el dinero base para la prueba
+            //Carga el dinero actual del storage manager
             Muuney = storageManager.GetResourceAmounts(GameResource.Muuney);;
             muuneyCount.text = Muuney.ToString();
             buyButton.interactable = false;
@@ -134,7 +134,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
           
 
             Muuney = Muuney - CardPrice;
-
+            storageManager.WasteMuuney(Muuney);
             
             muuneyCount.text = Muuney.ToString();
             buyButton.interactable = false;
