@@ -396,7 +396,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void HandleMouseDrag()
         {
-            Vector3 mousePosition = GetMouseWorldPosition();
+            Vector3 mousePosition = GetMouseWorldPositionOnPlane();
 
             if (IsMouseOverPlace(out RaycastHit hitBelow))
             {
@@ -416,6 +416,24 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
 
             UpdateObjectPosition(mousePosition);
+        }
+
+        private Vector3 GetMouseWorldPositionOnPlane()
+        {
+            // Crear un plano paralelo al plano XZ en la posición Y de la carta
+            Plane plane = new Plane(Vector3.up, new Vector3(0, fixedYPosition, 0));
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (plane.Raycast(ray, out float distance))
+            {
+                Vector3 worldPosition = ray.GetPoint(distance);
+
+                // Se mantiene Y fija para evitar saltos
+                return new Vector3(worldPosition.x, fixedYPosition, worldPosition.z);
+            }
+
+            // Retorna un valor por defecto si no intersecta
+            return Vector3.zero;
         }
 
         private void HandleMouseUp()
