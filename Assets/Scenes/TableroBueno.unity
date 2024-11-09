@@ -2146,11 +2146,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CardManager: {fileID: 566125689}
+  HUDManager: {fileID: 1011660058}
+  StorageManager: {fileID: 566125690}
+  board: {fileID: 1419162920}
   Farm: {fileID: 0}
   Stables: {fileID: 0}
   Taverna: {fileID: 0}
-  HUDManager: {fileID: 1011660058}
-  StorageManager: {fileID: 566125690}
 --- !u!114 &566125688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4415,6 +4416,11 @@ Transform:
   - {fileID: 1247431571}
   m_Father: {fileID: 606024194}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1419162920 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4775413213959628626, guid: 7ab2776ef9f434e4fa0da8aca93abde4, type: 3}
+  m_PrefabInstance: {fileID: 955672992}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1472110061
 PrefabInstance:
   m_ObjectHideFlags: 0

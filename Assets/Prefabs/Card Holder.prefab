@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3716862617342464464}
   - component: {fileID: 5522997473445575745}
   - component: {fileID: 3462212801927424307}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Card Holder
   m_TagString: Place
   m_Icon: {fileID: 0}

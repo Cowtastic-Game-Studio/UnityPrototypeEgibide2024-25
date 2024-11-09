@@ -500,8 +500,42 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private bool IsMouseOverPlace(out RaycastHit hitBelow)
         {
-            Ray downwardRay = new Ray(draggedObject.position, Vector3.down);
-            return Physics.Raycast(downwardRay, out hitBelow) && hitBelow.collider.CompareTag("Place");
+            //Ray downwardRay = new Ray(draggedObject.position, Vector3.down);
+            //return Physics.Raycast(downwardRay, out hitBelow) && hitBelow.collider.CompareTag("Place");
+
+            Collider cardCollider = draggedObject.GetComponent<Collider>();
+            Vector3 cardSize = cardCollider.bounds.size;
+
+            // Calcula el radio del círculo como el máximo entre las dimensiones X y Z de la carta
+            float circleRadius = Mathf.Max(cardSize.x, cardSize.z) * 2;
+
+            // Posición del centro del círculo (en este caso, la posición de la carta)
+            Vector3 checkPosition = draggedObject.position;
+
+            // Usamos Physics.OverlapSphere para detectar objetos en el layer "Place"
+            Collider[] collidersInPlaceLayer = Physics.OverlapSphere(
+                // Solo comprobamos X y Z, sin preocuparnos por Y
+                new Vector3(checkPosition.x, 0f, checkPosition.z),
+                circleRadius,
+                LayerMask.GetMask("Place")
+            );
+
+            // Mostrar la cantidad de colliders encontrados en el layer "Place"
+            Debug.Log($"Colliders encontrados en la capa 'Place': {collidersInPlaceLayer.Length}");
+
+            foreach (Collider collider in collidersInPlaceLayer)
+            {
+                if (collider.CompareTag("Place"))
+                {
+                    if (Physics.Raycast(draggedObject.position, Vector3.down, out hitBelow))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            hitBelow = new RaycastHit();
+            return false;
         }
 
         private void ChangeColor(Color color)

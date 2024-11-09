@@ -7,21 +7,20 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     {
         #region Properties
 
+        [Header("Managers")]
         public CardManager CardManager;
-
-        public FarmZone Farm;
-
-        public StableZone Stables;
-
-        public TarvernZone Taverna;
-
         public HUDManager HUDManager;
-
-        //public DeckAndHandManager DeckAndHandManager;
-
         public StorageManager StorageManager;
 
-        //List<ICard> ICardsManager.Hand => throw new System.NotImplementedException();
+        [Header("Board")]
+        [Space(1)]
+        public GameObject board;
+
+        [Header("Zones")]
+        [Space(3)]
+        public FarmZone Farm;
+        public StableZone Stables;
+        public TarvernZone Taverna;
 
         #endregion
 
