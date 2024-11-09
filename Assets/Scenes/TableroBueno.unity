@@ -792,7 +792,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9144022221344764890, guid: c4a03766196b519409927ae95080b226, type: 3}
       propertyPath: m_Name
-      value: Card Space (1)
+      value: CowSpace_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -991,7 +991,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9144022221344764890, guid: c4a03766196b519409927ae95080b226, type: 3}
       propertyPath: m_Name
-      value: Card Space (3)
+      value: SeedSpace_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1192,7 +1192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9144022221344764890, guid: c4a03766196b519409927ae95080b226, type: 3}
       propertyPath: m_Name
-      value: Card Space (1)
+      value: SeedSpace_4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1876,7 +1876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9144022221344764890, guid: c4a03766196b519409927ae95080b226, type: 3}
       propertyPath: m_Name
-      value: Card Space
+      value: ClientSpace_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2258,7 +2258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9144022221344764890, guid: c4a03766196b519409927ae95080b226, type: 3}
       propertyPath: m_Name
-      value: Card Space (1)
+      value: ClientSpace_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3362,7 +3362,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9144022221344764890, guid: c4a03766196b519409927ae95080b226, type: 3}
       propertyPath: m_Name
-      value: Card Space (3)
+      value: ClientSpace_3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4274,7 +4274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9144022221344764890, guid: c4a03766196b519409927ae95080b226, type: 3}
       propertyPath: m_Name
-      value: Card Space (3)
+      value: CowSpace_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4372,7 +4372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9144022221344764890, guid: c4a03766196b519409927ae95080b226, type: 3}
       propertyPath: m_Name
-      value: Card Space
+      value: CowSpace_3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4503,7 +4503,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9144022221344764890, guid: c4a03766196b519409927ae95080b226, type: 3}
       propertyPath: m_Name
-      value: Card Space (2)
+      value: SeedSpace_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5252,7 +5252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9144022221344764890, guid: c4a03766196b519409927ae95080b226, type: 3}
       propertyPath: m_Name
-      value: Card Space (2)
+      value: ClientSpace_4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5486,7 +5486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9144022221344764890, guid: c4a03766196b519409927ae95080b226, type: 3}
       propertyPath: m_Name
-      value: Card Space (2)
+      value: CowSpace_4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5580,7 +5580,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9144022221344764890, guid: c4a03766196b519409927ae95080b226, type: 3}
       propertyPath: m_Name
-      value: Card Space
+      value: SeedSpace_3
       objectReference: {fileID: 0}
     - target: {fileID: 9144022221344764890, guid: c4a03766196b519409927ae95080b226, type: 3}
       propertyPath: m_IsActive

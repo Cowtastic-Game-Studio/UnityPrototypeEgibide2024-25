@@ -87,6 +87,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private bool isOverPlace = false;
         public float placementHeightOffset = 0.2f;
 
+        private float dragingOffsetZ = 1.0f;
+
         private void Start()
         {
             // Comentado ya que la inicializacion la hace el SetUpPhase
@@ -457,7 +459,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             draggedObject = objectToDrag;
             isDragging = true;
             objectZDepth = Camera.main.WorldToScreenPoint(draggedObject.position).z;
-            fixedYPosition = draggedObject.position.y + 1;
+            fixedYPosition = draggedObject.position.y + dragingOffsetZ;
             originalPosition = draggedObject.position;
 
             Vector3 mousePosition = GetMouseWorldPosition();
@@ -515,7 +517,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Usamos Physics.OverlapSphere para detectar objetos en el layer "Place"
             Collider[] collidersInPlaceLayer = Physics.OverlapSphere(
                 // Solo comprobamos X y Z, sin preocuparnos por Y
-                new Vector3(checkPosition.x, 0f, checkPosition.z),
+                new Vector3(checkPosition.x, checkPosition.y, 0f),
                 circleRadius,
                 LayerMask.GetMask("Place")
             );
@@ -569,6 +571,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             draggedObject.transform.SetParent(hitBelow.collider.gameObject.transform);
             draggedObject.localPosition += new Vector3(hitBelow.collider.bounds.center.x / 2, hitBelow.collider.bounds.center.y / 2, -placementHeightOffset);
+
+            //draggedObject.localRotation = hitBelow.collider.gameObject.transform.rotation;
 
             // Remover la carta del handDeck
             RemoveCardFromHand(draggedObject.gameObject);
