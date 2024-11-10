@@ -43,7 +43,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GameManager.Instance.Tabletop.CardManager.WipeBoard();
 
             //ALBA: quitar cundo se arregle el poder hacer click en cartas colocadas
-            GameManager.Instance.Tabletop.CardManager.DiscardHand();
+            //GameManager.Instance.Tabletop.CardManager.DiscardHand();
         }
 
         private void OnCardClickedHandler(ICard card)

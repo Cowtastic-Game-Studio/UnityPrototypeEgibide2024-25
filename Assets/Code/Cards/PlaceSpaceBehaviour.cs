@@ -7,7 +7,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [SerializeField]
         private bool isActive = true;
 
-        private bool isEmpty = false;
+        private bool isEmpty = true;
 
         private Renderer renderer;
         private Color originalColor;
@@ -18,7 +18,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             renderer = GetComponent<Renderer>();
             if (renderer != null)
             {
-                //originalColor = renderer.material.color;
+                originalColor = renderer.material.color;
             }
         }
 
@@ -27,13 +27,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Solo resalta si se está arrastrando una carta
             if (GameManager.Instance.Tabletop.CardManager.IsDraggingCard)
             {
-                //Highlight();
+                if (isActive && isEmpty)
+                    Highlight();
             }
         }
 
         private void OnMouseExit()
         {
-            //RemoveHighlight();
+            RemoveHighlight();
         }
 
         private void OnMouseDown()

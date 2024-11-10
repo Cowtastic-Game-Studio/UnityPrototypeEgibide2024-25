@@ -71,11 +71,21 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void OnMouseDown()
         {
             if (!GameManager.Instance.Tabletop.CardManager.IsDraggingCard)
+            {
                 // Verifica si la carta está en la layer 'CardLayer'
                 if (gameObject.layer == LayerMask.NameToLayer("CardLayer"))
                 {
                     OnCardClicked();
                 }
+            }
+        }
+
+        private void OnMouseOver()
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                GameManager.Instance.Tabletop.CardManager.StopDragging();
+            }
         }
 
         // Método para configurar la visualización en CardDisplay

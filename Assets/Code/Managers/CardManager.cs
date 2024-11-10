@@ -447,6 +447,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         -placementHeightOffset
                     );
 
+                    handDeck.RemoveCard(selectedCard);
                     // Actualiza el estado
                     SetCardState(selectedCard, CardState.onTable);
 

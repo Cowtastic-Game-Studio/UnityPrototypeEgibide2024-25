@@ -39,6 +39,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <returns>Devuelve una copia de la carta superior</returns>
         public GameObject Peek();
 
+        /// <summary>
+        /// Elimina una carta específica del mazo.
+        /// </summary>
+        /// <param name="targetCard">El GameObject de la carta a eliminar.</param>
+        /// <returns>Devuelve true si la carta fue eliminada exitosamente; de lo contrario, false.</returns>
+        public bool RemoveCard(GameObject targetCard);
+
+
         #endregion
     }
 }

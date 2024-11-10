@@ -61,5 +61,37 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             return null;
         }
+
+        // Método para eliminar una carta específica
+        public bool RemoveCard(GameObject targetCard)
+        {
+            bool cardRemoved = false;
+            Stack<GameObject> tempStack = new Stack<GameObject>();
+
+            // Mover cartas a la pila temporal hasta encontrar la carta específica
+            while (_cards.Count > 0)
+            {
+                GameObject currentCard = _cards.Pop();
+
+                if (currentCard == targetCard && !cardRemoved)
+                {
+                    cardRemoved = true;
+                    // La carta específica se encuentra y se elimina, no se agrega a tempStack
+                }
+                else
+                {
+                    // Si no es la carta específica, la movemos a tempStack
+                    tempStack.Push(currentCard);
+                }
+            }
+
+            // Restaurar las cartas a la pila original en el orden correcto
+            while (tempStack.Count > 0)
+            {
+                _cards.Push(tempStack.Pop());
+            }
+
+            return cardRemoved; // Devuelve true si la carta se eliminó correctamente
+        }
     }
 }
