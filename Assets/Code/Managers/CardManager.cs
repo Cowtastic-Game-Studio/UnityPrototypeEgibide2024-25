@@ -77,26 +77,23 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public IDeck DiscardDeck => discardDeck;
 
         // Variables para Drag & Drop
-        private bool isDragging = false;
-        private Transform draggedObject;
-        private Vector3 dragOffset;
-        private float objectZDepth;
-        private float fixedYPosition;
-        private Vector3 originalPosition;
-        private Color originalColor;
-        private bool isOverPlace = false;
-        public float placementHeightOffset = 0.2f;
+        //private bool isDragging = false;
+        //private Transform draggedObject;
+        //private Vector3 dragOffset;
+        //private float objectZDepth;
+        //private float fixedYPosition;
+        //private Vector3 originalPosition;
+        //private Color originalColor;
+        //private bool isOverPlace = false;
+        //public float placementHeightOffset = 0.2f;
 
         private float dragingOffsetZ = 1.0f;
 
         //Place card
         private GameObject selectedCard = null;
 
-        private void Start()
-        {
-            // Comentado ya que la inicializacion la hace el SetUpPhase
-            //InitializeDeck();
-        }
+        private bool isDragging = false;
+        public bool IsDraggingCard => isDragging;
 
         /// <summary>
         /// Inicializa un mazo con cartas desde el ScriptableObject.
@@ -369,6 +366,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
 
         //drag and drop
+        /*
         public void HandleMouseInput()
         {
             if (Input.GetMouseButtonDown(0))
@@ -588,31 +586,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             draggedObject.position = originalPosition;
         }
+        */
 
-        private void RemoveCardFromHand(GameObject card)
-        {
-            // Usar un stack temporal para almacenar las cartas restantes
-            Stack<GameObject> tempStack = new Stack<GameObject>();
 
-            while (handDeck.Cards.Count > 0)
-            {
-                GameObject currentCard = handDeck.Draw();
-                if (currentCard != card)
-                {
-                    tempStack.Push(currentCard);
-                }
-            }
-
-            // Regresa las cartas que no fueron eliminadas al handDeck
-            while (tempStack.Count > 0)
-            {
-                handDeck.Place(tempStack.Pop());
-            }
-
-            Debug.Log($"Se ha eliminado la carta {card.name} de la mano.");
-        }
-
-        //PLACE CARD
         public GameObject SelectedCard
         {
             get => selectedCard;
@@ -620,7 +596,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 if (selectedCard != null)
                 {
-                    // Si hay una carta previamente seleccionada, desactivarla
                     selectedCard.GetComponent<CardBehaviour>()?.Deactivate();
                 }
 
@@ -628,37 +603,74 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 if (selectedCard != null)
                 {
-                    // Activar la nueva carta seleccionada
                     selectedCard.GetComponent<CardBehaviour>()?.Activate();
                 }
             }
         }
 
-        // Método para seleccionar una carta desde un GameObject
         public void SelectCard(GameObject card)
         {
             if (card != null && card.GetComponent<CardBehaviour>() != null)
             {
                 SelectedCard = card;
+                StartDragging();
             }
         }
 
-        // Método para colocar la carta seleccionada en un espacio específico
-        public void PlaceSelectedCard(Transform placeSpace)
+        private void StartDragging()
+        {
+            isDragging = true;
+        }
+
+        public void StopDragging()
+        {
+            isDragging = false;
+        }
+
+        public void UpdatePlacement()
+        {
+            if (isDragging && selectedCard != null)
+            {
+                MoveSelectedCardWithMouse();
+            }
+        }
+
+        private void MoveSelectedCardWithMouse()
+        {
+            // Detecta el estado actual para cambiar la capa de colisión
+            LayerMask mask = isDragging ? LayerMask.GetMask("BoardLayer") : ~LayerMask.GetMask("BoardLayer");
+
+            // Hacer el raycast
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, mask))
+            {
+                // Mover la carta sobre el plano
+                Vector3 newPosition = hit.point + Vector3.up * 0.1f;
+                selectedCard.transform.position = newPosition;
+            }
+        }
+
+        public void PlaceSelectedCard(Transform target)
         {
             if (selectedCard != null)
             {
-                selectedCard.transform.SetParent(placeSpace);
-                selectedCard.transform.localPosition = Vector3.zero;
+                if (target != null && target.gameObject.CompareTag("Place"))
+                {
+                    // Desactiva el arrastre
+                    StopDragging();
 
-                // Cambiar el estado de la carta a `onTable`
-                SetCardState(selectedCard, CardState.onTable);
+                    // Coloca la carta en el lugar objetivo
+                    selectedCard.transform.SetParent(target);
+                    selectedCard.transform.localPosition = Vector3.zero;
 
-                // Desactivar y deseleccionar la carta
-                selectedCard.GetComponent<CardBehaviour>()?.Deactivate();
-                selectedCard = null;
+                    // Actualiza el estado
+                    SetCardState(selectedCard, CardState.onTable);
+
+                    // Limpia la selección
+                    selectedCard.GetComponent<CardBehaviour>()?.Deactivate();
+                    selectedCard = null;
+                }
             }
         }
-
     }
 }
