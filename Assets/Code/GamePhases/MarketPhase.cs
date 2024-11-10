@@ -1,4 +1,5 @@
 using System;
+
 using UnityEngine.UI;
 
 
@@ -42,6 +43,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             // Establecemos los PAs en su valor por defecto
             GameManager.Instance.Tabletop.StorageManager.RestartPA();
+            GameManager.Instance.Tabletop.HUDManager.UpdateResources();
         }
     }
 }

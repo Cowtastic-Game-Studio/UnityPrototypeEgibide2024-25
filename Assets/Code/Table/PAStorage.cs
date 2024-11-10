@@ -16,7 +16,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public PAStorage()
         {
             // Le indicamos que el tipo del recurso es
-            Type = GameResource.Cereal;
+            Type = GameResource.ActionPoints;
             MaxResources = 6;
             Level = 1;
             Resource = 6;

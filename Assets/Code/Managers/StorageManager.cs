@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -116,9 +115,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return true;
         }
 
-    
 
-           public void WasteMuuney( int quantity)
+
+        public void WasteMuuney(int quantity)
         {
             _bankStorage.Resource -= quantity;
         }
@@ -148,7 +147,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void RestartPA()
         {
-            //_paStorage.Resource = _paStorage.MaxResources;
+            _paStorage.Resource = _paStorage.MaxResources;
         }
 
         #endregion
@@ -235,7 +234,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // TODO: Implementar
         }
 
-     
+
         #endregion
 
         #endregion
