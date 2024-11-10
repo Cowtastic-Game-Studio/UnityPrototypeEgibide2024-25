@@ -89,6 +89,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private float dragingOffsetZ = 1.0f;
 
+        //Place card
+        private GameObject selectedCard = null;
+
         private void Start()
         {
             // Comentado ya que la inicializacion la hace el SetUpPhase
@@ -608,5 +611,54 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             Debug.Log($"Se ha eliminado la carta {card.name} de la mano.");
         }
+
+        //PLACE CARD
+        public GameObject SelectedCard
+        {
+            get => selectedCard;
+            private set
+            {
+                if (selectedCard != null)
+                {
+                    // Si hay una carta previamente seleccionada, desactivarla
+                    selectedCard.GetComponent<CardBehaviour>()?.Deactivate();
+                }
+
+                selectedCard = value;
+
+                if (selectedCard != null)
+                {
+                    // Activar la nueva carta seleccionada
+                    selectedCard.GetComponent<CardBehaviour>()?.Activate();
+                }
+            }
+        }
+
+        // Método para seleccionar una carta desde un GameObject
+        public void SelectCard(GameObject card)
+        {
+            if (card != null && card.GetComponent<CardBehaviour>() != null)
+            {
+                SelectedCard = card;
+            }
+        }
+
+        // Método para colocar la carta seleccionada en un espacio específico
+        public void PlaceSelectedCard(Transform placeSpace)
+        {
+            if (selectedCard != null)
+            {
+                selectedCard.transform.SetParent(placeSpace);
+                selectedCard.transform.localPosition = Vector3.zero;
+
+                // Cambiar el estado de la carta a `onTable`
+                SetCardState(selectedCard, CardState.onTable);
+
+                // Desactivar y deseleccionar la carta
+                selectedCard.GetComponent<CardBehaviour>()?.Deactivate();
+                selectedCard = null;
+            }
+        }
+
     }
 }

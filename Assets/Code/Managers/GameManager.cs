@@ -14,6 +14,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         // Evento global para manejar clics en cartas
         public event Action<ICard> OnCardClickedGlobal;
+        public event Action<Transform> OnPlaceSpaceClickedGlobal;
 
         private void Awake()
         {
@@ -44,6 +45,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 GameCalendar.NextDay();
                 Debug.Log("NextDay: " + GameCalendar.CurrentDay);
+            }
+
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                GamePhaseManager.NextPhase();
             }
 
             if (Input.GetKeyDown(KeyCode.C))
@@ -97,10 +103,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GameCalendar.AddCalendarEvent(new BrokenFridgeEvent());
         }
 
-        // M�todo para invocar el evento de clic de carta
+        // Metodo para invocar el evento de clic de carta
         public void CardClicked(ICard card)
         {
             OnCardClickedGlobal?.Invoke(card);
+        }
+
+        // Metodo para invocar el evento de clic de carta
+        public void PlaceSpaceClicked(Transform transform)
+        {
+            OnPlaceSpaceClickedGlobal?.Invoke(transform);
         }
     }
 }
