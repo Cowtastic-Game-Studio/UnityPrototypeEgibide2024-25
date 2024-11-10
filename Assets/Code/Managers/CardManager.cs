@@ -76,24 +76,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public IDeck PlayedDeck => playedCardsDeck;
         public IDeck DiscardDeck => discardDeck;
 
-        // Variables para Drag & Drop
-        //private bool isDragging = false;
-        //private Transform draggedObject;
-        //private Vector3 dragOffset;
-        //private float objectZDepth;
-        //private float fixedYPosition;
-        //private Vector3 originalPosition;
-        //private Color originalColor;
-        //private bool isOverPlace = false;
-        //public float placementHeightOffset = 0.2f;
-
-        private float dragingOffsetZ = 1.0f;
-
         //Place card
         private GameObject selectedCard = null;
 
         private bool isDragging = false;
         public bool IsDraggingCard => isDragging;
+
+        public float placementHeightOffset = 3f;
+        private Vector3 originalPosition;
 
         /// <summary>
         /// Inicializa un mazo con cartas desde el ScriptableObject.
@@ -366,228 +356,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
 
         //drag and drop
-        /*
-        public void HandleMouseInput()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                HandleMouseDown();
-            }
-            if (isDragging)
-            {
-                HandleMouseDrag();
-            }
-            if (Input.GetMouseButtonUp(0))
-            {
-                HandleMouseUp();
-            }
-        }
-
-        private bool IsCardTag(string tag)
-        {
-            return tag == "CardCow" || tag == "CardSeed" || tag == "CardClient";
-        }
-
-        private void HandleMouseDown()
-        {
-            RaycastHit hit;
-            if (RaycastFromMouse(out hit) && IsCardTag(hit.collider.tag))
-            {
-                StartDragging(hit.collider.transform);
-            }
-        }
-
-        private void HandleMouseDrag()
-        {
-            Vector3 mousePosition = GetMouseWorldPositionOnPlane();
-
-            if (IsMouseOverPlace(out RaycastHit hitBelow))
-            {
-                if (!isOverPlace)
-                {
-                    ChangeColor(Color.black);
-                    isOverPlace = true;
-                }
-            }
-            else
-            {
-                if (isOverPlace)
-                {
-                    RevertColor();
-                    isOverPlace = false;
-                }
-            }
-
-            UpdateObjectPosition(mousePosition);
-        }
-
-        private Vector3 GetMouseWorldPositionOnPlane()
-        {
-            // Crear un plano paralelo al plano XZ en la posición Y de la carta
-            Plane plane = new Plane(Vector3.up, new Vector3(0, fixedYPosition, 0));
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (plane.Raycast(ray, out float distance))
-            {
-                Vector3 worldPosition = ray.GetPoint(distance);
-
-                // Se mantiene Y fija para evitar saltos
-                return new Vector3(worldPosition.x, fixedYPosition, worldPosition.z);
-            }
-
-            // Retorna un valor por defecto si no intersecta
-            return Vector3.zero;
-        }
-
-        private void HandleMouseUp()
-        {
-            if (draggedObject != null)
-            {
-                if (IsMouseOverPlace(out RaycastHit hitBelow))
-                {
-                    SnapToPlace(hitBelow);
-                }
-                else
-                {
-                    ReturnToOriginalPosition();
-                }
-                StopDragging();
-            }
-        }
-
-        private void StartDragging(Transform objectToDrag)
-        {
-            draggedObject = objectToDrag;
-            isDragging = true;
-            objectZDepth = Camera.main.WorldToScreenPoint(draggedObject.position).z;
-            fixedYPosition = draggedObject.position.y + dragingOffsetZ;
-            originalPosition = draggedObject.position;
-
-            Vector3 mousePosition = GetMouseWorldPosition();
-            dragOffset = draggedObject.position - new Vector3(mousePosition.x, 0, mousePosition.z);
-
-            //Renderer renderer = draggedObject.GetComponent<Renderer>();
-            //if (renderer != null)
-            //{
-            //    originalColor = renderer.material.color;
-            //}
-        }
-
-        private void StopDragging()
-        {
-            isDragging = false;
-            if (isOverPlace)
-            {
-                RevertColor();
-                isOverPlace = false;
-            }
-            draggedObject = null;
-        }
-
-        private void UpdateObjectPosition(Vector3 mousePosition)
-        {
-            draggedObject.position = new Vector3(mousePosition.x + dragOffset.x, fixedYPosition, mousePosition.z + dragOffset.z);
-        }
-
-        private Vector3 GetMouseWorldPosition()
-        {
-            Vector3 mouseScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, objectZDepth);
-            return Camera.main.ScreenToWorldPoint(mouseScreenPosition);
-        }
-
-        private bool RaycastFromMouse(out RaycastHit hit)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            return Physics.Raycast(ray, out hit);
-        }
-
-        private bool IsMouseOverPlace(out RaycastHit hitBelow)
-        {
-            //Ray downwardRay = new Ray(draggedObject.position, Vector3.down);
-            //return Physics.Raycast(downwardRay, out hitBelow) && hitBelow.collider.CompareTag("Place");
-
-            Collider cardCollider = draggedObject.GetComponent<Collider>();
-            Vector3 cardSize = cardCollider.bounds.size;
-
-            // Calcula el radio del círculo como el máximo entre las dimensiones X y Z de la carta
-            float circleRadius = Mathf.Max(cardSize.x, cardSize.z) * 2;
-
-            // Posición del centro del círculo (en este caso, la posición de la carta)
-            Vector3 checkPosition = draggedObject.position;
-
-            // Usamos Physics.OverlapSphere para detectar objetos en el layer "Place"
-            Collider[] collidersInPlaceLayer = Physics.OverlapSphere(
-                // Solo comprobamos X y Z, sin preocuparnos por Y
-                new Vector3(checkPosition.x, checkPosition.y, 0f),
-                circleRadius,
-                LayerMask.GetMask("Place")
-            );
-
-            // Mostrar la cantidad de colliders encontrados en el layer "Place"
-            Debug.Log($"Colliders encontrados en la capa 'Place': {collidersInPlaceLayer.Length}");
-
-            foreach (Collider collider in collidersInPlaceLayer)
-            {
-                if (collider.CompareTag("Place"))
-                {
-                    if (Physics.Raycast(draggedObject.position, Vector3.down, out hitBelow))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            hitBelow = new RaycastHit();
-            return false;
-        }
-
-        private void ChangeColor(Color color)
-        {
-            Renderer renderer = draggedObject.GetComponent<Renderer>();
-            if (renderer != null)
-            {
-                //renderer.material.color = color;
-            }
-        }
-
-        private void RevertColor()
-        {
-            Renderer renderer = draggedObject.GetComponent<Renderer>();
-            if (renderer != null)
-            {
-                //renderer.material.color = originalColor;
-            }
-        }
-
-        private void SnapToPlace(RaycastHit hitBelow)
-        {
-            // Obtener el centro del collider del objeto golpeado
-            Vector3 hitPosition = hitBelow.collider.bounds.center;
-
-            // Colocar el objeto arrastrado en el mismo centro que el objeto golpeado
-            //draggedObject.position = new Vector3(hitPosition.x, hitPosition.y, hitPosition.z + placementHeightOffset);
-            //var zvalue = hitPosition.z + placementHeightOffset;
-            //draggedObject.position = new Vector3(hitPosition.x, hitPosition.y, zvalue);
-            //draggedObject.position += new Vector3(0, 0, placementHeightOffset);
-
-            draggedObject.transform.SetParent(hitBelow.collider.gameObject.transform);
-            draggedObject.localPosition += new Vector3(hitBelow.collider.bounds.center.x / 2, hitBelow.collider.bounds.center.y / 2, -placementHeightOffset);
-
-            //draggedObject.localRotation = hitBelow.collider.gameObject.transform.rotation;
-
-            // Remover la carta del handDeck
-            RemoveCardFromHand(draggedObject.gameObject);
-
-            // Cambiar el estado de la carta a 'onTable'
-            SetCardState(draggedObject.gameObject, CardState.onTable);
-        }
-
-        private void ReturnToOriginalPosition()
-        {
-            draggedObject.position = originalPosition;
-        }
-        */
-
 
         public GameObject SelectedCard
         {
@@ -613,6 +381,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (card != null && card.GetComponent<CardBehaviour>() != null)
             {
                 SelectedCard = card;
+
+                // Guarda la posición original de la carta
+                originalPosition = card.transform.position;
+
                 StartDragging();
             }
         }
@@ -624,6 +396,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void StopDragging()
         {
+            if (isDragging && selectedCard != null)
+            {
+                // Devuelve la carta a su posición original
+                selectedCard.transform.position = originalPosition;
+            }
+
             isDragging = false;
         }
 
@@ -661,7 +439,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                     // Coloca la carta en el lugar objetivo
                     selectedCard.transform.SetParent(target);
+
                     selectedCard.transform.localPosition = Vector3.zero;
+                    selectedCard.transform.localPosition += new Vector3(
+                        0,
+                        2,
+                        -placementHeightOffset
+                    );
 
                     // Actualiza el estado
                     SetCardState(selectedCard, CardState.onTable);
