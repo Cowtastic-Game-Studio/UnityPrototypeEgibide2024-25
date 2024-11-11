@@ -11,25 +11,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public CardManager CardManager;
         public HUDManager HUDManager;
         public StorageManager StorageManager;
+        public MarketManager marketManager;
 
         [Header("Board")]
         [Space(1)]
         public GameObject board;
 
-        [Header("Zones")]
-        [Space(3)]
-        public FarmZone Farm;
-        public StableZone Stables;
-        public TarvernZone Taverna;
+        //[Header("Zones")]
+        //[Space(3)]
+        //public FarmZone Farm;
+        //public StableZone Stables;
+        //public TarvernZone Taverna;
 
         #endregion
-
-        private void Awake()
-        {
-            //StorageManager = new StorageManager();
-            //CardManager = new CardManager();
-
-        }
 
         #region Public methods
         public void CleanPlayerCards()

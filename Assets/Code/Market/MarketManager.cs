@@ -6,10 +6,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class MarketManager : MonoBehaviour
     {
-        //variables de la instancia para que cuando se inicie el escena
-        private static MarketManager _intance;
-        private static MarketManager GetItance => _intance;
-
         //--listas de datos de las cartas
         public int[] CowCardData = new int[3];
         public int[] SeedCardData = new int[3];
@@ -29,20 +25,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         void Start()
         {
-            //revisa si hay instancia del mercado activa en caso de que haiga una la cierra y la vuelve abrir 
-            if (_intance)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                _intance = this;
-                DontDestroyOnLoad(gameObject);
-            }
+            //Carga el dinero actual del storage manager
+            updateMuuney();
+            buyButton.interactable = false;
+        }
+
+        public void updateMuuney()
+        {
             //Carga el dinero actual del storage manager
             Muuney = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Muuney); ;
             muuneyCount.text = Muuney.ToString();
-            buyButton.interactable = false;
         }
 
 
@@ -130,12 +122,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void BuyCard()
         {
+            //Muuney = Muuney - CardPrice;
+            int muuney = GameManager.Instance.Tabletop.StorageManager.WasteMuuney(CardPrice);
 
-
-            Muuney = Muuney - CardPrice;
-            GameManager.Instance.Tabletop.StorageManager.WasteMuuney(Muuney);
-
-            muuneyCount.text = Muuney.ToString();
+            muuneyCount.text = muuney.ToString();
             buyButton.interactable = false;
         }
 
