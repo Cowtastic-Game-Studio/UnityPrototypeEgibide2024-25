@@ -118,7 +118,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public int WasteMuuney(int quantity)
         {
             int leftMuuney = _bankStorage.Resource - quantity;
-            if (leftMuuney > 0)
+            if (leftMuuney >= 0)
             {
                 _bankStorage.Resource -= quantity;
             }
