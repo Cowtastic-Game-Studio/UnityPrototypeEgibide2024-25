@@ -238,6 +238,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // TODO: Implementar
         }
 
+        internal bool CheckMuuney(int cardPrice)
+        {
+            return CheckStorage(cardPrice, _bankStorage);
+        }
+
 
         #endregion
 

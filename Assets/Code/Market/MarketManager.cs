@@ -15,11 +15,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public Button wheatPage, cowPage, CustomerPage, ButtonWheat, ButtonCowBase, ButtonCowHat, ButtonCowDInner, ButtonCowBlack, ButtonCustomer;
         public Button buyButton;
         public Text muuneyCount;
-        private int Muuney;
         int CardPrice = 0;
         public static UnityEvent GetCow;
         public static UnityEvent GetWheat;
         public static UnityEvent GetCustomer;
+
+        private CardType cardType;
 
         [SerializeField] private int cowAvaialable, cowHatAvaialable, cowBlackAvaialable, cowDinnerAvaialable, customerAvailable, wheatAvailable = 0;
 
@@ -33,8 +34,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void updateMuuney()
         {
             //Carga el dinero actual del storage manager
-            Muuney = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Muuney); ;
+            int Muuney = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Muuney); ;
             muuneyCount.text = Muuney.ToString();
+
+            cardType = CardType.None;
         }
 
 
@@ -51,6 +54,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             ButtonWheat.gameObject.SetActive(true);
             //--clientes
             ButtonCustomer.gameObject.SetActive(false);
+
+            cardType = CardType.None;
         }
 
         public void ShowCow()
@@ -64,6 +69,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             ButtonWheat.gameObject.SetActive(false);
             //--clientes
             ButtonCustomer.gameObject.SetActive(false);
+
+            cardType = CardType.None;
         }
 
         public void ShowCustomer()
@@ -77,7 +84,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             ButtonWheat.gameObject.SetActive(false);
             //--clientes
             ButtonCustomer.gameObject.SetActive(true);
+
+            cardType = CardType.None;
         }
+
         #endregion
         #region metodosComprarCartas
         //metodos que se ejecutan para obtener los datos de los objetos de las cartas y efectuar la compra dle item
@@ -88,6 +98,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 CowCardData[a] = cardCow[a];
             }
             extractCowCardData();
+
+            cardType = CardType.Cow;
         }
 
         public void GetSeedCardData(int[] cardSeed)
@@ -97,6 +109,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 SeedCardData[a] = cardSeed[a];
             }
             extractSeedCardData();
+
+            cardType = CardType.Seed;
         }
         public void GetCusomterData(int[] cardCustomer)
         {
@@ -105,6 +119,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 CustomerData[a] = cardCustomer[a];
             }
             extractCustomerCardData();
+
+            cardType = CardType.Customer;
         }
         //metodos que extraen el valor del precio de la carta objetivo
         public void extractCowCardData()
@@ -122,11 +138,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void BuyCard()
         {
-            //Muuney = Muuney - CardPrice;
-            int muuney = GameManager.Instance.Tabletop.StorageManager.WasteMuuney(CardPrice);
+            if (GameManager.Instance.Tabletop.StorageManager.CheckMuuney(CardPrice))
+            {
+                //Muuney = Muuney - x;
+                int muuney = GameManager.Instance.Tabletop.StorageManager.WasteMuuney(CardPrice);
 
-            muuneyCount.text = muuney.ToString();
-            buyButton.interactable = false;
+                muuneyCount.text = muuney.ToString();
+                buyButton.interactable = false;
+
+                GameManager.Instance.Tabletop.CardManager.buyCard(cardType);
+            }
         }
 
         #endregion

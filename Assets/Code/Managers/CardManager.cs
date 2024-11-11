@@ -457,5 +457,38 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 }
             }
         }
+
+        internal void buyCard(CardType cardType)
+        {
+            GameObject card = null;
+            string path = "Prefabs/Cards/";
+
+            switch (cardType)
+            {
+                case CardType.Cow:
+                    path += "CowCard";
+                    break;
+                case CardType.Seed:
+                    path += "SeedCard";
+                    break;
+                case CardType.Customer:
+                    path += "CustomerCard";
+                    break;
+                case CardType.None:
+                default:
+                    return;
+            }
+
+            card = Resources.Load<GameObject>(path);
+            if (card != null)
+            {
+                GameObject newCard = Instantiate(card, deckArea);
+                newCard.transform.SetParent(deckArea.transform);
+                newCard.transform.localPosition = Vector3.zero;
+
+                // Agrega la carta al mazo
+                drawDeck.Place(newCard);
+            }
+        }
     }
 }

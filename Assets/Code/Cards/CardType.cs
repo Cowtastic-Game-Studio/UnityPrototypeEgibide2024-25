@@ -4,6 +4,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     {
         Cow,
         Seed,
-        Customer
+        Customer,
+        None
     }
 }

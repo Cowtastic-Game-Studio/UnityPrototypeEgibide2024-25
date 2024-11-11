@@ -2181,7 +2181,7 @@ MonoBehaviour:
   discardDeckArea: {fileID: 1364878055}
   cardSpacing: 0.5
   drawCards: 5
-  placementHeightOffset: 3
+  placementHeightOffset: 0.5
 --- !u!114 &566125690
 MonoBehaviour:
   m_ObjectHideFlags: 0
