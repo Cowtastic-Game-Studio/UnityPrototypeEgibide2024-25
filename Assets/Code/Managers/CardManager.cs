@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -392,6 +393,17 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void StartDragging()
         {
             isDragging = true;
+            
+            if(selectedCard.transform.parent.CompareTag("Place") && selectedCard.transform.rotation.y !=180 && selectedCard.transform.rotation.y !=-90 )
+            {
+            selectedCard.transform.rotation= Quaternion.Euler(-90, 0, 90);;
+            Debug.Log("rotando");
+                    
+                
+            
+            }
+
+            
         }
 
         public void StopDragging()
@@ -424,6 +436,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 // Mover la carta sobre el plano
                 Vector3 newPosition = hit.point + Vector3.up * 0.1f;
+                
                 selectedCard.transform.position = newPosition;
             }
         }
