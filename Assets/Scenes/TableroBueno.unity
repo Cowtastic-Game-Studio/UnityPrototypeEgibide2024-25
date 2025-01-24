@@ -2989,6 +2989,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 395194080637547572, guid: 7ab2776ef9f434e4fa0da8aca93abde4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ce2e64dbb064a8f41b122fd8ae2cf518, type: 2}
+    - target: {fileID: 1979605318622538532, guid: 7ab2776ef9f434e4fa0da8aca93abde4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ce2e64dbb064a8f41b122fd8ae2cf518, type: 2}
     - target: {fileID: 3306494223283130538, guid: 7ab2776ef9f434e4fa0da8aca93abde4, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.62691826
@@ -3021,6 +3029,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4598863540316293415, guid: 7ab2776ef9f434e4fa0da8aca93abde4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ce2e64dbb064a8f41b122fd8ae2cf518, type: 2}
     - target: {fileID: 4775413213959628626, guid: 7ab2776ef9f434e4fa0da8aca93abde4, type: 3}
       propertyPath: m_Name
       value: Tablero Variant 2
@@ -3053,6 +3065,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4895865077703255912, guid: 7ab2776ef9f434e4fa0da8aca93abde4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ce2e64dbb064a8f41b122fd8ae2cf518, type: 2}
     - target: {fileID: 4943467757122881178, guid: 7ab2776ef9f434e4fa0da8aca93abde4, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.415334
@@ -3125,6 +3141,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -29.127
       objectReference: {fileID: 0}
+    - target: {fileID: 6958500285984789158, guid: 7ab2776ef9f434e4fa0da8aca93abde4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ce2e64dbb064a8f41b122fd8ae2cf518, type: 2}
     - target: {fileID: 7302167614544630744, guid: 7ab2776ef9f434e4fa0da8aca93abde4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
@@ -3165,6 +3185,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7361403041006232668, guid: 7ab2776ef9f434e4fa0da8aca93abde4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ce2e64dbb064a8f41b122fd8ae2cf518, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 8204031277718814352, guid: 7ab2776ef9f434e4fa0da8aca93abde4, type: 3}
@@ -3659,6 +3683,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1098348447}
   - component: {fileID: 1098348446}
+  - component: {fileID: 1098348448}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -3743,6 +3768,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1098348448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098348445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &1205444788
 GameObject:
   m_ObjectHideFlags: 0
