@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -82,7 +83,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private bool isDragging = false;
         public bool IsDraggingCard => isDragging;
 
-        public float placementHeightOffset = 3f;
+        public float placementHeightOffset = 4f;
         private Vector3 originalPosition;
 
         /// <summary>
@@ -395,6 +396,17 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void StartDragging()
         {
             isDragging = true;
+            
+            if(selectedCard.transform.parent.CompareTag("Place") && selectedCard.transform.rotation.y !=180 && selectedCard.transform.rotation.y !=-90 )
+            {
+            selectedCard.transform.rotation= Quaternion.Euler(-90, 0, 90);;
+            Debug.Log("rotando");
+                    
+                
+            
+            }
+
+            
         }
 
         public void StopDragging()
@@ -427,6 +439,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 // Mover la carta sobre el plano
                 Vector3 newPosition = hit.point + Vector3.up * 0.1f;
+                
                 selectedCard.transform.position = newPosition;
             }
         }
@@ -446,12 +459,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                     // Coloca la carta en el lugar objetivo
                     selectedCard.transform.SetParent(target);
-
-                    selectedCard.transform.localPosition = Vector3.zero;
+                    //rota la carta  a la rotacion del padre
+                  
+                    selectedCard.transform.rotation = target.transform.rotation;
+                   
+                    selectedCard.transform.position = target.transform.position;
+        
                     selectedCard.transform.localPosition += new Vector3(
                         0,
-                        2,
-                        -placementHeightOffset
+                        0,
+                        +placementHeightOffset
                     );
 
                     handDeck.RemoveCard(selectedCard);
