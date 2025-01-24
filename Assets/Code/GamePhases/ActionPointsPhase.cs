@@ -91,6 +91,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         Console.WriteLine($"Action executed for card {selectedCard.Name}.");
                         if (isProduced)
                         {
+                            CardBehaviour cardBehaviour = selectedCard as CardBehaviour;
+                            cardBehaviour.Deactivate();
                             GameManager.Instance.Tabletop.HUDManager.UpdateResources();
                             Console.WriteLine("Resources have been produced :)");
                         }

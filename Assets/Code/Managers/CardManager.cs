@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -194,7 +193,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Mueve las cartas de nuevo al mazo de robo
             foreach (ICard card in discardCards)
             {
-                GameObject cardGameObject = ((MonoBehaviour)card).gameObject;
+                GameObject cardGameObject = ((MonoBehaviour) card).gameObject;
                 cardGameObject.transform.SetParent(deckArea);
                 cardGameObject.transform.localPosition = Vector3.zero;
                 cardGameObject.transform.localRotation = Quaternion.Euler(90f, -90f, 0f);
@@ -396,17 +395,17 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void StartDragging()
         {
             isDragging = true;
-            
-            if(selectedCard.transform.parent.CompareTag("Place") && selectedCard.transform.rotation.y !=180 && selectedCard.transform.rotation.y !=-90 )
+
+            if (selectedCard.transform.parent.CompareTag("Place") && selectedCard.transform.rotation.y != 180 && selectedCard.transform.rotation.y != -90)
             {
-            selectedCard.transform.rotation= Quaternion.Euler(-90, 0, 90);;
-            Debug.Log("rotando");
-                    
-                
-            
+                selectedCard.transform.rotation = Quaternion.Euler(-90, 0, 90); ;
+                Debug.Log("rotando");
+
+
+
             }
 
-            
+
         }
 
         public void StopDragging()
@@ -439,11 +438,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 // Mover la carta sobre el plano
                 Vector3 newPosition = hit.point + Vector3.up * 0.1f;
-                
+
                 selectedCard.transform.position = newPosition;
             }
         }
-        
+
         /// <summary>
         /// Coloca la carta en el espacio de colocacion(Mercado, establo, huerta)
         /// </summary>
@@ -460,11 +459,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     // Coloca la carta en el lugar objetivo
                     selectedCard.transform.SetParent(target);
                     //rota la carta  a la rotacion del padre
-                  
+
                     selectedCard.transform.rotation = target.transform.rotation;
-                   
+
                     selectedCard.transform.position = target.transform.position;
-        
+
                     selectedCard.transform.localPosition += new Vector3(
                         0,
                         0,
@@ -478,7 +477,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     // Limpia la selección
                     var cardBH = selectedCard.GetComponent<CardBehaviour>();
                     cardBH.IsPlaced = true;
-                    cardBH.Deactivate();
+                    cardBH.Activate();
                     selectedCard = null;
                 }
             }

@@ -83,12 +83,17 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         // Verifica si la carta está en la layer 'CardLayer'
                         if (gameObject.layer == LayerMask.NameToLayer("CardLayer"))
                         {
-                            OnCardClicked();
+                            InvokeCardClicked();
                         }
                     }
-
                 }
-
+            }
+            else if (GameManager.Instance.GamePhaseManager.CurrentPhaseType == GamePhaseTypes.Action)
+            {
+                if (IsActive)
+                {
+                    InvokeCardClicked();
+                }
             }
 
         }
@@ -120,14 +125,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             template.Print();
         }
 
-        public void OnCardClicked()
+        public void InvokeCardClicked()
         {
-            //if (IsActive)
-            //{
             // Pasar la instancia ICard
-            ICard card = gameObject.GetComponent<ICard>(); ;
+            ICard card = gameObject.GetComponent<ICard>();
             GameManager.Instance?.CardClicked(card);
-            //}
         }
 
         //public void OnPointerClick(PointerEventData eventData)
