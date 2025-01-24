@@ -33,6 +33,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public CardState State { get; set; } = CardState.onDeck;
         public string Name => template.name;
+        public CardType Type => template.cardType;
         public string Description => template.description;
         public int ActionPointsCost => template.actionPointsCost;
         public int LifeCycleDays => template.lifeCycleDays;
@@ -55,7 +56,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             else
             {
-                // Configurar la visualización de la carta usando CardDisplay
+                // Configurar la visualizaciï¿½n de la carta usando CardDisplay
                 CardDisplay display = GetComponent<CardDisplay>();
                 if (display != null)
                 {
@@ -80,7 +81,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 {
                     if (!GameManager.Instance.Tabletop.CardManager.IsDraggingCard)
                     {
-                        // Verifica si la carta está en la layer 'CardLayer'
+                        // Verifica si la carta estï¿½ en la layer 'CardLayer'
                         if (gameObject.layer == LayerMask.NameToLayer("CardLayer"))
                         {
                             InvokeCardClicked();
@@ -135,20 +136,20 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         //public void OnPointerClick(PointerEventData eventData)
 
 
-        // Método para configurar la visualización en CardDisplay
+        // Mï¿½todo para configurar la visualizaciï¿½n en CardDisplay
         public void SetupDisplay(CardDisplay display)
         {
             // Pasa el estado activo
             display.UpdateDisplay(template, isActive);
         }
 
-        // Método para actualizar la visualización
+        // Mï¿½todo para actualizar la visualizaciï¿½n
         private void UpdateDisplay()
         {
             CardDisplay display = GetComponent<CardDisplay>();
             if (display != null)
             {
-                // Llama al método para activar/desactivar el overlay
+                // Llama al mï¿½todo para activar/desactivar el overlay
                 display.SetOverlayActive(!isActive);
             }
         }
