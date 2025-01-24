@@ -2,11 +2,23 @@ using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
+    public enum GamePhaseTypes
+    {
+        SetUp = 0,
+        StartDay = 1,        
+        PlaceCards = 2,
+        Action = 3,
+        Market = 4
+    }
+
+
     public class GamePhaseManager
     {
         //TODO: Añadir contador de turnos(dias)
 
         public IGamePhase CurrentPhase { get; private set; }
+
+        public GamePhaseTypes CurrentPhaseType {  get  {  return CurrentPhase.Phase; } }
 
 
         public GamePhaseManager()

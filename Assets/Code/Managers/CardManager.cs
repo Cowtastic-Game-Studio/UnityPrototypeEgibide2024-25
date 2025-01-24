@@ -162,6 +162,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     // Cambia la posición de la carta en la mano
                     card.transform.localPosition = new Vector3(i * cardSpacing, 0, 0);
                     card.transform.rotation = Quaternion.Euler(90, -90, 0);
+                    var cardBH = card.GetComponent<CardBehaviour>();
+                    cardBH.IsPlaced = false;
+                    cardBH.PositionInHand = i * cardSpacing;
                 }
             }
         }
@@ -427,7 +430,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 selectedCard.transform.position = newPosition;
             }
         }
-
+        
+        /// <summary>
+        /// Coloca la carta en el espacio de colocacion(Mercado, establo, huerta)
+        /// </summary>
+        /// <param name="target"></param>
         public void PlaceSelectedCard(Transform target)
         {
             if (selectedCard != null)
@@ -452,11 +459,29 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     SetCardState(selectedCard, CardState.onTable);
 
                     // Limpia la selección
-                    selectedCard.GetComponent<CardBehaviour>()?.Deactivate();
+                    var cardBH = selectedCard.GetComponent<CardBehaviour>();
+                    cardBH.IsPlaced = true;
+                    cardBH.Deactivate();
                     selectedCard = null;
                 }
             }
         }
+
+        /// <summary>
+        /// Quita la carta de un espacio de colocado y la devuelve a la mano
+        /// </summary>
+        public void RemovePlacedCard(GameObject card)
+        {
+            handDeck.Place(card);
+
+            var cardBH = card.GetComponent<CardBehaviour>();
+            cardBH.IsPlaced = false;
+
+            card.transform.SetParent(handArea);
+            card.transform.localPosition = new Vector3(cardBH.PositionInHand.Value, 0, 0);
+
+        }
+
 
         internal void buyCard(CardType cardType)
         {

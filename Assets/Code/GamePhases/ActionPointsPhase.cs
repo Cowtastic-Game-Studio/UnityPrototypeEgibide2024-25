@@ -4,6 +4,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class ActionPointsPhase : IGamePhaseWUndo
     {
+        #region Properties
+
+        #region Property: Phase
+        public GamePhaseTypes Phase { get { return GamePhaseTypes.Action; } }
+
+        #endregion
+
+        #endregion
+
         public ActionManager<ICommand> ActionManager { get; private set; }
         /// <summary>
         /// Carta seleccionada
