@@ -119,6 +119,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void DrawFromDeck()
         {
             MoveLastCardsToHand(drawCards);
+
+            InitHandCardLifes();
         }
 
         private void MoveLastCardsToHand(int cardsToDraw)
@@ -307,16 +309,24 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void WipeBoard()
         {
+            UpdatePlacedCardLifes();
+
             foreach (GameObject card in playedCardsDeck.Cards)
             {
-                card.transform.SetParent(discardDeckArea);
-                card.transform.localPosition = Vector3.zero;
-                card.transform.localRotation = Quaternion.Euler(90f, -90f, 0f);
-                SetCardState(card, CardState.onDiscard);
+                CardBehaviour cardBH = card.GetComponent<CardBehaviour>();
+                if (cardBH.LifeCycleDaysRemaining <= 0)
+                {
+                    handDeck.RemoveCard(card);
+
+                    card.transform.SetParent(discardDeckArea);
+                    card.transform.localPosition = Vector3.zero;
+                    card.transform.localRotation = Quaternion.Euler(90f, -90f, 0f);
+                    SetCardState(card, CardState.onDiscard);
+                }
             }
 
             // Reiniciar el mazo de cartas jugadas
-            playedCardsDeck = new CardDeck();
+            //playedCardsDeck = new CardDeck();
         }
 
 
@@ -496,7 +506,25 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             card.transform.SetParent(handArea);
             card.transform.localPosition = new Vector3(cardBH.PositionInHand.Value, 0, 0);
             card.transform.rotation = handArea.transform.rotation;
+        }
 
+
+        private void InitHandCardLifes()
+        {
+            foreach (GameObject card in handDeck.Cards)
+            {
+                CardBehaviour cardBH = card.GetComponent<CardBehaviour>();
+                cardBH.LifeCycleDaysRemaining = cardBH.LifeCycleDays;
+            }
+        }
+
+        private void UpdatePlacedCardLifes()
+        {
+            foreach (GameObject card in playedCardsDeck.Cards)
+            {
+                CardBehaviour cardBH = card.GetComponent<CardBehaviour>();
+                cardBH.LifeCycleDaysRemaining -= 1;
+            }
         }
 
 
