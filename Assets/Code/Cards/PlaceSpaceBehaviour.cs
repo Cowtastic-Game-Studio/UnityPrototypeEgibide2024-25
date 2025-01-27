@@ -10,7 +10,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private bool isEmpty = true;
 
         [SerializeField]
-        private string type;
+        private CardType type;
 
         private Renderer renderer;
         private Color originalColor;
@@ -37,9 +37,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 if (isActive && isEmpty) {
                     if (card.Type == type) {
+                        Debug.LogError(card.Type);
+                        Debug.LogError(type);
                         Highlight(true);
                     }
                     else {
+                        Debug.LogError(card.Type);
+                        Debug.LogError(type);
                         Highlight(false);
                     }
                 }
