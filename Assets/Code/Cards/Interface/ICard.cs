@@ -19,6 +19,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         void Deactivate();
 
         void Print();
-        void OnCardClicked();
+        void InvokeCardClicked();
     }
 }

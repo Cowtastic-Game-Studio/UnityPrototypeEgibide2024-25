@@ -5,6 +5,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class PlaceCardsPhase : IGamePhaseWUndo
     {
+        #region Properties
+
+        #region Property: Phase
+        public GamePhaseTypes Phase { get { return GamePhaseTypes.PlaceCards; } }
+
+        #endregion
+
+        #endregion
+
         public ActionManager<ICommand> ActionManager { get; private set; }
 
         public PlaceCardsPhase()

@@ -7,7 +7,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class MarketPhase : IGamePhaseWUndo
     {
+        #region Properties
 
+        #region Property: Phase
+
+        public GamePhaseTypes Phase { get { return GamePhaseTypes.Market; } }
+
+        #endregion
+
+        #endregion
 
 
         public Button cowPage, CustomerPage, WheatPage;

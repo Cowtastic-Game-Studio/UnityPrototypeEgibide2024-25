@@ -2,7 +2,21 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class StartDayPhase : IGamePhase
     {
+
+        #region Properties
+
+        #region Property: Phase
+
+        public GamePhaseTypes Phase { get { return GamePhaseTypes.StartDay;  } }
+
+        #endregion
+
+        #endregion
+
+
         //TODO: Gestionar el numero de veces que se puede hacer mulligan(Maximo 4 por fase)
+
+
 
 
         /// <summary>
