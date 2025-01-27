@@ -14,8 +14,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private Renderer renderer;
         private Color originalColor;
-        public Color highlightColorValid = Color.green;  // El color de resaltado al pasar el raton cuando es positivo
-        public Color highlightColorIncorrect = Color.red; // El color de resaltado al pasar el raton cuando es negativo
+        private Color highlightColorValid = Color.green;  // El color de resaltado al pasar el raton cuando es positivo
+        private Color highlightColorIncorrect = Color.red; // El color de resaltado al pasar el raton cuando es negativo
 
         private void Start()
         {
@@ -37,15 +37,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 if (isActive && isEmpty) {
                     if (card.Type == type) {
-                        Debug.LogError(card.Type);
-                        Debug.LogError(type);
                         Highlight(true);
                     }
                     else {
-                        Debug.LogError(card.Type);
-                        Debug.LogError(type);
                         Highlight(false);
                     }
+                } else {
+                    Highlight(false);
                 }
             }
         }
