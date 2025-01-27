@@ -97,10 +97,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void addCalendarEvents()
         {
-            GameCalendar.AddCalendarEvent(new HarvestDayEvent());
-            GameCalendar.AddCalendarEvent(new CowDayEvent());
-            GameCalendar.AddCalendarEvent(new PlagueEvent());
-            GameCalendar.AddCalendarEvent(new BrokenFridgeEvent());
+            // Eventos
+            GameCalendar.AddCalendarEvent(new HarvestDayEvent(), false);
+            GameCalendar.AddCalendarEvent(new PlagueEvent(), false);
+            GameCalendar.AddCalendarEvent(new BrokenFridgeEvent(), false);
+            GameCalendar.AddCalendarEvent(new HarvestDayEvent(), false);
         }
 
         // Metodo para invocar el evento de clic de carta

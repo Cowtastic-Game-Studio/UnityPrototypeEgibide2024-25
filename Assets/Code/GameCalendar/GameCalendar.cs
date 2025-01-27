@@ -1,6 +1,8 @@
+using Unity.VisualScripting;
+
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    // Enum que representa los días de la semana
+    // Enum que representa los dï¿½as de la semana
     public enum DayOfWeek
     {
         Lunes = 1,
@@ -19,10 +21,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private GameCalendarEventManager eventManager;
 
-        // Día aleatorio para el evento de la semana actual
+        // Dï¿½a aleatorio para el evento de la semana actual
         private int eventDayOfWeek;
 
-        // Propiedad para obtener el día de la semana (1 = Lunes, 7 = Domingo)
+        // Propiedad para obtener el dï¿½a de la semana (1 = Lunes, 7 = Domingo)
         public DayOfWeek DayOfWeek
         {
             get { return (DayOfWeek)((CurrentDay - 1) % 7 + 1); }
@@ -37,7 +39,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             eventDayOfWeek = -1;
         }
 
-        // Avanzar al siguiente día
+        // Avanzar al siguiente dï¿½a
         public void NextDay()
         {
             CurrentDay++;
@@ -49,15 +51,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         // Comprobar si debe ocurrir un evento
         public void CheckForEvent()
         {
-            // Al final de cada semana (múltiplo de 7) + Evitar la primera semana
+            // Al final de cada semana (mï¿½ltiplo de 7) + Evitar la primera semana
             if (CurrentDay % 7 == 1 && CurrentDay > 7)
             {
                 CurrentWeek++;
-                // Asignar un día aleatorio dentro de la nueva semana para que ocurra un evento
+                // Asignar un dï¿½a aleatorio dentro de la nueva semana para que ocurra un evento
                 eventDayOfWeek = new System.Random().Next(1, 8);
             }
 
-            // Comprobar si el día actual es el día del evento
+            // Comprobar si el dï¿½a actual es el dï¿½a del evento
             if (CurrentDay % 7 == eventDayOfWeek % 7)
             {
                 // Dispara un evento aleatorio
@@ -68,12 +70,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
 
         // Agregar eventos al calendario
-        public void AddCalendarEvent(CalendarEvent calendarEvent)
+        public void AddCalendarEvent(CalendarEvent calendarEvent, bool isDinamico)
         {
-            eventManager.AddEvent(calendarEvent);
+            eventManager.AddEvent(calendarEvent, isDinamico); 
         }
 
-        // Método para obtener el nombre del día de la semana 
+        // Mï¿½todo para obtener el nombre del dï¿½a de la semana 
         public string GetDayOfWeekName()
         {
             return DayOfWeek.ToString();

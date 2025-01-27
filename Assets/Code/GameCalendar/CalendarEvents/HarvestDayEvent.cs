@@ -4,21 +4,24 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class HarvestDayEvent : CalendarEvent
     {
-        public HarvestDayEvent() : base("Día de la Cosecha", "Los cultivos generan el doble de recursos al cosechar.", 1)
+
+        public CardType cardType;
+
+        public HarvestDayEvent() : base("Dï¿½a de la Cosecha", "Los cultivos generan el doble de recursos al cosechar.", 1)
         {
         }
 
         // Implementa los efectos del evento
         public override void ApplyEffects()
         {
-            Debug.Log("¡Doble de recursos al cosechar cultivos durante el Día de la Cosecha!");
-            // Aquí iría la lógica para aplicar el efecto de cosecha doble
+            Debug.Log("ï¿½Doble de recursos al cosechar cultivos durante el Dï¿½a de la Cosecha!");
+            
         }
 
         // Opcionalmente puedes sobreescribir EndEvent si el evento tiene efectos que terminan
         public override void EndEvent()
         {
-            Debug.Log("El Día de la Cosecha ha terminado.");
+            Debug.Log("El Dï¿½a de la Cosecha ha terminado.");
             // Limpiar los efectos del evento, si es necesario
         }
     }
