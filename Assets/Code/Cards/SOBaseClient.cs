@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -9,8 +10,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public BaseClient()
         {
             name = "Client";
-            
             lifeCycleDays = 1;
+            cardType = CardType.Customer;
         }
 
         private void Awake()
