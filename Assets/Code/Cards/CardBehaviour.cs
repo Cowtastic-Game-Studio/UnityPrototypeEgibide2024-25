@@ -43,6 +43,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public bool IsActive => isActive;
 
+        float clickdelay = 0.3f;
+        private bool click = false;
+        private float clickTime;
+
+        bool mouseClicksStarted = false;
+        int mouseClicks = 0;
+        float mouseTimerLimit = .25f;
 
         #region Unity methods
 
@@ -71,23 +78,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (GameManager.Instance.GamePhaseManager.CurrentPhaseType == GamePhaseTypes.PlaceCards)
             {
-                //Si esta colocada
-                if (this.IsPlaced)
-                {
-                    //Vuelve a la mano
-                    GameManager.Instance.Tabletop.CardManager.RemovePlacedCard(this.gameObject);
-                }
-                else
-                {
-                    if (!GameManager.Instance.Tabletop.CardManager.IsDraggingCard)
-                    {
-                        // Verifica si la carta est� en la layer 'CardLayer'
-                        if (gameObject.layer == LayerMask.NameToLayer("CardLayer"))
-                        {
-                            InvokeCardClicked();
-                        }
-                    }
-                }
+                OnClick();
             }
             else if (GameManager.Instance.GamePhaseManager.CurrentPhaseType == GamePhaseTypes.Action)
             {
@@ -109,6 +100,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         #endregion
 
+        #region Public methods
         public void Activate()
         {
             isActive = true;
@@ -143,7 +135,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             display.UpdateDisplay(template, isActive);
         }
 
-        // M�todo para actualizar la visualizaci�n
+        #endregion
+
+
+        #region Private methods
+        /// <summary>
+        /// M�todo para actualizar la visualizaci�n
+        /// </summary>
         private void UpdateDisplay()
         {
             CardDisplay display = GetComponent<CardDisplay>();
@@ -153,5 +151,42 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 display.SetOverlayActive(!isActive);
             }
         }
+
+        private void OnClick()
+        {
+            mouseClicks++;
+            if (mouseClicksStarted)
+            {
+                return;
+            }
+            mouseClicksStarted = true;
+            Invoke(nameof(CheckMouseDoubleClick), mouseTimerLimit);
+        }
+
+
+        private void CheckMouseDoubleClick()
+        {
+            if (mouseClicks > 1)
+            {
+                //Vuelve a la mano
+                GameManager.Instance.Tabletop.CardManager.RemovePlacedCard(this.gameObject);
+
+            }
+            else
+            {
+                if (!GameManager.Instance.Tabletop.CardManager.IsDraggingCard)
+                {
+                    // Verifica si la carta est� en la layer 'CardLayer'
+                    if (gameObject.layer == LayerMask.NameToLayer("CardLayer"))
+                    {
+                        InvokeCardClicked();
+                    }
+                }
+            }
+            mouseClicksStarted = false;
+            mouseClicks = 0;
+        }
+
+        #endregion
     }
 }
