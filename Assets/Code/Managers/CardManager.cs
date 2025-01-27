@@ -193,7 +193,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Mueve las cartas de nuevo al mazo de robo
             foreach (ICard card in discardCards)
             {
-                GameObject cardGameObject = ((MonoBehaviour) card).gameObject;
+                GameObject cardGameObject = ((MonoBehaviour)card).gameObject;
                 cardGameObject.transform.SetParent(deckArea);
                 cardGameObject.transform.localPosition = Vector3.zero;
                 cardGameObject.transform.localRotation = Quaternion.Euler(90f, -90f, 0f);
@@ -495,6 +495,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             card.transform.SetParent(handArea);
             card.transform.localPosition = new Vector3(cardBH.PositionInHand.Value, 0, 0);
+            card.transform.rotation = handArea.transform.rotation;
 
         }
 
