@@ -9,7 +9,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public Sprite artwork;
         public Sprite baseCard;
 
-        //public new string cardType
+        public CardType cardType;
         public new string name;
         public string description;
         public int actionPointsCost;

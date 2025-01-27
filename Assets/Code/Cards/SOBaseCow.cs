@@ -9,6 +9,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             name = "Cow";
             lifeCycleDays = 2;
+            cardType = CardType.Cow;
         }
 
         private void Awake()

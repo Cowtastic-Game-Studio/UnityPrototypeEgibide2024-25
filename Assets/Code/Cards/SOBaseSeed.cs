@@ -8,7 +8,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public BaseSeed()
         {
             name = "Seed";
-            lifeCycleDays = 1;
+            lifeCycleDays = 10;
+            cardType = CardType.Seed;
         }
 
         private void Awake()

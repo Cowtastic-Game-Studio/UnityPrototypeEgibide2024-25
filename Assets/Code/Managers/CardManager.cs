@@ -77,7 +77,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public IDeck DiscardDeck => discardDeck;
 
         //Place card
-        private GameObject selectedCard = null;
+        public GameObject selectedCard = null;
 
         private bool isDragging = false;
         public bool IsDraggingCard => isDragging;

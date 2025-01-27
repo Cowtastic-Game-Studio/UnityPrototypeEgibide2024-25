@@ -9,9 +9,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private bool isEmpty = true;
 
+        [SerializeField]
+        private CardType type;
+
         private Renderer renderer;
         private Color originalColor;
-        public Color highlightColor = Color.green;  // El color de resaltado al pasar el ratón
+        private Color highlightColorValid = Color.green;  // El color de resaltado al pasar el raton cuando es positivo
+        private Color highlightColorIncorrect = Color.red; // El color de resaltado al pasar el raton cuando es negativo
 
         private void Start()
         {
@@ -24,11 +28,23 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void OnMouseEnter()
         {
-            // Solo resalta si se está arrastrando una carta
+            // Solo resalta si se estï¿½ arrastrando una carta
             if (GameManager.Instance.Tabletop.CardManager.IsDraggingCard)
             {
-                if (isActive && isEmpty)
-                    Highlight();
+                // Recuperamos el componente CardBehaviour
+                GameObject selectedCard = GameManager.Instance.Tabletop.CardManager.selectedCard;
+                CardBehaviour card = selectedCard.GetComponent<CardBehaviour>();
+
+                if (isActive && isEmpty) {
+                    if (card.Type == type) {
+                        Highlight(true);
+                    }
+                    else {
+                        Highlight(false);
+                    }
+                } else {
+                    Highlight(false);
+                }
             }
         }
 
@@ -39,10 +55,18 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void OnMouseDown()
         {
-            // Verifica si la carta está en la layer 'PlaceSpace'
+            // Verifica si la carta estï¿½ en la layer 'PlaceSpace'
             if (gameObject.layer == LayerMask.NameToLayer("PlaceSpace"))
             {
-                OnPlaceSpaceClicked();
+                // Recuperamos el componente CardBehaviour
+                GameObject selectedCard = GameManager.Instance.Tabletop.CardManager.selectedCard;
+                CardBehaviour card = selectedCard.GetComponent<CardBehaviour>();
+
+                if (isActive && isEmpty) {
+                    if (card.Type == type) {
+                        OnPlaceSpaceClicked();
+                    }
+                }
             }
         }
 
@@ -55,11 +79,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             //}
         }
 
-        private void Highlight()
+        private void Highlight(bool valid)
         {
             if (renderer != null)
             {
-                renderer.material.color = highlightColor;
+                if (valid == true) {
+                    renderer.material.color = highlightColorValid;
+                }
+                else {
+                    renderer.material.color = highlightColorIncorrect;
+                }
             }
         }
 
