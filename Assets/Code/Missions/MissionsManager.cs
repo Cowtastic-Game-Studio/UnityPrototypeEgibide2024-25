@@ -1,6 +1,9 @@
 using CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
+using static CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions.Mission;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
@@ -33,12 +36,38 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         }
 
+        public void RenewWeeklyMissions()
+        {
+            List<Mission> weeklyMissions;
+            Mission weeklyMission;
+
+            //Obtiene las misiones semanales
+            weeklyMissions = this.Missions.Where((mission) => mission.Type == Mission.MissionTypes.Weekly).ToList();
+
+            //Borra las misiones semanales de la lista
+            weeklyMissions.ForEach(mission => this.Missions.Remove(mission));
+
+            weeklyMission = GenerateWeeklyMission();
+
+            this.Missions.Add(weeklyMission);
+
+            NewWeeklyMission.Invoke();
+        }
+
         #endregion
 
         #region Private methods
 
+        private Mission GenerateWeeklyMission()
+        {
+            Mission mission = new Mission("Weekly", "", MissionTypes.Weekly, new Goal(), new Reward());
+
+            return mission;
+        }
 
         #endregion
+
+        public UnityEvent NewWeeklyMission;
 
     }
 }
