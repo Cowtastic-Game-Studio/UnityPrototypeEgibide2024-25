@@ -51,10 +51,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         int mouseClicks = 0;
         float mouseTimerLimit = .25f;
 
+        public int LifeCycleDaysRemaining;
+
         #region Unity methods
 
         private void Start()
         {
+            LifeCycleDaysRemaining = LifeCycleDays;
+
             this.PositionInHand = null;
 
             if (template == null)
