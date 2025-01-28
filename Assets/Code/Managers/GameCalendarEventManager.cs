@@ -15,6 +15,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             activeEvent = null;
         }
 
+        public void TestActiveEvent()
+        {
+            activeEvent = staticEvents[1]; //Plague
+            activeEvent.TriggerEvent();
+        }
+
         public void AddEvent(CalendarEvent calendarEvent, bool isDynamic)
         {
             if (isDynamic)

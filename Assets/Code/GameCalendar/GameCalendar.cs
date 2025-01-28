@@ -1,5 +1,3 @@
-using Unity.VisualScripting;
-
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     // Enum que representa los d�as de la semana
@@ -27,7 +25,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         // Propiedad para obtener el d�a de la semana (1 = Lunes, 7 = Domingo)
         public DayOfWeek DayOfWeek
         {
-            get { return (DayOfWeek)((CurrentDay - 1) % 7 + 1); }
+            get { return (DayOfWeek) ((CurrentDay - 1) % 7 + 1); }
         }
 
         public GameCalendar()
@@ -37,6 +35,17 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             eventManager = new GameCalendarEventManager();
             // Inicialmente no hay evento
             eventDayOfWeek = -1;
+        }
+
+        // TODO: borrar
+        public void TestEvent()
+        {
+            eventManager.TestActiveEvent();
+        }
+
+        public void TestStopEvent()
+        {
+            eventManager.EndActiveEvent();
         }
 
         // Avanzar al siguiente d�a
@@ -72,7 +81,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         // Agregar eventos al calendario
         public void AddCalendarEvent(CalendarEvent calendarEvent, bool isDinamico)
         {
-            eventManager.AddEvent(calendarEvent, isDinamico); 
+            eventManager.AddEvent(calendarEvent, isDinamico);
         }
 
         // M�todo para obtener el nombre del d�a de la semana 

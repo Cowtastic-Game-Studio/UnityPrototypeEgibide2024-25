@@ -12,9 +12,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public Tabletop Tabletop;
 
-        private PlagueEvent plagueEvent = new PlagueEvent();
-
-
         // Evento global para manejar clics en cartas
         public event Action<ICard> OnCardClickedGlobal;
         public event Action<Transform> OnPlaceSpaceClickedGlobal;
@@ -98,17 +95,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (plagueEvent == null)
-                {
-                    plagueEvent = new PlagueEvent();
-                    plagueEvent.TriggerEvent();
-                }
-                else
-                {
-                    plagueEvent.EndEvent();
-                    plagueEvent = null;
+                GameCalendar.TestEvent();
 
-                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                GameCalendar.TestStopEvent();
+
             }
 
             #endregion
