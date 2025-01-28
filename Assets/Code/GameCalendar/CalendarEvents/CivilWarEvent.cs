@@ -1,15 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    /// <summary>
-    /// Evento generico que multiplica la optencion de un tipo de recurso
-    /// </summary>
-    public class ResourceMultipleEvent : CalendarEvent
+    public class CivilWarEvent : CalendarEvent
     {
-        private GameResource resourceType;
-        private int resourceMultiplier;
-
         /// <summary>
         /// Constructor para inicializar el evento generico.
         /// </summary>
@@ -18,25 +14,25 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <param name="eventDuration">Duración del evento en días.</param>
         /// <param name="cardType">Tipo de carta afectada durante el evento.</param>
         /// <param name="resourceMultiplier">Multiplicador de recursos durante el evento.</param>
-        public ResourceMultipleEvent(string eventName, string eventDescription, GameResource resourceType, int resourceMultiplier) 
-            : base(eventName, eventDescription, 1)
+        public CivilWarEvent() 
+            : base("La guerra estalla y tu pagas", "El reino entra en guerra y el rey te exige el 20% de tu Muuuney", 1)
         {
-            this.resourceType = resourceType;
-            this.resourceMultiplier = resourceMultiplier;
+
         }
 
         public override void ApplyEffects()
         {
-            GameManager.Instance.Tabletop.StorageManager.SetResourceMultiplierAndType(resourceMultiplier, resourceType);
+
         }
 
         public override void EndEvent()
         {
-            GameManager.Instance.Tabletop.StorageManager.ClearResourceMultiplierAndType();
+
         }
 
         public override void InitEvent()
         {
+
         }
     }
 }
