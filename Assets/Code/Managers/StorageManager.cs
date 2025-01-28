@@ -15,7 +15,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [SerializeField] private Silo _silo;
 
         private int multi = 1;
-        private GameResource typeResource;
+        private GameResource typeResource = GameResource.None;
         private List<ResourceAmount> _requiredResources;
         private List<ResourceAmount> _producedResources;
         #endregion
@@ -175,6 +175,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void ClearResourceMultiplierAndType()
         {
             multi = 1;
+            this.typeResource = GameResource.None;
         }
 
         #endregion

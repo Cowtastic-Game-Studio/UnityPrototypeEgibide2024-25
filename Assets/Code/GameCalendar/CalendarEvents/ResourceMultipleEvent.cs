@@ -28,13 +28,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public override void ApplyEffects()
         {
             GameManager.Instance.Tabletop.StorageManager.SetResourceMultiplierAndType(resourceMultiplier, resourceType);
-            Debug.Log($"Evento de multiplicar activado: tipo de carta {resourceType}, multiplicador de recursos: {resourceMultiplier}.");
         }
 
         public override void EndEvent()
         {
             GameManager.Instance.Tabletop.StorageManager.ClearResourceMultiplierAndType();
-            Debug.Log($"Se acabo el multiplicar las cosas por {resourceMultiplier}");
         }
 
         public override void InitEvent()
