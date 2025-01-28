@@ -20,10 +20,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (isDynamic)
             {
                 staticEvents.Add(calendarEvent);
-            } else 
+            }
+            else
             {
                 staticEvents.Add(calendarEvent);
             }
+            calendarEvent.InitEvent();
         }
 
         public void RemoveEvent(CalendarEvent calendarEvent)

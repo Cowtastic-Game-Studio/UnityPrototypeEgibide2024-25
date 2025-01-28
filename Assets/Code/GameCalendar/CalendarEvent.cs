@@ -26,6 +26,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             this.isActive = false;
         }
 
+        public abstract void InitEvent();
+
+
         // M�todo para activar el evento
         public virtual void TriggerEvent()
         {

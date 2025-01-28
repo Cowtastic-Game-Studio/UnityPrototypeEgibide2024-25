@@ -8,6 +8,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
         }
 
+        public override void InitEvent()
+        {
+        }
+
         public override void ApplyEffects()
         {
             Debug.Log("¡La nevera se ha roto! Toda la leche almacenada se perderá si no se vende.");

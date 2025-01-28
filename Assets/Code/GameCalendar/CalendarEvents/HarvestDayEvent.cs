@@ -11,11 +11,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
         }
 
+        public override void InitEvent()
+        {
+        }
+
         // Implementa los efectos del evento
         public override void ApplyEffects()
         {
             Debug.Log("�Doble de recursos al cosechar cultivos durante el D�a de la Cosecha!");
-            
+
         }
 
         // Opcionalmente puedes sobreescribir EndEvent si el evento tiene efectos que terminan
