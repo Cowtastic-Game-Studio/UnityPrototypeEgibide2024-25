@@ -43,7 +43,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 // Crea un nuevo Text para cada objetivo y lo configura.
                 Text newText = new GameObject(goal.Description).AddComponent<Text>();
-                newText.transform.SetParent(TutorialBoard.transform.parent);
+                newText.transform.SetParent(TutorialBoard.transform);
                 //newText.font = objectivesText.font;
                 newText.fontSize = 12;
                 newText.color = Color.black;
