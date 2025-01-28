@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
-
+using System.Diagnostics.Tracing;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -12,6 +14,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [SerializeField] private Fridge _fridgeStorage;
         [SerializeField] private Silo _silo;
 
+        private int multi = 1;
+        private GameResource typeResource;
         private List<ResourceAmount> _requiredResources;
         private List<ResourceAmount> _producedResources;
         #endregion
@@ -101,12 +105,20 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             foreach (ResourceAmount resource in _producedResources)
             {
-                int producedQuantity = resource.resourceQuantity;
+                int producedQuantity;
+    
                 GameResource producedType = resource.resourceType;
 
+                // Comprobamos el tipo de recurso para aplicar el multiplicador en solo ese producto
+                if (typeResource == producedType)
+                {
+                    producedQuantity = resource.resourceQuantity * multi;
+                } else 
+                {
+                    producedQuantity = resource.resourceQuantity;
+                }
+
                 var storage = GetStorage<IStorage>(producedType);
-
-
                 AddResources(producedQuantity, storage);
             }
 
@@ -152,6 +164,17 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void RestartPA()
         {
             _paStorage.Resource = _paStorage.MaxResources;
+        }
+
+        public void SetResourceMultiplierAndType(int multi, GameResource typeResource)
+        {
+            this.multi = multi;
+            this.typeResource = typeResource;
+        }
+
+        public void ClearResourceMultiplierAndType()
+        {
+            multi = 1;
         }
 
         #endregion

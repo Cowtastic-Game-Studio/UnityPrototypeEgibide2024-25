@@ -111,10 +111,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void addCalendarEvents()
         {
             // Eventos
-            GameCalendar.AddCalendarEvent(new HarvestDayEvent(), false);
+            GameCalendar.AddCalendarEvent(new ResourceMultipleEvent("dia de trigo doble", "Lo que dice el nombre dle evento", 1, GameResource.Cereal, 2), false);
             GameCalendar.AddCalendarEvent(new PlagueEvent(), false);
             GameCalendar.AddCalendarEvent(new BrokenFridgeEvent(), false);
-            GameCalendar.AddCalendarEvent(new HarvestDayEvent(), false);
         }
 
         // Metodo para invocar el evento de clic de carta
