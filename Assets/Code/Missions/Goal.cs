@@ -1,8 +1,9 @@
 ﻿using System;
+using UnityEngine.Events;
 
 namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 {
-    public class Goal
+    public class Goal 
     {
         #region Properties
 
@@ -28,6 +29,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         #endregion
 
         #endregion
+
+        #region Events
+
+        public UnityEvent OnCompleted = new UnityEvent();
+
+        #endregion
+
 
         #region Constructors
 
