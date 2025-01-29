@@ -252,14 +252,51 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             storage.Resource -= quantity;
         }
 
-        private void AddLevel()
+        private void AddLevel(IStorage storage)
         {
-            // TODO: Implementar
+            storage.Level += 1;
         }
 
-        private void UpgradeStorage()
+        private void UpgradeStorage(IStorage storage)
         {
-            // TODO: Implementar
+            AddLevel(storage);
+            
+            if (storage == _paStorage)
+            {
+                UpgradePAStorage();
+            }
+            if (storage == _bankStorage)
+            {
+                UpgradeBankStorage();
+            }
+            if (storage == _fridgeStorage)
+            {
+                UpgradeFridgeStorage();
+            }
+            if (storage == _silo)
+            {
+                UpgradeSiloStorage();
+            }
+        }
+
+        private void UpgradePAStorage()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void UpgradeBankStorage()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void UpgradeFridgeStorage()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void UpgradeSiloStorage()
+        {
+            throw new NotImplementedException();
         }
 
         internal bool CheckMuuney(int cardPrice)
