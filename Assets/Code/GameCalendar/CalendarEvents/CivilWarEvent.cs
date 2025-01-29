@@ -22,7 +22,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public override void ApplyEffects()
         {
+            int currentMuuney = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Muuney);
 
+            if (currentMuuney > 0)
+            {
+                double twentyPercent = currentMuuney * 0.20f;
+                int roundedMuuney = Utils.RoundMuuney(twentyPercent);
+
+                GameManager.Instance.Tabletop.StorageManager.WasteMuuney(roundedMuuney);
+                GameManager.Instance.Tabletop.HUDManager.UpdateResources();
+            }
         }
 
         public override void EndEvent()

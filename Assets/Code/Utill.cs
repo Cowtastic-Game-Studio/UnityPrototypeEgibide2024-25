@@ -1,8 +1,6 @@
 using System;
 
-namespace CowtasticGameStudio.MuuliciousHarvest
-{
-    public static class Utils
+public static class Utils
     {
         // Función para redondear hacia abajo
         public static int RoundResto(double number)
@@ -16,4 +14,3 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return (int)Math.Ceiling(number);
         }
     }
-}
