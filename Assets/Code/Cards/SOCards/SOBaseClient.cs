@@ -1,13 +1,12 @@
-using System;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     [CreateAssetMenu(fileName = "New Client", menuName = "Cards/Client")]
-    public class BaseClient : CardTemplate
+    public class SOBaseClient : CardTemplate
     {
-        
-        public BaseClient()
+
+        public SOBaseClient()
         {
             name = "Client";
             lifeCycleDays = 1;

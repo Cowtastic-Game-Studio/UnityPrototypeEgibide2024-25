@@ -3,9 +3,9 @@ using UnityEngine;
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     [CreateAssetMenu(fileName = "New Cow", menuName = "Cards/Seed")]
-    public class BaseSeed : CardTemplate
+    public class SOBaseSeed : CardTemplate
     {
-        public BaseSeed()
+        public SOBaseSeed()
         {
             name = "Seed";
             lifeCycleDays = 10;
