@@ -12,6 +12,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public Tabletop Tabletop;
 
+        private PlagueEvent plagueEvent = new PlagueEvent();
+
+
         // Evento global para manejar clics en cartas
         public event Action<ICard> OnCardClickedGlobal;
         public event Action<Transform> OnPlaceSpaceClickedGlobal;
@@ -92,15 +95,28 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 Tabletop.CardManager.ShuffleDiscardDeck();
             }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                GameCalendar.TestEvent();
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                GameCalendar.TestStopEvent();
+
+            }
+
             #endregion
         }
 
         private void addCalendarEvents()
         {
-            GameCalendar.AddCalendarEvent(new HarvestDayEvent());
-            GameCalendar.AddCalendarEvent(new CowDayEvent());
-            GameCalendar.AddCalendarEvent(new PlagueEvent());
-            GameCalendar.AddCalendarEvent(new BrokenFridgeEvent());
+            // Eventos
+            GameCalendar.AddCalendarEvent(new ResourceMultipleEvent("dia de trigo doble", "Lo que dice el nombre dle evento", 1, GameResource.Cereal, 2), false);
+            GameCalendar.AddCalendarEvent(new PlagueEvent(), false);
+            GameCalendar.AddCalendarEvent(new BrokenFridgeEvent(), false);
         }
 
         // Metodo para invocar el evento de clic de carta

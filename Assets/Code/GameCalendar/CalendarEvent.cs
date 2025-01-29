@@ -3,15 +3,15 @@ using UnityEngine;
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     //[CreateAssetMenu(fileName = "NewCalendarEvent", menuName = "Calendar/Event")]
-    public abstract class CalendarEvent // : ScriptableObject
+    public abstract class CalendarEvent
     {
         // Nombre del evento
         public string eventName { get; private set; }
 
-        // Descripción del evento
+        // Descripciï¿½n del evento
         public string eventDescription { get; private set; }
 
-        // Duración del evento en días
+        // Duraciï¿½n del evento en dï¿½as
         public int duration { get; private set; }
 
         // Estado del evento
@@ -26,7 +26,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             this.isActive = false;
         }
 
-        // Método para activar el evento
+        public abstract void InitEvent();
+
+
+        // Mï¿½todo para activar el evento
         public virtual void TriggerEvent()
         {
             isActive = true;
@@ -34,10 +37,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             ApplyEffects();
         }
 
-        // Método abstracto para aplicar los efectos específicos del evento
+        // Mï¿½todo abstracto para aplicar los efectos especï¿½ficos del evento
         public abstract void ApplyEffects();
 
-        // Método para finalizar el evento
+        // Mï¿½todo para finalizar el evento
         public virtual void EndEvent()
         {
             isActive = false;

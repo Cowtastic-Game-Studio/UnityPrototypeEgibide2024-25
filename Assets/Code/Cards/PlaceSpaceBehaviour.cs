@@ -35,14 +35,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 GameObject selectedCard = GameManager.Instance.Tabletop.CardManager.selectedCard;
                 CardBehaviour card = selectedCard.GetComponent<CardBehaviour>();
 
-                if (isActive && isEmpty) {
-                    if (card.Type == type) {
+                if (isActive && isEmpty)
+                {
+                    if (card.Type == type)
+                    {
                         Highlight(true);
                     }
-                    else {
+                    else
+                    {
                         Highlight(false);
                     }
-                } else {
+                }
+                else
+                {
                     Highlight(false);
                 }
             }
@@ -62,8 +67,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 GameObject selectedCard = GameManager.Instance.Tabletop.CardManager.selectedCard;
                 CardBehaviour card = selectedCard.GetComponent<CardBehaviour>();
 
-                if (isActive && isEmpty) {
-                    if (card.Type == type) {
+                if (isActive && isEmpty)
+                {
+                    if (card.Type == type)
+                    {
                         OnPlaceSpaceClicked();
                     }
                 }
@@ -79,14 +86,32 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             //}
         }
 
+        public CardType GetType(PlaceSpaceBehaviour item)
+        {
+            return item.type;
+        }
+
+        public bool GetIsActive(PlaceSpaceBehaviour item)
+        {
+            return item.isActive;
+        }
+
+        public void SetIsActive(bool active)
+        {
+            isActive = active;
+        }
+
+
         private void Highlight(bool valid)
         {
             if (renderer != null)
             {
-                if (valid == true) {
+                if (valid == true)
+                {
                     renderer.material.color = highlightColorValid;
                 }
-                else {
+                else
+                {
                     renderer.material.color = highlightColorIncorrect;
                 }
             }
@@ -99,5 +124,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 renderer.material.color = originalColor;
             }
         }
+
     }
 }

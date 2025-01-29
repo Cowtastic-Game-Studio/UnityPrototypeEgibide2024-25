@@ -4,33 +4,49 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class GameCalendarEventManager
     {
-        private List<CalendarEvent> availableEvents;
+        private List<CalendarEvent> staticEvents;
+        private List<CalendarEvent> dynamicEvents;
         private CalendarEvent activeEvent;
 
         public GameCalendarEventManager()
         {
-            availableEvents = new List<CalendarEvent>();
+            staticEvents = new List<CalendarEvent>();
+            dynamicEvents = new List<CalendarEvent>();
             activeEvent = null;
         }
 
-        public void AddEvent(CalendarEvent calendarEvent)
+        public void TestActiveEvent()
         {
-            availableEvents.Add(calendarEvent);
+            activeEvent = staticEvents[1]; //Plague
+            activeEvent.TriggerEvent();
+        }
+
+        public void AddEvent(CalendarEvent calendarEvent, bool isDynamic)
+        {
+            if (isDynamic)
+            {
+                staticEvents.Add(calendarEvent);
+            }
+            else
+            {
+                staticEvents.Add(calendarEvent);
+            }
+            calendarEvent.InitEvent();
         }
 
         public void RemoveEvent(CalendarEvent calendarEvent)
         {
-            availableEvents.Remove(calendarEvent);
+            staticEvents.Remove(calendarEvent);
         }
 
         public void TriggerRandomEvent()
         {
-            if (availableEvents.Count > 0)
+            if (dynamicEvents.Count > 0)
             {
-                // Genera un índice aleatorio
-                int index = UnityEngine.Random.Range(0, availableEvents.Count);
-                activeEvent = availableEvents[index];
-                // Llama al método TriggerEvent
+                // Genera un ï¿½ndice aleatorio
+                int index = UnityEngine.Random.Range(0, dynamicEvents.Count);
+                activeEvent = dynamicEvents[index];
+                // Llama al mï¿½todo TriggerEvent
                 activeEvent.TriggerEvent();
             }
         }
@@ -39,7 +55,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (activeEvent != null)
             {
-                // Llama al método EndEvent
+                // Llama al mï¿½todo EndEvent
                 activeEvent.EndEvent();
                 activeEvent = null;
             }
