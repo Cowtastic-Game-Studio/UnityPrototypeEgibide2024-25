@@ -12,11 +12,23 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public CardType cardType;
         public new string name;
         public string description;
+
+        [Header("Requests")]
         public int actionPointsCost;
+
+        [Header("Life")]
         public int lifeCycleDays;
+
+        [Header("Requests")]
         public List<ResourceAmount> requiredResources;
         public List<ResourceAmount> producedResources;
+
+        [Header("Market")]
         public int marketCost;
+
+        [Header("Upgrade")]
+        public CardType targetCardType = CardType.None;
+        public int multiplier = 1;
 
         public void Print()
         {

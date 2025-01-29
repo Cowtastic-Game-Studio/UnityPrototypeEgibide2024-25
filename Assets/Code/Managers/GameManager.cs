@@ -1,5 +1,4 @@
 using System;
-
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -13,7 +12,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public Tabletop Tabletop;
 
         private PlagueEvent plagueEvent = new PlagueEvent();
-
 
         // Evento global para manejar clics en cartas
         public event Action<ICard> OnCardClickedGlobal;
@@ -37,6 +35,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GamePhaseManager = new GamePhaseManager();
             GameCalendar = new GameCalendar();
             addCalendarEvents();
+            Tabletop.FindPlaces();
         }
 
         private void Update()

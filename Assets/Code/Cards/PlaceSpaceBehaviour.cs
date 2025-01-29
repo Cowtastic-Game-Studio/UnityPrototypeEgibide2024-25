@@ -8,50 +8,62 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private bool isActive = true;
 
         private bool isEmpty = true;
+        private bool deactiveNextDay = false;
 
         [SerializeField]
         private CardType type;
 
-        private Renderer renderer;
+        private Renderer myRenderer;
         private Color originalColor;
         private Color highlightColorValid = Color.green;  // El color de resaltado al pasar el raton cuando es positivo
         private Color highlightColorIncorrect = Color.red; // El color de resaltado al pasar el raton cuando es negativo
 
         private void Start()
         {
-            renderer = GetComponent<Renderer>();
-            if (renderer != null)
+            myRenderer = GetComponent<Renderer>();
+            if (myRenderer != null)
             {
-                originalColor = renderer.material.color;
+                originalColor = myRenderer.material.color;
             }
         }
+
 
         private void OnMouseEnter()
         {
-            // Solo resalta si se est� arrastrando una carta
-            if (GameManager.Instance.Tabletop.CardManager.IsDraggingCard)
-            {
-                // Recuperamos el componente CardBehaviour
-                GameObject selectedCard = GameManager.Instance.Tabletop.CardManager.selectedCard;
-                CardBehaviour card = selectedCard.GetComponent<CardBehaviour>();
+            // Solo resalta si se está arrastrando una carta
+            if (!GameManager.Instance.Tabletop.CardManager.IsDraggingCard)
+                return;
 
-                if (isActive && isEmpty)
-                {
-                    if (card.Type == type)
-                    {
-                        Highlight(true);
-                    }
-                    else
-                    {
-                        Highlight(false);
-                    }
-                }
-                else
-                {
-                    Highlight(false);
-                }
+            // Recuperamos el componente CardBehaviour
+            GameObject selectedCard = GameManager.Instance.Tabletop.CardManager.selectedCard;
+            CardBehaviour card = selectedCard.GetComponent<CardBehaviour>();
+
+            bool shouldHighlight = false;
+
+            // Verificamos las condiciones dependiendo del tipo de carta
+            bool isCardTypeMatch = card.TargetType == type;
+            bool isActiveConditionMet = (isActive && isEmpty);
+
+            if (card.Type == CardType.PlaceActivator)
+            {
+                // PlaceActivator solo se activa si no está activo y está vacío
+                shouldHighlight = !isActive && isEmpty && isCardTypeMatch;
             }
+            else if (card.Type == CardType.PlaceMultiplier)
+            {
+                // PlaceMultiplier solo se activa si está activo y está vacío
+                shouldHighlight = isActive && isEmpty && isCardTypeMatch;
+            }
+            else
+            {
+                isCardTypeMatch = card.Type == type;
+                // Para otros tipos de carta, solo se activa si está activo, vacío y coincide el tipo
+                shouldHighlight = isActiveConditionMet && isCardTypeMatch;
+            }
+
+            Highlight(shouldHighlight);
         }
+
 
         private void OnMouseExit()
         {
@@ -67,22 +79,53 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 GameObject selectedCard = GameManager.Instance.Tabletop.CardManager.selectedCard;
                 CardBehaviour card = selectedCard.GetComponent<CardBehaviour>();
 
-                if (isActive && isEmpty)
+                bool canPlace = false, stayEmpty = false;
+
+                // Verificamos las condiciones dependiendo del tipo de carta
+                bool isCardTypeMatch = card.TargetType == type;
+                bool isActiveConditionMet = (isActive && isEmpty);
+
+                if (card.Type == CardType.PlaceActivator)
                 {
-                    if (card.Type == type)
+                    // PlaceActivator solo se activa si no está activo y está vacío
+                    canPlace = !isActive && isEmpty && isCardTypeMatch;
+                    stayEmpty = canPlace;
+                    if (canPlace)
                     {
-                        OnPlaceSpaceClicked();
+                        deactiveNextDay = true;
+                        SetIsActive(true);
                     }
+
                 }
+                else if (card.Type == CardType.PlaceMultiplier)
+                {
+                    // PlaceMultiplier solo se activa si está activo y está vacío
+                    canPlace = isActive && isEmpty && isCardTypeMatch;
+                    stayEmpty = canPlace;
+                }
+                else
+                {
+                    isCardTypeMatch = card.Type == type;
+                    // Para otros tipos de carta, solo se activa si está activo, vacío y coincide el tipo
+                    canPlace = isActiveConditionMet && isCardTypeMatch;
+                    stayEmpty = false;
+                }
+
+                if (canPlace)
+                    OnPlaceSpaceClicked(stayEmpty);
+
             }
         }
 
-        public void OnPlaceSpaceClicked()
+        public void OnPlaceSpaceClicked(bool shouldStayEmpty)
         {
+            isEmpty = shouldStayEmpty;
+
             //if (isActive && isEmpty)
             //{
             Transform placeTrans = gameObject.transform;
             GameManager.Instance?.PlaceSpaceClicked(placeTrans);
+
             //}
         }
 
@@ -104,26 +147,37 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void Highlight(bool valid)
         {
-            if (renderer != null)
+            if (myRenderer != null)
             {
                 if (valid == true)
                 {
-                    renderer.material.color = highlightColorValid;
+                    myRenderer.material.color = highlightColorValid;
                 }
                 else
                 {
-                    renderer.material.color = highlightColorIncorrect;
+                    myRenderer.material.color = highlightColorIncorrect;
                 }
             }
         }
 
         private void RemoveHighlight()
         {
-            if (renderer != null)
+            if (myRenderer != null)
             {
-                renderer.material.color = originalColor;
+                myRenderer.material.color = originalColor;
             }
         }
 
+
+        public void updateEmpty()
+        {
+            isEmpty = true;
+        }
+
+        internal void updateActive()
+        {
+            if (deactiveNextDay)
+                isActive = false;
+        }
     }
 }

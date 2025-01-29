@@ -5,6 +5,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         Cow,
         Seed,
         Customer,
+        PlaceActivator,
+        PlaceMultiplier,
+        Helper,
         None
     }
 }

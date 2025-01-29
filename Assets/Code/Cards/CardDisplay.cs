@@ -26,14 +26,36 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (cardTemplate != null)
             {
                 nameText.text = cardTemplate.name;
-                descriptionText.text = cardTemplate.description;
+
+                if (!string.IsNullOrEmpty(cardTemplate.description))
+                    descriptionText.text = cardTemplate.description;
+                else
+                    descriptionText.text = "";
+
                 artworkImage.sprite = cardTemplate.artwork;
                 baseCardImage.sprite = cardTemplate.baseCard;
+
                 actionPointsText.text = cardTemplate.actionPointsCost.ToString();
-                requieredTypeText.text = FormatResources(cardTemplate.requiredResources, true);
-                requieredQuantityText.text = FormatResources(cardTemplate.requiredResources, false);
-                producedTypeText.text = FormatResources(cardTemplate.producedResources, true);
-                producedQuantityText.text = FormatResources(cardTemplate.producedResources, false);
+
+                if (cardTemplate.requiredResources.Count != 0)
+                {
+                    requieredTypeText.text = FormatResources(cardTemplate.requiredResources, true);
+                    requieredQuantityText.text = FormatResources(cardTemplate.requiredResources, false);
+                }
+                else
+                    requieredTypeText.text = requieredQuantityText.text = "";
+
+                if (cardTemplate.producedResources.Count != 0)
+                {
+                    producedTypeText.text = FormatResources(cardTemplate.producedResources, true);
+                    producedQuantityText.text = FormatResources(cardTemplate.producedResources, false);
+                }
+                else
+                    producedTypeText.text = producedQuantityText.text = "";
+
+                if (cardTemplate.cardType == CardType.PlaceActivator ||
+                    cardTemplate.cardType == CardType.PlaceMultiplier)
+                    producedTypeText.text = cardTemplate.targetCardType.ToString();
 
                 // Actualiza la visibilidad del filtro gris según el estado de la carta
                 SetOverlayActive(!isActive);
