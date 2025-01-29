@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Cinemachine;
-using UnityEditor.Rendering;
 
 public class CameraGestor : MonoBehaviour
 {
@@ -36,10 +33,12 @@ public class CameraGestor : MonoBehaviour
 
     private void OnCameraSwitch(InputAction.CallbackContext context)
     {
-        Debug.Log("pulsado + " + context.control.displayName);
+        //Debug.Log("pulsado + " + context.control.displayName);
         switch (context.control.displayName)
         {
             case "W":
+                //RotateMainCamera(1); // Avanzar en el ciclo
+
                 if (IsMainCameraActive())
                 {
                     SwitchToCamera(VirtualCameraPared, "VirtualCameraPared");
@@ -70,56 +69,46 @@ public class CameraGestor : MonoBehaviour
         //switch (context.control.displayName)
         //{
         //    case "W":
+        //        //RotateMainCamera(1); // Avanzar en el ciclo
+
         //        if (IsMainCameraActive())
         //        {
-        //            // If not on the main camera, switch to Camarapareed
-        //            SwitchToCamera(cameraPared, "CameraPared");
+        //            SwitchToCamera(VirtualCameraPared, "VirtualCameraPared");
         //        }
         //        else
         //        {
-        //            RotateCamera(2); // Puedes ajustar esto según tu lógica
-
-        //            //SwitchToCamera(cameraUp, "CameraUp"); // Transición a cámara principal
+        //            SwitchToCamera(VirtualCameraIdle, "VirtualCameraIdle");
+        //            // Avanzar en el ciclo
         //        }
         //        break;
-        //    //case "S":
-        //    //    SwitchToCamera(cameraDown, "CameraDown");
-        //    //    break;
-        //    //case "A":
-        //    //    SwitchToCamera(cameraLeft, "CameraLeft");
-        //    //    break;
-        //    //case "D":
-        //    //    SwitchToCamera(cameraRight, "CameraRight");
-        //    //    break;
+        //    case "S":
+        //        SwitchToCamera(VirtualCameraAtras, "VirtualCameraAtras");
+        //        // Retroceder en el ciclo
+        //        break;
+
+        //    case "D":
+        //        SwitchToCamera(VirtualCameraDerecha, "VirtualCameraDerecha");
+        //        ; // Retroceder en el ciclo
+        //        break;
+        //    case "A":
+        //        SwitchToCamera(VirtualCameraIzquierda, "VirtualCameraIzquierda");
+        //        break;
         //    case "Q":
-        //        if (IsMainCameraActive())
-        //        {
-        //            SwitchToCamera(cameraExterior, "CameraExterior");
-        //        }
+        //        if (IsMainCameraActive()) SwitchToCamera(VirtualCameraExterior, "VirtualCameraExterior");
         //        break;
         //    case "E":
-        //        if (IsMainCameraActive())
-        //        {
-        //            SwitchToCamera(cameraInterior, "CameraInterior");
-        //        }
-        //        break;
-        //    case "D": // Rotar a la derecha
-        //        RotateCamera(1); // 1 para avanzar en la lista de cámaras
-        //        break;
-        //    case "A": // Rotar a la izquierda
-        //        RotateCamera(-1); // -1 para retroceder en la lista de cámaras
-        //        break;
-        //    case "S": // Rotar hacia abajo (opcional)
-        //        RotateCamera(-2); // Puedes ajustar esto según tu lógica
+        //        if (IsMainCameraActive()) SwitchToCamera(VirtualCameraInterior, "VirtualCameraInterior");
         //        break;
         //}
+
+
     }
 
 
     private void RotateMainCamera(int direction)
     {
         // Desactivar la cámara actual
-        mainCameras[currentCameraIndex].gameObject.SetActive(false);
+        //mainCameras[currentCameraIndex].gameObject.SetActive(false);
 
         // Calcular el nuevo índice de forma cíclica
         currentCameraIndex = (currentCameraIndex + direction + mainCameras.Length) % mainCameras.Length;
@@ -132,36 +121,26 @@ public class CameraGestor : MonoBehaviour
 
     private void SwitchToCamera(CinemachineVirtualCamera targetCamera, string cameraState)
     {
-        foreach (var cam in mainCameras)
-        {
-            cam.gameObject.SetActive(false);
-        }
+        Debug.Log("Cambiando a cámara: " + cameraState);
+        cameraState = cameraState.Replace(" ", "");
 
+        // Desactivar todas las cámaras
+        VirtualCameraAtras.gameObject.SetActive(false);
+        VirtualCameraIzquierda.gameObject.SetActive(false);
+        VirtualCameraDerecha.gameObject.SetActive(false);
+        VirtualCameraIdle.gameObject.SetActive(false);
         VirtualCameraPared.gameObject.SetActive(false);
         VirtualCameraExterior.gameObject.SetActive(false);
         VirtualCameraInterior.gameObject.SetActive(false);
 
+
+
+        // Activar la nueva cámara
         targetCamera.gameObject.SetActive(true);
         cameraAnimator.Play(cameraState);
+
+        Debug.Log("Cámara actual: " + targetCamera.name);
     }
-
-    //private void SwitchToCamera(CinemachineVirtualCamera targetCamera, string cameraState)
-    //{
-    //    // Desactivar todas las cámaras primero
-    //    cameraUp.gameObject.SetActive(false);
-    //    cameraDown.gameObject.SetActive(false);
-    //    cameraLeft.gameObject.SetActive(false);
-    //    cameraRight.gameObject.SetActive(false);
-    //    cameraExterior.gameObject.SetActive(false);
-    //    cameraInterior.gameObject.SetActive(false);
-    //    cameraPared.gameObject.SetActive(false);
-
-    //    // Activar la cámara correspondiente
-    //    targetCamera.gameObject.SetActive(true);
-
-    //    // Cambiar al estado correspondiente en el Animator para la transición de la cámara
-    //    cameraAnimator.Play(cameraState);
-    //}
     private bool IsMainCameraActive()
     {
         // Check if the main camera is active (you can define what the main camera is)

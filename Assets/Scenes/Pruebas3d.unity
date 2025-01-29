@@ -5969,6 +5969,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 907512546197502982, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
+      propertyPath: m_Priority
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1058844501315122902, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: m_Name
       value: "Caba\xF1a"
@@ -6000,6 +6004,10 @@ PrefabInstance:
     - target: {fileID: 1539264920230612511, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: m_LocalPosition.z
       value: -18.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 2611922067581987786, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
+      propertyPath: m_Priority
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2662489919319745867, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: m_ParentHash.Array.size
@@ -6161,6 +6169,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Virtual CameraExterior
       objectReference: {fileID: 0}
+    - target: {fileID: 3467578517358251529, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3477239342081195009, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.8
@@ -6172,6 +6184,14 @@ PrefabInstance:
     - target: {fileID: 3477239342081195009, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: m_LocalPosition.z
       value: -40.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3511414327212333205, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3511414327212333205, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
+      propertyPath: m_Priority
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3668469013615231547, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: m_LocalScale.y
@@ -6220,6 +6240,10 @@ PrefabInstance:
     - target: {fileID: 3842999958687264904, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: m_LocalPosition.y
       value: 7.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123430415069752785, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
+      propertyPath: m_Priority
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4266287928860486292, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: cameraPared
@@ -6409,6 +6433,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5323499871582021321, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
+      propertyPath: m_Priority
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5370543207982627902, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: m_LocalScale.y
       value: 160
@@ -6552,6 +6580,10 @@ PrefabInstance:
     - target: {fileID: 9080574155171085168, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: m_BackGroundColor.r
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9101683299345714706, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
+      propertyPath: m_Priority
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9156140502168143758, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: m_LocalPosition.x
