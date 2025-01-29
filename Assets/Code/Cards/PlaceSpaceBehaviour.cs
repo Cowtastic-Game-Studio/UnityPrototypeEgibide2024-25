@@ -8,6 +8,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private bool isActive = true;
 
         private bool isEmpty = true;
+        private bool deactiveNextDay = false;
 
         [SerializeField]
         private CardType type;
@@ -26,6 +27,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
+
         private void OnMouseEnter()
         {
             // Solo resalta si se está arrastrando una carta
@@ -38,27 +40,25 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             bool shouldHighlight = false;
 
-            // Comprobamos el tipo de carta y las condiciones de activación
+            // Verificamos las condiciones dependiendo del tipo de carta
+            bool isCardTypeMatch = card.TargetType == type;
+            bool isActiveConditionMet = (isActive && isEmpty);
+
             if (card.Type == CardType.PlaceActivator)
             {
-                bool isCardTypeMatch = card.TargetType == type;
-                bool isActiveConditionMet = (!isActive && isEmpty);
-
-                // Si la carta es de tipo PlaceActivator o PlaceMultiplier, comprobamos las condiciones
-                shouldHighlight = (isActiveConditionMet && isCardTypeMatch);
+                // PlaceActivator solo se activa si no está activo y está vacío
+                shouldHighlight = !isActive && isEmpty && isCardTypeMatch;
             }
-            else if (card.Type == CardType.PlaceActivator || card.Type == CardType.PlaceMultiplier)
+            else if (card.Type == CardType.PlaceMultiplier)
             {
-                bool isCardTypeMatch = card.TargetType == type;
-                bool isActiveConditionMet = (isActive && isEmpty);
-
-                // Si la carta es de tipo PlaceActivator o PlaceMultiplier, comprobamos las condiciones
-                shouldHighlight = (isActiveConditionMet && isCardTypeMatch);
+                // PlaceMultiplier solo se activa si está activo y está vacío
+                shouldHighlight = isActive && isEmpty && isCardTypeMatch;
             }
             else
             {
-                // Para otros tipos de carta, comprobamos solo si está activa y es vacía
-                shouldHighlight = isActive && isEmpty && card.Type == type;
+                isCardTypeMatch = card.Type == type;
+                // Para otros tipos de carta, solo se activa si está activo, vacío y coincide el tipo
+                shouldHighlight = isActiveConditionMet && isCardTypeMatch;
             }
 
             Highlight(shouldHighlight);
@@ -79,22 +79,53 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 GameObject selectedCard = GameManager.Instance.Tabletop.CardManager.selectedCard;
                 CardBehaviour card = selectedCard.GetComponent<CardBehaviour>();
 
-                if (isActive && isEmpty)
+                bool canPlace = false, stayEmpty = false;
+
+                // Verificamos las condiciones dependiendo del tipo de carta
+                bool isCardTypeMatch = card.TargetType == type;
+                bool isActiveConditionMet = (isActive && isEmpty);
+
+                if (card.Type == CardType.PlaceActivator)
                 {
-                    if (card.Type == type)
+                    // PlaceActivator solo se activa si no está activo y está vacío
+                    canPlace = !isActive && isEmpty && isCardTypeMatch;
+                    stayEmpty = canPlace;
+                    if (canPlace)
                     {
-                        OnPlaceSpaceClicked();
+                        deactiveNextDay = true;
+                        SetIsActive(true);
                     }
+
                 }
+                else if (card.Type == CardType.PlaceMultiplier)
+                {
+                    // PlaceMultiplier solo se activa si está activo y está vacío
+                    canPlace = isActive && isEmpty && isCardTypeMatch;
+                    stayEmpty = canPlace;
+                }
+                else
+                {
+                    isCardTypeMatch = card.Type == type;
+                    // Para otros tipos de carta, solo se activa si está activo, vacío y coincide el tipo
+                    canPlace = isActiveConditionMet && isCardTypeMatch;
+                    stayEmpty = false;
+                }
+
+                if (canPlace)
+                    OnPlaceSpaceClicked(stayEmpty);
+
             }
         }
 
-        public void OnPlaceSpaceClicked()
+        public void OnPlaceSpaceClicked(bool shouldStayEmpty)
         {
+            isEmpty = shouldStayEmpty;
+
             //if (isActive && isEmpty)
             //{
             Transform placeTrans = gameObject.transform;
             GameManager.Instance?.PlaceSpaceClicked(placeTrans);
+
             //}
         }
 
@@ -137,5 +168,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
+
+        public void updateEmpty()
+        {
+            isEmpty = true;
+        }
+
+        internal void updateActive()
+        {
+            if (deactiveNextDay)
+                isActive = false;
+        }
     }
 }

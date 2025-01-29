@@ -7,7 +7,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         #region Property: Phase
 
-        public GamePhaseTypes Phase { get { return GamePhaseTypes.StartDay;  } }
+        public GamePhaseTypes Phase { get { return GamePhaseTypes.StartDay; } }
 
         #endregion
 
@@ -17,8 +17,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         //TODO: Gestionar el numero de veces que se puede hacer mulligan(Maximo 4 por fase)
 
 
-
-
         /// <summary>
         /// Acciones a ejecutar al inicio de la fase.
         /// </summary>
@@ -26,6 +24,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             // Llama a Robo
             GameManager.Instance.Tabletop.CardManager.DrawFromDeck();
+            GameManager.Instance.Tabletop.UpdateEmptyPlaces();
+            GameManager.Instance.Tabletop.UpdateAcivePlaces();
         }
 
         /// <summary>
