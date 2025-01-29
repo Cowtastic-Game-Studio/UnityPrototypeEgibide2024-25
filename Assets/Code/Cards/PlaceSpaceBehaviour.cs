@@ -12,46 +12,58 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [SerializeField]
         private CardType type;
 
-        private Renderer renderer;
+        private Renderer myRenderer;
         private Color originalColor;
         private Color highlightColorValid = Color.green;  // El color de resaltado al pasar el raton cuando es positivo
         private Color highlightColorIncorrect = Color.red; // El color de resaltado al pasar el raton cuando es negativo
 
         private void Start()
         {
-            renderer = GetComponent<Renderer>();
-            if (renderer != null)
+            myRenderer = GetComponent<Renderer>();
+            if (myRenderer != null)
             {
-                originalColor = renderer.material.color;
+                originalColor = myRenderer.material.color;
             }
         }
 
         private void OnMouseEnter()
         {
-            // Solo resalta si se est� arrastrando una carta
-            if (GameManager.Instance.Tabletop.CardManager.IsDraggingCard)
-            {
-                // Recuperamos el componente CardBehaviour
-                GameObject selectedCard = GameManager.Instance.Tabletop.CardManager.selectedCard;
-                CardBehaviour card = selectedCard.GetComponent<CardBehaviour>();
+            // Solo resalta si se está arrastrando una carta
+            if (!GameManager.Instance.Tabletop.CardManager.IsDraggingCard)
+                return;
 
-                if (isActive && isEmpty)
-                {
-                    if (card.Type == type)
-                    {
-                        Highlight(true);
-                    }
-                    else
-                    {
-                        Highlight(false);
-                    }
-                }
-                else
-                {
-                    Highlight(false);
-                }
+            // Recuperamos el componente CardBehaviour
+            GameObject selectedCard = GameManager.Instance.Tabletop.CardManager.selectedCard;
+            CardBehaviour card = selectedCard.GetComponent<CardBehaviour>();
+
+            bool shouldHighlight = false;
+
+            // Comprobamos el tipo de carta y las condiciones de activación
+            if (card.Type == CardType.PlaceActivator)
+            {
+                bool isCardTypeMatch = card.TargetType == type;
+                bool isActiveConditionMet = (!isActive && isEmpty);
+
+                // Si la carta es de tipo PlaceActivator o PlaceMultiplier, comprobamos las condiciones
+                shouldHighlight = (isActiveConditionMet && isCardTypeMatch);
             }
+            else if (card.Type == CardType.PlaceActivator || card.Type == CardType.PlaceMultiplier)
+            {
+                bool isCardTypeMatch = card.TargetType == type;
+                bool isActiveConditionMet = (isActive && isEmpty);
+
+                // Si la carta es de tipo PlaceActivator o PlaceMultiplier, comprobamos las condiciones
+                shouldHighlight = (isActiveConditionMet && isCardTypeMatch);
+            }
+            else
+            {
+                // Para otros tipos de carta, comprobamos solo si está activa y es vacía
+                shouldHighlight = isActive && isEmpty && card.Type == type;
+            }
+
+            Highlight(shouldHighlight);
         }
+
 
         private void OnMouseExit()
         {
@@ -104,24 +116,24 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void Highlight(bool valid)
         {
-            if (renderer != null)
+            if (myRenderer != null)
             {
                 if (valid == true)
                 {
-                    renderer.material.color = highlightColorValid;
+                    myRenderer.material.color = highlightColorValid;
                 }
                 else
                 {
-                    renderer.material.color = highlightColorIncorrect;
+                    myRenderer.material.color = highlightColorIncorrect;
                 }
             }
         }
 
         private void RemoveHighlight()
         {
-            if (renderer != null)
+            if (myRenderer != null)
             {
-                renderer.material.color = originalColor;
+                myRenderer.material.color = originalColor;
             }
         }
 

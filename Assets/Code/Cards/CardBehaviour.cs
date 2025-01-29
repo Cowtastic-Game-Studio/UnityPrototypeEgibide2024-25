@@ -34,6 +34,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public CardState State { get; set; } = CardState.onDeck;
         public string Name => template.name;
         public CardType Type => template.cardType;
+        public CardType TargetType => template.targetCardType;
         public string Description => template.description;
         public int ActionPointsCost => template.actionPointsCost;
         public int LifeCycleDays => template.lifeCycleDays;

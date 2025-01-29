@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    [CreateAssetMenu(fileName = "New Cow", menuName = "Cards/Seed")]
+    [CreateAssetMenu(fileName = "New Seed", menuName = "Cards/Seed")]
     public class SOBaseSeed : CardTemplate
     {
         public SOBaseSeed()
