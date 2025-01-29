@@ -11,7 +11,9 @@ public class CameraGestor : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera cameraDown;
     [SerializeField] private CinemachineVirtualCamera cameraLeft;
     [SerializeField] private CinemachineVirtualCamera cameraRight; 
-    [SerializeField] private CinemachineVirtualCamera cameraMaqueta;
+    [SerializeField] private CinemachineVirtualCamera cameraInterior;
+    [SerializeField] private CinemachineVirtualCamera cameraExterior;
+    [SerializeField] private CinemachineVirtualCamera cameraPared;
 
     [SerializeField] private InputAction cameraSwitchAction;
 
@@ -47,9 +49,17 @@ public class CameraGestor : MonoBehaviour
         {
             SwitchToCamera(cameraRight, "CameraRight"); // Transición a cámara derecha
         }
-        else if (context.control.displayName == "M")    
+        else if (context.control.displayName == "Q")    
         {
-            SwitchToCamera(cameraRight, "CameraMaqueta"); // Transición a cámara maqueta
+            SwitchToCamera(cameraExterior, "CameraExterior"); // Transición a cámara maqueta
+        }
+        else if (context.control.displayName == "E")
+        {
+            SwitchToCamera(cameraInterior, "CameraInterior"); // Transición a cámara maqueta
+        }
+        else if (context.control.displayName == "W")
+        {
+            SwitchToCamera(cameraPared, "CameraPared"); // Transición a cámara maqueta
         }
     }
 
@@ -60,6 +70,9 @@ public class CameraGestor : MonoBehaviour
         cameraDown.gameObject.SetActive(false);
         cameraLeft.gameObject.SetActive(false);
         cameraRight.gameObject.SetActive(false);
+        cameraExterior.gameObject.SetActive(false);
+        cameraInterior.gameObject.SetActive(false);
+        cameraPared.gameObject.SetActive(false);
 
         // Activar la cámara correspondiente
         targetCamera.gameObject.SetActive(true);
