@@ -115,6 +115,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             // Eventos
             GameCalendar.AddCalendarEvent(new ResourceMultipleEvent("dia de trigo doble", "Lo que dice el nombre dle evento", 1, GameResource.Cereal, 2), false);
+            GameCalendar.AddCalendarEvent(new ResourceMultipleEvent("Festival de la granja", "Vendes el doble de caro, misma calidad y nadie se queja", 1, GameResource.Muuney, 2), false);
             GameCalendar.AddCalendarEvent(new PlagueEvent(), false);
             GameCalendar.AddCalendarEvent(new BrokenFridgeEvent(), false);
         }
