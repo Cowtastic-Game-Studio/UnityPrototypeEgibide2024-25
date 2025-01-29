@@ -28,6 +28,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         [Header("Upgrade")]
         public CardType targetCardType = CardType.None;
+        public int multiplier = 1;
 
         public void Print()
         {

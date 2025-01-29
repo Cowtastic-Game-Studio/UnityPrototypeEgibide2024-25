@@ -53,7 +53,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 else
                     producedTypeText.text = producedQuantityText.text = "";
 
-                if (cardTemplate.cardType == CardType.Upgrade)
+                if (cardTemplate.cardType == CardType.PlaceActivator ||
+                    cardTemplate.cardType == CardType.PlaceMultiplier)
                     producedTypeText.text = cardTemplate.targetCardType.ToString();
 
                 // Actualiza la visibilidad del filtro gris según el estado de la carta
