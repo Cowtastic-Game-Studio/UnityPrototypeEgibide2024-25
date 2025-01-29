@@ -49,8 +49,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             GameManager.Instance.Tabletop.CardManager.StopDragging();
 
-            //ALBA: descomentar cundo se arregle el poder hacer click en cartas colocadas
             GameManager.Instance.Tabletop.CardManager.DiscardHand();
+
+            GameManager.Instance.Tabletop.checkHelperPlayer();
         }
 
         private void OnCardClickedHandler(ICard card)
