@@ -38,7 +38,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CameraLeft
+  m_Name: VirtualCameraIzquierda
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -64,7 +64,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CameraPared
+  m_Name: VirtualCameraPared
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -90,7 +90,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CameraDown
+  m_Name: VirtualCameraAtras
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -162,7 +162,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CameraRight
+  m_Name: VirtualCameraDerecha
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -266,7 +266,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CameraInterior
+  m_Name: VirtualCameraInterior
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -292,7 +292,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CameraUp
+  m_Name: VirtualCameraIdle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -318,7 +318,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CameraExterior
+  m_Name: VirtualCameraExterior
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
