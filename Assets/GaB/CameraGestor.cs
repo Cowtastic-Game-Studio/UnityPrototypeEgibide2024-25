@@ -21,12 +21,8 @@ public class CameraGestor : MonoBehaviour
 
     private void Awake()
     {
-        // Inicializar el Input System
-        //var playerInput = new InputActionMap("CameraControls");
+        // Inicializar el Input System        
         cameraAnimator = GetComponent<Animator>();
-        // Asignar acciones a cada flecha
-        //cameraSwitchAction = playerInput.AddAction("SwitchCamera", binding: "<Keyboard>/upArrow,<Keyboard>/downArrow,<Keyboard>/leftArrow,<Keyboard>/rightArrow");
-
         cameraSwitchAction.performed += OnCameraSwitch;
         // playerInput.Enable();
     }
@@ -43,80 +39,57 @@ public class CameraGestor : MonoBehaviour
                 {
                     SwitchToCamera(VirtualCameraPared, "VirtualCameraPared");
                 }
-                else
-                {
-                    RotateMainCamera(1); // Avanzar en el ciclo
-                }
+
                 break;
             case "S":
-                RotateMainCamera(-1); // Retroceder en el ciclo
-                break;
+                if (IsParedCameraActive() || IsExteriorCameraActive() || IsInteriorCameraActive())
+                {
+                    SwitchToCamera(VirtualCameraIdle, "VirtualCameraIdle");
+                }
+                else
+                {
+                    RotateMainCamera(-2); // Retroceder en el ciclo
 
+                }
+                break;
             case "D":
-                RotateMainCamera(1); // Retroceder en el ciclo
+                if (!IsParedCameraActive() && !IsExteriorCameraActive() && !IsInteriorCameraActive())
+                {
+                    RotateMainCamera(1);
+                }
                 break;
             case "A":
-                RotateMainCamera(-1); // Retroceder en el ciclo
+                if (!IsParedCameraActive() && !IsExteriorCameraActive() && !IsInteriorCameraActive())
+                {
+                    RotateMainCamera(-1);
+                }
                 break;
             case "Q":
-                if (IsMainCameraActive()) SwitchToCamera(VirtualCameraExterior, "VirtualCameraExterior");
+                if (IsMainCameraActive())
+                {
+                    SwitchToCamera(VirtualCameraInterior, "VirtualCameraExterior");
+                }
+                else if (IsInteriorCameraActive())
+                {
+                    SwitchToCamera(VirtualCameraExterior, "VirtualCameraExterior");
+                }
                 break;
             case "E":
-                if (IsMainCameraActive()) SwitchToCamera(VirtualCameraInterior, "VirtualCameraInterior");
+                if (IsMainCameraActive())
+                {
+                    SwitchToCamera(VirtualCameraInterior, "VirtualCameraInterior");
+                }
+                else if (IsExteriorCameraActive())
+                {
+                    SwitchToCamera(VirtualCameraInterior, "VirtualCameraInterior");
+                }
                 break;
         }
-
-        //switch (context.control.displayName)
-        //{
-        //    case "W":
-        //        //RotateMainCamera(1); // Avanzar en el ciclo
-
-        //        if (IsMainCameraActive())
-        //        {
-        //            SwitchToCamera(VirtualCameraPared, "VirtualCameraPared");
-        //        }
-        //        else
-        //        {
-        //            SwitchToCamera(VirtualCameraIdle, "VirtualCameraIdle");
-        //            // Avanzar en el ciclo
-        //        }
-        //        break;
-        //    case "S":
-        //        SwitchToCamera(VirtualCameraAtras, "VirtualCameraAtras");
-        //        // Retroceder en el ciclo
-        //        break;
-
-        //    case "D":
-        //        SwitchToCamera(VirtualCameraDerecha, "VirtualCameraDerecha");
-        //        ; // Retroceder en el ciclo
-        //        break;
-        //    case "A":
-        //        SwitchToCamera(VirtualCameraIzquierda, "VirtualCameraIzquierda");
-        //        break;
-        //    case "Q":
-        //        if (IsMainCameraActive()) SwitchToCamera(VirtualCameraExterior, "VirtualCameraExterior");
-        //        break;
-        //    case "E":
-        //        if (IsMainCameraActive()) SwitchToCamera(VirtualCameraInterior, "VirtualCameraInterior");
-        //        break;
-        //}
-
-
     }
-
-
     private void RotateMainCamera(int direction)
     {
-        // Desactivar la cámara actual
-        //mainCameras[currentCameraIndex].gameObject.SetActive(false);
-
-        // Calcular el nuevo índice de forma cíclica
         currentCameraIndex = (currentCameraIndex + direction + mainCameras.Length) % mainCameras.Length;
-
-        // Activar la nueva cámara
-        //mainCameras[currentCameraIndex].gameObject.SetActive(true);
         SwitchToCamera(mainCameras[currentCameraIndex], mainCameras[currentCameraIndex].name);
-        //cameraAnimator.Play(mainCameras[currentCameraIndex].name);
     }
 
     private void SwitchToCamera(CinemachineVirtualCamera targetCamera, string cameraState)
@@ -133,8 +106,6 @@ public class CameraGestor : MonoBehaviour
         VirtualCameraExterior.gameObject.SetActive(false);
         VirtualCameraInterior.gameObject.SetActive(false);
 
-
-
         // Activar la nueva cámara
         targetCamera.gameObject.SetActive(true);
         cameraAnimator.Play(cameraState);
@@ -143,8 +114,26 @@ public class CameraGestor : MonoBehaviour
     }
     private bool IsMainCameraActive()
     {
-        // Check if the main camera is active (you can define what the main camera is)
-        return VirtualCameraIdle.gameObject.activeSelf; // Adjust this condition based on your setup
+
+        return VirtualCameraIdle.gameObject.activeSelf;
+    }
+
+    private bool IsInteriorCameraActive()
+    {
+
+        return VirtualCameraInterior.gameObject.activeSelf;
+    }
+
+    private bool IsExteriorCameraActive()
+    {
+
+        return VirtualCameraExterior.gameObject.activeSelf;
+    }
+
+    private bool IsParedCameraActive()
+    {
+
+        return VirtualCameraPared.gameObject.activeSelf;
     }
 
 

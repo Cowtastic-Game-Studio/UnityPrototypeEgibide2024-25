@@ -1859,7 +1859,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &346782982
 Transform:
   m_ObjectHideFlags: 0
@@ -5945,6 +5945,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 38.2
       objectReference: {fileID: 0}
+    - target: {fileID: 435503464654460057, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 513019048345249696, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: m_LocalScale.x
       value: 110.79
@@ -6165,13 +6169,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 37.21
       objectReference: {fileID: 0}
+    - target: {fileID: 3150869370778416331, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3467578517358251529, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: m_Name
       value: Virtual CameraExterior
       objectReference: {fileID: 0}
     - target: {fileID: 3467578517358251529, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3477239342081195009, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6240,6 +6248,10 @@ PrefabInstance:
     - target: {fileID: 3842999958687264904, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: m_LocalPosition.y
       value: 7.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4016086483669262547, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4123430415069752785, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: m_Priority
@@ -6453,6 +6465,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -31.2
       objectReference: {fileID: 0}
+    - target: {fileID: 5784355116654400620, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6145089416517211937, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: m_LocalPosition.y
       value: 14
@@ -6484,6 +6500,10 @@ PrefabInstance:
     - target: {fileID: 6334506847409881805, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6351968522732283047, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7539682065054821354, guid: 6cae8b36a1453714884e5fcd13288f56, type: 3}
       propertyPath: m_LocalScale.y
@@ -7875,7 +7895,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1910094310
 Transform:
   m_ObjectHideFlags: 0
