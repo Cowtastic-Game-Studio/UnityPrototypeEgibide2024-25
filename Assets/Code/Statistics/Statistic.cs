@@ -5,17 +5,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public StatisticType StatType { get; set; }
         public string Title { get; set; }
-        public CardType Type { get; set; }
+        public CardType CardType { get; set; }
         public GameResource Resource { get; set; }
         public int Uses { get; set; }
 
-        public Statistic(StatisticType statType, string title, CardType type, GameResource resource, int uses)
+        public bool IsUsed { get; set; }
+
+        public Statistic(StatisticType statType, CardType type, GameResource resource, int uses, bool isUsed)
         {
             StatType = statType;
-            Title = title;
-            Type = type;
+            CardType = type;
             Resource = resource;
             Uses = uses;
+            IsUsed = isUsed;
         }
     }
 }
