@@ -38,7 +38,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             if (validThefts.Count == 0)
             {
-                Debug.Log("¡No hay recursos suficientes para ser robados!");
+                GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(1, GameResource.Muuney);
+                Debug.Log("como no tenias nada que robar les has dado pena y te han dejado uno de muuuney");
             } else 
             {
                 // Elegir un recurso al azar para robar
