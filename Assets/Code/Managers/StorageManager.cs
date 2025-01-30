@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -101,28 +98,32 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 IStorage storage = GetStorage<IStorage>(requireType);
 
                 RemoveResources(requireQuantity, storage);
+                StatisticsManager.Instance.UpdateByResource(requireType, false, requireQuantity);
             }
 
             foreach (ResourceAmount resource in _producedResources)
             {
                 int producedQuantity;
-    
+
                 GameResource producedType = resource.resourceType;
 
                 // Comprobamos el tipo de recurso para aplicar el multiplicador en solo ese producto
                 if (typeResource == producedType)
                 {
                     producedQuantity = resource.resourceQuantity * multi;
-                } else 
+                }
+                else
                 {
                     producedQuantity = resource.resourceQuantity;
                 }
 
                 var storage = GetStorage<IStorage>(producedType);
                 AddResources(producedQuantity, storage);
+                StatisticsManager.Instance.UpdateByResource(producedType, true, producedQuantity);
             }
 
             RemoveResources(1, _paStorage);
+            StatisticsManager.Instance.UpdateByResource(GameResource.ActionPoints, false, 1);
 
             return true;
         }
