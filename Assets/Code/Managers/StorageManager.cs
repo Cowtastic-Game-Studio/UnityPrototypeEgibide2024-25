@@ -178,6 +178,38 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             this.typeResource = GameResource.None;
         }
 
+        /// <summary>
+        /// Añade una cantidad específica de recurso a un almacenamiento determinado, 
+        /// pero si sobrepasa el almacenamiento máximo, lo ajusta al máximo permitido.
+        /// </summary>
+        /// <param name="quantity">La cantidad de recursos a añadir.</param>
+        /// <param name="type">El tipo de recurso.</param>
+        public void AddResourceUpToMax(int quantity, GameResource type)
+        {
+            var storage = GetStorage<IStorage>(type);
+            
+            if (storage == null)
+            {
+                Debug.LogError($"No se encontró almacenamiento para el recurso: {type}");
+                return;
+            }
+
+            // Calcular espacio restante
+            int espacioDisponible = storage.MaxResources - storage.Resource;
+
+            if (espacioDisponible <= 0)
+            {
+                Debug.LogWarning($"El almacenamiento de {type} está lleno.");
+                return;
+            }
+
+            // Añadir la cantidad permitida sin exceder el máximo
+            int cantidadAAgregar = Mathf.Min(quantity, espacioDisponible);
+            storage.Resource += cantidadAAgregar;
+
+            Debug.Log($"Añadidos {cantidadAAgregar} {type}. Cantidad actual: {storage.Resource}/{storage.MaxResources}");
+        }
+
         #endregion
 
         #region Private
