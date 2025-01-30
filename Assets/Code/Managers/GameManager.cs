@@ -79,12 +79,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             }
 
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 Tabletop.CardManager.DrawFromDeck();
             }
 
-            if (Input.GetKeyDown(KeyCode.M))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
                 Tabletop.CardManager.Mulligan();
             }
