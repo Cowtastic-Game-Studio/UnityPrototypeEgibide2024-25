@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -72,19 +73,21 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <summary>
         /// Inicializa la hoja de mision
         /// </summary>
-        /// <param name="mision"></param>
-        private void Initialize(Mission mision)
+        /// <param name="mission"></param>
+        private void Initialize(Mission mission)
         {
-            this.TitleText.text = mision.Description;
-            this.UpdateGoals(mision.Goals.ToList());
-            
+            this.TitleText.text = mission.Description;
+            this.UpdateGoals(mission.Goals.ToList());
+
+            mission.Updated.AddListener(OnUpdated);
+
         }
 
         /// <summary>
         /// Actualiza la lista de objetivos
         /// </summary>
         /// <param name="mission"></param>
-        public void UpdateGoals(List<Goal> goals)
+        private void UpdateGoals(List<Goal> goals)
         {
             GameObject newtext;
             TMP_Text tmp;
@@ -92,7 +95,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Primero, limpia cualquier texto viejo en la UI.
             foreach (GameObject goalText in GoalTexts)
             {
-                Destroy(gameObject);
+                Destroy(goalText);
             }
             GoalTexts.Clear();
 
@@ -111,6 +114,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 GoalTexts.Add(newtext);
             }
+        }
+
+        #endregion
+
+        #region Eventhandlers
+
+        private void OnUpdated(Mission mission)
+        {
+            UpdateGoals(mission.Goals.ToList());
         }
 
         #endregion

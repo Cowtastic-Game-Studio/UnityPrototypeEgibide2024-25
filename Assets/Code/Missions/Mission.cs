@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
@@ -57,12 +57,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             this.Goals = new List<Goal>(goals);
             this.Rewards = new List<Reward>(rewards);
 
-            foreach (var item in Goals)
+            //Se suscribe el evento OnCompleted de los goals
+            foreach (Goal goal in Goals)
             {
-                item.OnCompleted.AddListener(OnCompleteGoal);
+                goal.OnCompleted.AddListener(OnCompleteGoal);
             }
-
-
         }
 
 
@@ -75,10 +74,20 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
         #endregion
 
+        #region Events
 
-        private void OnCompleteGoal()
+        public UnityEvent<Mission> Updated = new UnityEvent<Mission>();
+
+        #endregion
+
+
+        private void OnCompleteGoal(Goal goal)
         {
-            throw new NotImplementedException();
+            Debug.Log("Goal complete:" + goal.Description);
+            goal.OnCompleted.RemoveListener(OnCompleteGoal);
+            
+            this.Updated.Invoke(this);
+
         }
 
 

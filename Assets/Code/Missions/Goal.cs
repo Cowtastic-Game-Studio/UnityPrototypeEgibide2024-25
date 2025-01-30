@@ -34,7 +34,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             set { _IsCompleted = value;
 
                 if (_IsCompleted == true)
-                    OnCompleted.Invoke();
+                    OnCompleted.Invoke(this);
             }
         }
 
@@ -45,7 +45,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
         #region Events
 
-        public UnityEvent OnCompleted = new UnityEvent();
+        public UnityEvent<Goal> OnCompleted = new UnityEvent<Goal>();
 
         #endregion
 

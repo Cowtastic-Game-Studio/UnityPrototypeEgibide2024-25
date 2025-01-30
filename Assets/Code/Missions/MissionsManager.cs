@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions;
 using UnityEngine;
 using UnityEngine.Events;
@@ -34,7 +32,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         #endregion
 
         #region Property: GlobalMission
-
         public List<Mission> GlobalMissions { get; set; }
 
         #endregion
@@ -80,11 +77,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void InitializeMissions()
         {
+
             CreateTutorialMission();
 
             RenewWeeklyMission();
 
             CreateGlobalMissions();
+
+            
         }
 
         /// <summary>
@@ -92,54 +92,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private void CreateTutorialMission()
         {
+            Goal goal1, goal2;
 
-            UnityAction<Goal> goal1Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CardsTotalUsed);
-
-                    if (stat.Uses >= 1)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            var goal1 = new Goal("T-M1", "Coloca 1 carta en la mesa", goal1Initialization); 
-
-            UnityAction<Goal> goal2Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                //Crea 
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CerealTotalAdquired);
-
-                    if (stat.Uses >= 1)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            var goal2 = new Goal("T-M2", "Consigue 1 de trigo", goal2Initialization);
+            goal1 = GoalGenerator.CreateTutorialGoal1();
+            goal2 = GoalGenerator.CreateTutorialGoal2();
 
 
-            //var goal3 = new Goal("T-M3", "T-M3", null);
-            //var goal4 = new Goal("T-M4", "T-M4", null);
-            //var goal5 = new Goal("T-M5", "T-M5", null);
 
             this.Tutorial = new Mission("Tutorial", "Tutorial", Mission.MissionTypes.Tutorial, new List<Goal>() { goal1, goal2 }, new List<Reward>());
 
@@ -148,36 +106,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <summary>
         /// Genera una mision semanal
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Devuelve la mision semanal generada</returns>
         private Mission GenerateWeeklyMission()
         {
+            List<Goal> goals;
 
-            UnityAction<Goal> goal1Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
+            goals = GoalGenerator.GetWeeklyRandomGoals();
 
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CowsMilked);
-
-                    if (stat.Uses >= 4)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            var goal1 = new Goal("W-M1", "Ordeña vacas 4 veces", goal1Initialization);
-
-            //var goal2 = new Goal("W-M2", "W2", null);
-            //var goal3 = new Goal("W-M3", "W3", null);
-            //var goal4 = new Goal("W-M4", "W4", null);
-
-            Mission mission = new Mission("Weekly", "Weekly", MissionTypes.Weekly, new List<Goal>() { goal1 }, new List<Reward>());
+            Mission mission = new Mission("Weekly", "Weekly", MissionTypes.Weekly, goals, new List<Reward>());
 
             return mission;
         }
@@ -185,10 +121,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <summary>
         /// Crea las misiones globales/logros
         /// </summary>
-        /// <returns></returns>
-        private List<Mission> CreateGlobalMissions()
+        private void CreateGlobalMissions()
         {
-            return null;
+            this.GlobalMissions = new List<Mission>();            
+
         }
 
         #endregion
