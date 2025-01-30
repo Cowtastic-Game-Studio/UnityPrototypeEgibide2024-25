@@ -98,7 +98,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 IStorage storage = GetStorage<IStorage>(requireType);
 
                 RemoveResources(requireQuantity, storage);
-                StatisticsManager.Instance.UpdateByResource(requireType, false, requireQuantity);
+                StatisticsManager.Instance.UpdateByResource(requireType, requireQuantity, true);
             }
 
             foreach (ResourceAmount resource in _producedResources)
@@ -119,11 +119,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 var storage = GetStorage<IStorage>(producedType);
                 AddResources(producedQuantity, storage);
-                StatisticsManager.Instance.UpdateByResource(producedType, true, producedQuantity);
+                StatisticsManager.Instance.UpdateByResource(producedType, producedQuantity, false);
             }
 
             RemoveResources(1, _paStorage);
-            StatisticsManager.Instance.UpdateByResource(GameResource.ActionPoints, false, 1);
+            StatisticsManager.Instance.UpdateByResource(GameResource.ActionPoints, 1, true);
 
             return true;
         }
