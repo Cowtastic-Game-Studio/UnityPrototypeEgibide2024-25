@@ -18,8 +18,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <param name="eventDuration">Duración del evento en días.</param>
         /// <param name="cardType">Tipo de carta afectada durante el evento.</param>
         /// <param name="resourceMultiplier">Multiplicador de recursos durante el evento.</param>
-        public ResourceMultipleEvent(string eventName, string eventDescription, int eventDuration, GameResource resourceType, int resourceMultiplier) 
-            : base(eventName, eventDescription, eventDuration)
+        public ResourceMultipleEvent(string eventName, string eventDescription, GameResource resourceType, int resourceMultiplier) 
+            : base(eventName, eventDescription, 1)
         {
             this.resourceType = resourceType;
             this.resourceMultiplier = resourceMultiplier;
