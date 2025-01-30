@@ -17,7 +17,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void TestActiveEvent()
         {
-            activeEvent = staticEvents[1]; //Plague
+            activeEvent = staticEvents[1];
             activeEvent.TriggerEvent();
         }
 
