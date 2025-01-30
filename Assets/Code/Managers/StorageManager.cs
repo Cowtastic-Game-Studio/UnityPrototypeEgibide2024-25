@@ -252,15 +252,21 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             storage.Resource -= quantity;
         }
 
+        /// <summary>
+        /// Sube en uno el nivel del almacen, pero no lo mejora
+        /// </summary>
+        /// <param name="storage">El tipo de almacen</param>
         private void AddLevel(IStorage storage)
         {
             storage.Level += 1;
         }
 
+        /// <summary>
+        /// Llama a la funcion de mejora del almacen pasado como parametro
+        /// </summary>
+        /// <param name="storage">El tipo de almacen</param>
         private void UpgradeStorage(IStorage storage)
         {
-            AddLevel(storage);
-            
             if (storage == _paStorage)
             {
                 UpgradePAStorage();
@@ -277,26 +283,123 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 UpgradeSiloStorage();
             }
+
+            GameManager.Instance.Tabletop.HUDManager.UpdateResources();
         }
 
+        /// <summary>
+        /// Mejora del almacen de APs
+        /// </summary>
         private void UpgradePAStorage()
         {
-            throw new NotImplementedException();
+            if (_paStorage.MaxResources < 18)
+            {
+                int upgradeCost = 0;
+
+                switch (_paStorage.Level)
+                {
+                    case 1:
+                        upgradeCost = 30;
+                        break;
+                    case 2:
+                        upgradeCost = 50;
+                        break;
+                    case 3:
+                        upgradeCost = 75;
+                        break;
+                    case 4:
+                        upgradeCost = 100;
+                        break;
+                    case 5:
+                        upgradeCost = 200;
+                        break;
+                    case 6:
+                        upgradeCost = 300;
+                        break;
+                }
+                if (CheckMuuney(upgradeCost))
+                {
+                    _paStorage.MaxResources += 2;
+                    AddLevel(_paStorage);
+                    WasteMuuney(upgradeCost);
+                    Debug.Log("PAs mejorados.");
+                }
+            }
         }
 
+        /// <summary>
+        /// Mejora del banco
+        /// </summary>
         private void UpgradeBankStorage()
         {
-            throw new NotImplementedException();
+            int upgradeCost = Utils.RoundMuuney(30*_bankStorage.MaxResources)/100;
+            if (CheckMuuney(upgradeCost))
+            {
+                _bankStorage.MaxResources += 5;
+                AddLevel(_bankStorage);
+                WasteMuuney(upgradeCost);
+                Debug.Log("Banco mejorado.");
+            }
         }
 
+        /// <summary>
+        /// Mejora de la nevera
+        /// </summary>
         private void UpgradeFridgeStorage()
         {
-            throw new NotImplementedException();
+            if (_fridgeStorage.MaxResources < 20)
+            {
+                if (CheckMuuney(15))
+                {
+                    _fridgeStorage.MaxResources += 2;
+                    AddLevel(_fridgeStorage);
+                    WasteMuuney(15);
+                    Debug.Log("Nevera mejorada.");
+                }
+            }
         }
 
+        /// <summary>
+        /// Mejora del silo
+        /// </summary>
         private void UpgradeSiloStorage()
         {
-            throw new NotImplementedException();
+            if (_silo.MaxResources < 30)
+            {
+                if (CheckMuuney(10))
+                {
+                    _silo.MaxResources += 3;
+                    AddLevel(_silo);
+                    WasteMuuney(10);
+                    Debug.Log("Silo mejorado.");
+                }
+            }
+        }
+
+        // Este update se puede borrar, solo es para pruebas.
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Y)) 
+            {
+                UpgradeStorage(_bankStorage);
+            }
+            if (Input.GetKeyDown(KeyCode.U)) 
+            {
+                UpgradeStorage(_paStorage);
+            }
+            if (Input.GetKeyDown(KeyCode.I)) 
+            {
+                UpgradeStorage(_fridgeStorage);
+            }
+            if (Input.GetKeyDown(KeyCode.O)) 
+            {
+                UpgradeStorage(_silo);
+            }
+            if (Input.GetKeyDown(KeyCode.L)) 
+            {
+                _bankStorage.Resource = _bankStorage.MaxResources;
+                GameManager.Instance.Tabletop.HUDManager.UpdateResources();
+            }
         }
 
         internal bool CheckMuuney(int cardPrice)
