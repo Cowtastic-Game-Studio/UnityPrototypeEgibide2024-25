@@ -4,6 +4,17 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class SetUpPhase : IGamePhase
     {
+        #region Properties
+
+        #region Property: Phase
+
+        public GamePhaseTypes Phase { get { return GamePhaseTypes.SetUp; } }
+
+        #endregion
+
+        #endregion
+
+
         #region Metodos publicos
         /// <summary>
         /// Al entrar en la fase se ejecutara NewGame() para preparar el mazo y PAs

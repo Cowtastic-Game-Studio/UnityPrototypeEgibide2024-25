@@ -3,12 +3,13 @@ using UnityEngine;
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     [CreateAssetMenu(fileName = "New Cow", menuName = "Cards/Cow")]
-    public class BaseCow : CardTemplate
+    public class SOBaseCow : CardTemplate
     {
-        public BaseCow()
+        public SOBaseCow()
         {
             name = "Cow";
             lifeCycleDays = 2;
+            cardType = CardType.Cow;
         }
 
         private void Awake()

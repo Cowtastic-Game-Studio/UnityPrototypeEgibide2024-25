@@ -5,6 +5,27 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class CardBehaviour : MonoBehaviour, ICard
     {
+        #region Properties
+
+        #region Property: IsPlaced
+
+        public bool IsPlaced { get; set; }
+
+        #endregion
+
+        #region Property: PositionInHand
+
+        /// <summary>
+        /// Posicion de la carta en la mano
+        /// </summary>
+        public float? PositionInHand { get; set; }
+
+        #endregion
+
+
+        #endregion
+
+
         [SerializeField]
         private CardTemplate template;
 
@@ -12,6 +33,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public CardState State { get; set; } = CardState.onDeck;
         public string Name => template.name;
+        public CardType Type => template.cardType;
+        public CardType TargetType => template.targetCardType;
         public string Description => template.description;
         public int ActionPointsCost => template.actionPointsCost;
         public int LifeCycleDays => template.lifeCycleDays;
@@ -21,15 +44,27 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public bool IsActive => isActive;
 
+        bool mouseClicksStarted = false;
+        int mouseClicks = 0;
+        float mouseTimerLimit = .25f;
+
+        public int LifeCycleDaysRemaining;
+
+        #region Unity methods
+
         private void Start()
         {
+            LifeCycleDaysRemaining = LifeCycleDays;
+
+            this.PositionInHand = null;
+
             if (template == null)
             {
                 Debug.LogError("Card template is not assigned.");
             }
             else
             {
-                // Configurar la visualización de la carta usando CardDisplay
+                // Configurar la visualizaciï¿½n de la carta usando CardDisplay
                 CardDisplay display = GetComponent<CardDisplay>();
                 if (display != null)
                 {
@@ -40,6 +75,33 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             Deactivate();
         }
 
+        private void OnMouseDown()
+        {
+            if (GameManager.Instance.GamePhaseManager.CurrentPhaseType == GamePhaseTypes.PlaceCards)
+            {
+                OnClick();
+            }
+            else if (GameManager.Instance.GamePhaseManager.CurrentPhaseType == GamePhaseTypes.Action)
+            {
+                if (IsActive)
+                {
+                    InvokeCardClicked();
+                }
+            }
+
+        }
+
+        private void OnMouseOver()
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                GameManager.Instance.Tabletop.CardManager.StopDragging();
+            }
+        }
+
+        #endregion
+
+        #region Public methods
         public void Activate()
         {
             isActive = true;
@@ -57,53 +119,75 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             template.Print();
         }
 
-        public void OnCardClicked()
+        public void InvokeCardClicked()
         {
-            //if (IsActive)
-            //{
             // Pasar la instancia ICard
-            ICard card = gameObject.GetComponent<ICard>(); ;
+            ICard card = gameObject.GetComponent<ICard>();
             GameManager.Instance?.CardClicked(card);
-            //}
         }
 
         //public void OnPointerClick(PointerEventData eventData)
-        private void OnMouseDown()
-        {
-            if (!GameManager.Instance.Tabletop.CardManager.IsDraggingCard)
-            {
-                // Verifica si la carta está en la layer 'CardLayer'
-                if (gameObject.layer == LayerMask.NameToLayer("CardLayer"))
-                {
-                    OnCardClicked();
-                }
-            }
-        }
 
-        private void OnMouseOver()
-        {
-            if (Input.GetMouseButtonDown(1))
-            {
-                GameManager.Instance.Tabletop.CardManager.StopDragging();
-            }
-        }
 
-        // Método para configurar la visualización en CardDisplay
+        // Mï¿½todo para configurar la visualizaciï¿½n en CardDisplay
         public void SetupDisplay(CardDisplay display)
         {
             // Pasa el estado activo
             display.UpdateDisplay(template, isActive);
         }
 
-        // Método para actualizar la visualización
+        #endregion
+
+
+        #region Private methods
+        /// <summary>
+        /// Mï¿½todo para actualizar la visualizaciï¿½n
+        /// </summary>
         private void UpdateDisplay()
         {
             CardDisplay display = GetComponent<CardDisplay>();
             if (display != null)
             {
-                // Llama al método para activar/desactivar el overlay
+                // Llama al mï¿½todo para activar/desactivar el overlay
                 display.SetOverlayActive(!isActive);
             }
         }
+
+        private void OnClick()
+        {
+            mouseClicks++;
+            if (mouseClicksStarted)
+            {
+                return;
+            }
+            mouseClicksStarted = true;
+            Invoke(nameof(CheckMouseDoubleClick), mouseTimerLimit);
+        }
+
+
+        private void CheckMouseDoubleClick()
+        {
+            if (mouseClicks > 1)
+            {
+                //Vuelve a la mano
+                GameManager.Instance.Tabletop.CardManager.RemovePlacedCard(this.gameObject);
+
+            }
+            else
+            {
+                if (!GameManager.Instance.Tabletop.CardManager.IsDraggingCard)
+                {
+                    // Verifica si la carta estï¿½ en la layer 'CardLayer'
+                    if (gameObject.layer == LayerMask.NameToLayer("CardLayer"))
+                    {
+                        InvokeCardClicked();
+                    }
+                }
+            }
+            mouseClicksStarted = false;
+            mouseClicks = 0;
+        }
+
+        #endregion
     }
 }

@@ -5,6 +5,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         ActionPoints,
         Muuney,
         Milk,
-        Cereal
+        Cereal,
+        None
     }
 }

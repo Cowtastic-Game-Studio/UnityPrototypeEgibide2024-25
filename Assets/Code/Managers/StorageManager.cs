@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -12,6 +11,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [SerializeField] private Fridge _fridgeStorage;
         [SerializeField] private Silo _silo;
 
+        private int multi = 1;
+        private GameResource typeResource = GameResource.None;
         private List<ResourceAmount> _requiredResources;
         private List<ResourceAmount> _producedResources;
         #endregion
@@ -97,20 +98,32 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 IStorage storage = GetStorage<IStorage>(requireType);
 
                 RemoveResources(requireQuantity, storage);
+                StatisticsManager.Instance.UpdateByResource(requireType, requireQuantity, true);
             }
 
             foreach (ResourceAmount resource in _producedResources)
             {
-                int producedQuantity = resource.resourceQuantity;
+                int producedQuantity;
+
                 GameResource producedType = resource.resourceType;
 
+                // Comprobamos el tipo de recurso para aplicar el multiplicador en solo ese producto
+                if (typeResource == producedType)
+                {
+                    producedQuantity = resource.resourceQuantity * multi;
+                }
+                else
+                {
+                    producedQuantity = resource.resourceQuantity;
+                }
+
                 var storage = GetStorage<IStorage>(producedType);
-
-
                 AddResources(producedQuantity, storage);
+                StatisticsManager.Instance.UpdateByResource(producedType, producedQuantity, false);
             }
 
             RemoveResources(1, _paStorage);
+            StatisticsManager.Instance.UpdateByResource(GameResource.ActionPoints, 1, true);
 
             return true;
         }
@@ -152,6 +165,79 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void RestartPA()
         {
             _paStorage.Resource = _paStorage.MaxResources;
+        }
+
+        public void SetResourceMultiplierAndType(int multi, GameResource typeResource)
+        {
+            this.multi = multi;
+            this.typeResource = typeResource;
+        }
+
+        public void ClearResourceMultiplierAndType()
+        {
+            multi = 1;
+            this.typeResource = GameResource.None;
+        }
+
+        /// <summary>
+        /// Añade una cantidad específica de recurso a un almacenamiento determinado, 
+        /// pero si sobrepasa el almacenamiento máximo, lo ajusta al máximo permitido.
+        /// </summary>
+        /// <param name="quantity">La cantidad de recursos a añadir.</param>
+        /// <param name="type">El tipo de recurso.</param>
+        public void AddResourceUpToMax(int quantity, GameResource type)
+        {
+            var storage = GetStorage<IStorage>(type);
+            
+            if (storage == null)
+            {
+                Debug.LogError($"No se encontró almacenamiento para el recurso: {type}");
+                return;
+            }
+
+            // Calcular espacio restante
+            int espacioDisponible = storage.MaxResources - storage.Resource;
+
+            if (espacioDisponible <= 0)
+            {
+                Debug.LogWarning($"El almacenamiento de {type} está lleno.");
+                return;
+            }
+
+            // Añadir la cantidad permitida sin exceder el máximo
+            int cantidadAAgregar = Mathf.Min(quantity, espacioDisponible);
+            storage.Resource += cantidadAAgregar;
+
+            Debug.Log($"Añadidos {cantidadAAgregar} {type}. Cantidad actual: {storage.Resource}/{storage.MaxResources}");
+        }
+
+        /// <summary>
+        /// Quita una cantidad específica de recurso de un almacenamiento determinado,
+        /// sin reducir la cantidad por debajo de cero.
+        /// </summary>
+        /// <param name="quantity">La cantidad de recursos a quitar.</param>
+        /// <param name="type">El tipo de recurso.</param>
+        public void RemoveResourceDownToMin(int quantity, GameResource type)
+        {
+            var storage = GetStorage<IStorage>(type);
+
+            if (storage == null)
+            {
+                Debug.LogError($"No se encontró almacenamiento para el recurso: {type}");
+                return;
+            }
+
+            if (storage.Resource <= 0)
+            {
+                Debug.LogWarning($"El almacenamiento de {type} ya está vacío.");
+                return;
+            }
+
+            // Determinar la cantidad a quitar sin quedar por debajo de 0
+            int cantidadAQuitar = Mathf.Min(quantity, storage.Resource);
+            storage.Resource -= cantidadAQuitar;
+
+            Debug.Log($"Quitados {cantidadAQuitar} {type}. Cantidad actual: {storage.Resource}/{storage.MaxResources}");
         }
 
         #endregion

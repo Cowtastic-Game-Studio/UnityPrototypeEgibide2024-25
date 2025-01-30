@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -23,6 +24,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         //public StableZone Stables;
         //public TarvernZone Taverna;
 
+
+        private List<PlaceSpaceBehaviour> placeSpaceBehaviours = new List<PlaceSpaceBehaviour>();
         #endregion
 
         #region Public methods
@@ -55,10 +58,46 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
 
         }
+
+        public void FindPlaces()
+        {
+            // Buscar todos los objetos con el tag "Place"
+            GameObject[] places = GameObject.FindGameObjectsWithTag("Place");
+
+            // Recorrer todos los objetos encontrados
+            foreach (GameObject place in places)
+            {
+                // Obtener el componente PlaceSpaceBehaviour del objeto
+                PlaceSpaceBehaviour placeSpace = place.GetComponent<PlaceSpaceBehaviour>();
+
+                // Verificar si el componente existe y agregarlo a la lista
+                if (placeSpace != null)
+                {
+                    placeSpaceBehaviours.Add(placeSpace);
+                }
+            }
+        }
+
+        public void UpdateEmptyPlaces()
+        {
+            foreach (PlaceSpaceBehaviour place in placeSpaceBehaviours)
+            {
+                place.updateEmpty();
+            }
+        }
+
+        internal void UpdateAcivePlaces()
+        {
+            foreach (PlaceSpaceBehaviour place in placeSpaceBehaviours)
+            {
+                place.updateActive();
+            }
+        }
         #endregion
 
         #region Private methods
 
         #endregion
+
     }
 }

@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f280cbee807c61a43b83afed36a2c197, type: 3}
   m_Name: Seed
   m_EditorClassIdentifier: 
-  name: Seed
-  description: 
   artwork: {fileID: 21300000, guid: a79cbc2b57244e248ada1b37b9034ce0, type: 3}
   baseCard: {fileID: 21300000, guid: 3381212bab47d73469e383e6f98f5d64, type: 3}
+  cardType: 1
+  name: Seed
+  description: 
   actionPointsCost: 1
   lifeCycleDays: 1
   requiredResources: []

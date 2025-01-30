@@ -1,5 +1,4 @@
 using System;
-
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -11,6 +10,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public GameCalendar GameCalendar { get; private set; }
 
         public Tabletop Tabletop;
+
+        private PlagueEvent plagueEvent = new PlagueEvent();
 
         // Evento global para manejar clics en cartas
         public event Action<ICard> OnCardClickedGlobal;
@@ -34,6 +35,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GamePhaseManager = new GamePhaseManager();
             GameCalendar = new GameCalendar();
             addCalendarEvents();
+            Tabletop.FindPlaces();
         }
 
         private void Update()
@@ -92,15 +94,37 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 Tabletop.CardManager.ShuffleDiscardDeck();
             }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                GameCalendar.TestEvent();
+
+            }
+
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                GameCalendar.TestStopEvent();
+
+            }
+
             #endregion
         }
 
         private void addCalendarEvents()
         {
-            GameCalendar.AddCalendarEvent(new HarvestDayEvent());
-            GameCalendar.AddCalendarEvent(new CowDayEvent());
-            GameCalendar.AddCalendarEvent(new PlagueEvent());
-            GameCalendar.AddCalendarEvent(new BrokenFridgeEvent());
+            // Eventos No Dinamicos
+            GameCalendar.AddCalendarEvent(new ResourceMultipleEvent("Día de la cosecha", "¡Los cultivos dan el doble de recursos!", GameResource.Cereal, 2), false);
+            GameCalendar.AddCalendarEvent(new ResourceMultipleEvent("Día de las vacas", "¡Las vacas dan el doble de recursos!", GameResource.Milk, 2), false);
+            GameCalendar.AddCalendarEvent(new ResourceMultipleEvent("Festival de la granja", "Vendes el doble de caro, misma calidad y nadie se queja", GameResource.Muuney, 2), false);
+
+            // Eventos Dinamicos
+            // TODO cuando el sistema de eventos este completo y no se hagan pruebas cambiar a true para que netre en la lista dinamica
+            GameCalendar.AddCalendarEvent(new PlagueEvent(), false);
+            GameCalendar.AddCalendarEvent(new BrokenFridgeEvent(), false);
+            GameCalendar.AddCalendarEvent(new CivilWarEvent(), false);
+            GameCalendar.AddCalendarEvent(new LuckStrike(), false);
+            GameCalendar.AddCalendarEvent(new Heist(), false);
+            GameCalendar.AddCalendarEvent(new BrokenFridgeEvent(), false);
         }
 
         // Metodo para invocar el evento de clic de carta
