@@ -179,6 +179,35 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             this.typeResource = GameResource.None;
         }
 
+        /// <summary>
+        /// Quita una cantidad específica de recurso de un almacenamiento determinado,
+        /// sin reducir la cantidad por debajo de cero.
+        /// </summary>
+        /// <param name="quantity">La cantidad de recursos a quitar.</param>
+        /// <param name="type">El tipo de recurso.</param>
+        public void RemoveResourceDownToMin(int quantity, GameResource type)
+        {
+            var storage = GetStorage<IStorage>(type);
+
+            if (storage == null)
+            {
+                Debug.LogError($"No se encontró almacenamiento para el recurso: {type}");
+                return;
+            }
+
+            if (storage.Resource <= 0)
+            {
+                Debug.LogWarning($"El almacenamiento de {type} ya está vacío.");
+                return;
+            }
+
+            // Determinar la cantidad a quitar sin quedar por debajo de 0
+            int cantidadAQuitar = Mathf.Min(quantity, storage.Resource);
+            storage.Resource -= cantidadAQuitar;
+
+            Debug.Log($"Quitados {cantidadAQuitar} {type}. Cantidad actual: {storage.Resource}/{storage.MaxResources}");
+        }
+
         #endregion
 
         #region Private
