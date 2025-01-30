@@ -25,7 +25,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         // Propiedad para obtener el d�a de la semana (1 = Lunes, 7 = Domingo)
         public DayOfWeek DayOfWeek
         {
-            get { return (DayOfWeek) ((CurrentDay - 1) % 7 + 1); }
+            get { return (DayOfWeek)((CurrentDay - 1) % 7 + 1); }
         }
 
         public GameCalendar()
@@ -51,6 +51,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         // Avanzar al siguiente d�a
         public void NextDay()
         {
+            eventManager.EndActiveEvent();
+
             CurrentDay++;
 
             //Comprobar si hay que activar un evento
