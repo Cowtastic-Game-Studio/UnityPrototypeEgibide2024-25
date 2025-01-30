@@ -71,6 +71,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void OnMouseDown()
         {
+            // TODO: Da un fallo si se clicka en un espacio vacio 
             // Verifica si la carta est� en la layer 'PlaceSpace'
             if (gameObject.layer == LayerMask.NameToLayer("PlaceSpace"))
             {

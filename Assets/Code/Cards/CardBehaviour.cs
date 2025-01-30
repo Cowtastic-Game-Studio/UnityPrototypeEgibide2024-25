@@ -44,10 +44,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public bool IsActive => isActive;
 
-        float clickdelay = 0.3f;
-        private bool click = false;
-        private float clickTime;
-
         bool mouseClicksStarted = false;
         int mouseClicks = 0;
         float mouseTimerLimit = .25f;
