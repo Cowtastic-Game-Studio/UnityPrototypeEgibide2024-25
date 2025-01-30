@@ -22,7 +22,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             get { return _Mission; }
             set { 
                 _Mission = value;
-                Initialize(value);
+                if(value != null)
+                    Initialize(value);
             }
         }
 
@@ -105,7 +106,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 tmp.text = goal.Description;
 
-                if(goal.IsComplete)
+                if(goal.IsCompleted)
                     tmp.fontStyle = FontStyles.Strikethrough;
 
                 GoalTexts.Add(newtext);

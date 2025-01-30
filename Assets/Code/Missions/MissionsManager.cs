@@ -33,6 +33,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         #endregion
 
+        #region Property: GlobalMission
+
+        public List<Mission> GlobalMissions { get; set; }
+
+        #endregion
+
         #endregion
 
         #region Events
@@ -60,16 +66,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         #region Public methods
 
-        public void InitializeMissions()
-        {
-            CreateTutorialMission();
-
-            RenewWeeklyMission();
-
-            CreateGlobalMissions();
-
-        }
-
         public void RenewWeeklyMission()
         {
             //Genera la mision semanal
@@ -77,41 +73,75 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             NewWeeklyMission.Invoke();
         }
-        
 
         #endregion
 
         #region Private methods
+
+        private void InitializeMissions()
+        {
+            CreateTutorialMission();
+
+            RenewWeeklyMission();
+
+            CreateGlobalMissions();
+        }
 
         /// <summary>
         /// Crea la mission de tutorial
         /// </summary>
         private void CreateTutorialMission()
         {
-            //Goal x;
-            //UnityAction a = () => {
 
-            //    UnityAction OnEvent = () =>
-            //    {
-            //        //Comprobar condicion del objetivo
-            //        Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CardsPurchased);
+            UnityAction<Goal> goal1Initialization = (Goal goal) =>
+            {
+                UnityAction OnStatisticChanged = null;
 
-            //        if (stat.Uses >= 1)
-            //            x.IsComplete = true;
+                OnStatisticChanged = () =>
+                {
+                    //Comprobar condicion del objetivo
+                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CardsTotalUsed);
 
-            //        //si esta clompleto
-            //        if ()
-            //            StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnEvent);
-            //    };
-            //    StatisticsManager.Instance.OnStatisticChanged.AddListener(OnEvent);
-            //};
-            var goal1 = new Goal("T-M1", "Robar 1 carta", null);
-            var goal2 = new Goal("T-M2", "otra mission", null);
-            var goal3 = new Goal("T-M3", "T-M3", null);
-            var goal4 = new Goal("T-M4", "T-M4", null);
-            var goal5 = new Goal("T-M5", "T-M5", null);
+                    if (stat.Uses >= 1)
+                        goal.IsCompleted = true;
 
-            this.Tutorial = new Mission("Tutorial", "Tutorial", Mission.MissionTypes.Tutorial, new List<Goal>() { goal1, goal2, goal3, goal4, goal5 }, new List<Reward>());
+                    //si esta clompleto
+                    if (goal.IsCompleted)
+                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
+                };
+
+                StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
+            };
+            var goal1 = new Goal("T-M1", "Coloca 1 carta en la mesa", goal1Initialization); 
+
+            UnityAction<Goal> goal2Initialization = (Goal goal) =>
+            {
+                UnityAction OnStatisticChanged = null;
+
+                //Crea 
+                OnStatisticChanged = () =>
+                {
+                    //Comprobar condicion del objetivo
+                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CerealTotalAdquired);
+
+                    if (stat.Uses >= 1)
+                        goal.IsCompleted = true;
+
+                    //si esta clompleto
+                    if (goal.IsCompleted)
+                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
+                };
+
+                StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
+            };
+            var goal2 = new Goal("T-M2", "Consigue 1 de trigo", goal2Initialization);
+
+
+            //var goal3 = new Goal("T-M3", "T-M3", null);
+            //var goal4 = new Goal("T-M4", "T-M4", null);
+            //var goal5 = new Goal("T-M5", "T-M5", null);
+
+            this.Tutorial = new Mission("Tutorial", "Tutorial", Mission.MissionTypes.Tutorial, new List<Goal>() { goal1, goal2 }, new List<Reward>());
 
         }
 
@@ -121,12 +151,33 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <returns></returns>
         private Mission GenerateWeeklyMission()
         {
-            var goal1 = new Goal("W-M1", "W1", null);
-            var goal2 = new Goal("W-M2", "W2", null);
-            var goal3 = new Goal("W-M3", "W3", null);
-            var goal4 = new Goal("W-M4", "W4", null);
 
-            Mission mission = new Mission("Weekly", "Weekly", MissionTypes.Weekly, new List<Goal>() { goal1, goal2, goal3, goal4 }, new List<Reward>());
+            UnityAction<Goal> goal1Initialization = (Goal goal) =>
+            {
+                UnityAction OnStatisticChanged = null;
+
+                OnStatisticChanged = () =>
+                {
+                    //Comprobar condicion del objetivo
+                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CowsMilked);
+
+                    if (stat.Uses >= 4)
+                        goal.IsCompleted = true;
+
+                    //si esta clompleto
+                    if (goal.IsCompleted)
+                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
+                };
+
+                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
+            };
+            var goal1 = new Goal("W-M1", "Ordeña vacas 4 veces", goal1Initialization);
+
+            //var goal2 = new Goal("W-M2", "W2", null);
+            //var goal3 = new Goal("W-M3", "W3", null);
+            //var goal4 = new Goal("W-M4", "W4", null);
+
+            Mission mission = new Mission("Weekly", "Weekly", MissionTypes.Weekly, new List<Goal>() { goal1 }, new List<Reward>());
 
             return mission;
         }

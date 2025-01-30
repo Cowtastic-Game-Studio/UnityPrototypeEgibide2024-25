@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine.Events;
 
 namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 {
@@ -54,7 +56,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             this.Type = type;
             this.Goals = new List<Goal>(goals);
             this.Rewards = new List<Reward>(rewards);
+
+            foreach (var item in Goals)
+            {
+                item.OnCompleted.AddListener(OnCompleteGoal);
+            }
+
+
         }
+
+
 
         public Mission(string name, string description, MissionTypes type, Goal goal, Reward reward) :
             this(name, description, type, new List<Goal>() { goal }, new List<Reward>() { reward })
@@ -63,6 +74,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
 
         #endregion
+
+
+        private void OnCompleteGoal()
+        {
+            throw new NotImplementedException();
+        }
 
 
     }

@@ -13,8 +13,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         #endregion
 
-
-
         #region Unity methods
 
         private void Start()
@@ -45,7 +43,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
 
         #endregion
-
 
     }
 }

@@ -5,6 +5,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 {
     public class Goal 
     {
+        public delegate void InitializeCheckGoal();
+
         #region Properties
 
         #region Property: Name
@@ -17,14 +19,25 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
         #endregion
 
-        #region Property: RewardCondition
-        private Action CompleteCondition { get; set; }
+        //#region Property: RewardCondition
+        //private Action CompleteCondition { get; set; }
 
-        #endregion
+        //#endregion
 
-        #region Property: IsComplete
+        #region Property: IsCompleted
 
-        public bool IsComplete { get; set; }
+        private bool _IsCompleted;
+
+        public bool IsCompleted
+        {
+            get { return _IsCompleted; }
+            set { _IsCompleted = value;
+
+                if (_IsCompleted == true)
+                    OnCompleted.Invoke();
+            }
+        }
+
 
         #endregion
 
@@ -39,12 +52,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
         #region Constructors
 
-        public Goal(string name, string description, Action completeCondition)
+        public Goal(string name, string description, UnityAction<Goal> initializeCondition)
         {
             this.Name = name;
             this.Description = description;
-            this.CompleteCondition = completeCondition;
-            this.IsComplete = false;
+            this.IsCompleted = false;
+
+            if(initializeCondition != null)
+                initializeCondition.Invoke(this);
         }
 
         #endregion
