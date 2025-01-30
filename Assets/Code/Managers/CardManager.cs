@@ -518,6 +518,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 CardBehaviour cardBH = card.GetComponent<CardBehaviour>();
                 cardBH.LifeCycleDaysRemaining -= 1;
+                cardBH.Activate();
             }
         }
 
