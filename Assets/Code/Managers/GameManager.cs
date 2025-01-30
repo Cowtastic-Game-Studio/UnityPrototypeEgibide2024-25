@@ -116,14 +116,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GameCalendar.AddCalendarEvent(new ResourceMultipleEvent("Día de la cosecha", "¡Los cultivos dan el doble de recursos!", GameResource.Cereal, 2), false);
             GameCalendar.AddCalendarEvent(new ResourceMultipleEvent("Día de las vacas", "¡Las vacas dan el doble de recursos!", GameResource.Milk, 2), false);
             GameCalendar.AddCalendarEvent(new ResourceMultipleEvent("Festival de la granja", "Vendes el doble de caro, misma calidad y nadie se queja", GameResource.Muuney, 2), false);
-            GameCalendar.AddCalendarEvent(new LuckStrike(), false);
-            GameCalendar.AddCalendarEvent(new Heist(), false);
 
             // Eventos Dinamicos
             // TODO cuando el sistema de eventos este completo y no se hagan pruebas cambiar a true para que netre en la lista dinamica
             GameCalendar.AddCalendarEvent(new PlagueEvent(), false);
             GameCalendar.AddCalendarEvent(new BrokenFridgeEvent(), false);
             GameCalendar.AddCalendarEvent(new CivilWarEvent(), false);
+            GameCalendar.AddCalendarEvent(new LuckStrike(), false);
+            GameCalendar.AddCalendarEvent(new Heist(), false);
         }
 
         // Metodo para invocar el evento de clic de carta
