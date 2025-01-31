@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -22,8 +24,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         //[Space(3)]
         //public FarmZone Farm;
         //public StableZone Stables;
-        //public TarvernZone Taverna;
+        //public TavernZone Taverna;
 
+/// <summary>
+/// Listas de zonas para poder activarlas
+/// </summary>
+        public List<PlaceSpaceBehaviour> farms = new List<PlaceSpaceBehaviour>();
+        public List<PlaceSpaceBehaviour> stables = new List<PlaceSpaceBehaviour>();
+        public List<PlaceSpaceBehaviour> taverns = new List<PlaceSpaceBehaviour>();
 
         private List<PlaceSpaceBehaviour> placeSpaceBehaviours = new List<PlaceSpaceBehaviour>();
         #endregion
@@ -83,6 +91,47 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             foreach (PlaceSpaceBehaviour place in placeSpaceBehaviours)
             {
                 place.updateEmpty();
+            }
+        }
+
+/// <summary>
+/// Estos 3 metodos son los que activan la siguiente zona a activar cuando mejoren alguna zona.(Nota: Asegurarse de que las casillas que tienen que empezar activas estan las primeras en la lista , gracias.)
+/// </summary>
+        public void FarmsActivateZone()
+        {
+            foreach(PlaceSpaceBehaviour farm in farms)
+            {
+                int i = 0;
+
+                if (!farm.GetIsActive())
+                {
+                    farm.SetIsActive(true);
+                    break;
+                }
+            }
+        }
+
+        public void StablesActivateZone()
+        {
+            foreach(PlaceSpaceBehaviour stable in stables)
+            {
+                if (!stable.GetIsActive())
+                {
+                    stable.SetIsActive(true);
+                    break;
+                }
+            }
+        }
+
+        public void TavernActivateZone()
+        {
+            foreach(PlaceSpaceBehaviour tavern in taverns)
+            {
+                if (!tavern.GetIsActive())
+                {
+                    tavern.SetIsActive(true);
+                    break;
+                }
             }
         }
 

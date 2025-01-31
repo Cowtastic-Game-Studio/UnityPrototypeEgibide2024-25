@@ -139,7 +139,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Pasa el estado activo
             display.UpdateDisplay(template, isActive);
         }
-
         #endregion
 
 
