@@ -97,6 +97,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     {
                         deactiveNextDay = true;
                         SetIsActive(true);
+                        card.Deactivate();
+                        GameManager.Instance.Tabletop.CardManager.MoveLastCardsToHand(1);
                     }
 
                 }
@@ -105,6 +107,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     // PlaceMultiplier solo se activa si está activo y está vacío
                     canPlace = isActive && isEmpty && isCardTypeMatch;
                     stayEmpty = canPlace;
+                    card.Deactivate();
+                    GameManager.Instance.Tabletop.CardManager.MoveLastCardsToHand(1);
                 }
                 else
                 {

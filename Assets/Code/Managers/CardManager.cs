@@ -123,7 +123,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             InitHandCardLifes();
         }
 
-        private void MoveLastCardsToHand(int cardsToDraw)
+        public void MoveLastCardsToHand(int cardsToDraw)
         {
             // Verificar que hay suficientes cartas en el mazo de robo
             if (drawDeck.Cards.Count < 5)
