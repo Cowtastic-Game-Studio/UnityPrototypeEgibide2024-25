@@ -10,24 +10,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// Constructor para inicializar el evento generico.
         /// </summary>
         public NewMemberEvent() 
-            : base("¡Te han robado!", "Algo o laguien ha entrado a tu granja y...", 1)
+            : base("Nuevo integrante ne la familia", "¡Resulta que una de tus vacas no estaba gorda, estaba embarazada! Has tenido un ternero (bueno, tú no, la vaca)", 1)
         {
 
         }
 
         public override void ApplyEffects()
-        {
-            foreach (GameObject card in GameManager.Instance.Tabletop.CardManager.PlayedDeck.Cards)
-            {
-                CardBehaviour cardBH = card.GetComponent<CardBehaviour>();
-
-                if (cardBH.Type == CardType.Cow) 
-                {
-                    cardBH.IncreaseLifeCycleDays(1);
-                }
-            }
-
-            GameManager.Instance.Tabletop.HUDManager.UpdateResources();
+        {   
+            GameManager.Instance.Tabletop.CardManager.buyCard(CardType.Cow);
         }
 
         public override void EndEvent()

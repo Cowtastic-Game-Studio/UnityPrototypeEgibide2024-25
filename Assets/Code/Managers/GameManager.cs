@@ -126,6 +126,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GameCalendar.AddCalendarEvent(new Heist(), false);
             GameCalendar.AddCalendarEvent(new BrokenFridgeEvent(), false);
             GameCalendar.AddCalendarEvent(new VentDayEvent(), false);
+            GameCalendar.AddCalendarEvent(new NewMemberEvent(), false);
         }
 
         // Metodo para invocar el evento de clic de carta
