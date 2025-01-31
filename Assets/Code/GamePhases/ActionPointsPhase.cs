@@ -30,6 +30,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             Console.WriteLine("Entering Action Points Phase");
 
+            GameManager.Instance.Tabletop.CardManager.ActivatePlacedCards();
+
             // Suscribirse al evento global de clic de carta en GameManager
             GameManager.Instance.OnCardClickedGlobal += OnCardClickedHandler;
         }

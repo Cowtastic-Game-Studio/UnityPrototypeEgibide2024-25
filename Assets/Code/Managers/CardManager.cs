@@ -518,6 +518,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 CardBehaviour cardBH = card.GetComponent<CardBehaviour>();
                 cardBH.LifeCycleDaysRemaining -= 1;
+                //cardBH.Activate();
+            }
+        }
+
+        public void ActivatePlacedCards()
+        {
+            foreach (GameObject card in playedCardsDeck.Cards)
+            {
+                CardBehaviour cardBH = card.GetComponent<CardBehaviour>();
                 cardBH.Activate();
             }
         }

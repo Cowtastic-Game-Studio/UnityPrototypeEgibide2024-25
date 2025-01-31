@@ -78,6 +78,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 // Recuperamos el componente CardBehaviour
                 GameObject selectedCard = GameManager.Instance.Tabletop.CardManager.selectedCard;
+                if (!selectedCard)
+                    return;
+
                 CardBehaviour card = selectedCard.GetComponent<CardBehaviour>();
 
                 bool canPlace = false, stayEmpty = false;
