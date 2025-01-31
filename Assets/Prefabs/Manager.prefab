@@ -66,6 +66,27 @@ MonoBehaviour:
   StorageManager: {fileID: 3014971678426901391}
   marketManager: {fileID: 0}
   board: {fileID: 0}
+  farms:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  stables:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  taverns:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &7130352884580539777
 MonoBehaviour:
   m_ObjectHideFlags: 0
