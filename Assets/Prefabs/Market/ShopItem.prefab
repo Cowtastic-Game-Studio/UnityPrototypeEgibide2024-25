@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b96071641b4751c49bd3b8b75839847e, type: 2}
+  - {fileID: 2100000, guid: 5c76cda55f797e94c8c98130feec9bcb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1083,6 +1083,7 @@ MonoBehaviour:
   requieredQuantityText: {fileID: 2418374591743586762}
   producedTypeText: {fileID: 4236459917146195723}
   producedQuantityText: {fileID: 8345433475439871078}
+  cost: 0
   overlayImage: {fileID: 0}
 --- !u!65 &3873145610678653780
 BoxCollider:
