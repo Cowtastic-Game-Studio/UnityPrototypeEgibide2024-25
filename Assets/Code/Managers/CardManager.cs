@@ -441,7 +441,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, mask))
             {
                 // Mover la carta sobre el plano
-                Vector3 newPosition = hit.point + Vector3.up * 0.1f;
+                Vector3 newPosition = hit.point + Vector3.up;
 
                 selectedCard.transform.position = newPosition;
             }
@@ -518,6 +518,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 CardBehaviour cardBH = card.GetComponent<CardBehaviour>();
                 cardBH.LifeCycleDaysRemaining -= 1;
+                //cardBH.Activate();
+            }
+        }
+
+        public void ActivatePlacedCards()
+        {
+            foreach (GameObject card in playedCardsDeck.Cards)
+            {
+                CardBehaviour cardBH = card.GetComponent<CardBehaviour>();
+                cardBH.Activate();
             }
         }
 

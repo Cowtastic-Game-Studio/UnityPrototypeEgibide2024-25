@@ -79,12 +79,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             }
 
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 Tabletop.CardManager.DrawFromDeck();
             }
 
-            if (Input.GetKeyDown(KeyCode.M))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
                 Tabletop.CardManager.Mulligan();
             }
@@ -122,6 +122,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GameCalendar.AddCalendarEvent(new PlagueEvent(), false);
             GameCalendar.AddCalendarEvent(new BrokenFridgeEvent(), false);
             GameCalendar.AddCalendarEvent(new CivilWarEvent(), false);
+            GameCalendar.AddCalendarEvent(new LuckStrike(), false);
+            GameCalendar.AddCalendarEvent(new Heist(), false);
+            GameCalendar.AddCalendarEvent(new BrokenFridgeEvent(), false);
         }
 
         // Metodo para invocar el evento de clic de carta
