@@ -585,7 +585,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3462212801927424307, guid: c4a03766196b519409927ae95080b226, type: 3}
       propertyPath: m_Center.z
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3462212801927424307, guid: c4a03766196b519409927ae95080b226, type: 3}
       propertyPath: m_IsTrigger
