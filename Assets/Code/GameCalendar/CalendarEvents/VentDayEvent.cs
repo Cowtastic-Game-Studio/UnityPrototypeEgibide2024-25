@@ -23,7 +23,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 if (cardBH.Type == CardType.Cow) 
                 {
-                    cardBH.IncreaseLifeCycleDays(1);
+                    cardBH.LifeCycleDaysRemaining += 1;
                 }
             }
         }

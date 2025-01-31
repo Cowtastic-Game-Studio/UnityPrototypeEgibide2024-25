@@ -136,25 +136,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Pasa el estado activo
             display.UpdateDisplay(template, isActive);
         }
-
-
-        /// <summary>
-        /// Aumenta LifeCycleDaysRemaining en la cantidad especificada.
-        /// </summary>
-        /// <param name="days">Cantidad de días a aumentar</param>
-        public void IncreaseLifeCycleDays(int days)
-        {
-            if (days > 0)
-            {
-                LifeCycleDaysRemaining += days;
-                Debug.Log($"LifeCycleDaysRemaining incrementado en {days}. Nuevo valor: {LifeCycleDaysRemaining}");
-            }
-            else
-            {
-                Debug.LogWarning("El incremento de LifeCycleDays debe ser mayor a cero.");
-            }
-        }
-
         #endregion
 
 
