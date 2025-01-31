@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -11,6 +12,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         [SerializeField] private GameObject page;
         [SerializeField] private GameObject shopItem;
+        [SerializeField] private GameObject cardPreview;
 
         private List<ShopItemData> shopItemsData;
 
@@ -24,11 +26,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         // Start is called before the first frame update
         void Start()
         {
-            Debug.Log("Market Manager Start");
+            cardPreview.SetActive(false);
             marketCards.Initialize();
             shopItemsData = marketCards.ShopItemsData;
             GetMuuney();
 
+            pageList = page.GetComponent<SlotsList>()?.slotsList;
             UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Cow).ConvertAll(x => x.cardTemplate));
         }
 
@@ -38,54 +41,99 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (Input.GetMouseButtonDown(0)) // Detecta clic izquierdo del mouse
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                int layerMask = LayerMask.GetMask("Default"); // Ajusta esto según las capas que quieras considerar
 
-                if (Physics.Raycast(ray, out RaycastHit hit))
+                if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
                 {
                     if (hit.collider != null)
                     {
                         string name = hit.collider.name;
-                        Debug.Log("Hit: " + hit.collider.name);
+                        GameObject shopItemGO = hit.collider.gameObject.transform.parent.gameObject;
 
-                        switch (name)
-                        {
-                            case "CowButton":
-                                shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Cow);
+                        Debug.Log("Name: " + name);
+                        //Debug.Log("Hit: " + hit.collider.name);
 
-                                UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Cow).ConvertAll(x => x.cardTemplate));
-
-                                break;
-                            case "SeedButton":
-                                break;
-                            case "ClientButton":
-                                break;
-                            case "TemporalButton":
-                                break;
-                            case "ZonesButton":
-                                break;
-
-                            default:
-                                break;
-                        }
+                        ChangePanel(name, shopItemGO);
                     }
                 }
             }
         }
 
+
+        private void ChangePanel(string name, GameObject shopItemGO)
+        {
+            switch (name)
+            {
+                case "CowButton":
+                    Debug.Log("Cows");
+
+                    Debug.Log("PageList: " + pageList.Count);
+
+                    UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Cow).ConvertAll(x => x.cardTemplate));
+
+                    break;
+                case "SeedButton":
+                    Debug.Log("Seeds");
+
+                    Debug.Log("PageList: " + pageList.Count);
+
+                    UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Seed).ConvertAll(x => x.cardTemplate));
+
+                    break;
+                case "ClientButton":
+                    Debug.Log("Client");
+
+
+                    UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Customer).ConvertAll(x => x.cardTemplate));
+
+                    break;
+                case "TemporalButton":
+                    Debug.Log("Temporal");
+
+
+                    UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.PlaceMultiplier).ConvertAll(x => x.cardTemplate));
+
+                    break;
+                case "ZonesButton":
+                    Debug.Log("Zones");
+
+                    UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Helper).ConvertAll(x => x.cardTemplate));
+
+                    break;
+                case "CardDisplay Template":
+                    Debug.Log("CardDisplay Template");
+                    cardPreview.SetActive(true);
+
+                    break;
+                case "BuyButton":
+                    Debug.Log("BuyButton");
+
+                    shopItemGO.GetComponent<ShopItem>()?.TriggerCard();
+                    shopItemGO.GetComponent<ShopItem>()?.TriggerPrice();
+
+
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
         public void UpdateShopItemDisplay(List<CardTemplate> cardList)
         {
-            Debug.Log("Update");
-
-            pageList = page.GetComponent<SlotsList>()?.slotsList;
             int counter = 0;
+            // todo: borrar los items anteriores
             foreach (CardTemplate card in cardList)
             {
-                GameObject slot = pageList[counter];
-                Debug.Log("Slot");
+                if (counter < pageList.Count)
+                {
+                    GameObject slot = pageList[counter];
 
-                GameObject createdItem = GameObject.Instantiate(shopItem, slot.transform);
+                    GameObject createdItem = GameObject.Instantiate(shopItem, slot.transform);
 
-                createdItem.GetComponent<ShopItem>()?.UpdateDisplayData(card);
-                counter++;
+                    createdItem.GetComponent<ShopItem>()?.UpdateDisplayData(card);
+                    counter++;
+                }
             }
         }
 

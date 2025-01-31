@@ -1,4 +1,5 @@
 using TMPro;
+
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -12,6 +13,17 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             card.UpdateDisplay(cardTemplate, false);
             price.text = cardTemplate.marketCost.ToString();
+        }
+
+        public void TriggerCard()
+        {
+            Debug.Log("TriggerCard");
+        }
+
+        public void TriggerPrice()
+        {
+            Debug.Log("TriggerPrice");
+            Debug.Log("Price: " + price.text);
         }
     }
 }
