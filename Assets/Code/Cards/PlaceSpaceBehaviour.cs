@@ -138,9 +138,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return item.type;
         }
 
-        public bool GetIsActive(PlaceSpaceBehaviour item)
+        public bool GetIsActive()
         {
-            return item.isActive;
+            return isActive;
         }
 
         public void SetIsActive(bool active)

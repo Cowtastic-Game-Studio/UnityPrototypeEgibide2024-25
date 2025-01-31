@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -22,8 +24,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         //[Space(3)]
         //public FarmZone Farm;
         //public StableZone Stables;
-        //public TarvernZone Taverna;
+        //public TavernZone Taverna;
 
+        public List<PlaceSpaceBehaviour> farms = new List<PlaceSpaceBehaviour>();
+        public List<PlaceSpaceBehaviour> stables = new List<PlaceSpaceBehaviour>();
+        public List<PlaceSpaceBehaviour> taverns = new List<PlaceSpaceBehaviour>();
 
         private List<PlaceSpaceBehaviour> placeSpaceBehaviours = new List<PlaceSpaceBehaviour>();
         #endregion
@@ -83,6 +88,48 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             foreach (PlaceSpaceBehaviour place in placeSpaceBehaviours)
             {
                 place.updateEmpty();
+            }
+        }
+
+        public void FarmsActivateZone()
+        {
+            foreach(PlaceSpaceBehaviour farm in farms)
+            {
+                int i = 0;
+
+                if ((farms[i - 1].GetIsActive() || farms[i-1].Equals(null)) && !farms[i].GetIsActive() && (!farms[i + 1].GetIsActive() || farms[i-1].Equals(null)))
+                {
+                    farms[i].SetIsActive(true);
+                    break;
+                }
+            }
+        }
+
+        public void StablesActivateZone()
+        {
+            foreach(PlaceSpaceBehaviour stable in stables)
+            {
+                int i = 0;
+
+                if ((stables[i - 1].GetIsActive() || stables[i-1].Equals(null)) && !stables[i].GetIsActive() && (!stables[i + 1].GetIsActive() || stables[i-1].Equals(null)))
+                {
+                    stables[i].SetIsActive(true);
+                    break;
+                }
+            }
+        }
+
+        public void TavernActivateZone()
+        {
+            foreach(PlaceSpaceBehaviour tavern in taverns)
+            {
+                int i = 0;
+
+                if ((taverns[i - 1].GetIsActive() || taverns[i-1].Equals(null)) && !taverns[i].GetIsActive() && (!taverns[i + 1].GetIsActive() || taverns[i-1].Equals(null)))
+                {
+                    taverns[i].SetIsActive(true);
+                    break;
+                }
             }
         }
 
