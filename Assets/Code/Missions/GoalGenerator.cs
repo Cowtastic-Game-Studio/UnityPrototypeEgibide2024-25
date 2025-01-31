@@ -106,7 +106,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
                 //genera el objetivo y lo añade a la lista
                 goal = WeeklyGoalFunctions[index].Invoke();
                 goals.Add(goal);
-            }            
+            }
 
             return goals;
         }
@@ -183,7 +183,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
                 OnStatisticChanged = () =>
                 {
                     //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.MilkSelled);
+                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.MilkTotalUsed);
 
                     if (stat.Uses >= 3)
                         goal.IsCompleted = true;
