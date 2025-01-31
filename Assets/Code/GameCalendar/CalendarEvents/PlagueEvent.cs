@@ -21,7 +21,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             Debug.Log("Found " + spaceBehaviourList.Length + " instances with this script attached");
             foreach (PlaceSpaceBehaviour item in spaceBehaviourList)
             {
-                if (item.GetType(item) == CardType.Seed && item.GetIsActive(item) == true)
+                if (item.GetType(item) == CardType.Seed && item.GetIsActive() == true)
                 {
                     gardenList.Add(item);
                 }
@@ -32,8 +32,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public override void ApplyEffects()
         {
-            Debug.Log("¡Plaga! Los cultivos han sido destruidos.");
-            // Lógica para destruir cultivos
+            Debug.Log("ï¿½Plaga! Los cultivos han sido destruidos.");
+            // Lï¿½gica para destruir cultivos
 
             for (int i = 0; i < gardenList.Count / 2; i++)
             {
