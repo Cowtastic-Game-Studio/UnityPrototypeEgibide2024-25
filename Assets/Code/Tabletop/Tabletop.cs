@@ -26,6 +26,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         //public StableZone Stables;
         //public TavernZone Taverna;
 
+/// <summary>
+/// Listas de zonas para poder activarlas
+/// </summary>
         public List<PlaceSpaceBehaviour> farms = new List<PlaceSpaceBehaviour>();
         public List<PlaceSpaceBehaviour> stables = new List<PlaceSpaceBehaviour>();
         public List<PlaceSpaceBehaviour> taverns = new List<PlaceSpaceBehaviour>();
@@ -91,15 +94,18 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
+/// <summary>
+/// Estos 3 metodos son los que activan la siguiente zona a activar cuando mejoren alguna zona.(Nota: Asegurarse de que las casillas que tienen que empezar activas estan las primeras en la lista , gracias.)
+/// </summary>
         public void FarmsActivateZone()
         {
             foreach(PlaceSpaceBehaviour farm in farms)
             {
                 int i = 0;
 
-                if ((farms[i - 1].GetIsActive() || farms[i-1].Equals(null)) && !farms[i].GetIsActive() && (!farms[i + 1].GetIsActive() || farms[i-1].Equals(null)))
+                if (!farm.GetIsActive())
                 {
-                    farms[i].SetIsActive(true);
+                    farm.SetIsActive(true);
                     break;
                 }
             }
@@ -109,11 +115,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             foreach(PlaceSpaceBehaviour stable in stables)
             {
-                int i = 0;
-
-                if ((stables[i - 1].GetIsActive() || stables[i-1].Equals(null)) && !stables[i].GetIsActive() && (!stables[i + 1].GetIsActive() || stables[i-1].Equals(null)))
+                if (!stable.GetIsActive())
                 {
-                    stables[i].SetIsActive(true);
+                    stable.SetIsActive(true);
                     break;
                 }
             }
@@ -123,11 +127,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             foreach(PlaceSpaceBehaviour tavern in taverns)
             {
-                int i = 0;
-
-                if ((taverns[i - 1].GetIsActive() || taverns[i-1].Equals(null)) && !taverns[i].GetIsActive() && (!taverns[i + 1].GetIsActive() || taverns[i-1].Equals(null)))
+                if (!tavern.GetIsActive())
                 {
-                    taverns[i].SetIsActive(true);
+                    tavern.SetIsActive(true);
                     break;
                 }
             }
