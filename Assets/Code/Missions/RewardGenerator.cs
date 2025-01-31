@@ -20,7 +20,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             UnityAction rewardReceiveDelegate = () =>
             {
                 //TODO: Añadir 10 de oro
-                GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(10, GameResource.Muuney);
+                GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(10, GameResource.Muuney, true);
 
                 //TODO: Añadir 1 carta de vaca veloz
                 GameManager.Instance.Tabletop.CardManager.buyCard(CardType.Cow);
@@ -41,7 +41,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
                 int roundedMuuney = Utils.RoundMuuney((int)tenPercentMuuney);
                 
                 // Añadir dinero y actualizar hud
-                GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(roundedMuuney, GameResource.Muuney);
+                GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(roundedMuuney, GameResource.Muuney, true);
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
                 Debug.Log("Se ha aadido Muuney: " + roundedMuuney);
                 
