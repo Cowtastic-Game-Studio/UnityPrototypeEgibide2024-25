@@ -10,15 +10,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void Start()
         {
-            foreach (var slot in slotsList)
-            {
-                slot.SetActive(false);
-            }
 
-            foreach (var button in buttonsList)
-            {
-                button.SetActive(false);
-            }
         }
     }
 }
