@@ -26,6 +26,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             // C�digo para entrar en la fase
             Console.WriteLine("Entering Place Cards Phase");
+
+            GameManager.Instance.Tabletop.CardManager.ActivateHandDeckCards();
+
             // Suscribirse al evento global de clic de carta en GameManager
             GameManager.Instance.OnCardClickedGlobal += OnCardClickedHandler;
             GameManager.Instance.OnPlaceSpaceClickedGlobal += OnPlaceSpaceClickedHandler;
@@ -50,8 +53,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GameManager.Instance.Tabletop.CardManager.StopDragging();
 
             GameManager.Instance.Tabletop.CardManager.DiscardHand();
-
-            GameManager.Instance.Tabletop.checkHelperPlayer();
         }
 
         private void OnCardClickedHandler(ICard card)

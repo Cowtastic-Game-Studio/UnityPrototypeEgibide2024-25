@@ -94,13 +94,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
-        internal void checkHelperPlayer()
-        {
-            foreach (PlaceSpaceBehaviour place in placeSpaceBehaviours)
-            {
-                place.checkContainsHelper();
-            }
-        }
         #endregion
 
         #region Private methods

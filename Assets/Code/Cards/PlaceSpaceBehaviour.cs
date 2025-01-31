@@ -183,20 +183,5 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 isActive = false;
         }
 
-        internal void checkContainsHelper()
-        {
-            // Obtener todos los componentes CardBehaviour en los hijos
-            CardBehaviour[] cardBehaviours = gameObject.GetComponentsInChildren<CardBehaviour>();
-
-            // Iterar a través de cada CardBehaviour encontrado
-            foreach (var cardBehaviour in cardBehaviours)
-            {
-                // Verificar si el tipo de la carta es Helper
-                if (cardBehaviour.Type == CardType.Helper)
-                {
-                    GameManager.Instance.Tabletop.StorageManager.addResource(cardBehaviour.ProducedResources[0].resourceType, cardBehaviour.ProducedResources[0].resourceQuantity);
-                }
-            }
-        }
     }
 }
