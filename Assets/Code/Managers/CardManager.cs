@@ -123,7 +123,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             InitHandCardLifes();
         }
 
-        private void MoveLastCardsToHand(int cardsToDraw)
+        public void MoveLastCardsToHand(int cardsToDraw)
         {
             // Verificar que hay suficientes cartas en el mazo de robo
             if (drawDeck.Cards.Count < 5)
@@ -144,6 +144,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     // Agregar la carta a la lista de la mano
                     //handDeck.Place(cardToMove);
                     SetCardState(cardToMove, CardState.onHand);
+
+                    //activar las cartas al ir a la mano
+                    var cardBH = cardToMove.GetComponent<CardBehaviour>();
+                    cardBH.Activate();
                 }
             }
 
@@ -483,6 +487,17 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     cardBH.IsPlaced = true;
                     cardBH.Activate();
                     selectedCard = null;
+
+
+                    //Special case
+                    if (cardBH.Type == CardType.Helper)
+                    {
+                        cardBH.Deactivate();
+                        GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(6, GameResource.ActionPoints, false);
+                        GameManager.Instance.Tabletop.HUDManager.UpdateResources();
+                        MoveLastCardsToHand(1);
+                    }
+
                 }
             }
         }
@@ -522,9 +537,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
-        public void ActivatePlacedCards()
+        public void ActivateHandDeckCards()
         {
-            foreach (GameObject card in playedCardsDeck.Cards)
+            foreach (GameObject card in HandDeck.Cards)
             {
                 CardBehaviour cardBH = card.GetComponent<CardBehaviour>();
                 cardBH.Activate();

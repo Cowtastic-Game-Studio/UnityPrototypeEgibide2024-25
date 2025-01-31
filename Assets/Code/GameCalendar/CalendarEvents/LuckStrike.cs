@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -10,7 +8,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// Constructor para inicializar el evento LuckStrike.
         /// Donde el gatito del jugador le otorga una bolsa con el 10% de muuney que puede tener
         /// </summary>
-        public LuckStrike() 
+        public LuckStrike()
             : base("Golpe de suerte", "Tu gatito ha encontrado algo... ostia tu cuanta munney", 1)
         {
 
@@ -22,9 +20,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             int currentMaxMuuney = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.Muuney);
             double tenPercentMuuney = currentMaxMuuney * 0.10;
             int roundedMuuney = Utils.RoundMuuney((int)tenPercentMuuney);
-            
+
             // Añadir dinero y actualizar hud
-            GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(roundedMuuney, GameResource.Muuney);
+            GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(roundedMuuney, GameResource.Muuney, true);
             GameManager.Instance.Tabletop.HUDManager.UpdateResources();
             Debug.Log("Se ha aadido Muuney: " + roundedMuuney);
         }

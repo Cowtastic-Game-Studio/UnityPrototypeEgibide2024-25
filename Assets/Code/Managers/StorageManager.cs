@@ -15,6 +15,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private GameResource typeResource = GameResource.None;
         private List<ResourceAmount> _requiredResources;
         private List<ResourceAmount> _producedResources;
+        private int _paCost;
         #endregion
 
         private void Awake()
@@ -39,7 +40,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 return false;
             }
-
+            _paCost = nAP;
             return true;
         }
 
@@ -122,7 +123,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 StatisticsManager.Instance.UpdateByResource(producedType, producedQuantity, false);
             }
 
-            RemoveResources(1, _paStorage);
+            RemoveResources(_paCost, _paStorage);
             StatisticsManager.Instance.UpdateByResource(GameResource.ActionPoints, 1, true);
 
             return true;
@@ -185,23 +186,27 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         /// <param name="quantity">La cantidad de recursos a añadir.</param>
         /// <param name="type">El tipo de recurso.</param>
-        public void AddResourceUpToMax(int quantity, GameResource type)
+        public void AddResourceUpToMax(int quantity, GameResource type, bool isUpToMax)
         {
             var storage = GetStorage<IStorage>(type);
-            
+
             if (storage == null)
             {
                 Debug.LogError($"No se encontró almacenamiento para el recurso: {type}");
                 return;
             }
 
-            // Calcular espacio restante
-            int espacioDisponible = storage.MaxResources - storage.Resource;
-
-            if (espacioDisponible <= 0)
+            int espacioDisponible = storage.Resource;
+            if (isUpToMax)
             {
-                Debug.LogWarning($"El almacenamiento de {type} está lleno.");
-                return;
+                // Calcular espacio restante
+                espacioDisponible = storage.MaxResources - storage.Resource;
+
+                if (espacioDisponible <= 0)
+                {
+                    Debug.LogWarning($"El almacenamiento de {type} está lleno.");
+                    return;
+                }
             }
 
             // Añadir la cantidad permitida sin exceder el máximo
@@ -394,7 +399,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private void UpgradeBankStorage()
         {
-            int upgradeCost = Utils.RoundMuuney(30*_bankStorage.MaxResources)/100;
+            int upgradeCost = Utils.RoundMuuney(30 * _bankStorage.MaxResources) / 100;
             if (CheckMuuney(upgradeCost))
             {
                 _bankStorage.MaxResources += 5;
@@ -441,23 +446,23 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         // Este update se puede borrar, solo es para pruebas.
         public void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Y)) 
+            if (Input.GetKeyDown(KeyCode.Y))
             {
                 UpgradeStorage(_bankStorage);
             }
-            if (Input.GetKeyDown(KeyCode.U)) 
+            if (Input.GetKeyDown(KeyCode.U))
             {
                 UpgradeStorage(_paStorage);
             }
-            if (Input.GetKeyDown(KeyCode.I)) 
+            if (Input.GetKeyDown(KeyCode.I))
             {
                 UpgradeStorage(_fridgeStorage);
             }
-            if (Input.GetKeyDown(KeyCode.O)) 
+            if (Input.GetKeyDown(KeyCode.O))
             {
                 UpgradeStorage(_silo);
             }
-            if (Input.GetKeyDown(KeyCode.L)) 
+            if (Input.GetKeyDown(KeyCode.L))
             {
                 _bankStorage.Resource = _bankStorage.MaxResources;
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();

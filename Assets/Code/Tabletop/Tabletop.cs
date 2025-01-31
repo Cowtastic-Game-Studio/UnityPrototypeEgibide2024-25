@@ -142,6 +142,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 place.updateActive();
             }
         }
+
         #endregion
 
         #region Private methods
