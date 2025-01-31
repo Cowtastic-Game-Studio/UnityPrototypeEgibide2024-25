@@ -531,11 +531,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
-
+        //TODO: change to receive scriptableObject CardTemplate
+        // + move card prefab back to Prefab folder
         internal void buyCard(CardType cardType)
         {
             GameObject card = null;
-            string path = "Prefabs/Cards/";
+            string path = "Cards/Prefab/";
 
             switch (cardType)
             {
