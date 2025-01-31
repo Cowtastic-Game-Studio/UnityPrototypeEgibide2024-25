@@ -26,8 +26,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     cardBH.IncreaseLifeCycleDays(1);
                 }
             }
-
-            GameManager.Instance.Tabletop.HUDManager.UpdateResources();
         }
 
         public override void EndEvent()
