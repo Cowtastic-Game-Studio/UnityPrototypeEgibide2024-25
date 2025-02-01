@@ -14,9 +14,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [SerializeField] private GameObject shopItem;
         [SerializeField] private GameObject cardPreview;
 
+        [SerializeField]
+        private ShopSlotList shopSlotList;
+
         private List<ShopItemData> shopItemsData;
 
-        private List<GameObject> pageList = new();
+        private List<GameObject> pageItemsList = new();
+
+        private List<CardTemplate> cardList = new();
 
         private void Awake()
         {
@@ -31,8 +36,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             shopItemsData = marketCards.ShopItemsData;
             GetMuuney();
 
-            pageList = page.GetComponent<SlotsList>()?.slotsList;
-            UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Cow).ConvertAll(x => x.cardTemplate));
+            pageItemsList = page.GetComponent<ShopSlotList>()?.slotsList;
+            UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Cow && x.isActive).ConvertAll(x => x.cardTemplate));
+
         }
 
         // Update is called once per frame
@@ -67,40 +73,47 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 case "CowButton":
                     Debug.Log("Cows");
 
-                    Debug.Log("PageList: " + pageList.Count);
+                    Debug.Log("PageList: " + pageItemsList.Count);
 
-                    UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Cow).ConvertAll(x => x.cardTemplate));
+                    //foreach (var item in shopItemsData)
+                    //{
+                    //    if (item.cardTemplate.cardType == CardType.Cow && !item.isActive)
+                    //    {
+                    //        cardList.Add(item.cardTemplate);
+                    //    }
+                    //}
+                    UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Cow && x.isActive).ConvertAll(x => x.cardTemplate));
 
                     break;
                 case "SeedButton":
                     Debug.Log("Seeds");
 
-                    Debug.Log("PageList: " + pageList.Count);
+                    Debug.Log("PageList: " + pageItemsList.Count);
 
-                    UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Seed).ConvertAll(x => x.cardTemplate));
+                    UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Seed && x.isActive).ConvertAll(x => x.cardTemplate));
 
                     break;
                 case "ClientButton":
                     Debug.Log("Client");
 
 
-                    UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Customer).ConvertAll(x => x.cardTemplate));
+                    UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Customer && x.isActive).ConvertAll(x => x.cardTemplate));
 
                     break;
                 case "TemporalButton":
                     Debug.Log("Temporal");
 
 
-                    UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.PlaceMultiplier).ConvertAll(x => x.cardTemplate));
+                    UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.PlaceMultiplier && x.isActive).ConvertAll(x => x.cardTemplate));
 
                     break;
                 case "ZonesButton":
                     Debug.Log("Zones");
 
-                    UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Helper).ConvertAll(x => x.cardTemplate));
+                    UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Helper && x.isActive).ConvertAll(x => x.cardTemplate));
 
                     break;
-                case "CardDisplay Template":
+                case "CardDisplayTemplate":
                     Debug.Log("CardDisplay Template");
                     cardPreview.SetActive(true);
 
@@ -121,13 +134,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void UpdateShopItemDisplay(List<CardTemplate> cardList)
         {
+            ClearPageItemsList();
+
             int counter = 0;
             // todo: borrar los items anteriores
             foreach (CardTemplate card in cardList)
             {
-                if (counter < pageList.Count)
+                if (counter < pageItemsList.Count)
                 {
-                    GameObject slot = pageList[counter];
+                    GameObject slot = pageItemsList[counter];
 
                     GameObject createdItem = GameObject.Instantiate(shopItem, slot.transform);
 
@@ -135,8 +150,20 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     counter++;
                 }
             }
+
         }
 
+        private void ClearPageItemsList()
+        {
+            foreach (var item in pageItemsList)
+            {
+                for (int i = 0; i < item.transform.childCount; i++)
+                {
+                    if (item.transform.GetChild(i).gameObject != null)
+                        Destroy(item.transform.GetChild(i).gameObject);
+                }
+            }
+        }
 
         public void GetItemSlots()
         {

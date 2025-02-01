@@ -1,16 +1,30 @@
 using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    public class SlotsList : MonoBehaviour
+    public class ShopSlotList : MonoBehaviour
     {
         public List<GameObject> slotsList;
-        public List<GameObject> buttonsList;
+        [SerializeField] private GameObject nextPage;
+        [SerializeField] private GameObject previousPage;
 
-        private void Start()
+        private int currentPage = 0;
+
+        public void NextPage()
         {
+            if (currentPage < slotsList.Count - 1)
+            {
 
+            }
+        }
+
+        public void PreviousPage()
+        {
+            if (currentPage > 0)
+            {
+            }
         }
     }
 }
