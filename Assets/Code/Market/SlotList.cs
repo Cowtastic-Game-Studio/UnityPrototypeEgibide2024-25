@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    public class ShopSlotList : MonoBehaviour
+    public class SlotList : MonoBehaviour
     {
         public List<GameObject> slotsList;
         [SerializeField] private GameObject nextPage;

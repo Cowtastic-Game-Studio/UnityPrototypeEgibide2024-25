@@ -15,7 +15,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [SerializeField] private GameObject cardPreview;
 
         [SerializeField]
-        private ShopSlotList shopSlotList;
+        private SlotList shopSlotList;
 
         private List<ShopItemData> shopItemsData;
 
@@ -36,7 +36,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             shopItemsData = marketCards.ShopItemsData;
             GetMuuney();
 
-            pageItemsList = page.GetComponent<ShopSlotList>()?.slotsList;
+            pageItemsList = page.GetComponent<SlotList>()?.slotsList;
             UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Cow && x.isActive).ConvertAll(x => x.cardTemplate));
 
         }
@@ -47,7 +47,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (Input.GetMouseButtonDown(0)) // Detecta clic izquierdo del mouse
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                int layerMask = LayerMask.GetMask("Default"); // Ajusta esto según las capas que quieras considerar
+                int layerMask = LayerMask.GetMask("Market");
 
                 if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
                 {
@@ -57,7 +57,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         GameObject shopItemGO = hit.collider.gameObject.transform.parent.gameObject;
 
                         Debug.Log("Name: " + name);
-                        //Debug.Log("Hit: " + hit.collider.name);
 
                         ChangePanel(name, shopItemGO);
                     }
@@ -71,60 +70,35 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             switch (name)
             {
                 case "CowButton":
-                    Debug.Log("Cows");
-
-                    Debug.Log("PageList: " + pageItemsList.Count);
-
-                    //foreach (var item in shopItemsData)
-                    //{
-                    //    if (item.cardTemplate.cardType == CardType.Cow && !item.isActive)
-                    //    {
-                    //        cardList.Add(item.cardTemplate);
-                    //    }
-                    //}
                     UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Cow && x.isActive).ConvertAll(x => x.cardTemplate));
 
                     break;
                 case "SeedButton":
-                    Debug.Log("Seeds");
-
-                    Debug.Log("PageList: " + pageItemsList.Count);
-
                     UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Seed && x.isActive).ConvertAll(x => x.cardTemplate));
 
                     break;
                 case "ClientButton":
-                    Debug.Log("Client");
-
-
                     UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Customer && x.isActive).ConvertAll(x => x.cardTemplate));
 
                     break;
                 case "TemporalButton":
-                    Debug.Log("Temporal");
-
-
                     UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.PlaceMultiplier && x.isActive).ConvertAll(x => x.cardTemplate));
 
                     break;
                 case "ZonesButton":
-                    Debug.Log("Zones");
-
                     UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Helper && x.isActive).ConvertAll(x => x.cardTemplate));
 
                     break;
                 case "CardDisplayTemplate":
+                    // TODO: Mostrar la información de la carta bien
                     Debug.Log("CardDisplay Template");
                     cardPreview.SetActive(true);
+                    shopItemGO.GetComponent<ShopItem>()?.TriggerCard();
 
                     break;
                 case "BuyButton":
-                    Debug.Log("BuyButton");
-
-                    shopItemGO.GetComponent<ShopItem>()?.TriggerCard();
+                    // TODO: Logica de comprar la carta
                     shopItemGO.GetComponent<ShopItem>()?.TriggerPrice();
-
-
                     break;
 
                 default:
@@ -137,7 +111,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             ClearPageItemsList();
 
             int counter = 0;
-            // todo: borrar los items anteriores
             foreach (CardTemplate card in cardList)
             {
                 if (counter < pageItemsList.Count)
@@ -163,10 +136,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         Destroy(item.transform.GetChild(i).gameObject);
                 }
             }
-        }
-
-        public void GetItemSlots()
-        {
         }
 
 
