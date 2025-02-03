@@ -85,17 +85,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             positions[27] = new Vector3(0.005f, -3.61f, 6.322f);
         }
 
-        // TODO: borrar
-        public void TestEvent()
-        {
-            eventManager.TestActiveEvent();
-        }
-
-        public void TestStopEvent()
-        {
-            eventManager.EndActiveEvent();
-        }
-
         // Avanzar al siguiente d�a
         public void NextDay()
         {
@@ -112,28 +101,24 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         // Comprobar si debe ocurrir un evento
         public void CheckForEvent()
         {
+            eventManager.TriggerDailyEvent(CurrentDay);
+
             // Al final de cada semana (m�ltiplo de 7) + Evitar la primera semana
-            if (CurrentDay % 7 == 1 && CurrentDay > 7)
-            {
-                CurrentWeek++;
-                // Asignar un d�a aleatorio dentro de la nueva semana para que ocurra un evento
-                eventDayOfWeek = new System.Random().Next(1, 8);
-            }
+            //if (CurrentDay % 7 == 1 && CurrentDay > 7)
+            //{
+            //    CurrentWeek++;
+            //    // Asignar un d�a aleatorio dentro de la nueva semana para que ocurra un evento
+            //    eventDayOfWeek = new System.Random().Next(1, 8);
+            //}
 
-            // Comprobar si el d�a actual es el d�a del evento
-            if (CurrentDay % 7 == eventDayOfWeek % 7)
-            {
-                // Dispara un evento aleatorio
-                eventManager.TriggerRandomEvent();
-                // Resetear el evento de la semana actual
-                eventDayOfWeek = -1;
-            }
-        }
-
-        // Agregar eventos al calendario
-        public void AddCalendarEvent(CalendarEvent calendarEvent, bool isDinamico)
-        {
-            eventManager.AddEvent(calendarEvent, isDinamico);
+            //// Comprobar si el d�a actual es el d�a del evento
+            //if (CurrentDay % 7 == eventDayOfWeek % 7)
+            //{
+            //    // Dispara un evento aleatorio
+            //    eventManager.TriggerRandomEvent();
+            //    // Resetear el evento de la semana actual
+            //    eventDayOfWeek = -1;
+            //}
         }
 
         // M�todo para obtener el nombre del d�a de la semana 
