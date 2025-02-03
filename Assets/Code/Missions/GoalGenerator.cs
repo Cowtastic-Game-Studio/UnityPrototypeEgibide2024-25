@@ -198,6 +198,122 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             return new Goal("W-M1", "Vende 3 leches", goal1Initialization);
         }
 
+        /// <summary>
+        /// Crea el objetivo 4 de la mision semanal.
+        /// "Vende 2 compra dos cartas"
+        /// </summary>
+        /// <returns></returns>
+        private static Goal CreateWeeklyGoal4()
+        {
+            UnityAction<Goal> goal1Initialization = (Goal goal) =>
+            {
+                UnityAction OnStatisticChanged = null;
+
+                OnStatisticChanged = () =>
+                {
+                    //Comprobar condicion del objetivo
+                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CardsPurchased);
+
+                    if (stat.Uses >= 2)
+                        goal.IsCompleted = true;
+
+                    //si esta clompleto
+                    if (goal.IsCompleted)
+                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
+                };
+
+                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
+            };
+            return new Goal("W-M1", "Vende 3 leches", goal1Initialization);
+        }
+
+        /// <summary>
+        /// Crea el objetivo 5 de la mision semanal.
+        /// "adquiere 20 de Muuuney"
+        /// </summary>
+        /// <returns></returns>
+        private static Goal CreateWeeklyGoal5()
+        {
+            UnityAction<Goal> goal1Initialization = (Goal goal) =>
+            {
+                UnityAction OnStatisticChanged = null;
+
+                OnStatisticChanged = () =>
+                {
+                    //Comprobar condicion del objetivo
+                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.MuuneyTotalAdquired);
+
+                    if (stat.Uses >= 20)
+                        goal.IsCompleted = true;
+
+                    //si esta clompleto
+                    if (goal.IsCompleted)
+                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
+                };
+
+                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
+            };
+            return new Goal("W-M1", "Vende 3 leches", goal1Initialization);
+        }
+
+        /// <summary>
+        /// Crea el objetivo 6 de la mision semanal.
+        /// "Usa una mejora temporal"
+        /// </summary>
+        /// <returns></returns>
+        private static Goal CreateWeeklyGoal6()
+        {
+            UnityAction<Goal> goal1Initialization = (Goal goal) =>
+            {
+                UnityAction OnStatisticChanged = null;
+
+                OnStatisticChanged = () =>
+                {
+                    //Comprobar condicion del objetivo
+                    // TODO No estoy seguro si esta es la estadistica para las mejoras temporales o para cartas temporales como tal
+                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.TemporaryUsedCards);
+
+                    if (stat.Uses >= 1)
+                        goal.IsCompleted = true;
+
+                    //si esta clompleto
+                    if (goal.IsCompleted)
+                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
+                };
+
+                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
+            };
+            return new Goal("W-M1", "Vende 3 leches", goal1Initialization);
+        }
+
+        /// <summary>
+        /// Crea el objetivo 7 de la mision semanal.
+        /// "Atiende a 5 clientes"
+        /// </summary>
+        /// <returns></returns>
+        private static Goal CreateWeeklyGoal7()
+        {
+            UnityAction<Goal> goal1Initialization = (Goal goal) =>
+            {
+                UnityAction OnStatisticChanged = null;
+
+                OnStatisticChanged = () =>
+                {
+                    //Comprobar condicion del objetivo
+                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CustomersServed);
+
+                    if (stat.Uses >= 1)
+                        goal.IsCompleted = true;
+
+                    //si esta clompleto
+                    if (goal.IsCompleted)
+                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
+                };
+
+                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
+            };
+            return new Goal("W-M1", "Vende 3 leches", goal1Initialization);
+        }
 
         #endregion
 
