@@ -10,6 +10,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 {
     internal static class RewardGenerator
     {
+
         /// <summary>
         /// Genera la recompensa del tutorial
         /// Añade 10 de muuney y 1 añade una carta de vaca veloz
@@ -50,6 +51,18 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
                 Debug.Log("Se ha aadido Muuney: " + roundedMuuney);
                 
+                GameManager.Instance.Tabletop.HUDManager.UpdateResources();
+            };
+
+            return new Reward(rewardReceiveDelegate);
+        }
+
+        // TODO hablar con Mikel para ver si esto le sirve para los rewards
+        public static Reward CreateGoalReward(int muuney)
+        {
+            UnityAction rewardReceiveDelegate = () =>
+            {
+                GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(muuney, GameResource.Muuney, true); 
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
             };
 
