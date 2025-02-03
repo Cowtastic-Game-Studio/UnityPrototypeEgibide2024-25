@@ -633,3 +633,5 @@ MonoBehaviour:
   - {fileID: 5158475164833551909}
   nextPage: {fileID: 7322374156945004540}
   previousPage: {fileID: 7553249054627586896}
+  totalPage: 1
+  currentPage: 1

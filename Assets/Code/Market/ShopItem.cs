@@ -24,6 +24,20 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             Debug.Log("TriggerPrice");
             Debug.Log("Price: " + price.text);
+
+            BuyCard(int.Parse(price.text));
         }
+
+        public void BuyCard(int price)
+        {
+            if (GameManager.Instance.Tabletop.StorageManager.CheckMuuney(price))
+            {
+                //Muuney = Muuney - x;
+                int muuney = GameManager.Instance.Tabletop.StorageManager.WasteMuuney(price);
+
+                //GameManager.Instance.Tabletop.CardManager.buyCard(cardType);
+            }
+        }
+
     }
 }

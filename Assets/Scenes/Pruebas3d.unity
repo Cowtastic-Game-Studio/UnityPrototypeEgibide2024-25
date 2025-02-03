@@ -4183,17 +4183,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8ac830727a3f3f44a02453c7246a5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  marketCards: {fileID: 908711202}
   buttonList:
   - {fileID: 1742473000}
   - {fileID: 1742472999}
   - {fileID: 1742472998}
   - {fileID: 1742472997}
   - {fileID: 1742472996}
+  InitMarketCards: {fileID: 908711202}
+  slotList: {fileID: 1278379601}
+  cardPreview: {fileID: 378393501}
   page: {fileID: 1278379599}
   shopItem: {fileID: 7452128422540233453, guid: fe74523c84c6fee46a1671e8c626867c, type: 3}
-  cardPreview: {fileID: 378393501}
-  slotList: {fileID: 1278379601}
 --- !u!114 &908711202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7248,14 +7248,6 @@ PrefabInstance:
     - target: {fileID: 5158475164833551909, guid: 7e2df16f40ec792428e9cd68180d627f, type: 3}
       propertyPath: m_Layer
       value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 5414063877342536566, guid: 7e2df16f40ec792428e9cd68180d627f, type: 3}
-      propertyPath: totalPage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5414063877342536566, guid: 7e2df16f40ec792428e9cd68180d627f, type: 3}
-      propertyPath: currentPage
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5554038674645326362, guid: 7e2df16f40ec792428e9cd68180d627f, type: 3}
       propertyPath: m_Layer

@@ -140,7 +140,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (GameManager.Instance.Tabletop.StorageManager.CheckMuuney(CardPrice))
             {
-                //Muuney = Muuney - x;
                 int muuney = GameManager.Instance.Tabletop.StorageManager.WasteMuuney(CardPrice);
 
                 muuneyCount.text = muuney.ToString();
