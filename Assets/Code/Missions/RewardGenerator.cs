@@ -31,6 +31,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             return new Reward(rewardReceiveDelegate);
         }
 
+        /// <summary>
+        /// Genera la recompensa semanal
+        /// Añade el 20% de muuuney
+        /// </summary>
+        /// <returns></returns>
         public static Reward CreateWeekReward()
         {
             UnityAction rewardReceiveDelegate = () =>

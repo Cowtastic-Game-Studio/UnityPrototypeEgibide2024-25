@@ -74,6 +74,130 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
         }
 
+        /// <summary>
+        /// Crea el objetivo 3 de la mision de tutorial.
+        /// "Consigue 1 de leche"
+        /// </summary>
+        /// <returns></returns>
+        public static Goal CreateTutorialGoal3()
+        {
+            UnityAction<Goal> goal2Initialization = (Goal goal) =>
+            {
+                UnityAction OnStatisticChanged = null;
+
+                //Crea 
+                OnStatisticChanged = () =>
+                {
+                    //Comprobar condicion del objetivo
+                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.MilkTotalAdquired);
+
+                    if (stat.Uses >= 1)
+                        goal.IsCompleted = true;
+
+                    //si esta clompleto
+                    if (goal.IsCompleted)
+                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
+                };
+
+                StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
+            };
+            return new Goal("T-M3", "Consigue 1 de leche", goal2Initialization);
+
+        }
+
+        /// <summary>
+        /// Crea el objetivo 4 de la mision de tutorial.
+        /// "Consigue un cliente"
+        /// </summary>
+        /// <returns></returns>
+        public static Goal CreateTutorialGoal4()
+        {
+            UnityAction<Goal> goal2Initialization = (Goal goal) =>
+            {
+                UnityAction OnStatisticChanged = null;
+
+                //Crea 
+                OnStatisticChanged = () =>
+                {
+                    //Comprobar condicion del objetivo
+                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CustomersTotalUsed);
+
+                    if (stat.Uses >= 1)
+                        goal.IsCompleted = true;
+
+                    //si esta clompleto
+                    if (goal.IsCompleted)
+                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
+                };
+
+                StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
+            };
+            return new Goal("T-M4", "Consigue un cliente", goal2Initialization);
+
+        }
+
+        /// <summary>
+        /// Crea el objetivo 5 de la mision de tutorial.
+        /// "Compra una carta"
+        /// </summary>
+        /// <returns></returns>
+        public static Goal CreateTutorialGoal5()
+        {
+            UnityAction<Goal> goal2Initialization = (Goal goal) =>
+            {
+                UnityAction OnStatisticChanged = null;
+
+                //Crea 
+                OnStatisticChanged = () =>
+                {
+                    //Comprobar condicion del objetivo
+                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CardsPurchased);
+
+                    if (stat.Uses >= 1)
+                        goal.IsCompleted = true;
+
+                    //si esta clompleto
+                    if (goal.IsCompleted)
+                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
+                };
+
+                StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
+            };
+            return new Goal("T-M5", "Compra una carta", goal2Initialization);
+
+        }
+
+        /// <summary>
+        /// Crea el objetivo 5 de la mision de tutorial.
+        /// "Compra una carta"
+        /// </summary>
+        /// <returns></returns>
+        public static Goal CreateTutorialGoal6()
+        {
+            UnityAction<Goal> goal2Initialization = (Goal goal) =>
+            {
+                UnityAction OnStatisticChanged = null;
+
+                //Crea 
+                OnStatisticChanged = () =>
+                {
+                    //Comprobar condicion del objetivo
+                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.ZonesUpgradePurchased);
+
+                    if (stat.Uses >= 1)
+                        goal.IsCompleted = true;
+
+                    //si esta clompleto
+                    if (goal.IsCompleted)
+                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
+                };
+
+                StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
+            };
+            return new Goal("T-M6", "Compra una mejora de zona", goal2Initialization);
+
+        }
+
         #endregion
 
         #region Semanales
@@ -353,6 +477,185 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
         }
 
+        /// <summary>
+        /// Crea el objetivo 2 de la mision de tutorial.
+        /// "Consigue 1 de trigo"
+        /// </summary>
+        /// <returns></returns>
+        public static Goal CreateGlobalGoal2()
+        {
+            UnityAction<Goal> goal1Initialization = (Goal goal) =>
+            {
+                UnityAction OnStatisticChanged = null;
+
+                OnStatisticChanged = () =>
+                {
+                    //Comprobar condicion del objetivo
+                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CowsMilked);
+
+                    if (stat.Uses >= 4)
+                        goal.IsCompleted = true;
+
+                    //si esta clompleto
+                    if (goal.IsCompleted)
+                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
+                };
+
+                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
+            };
+            return new Goal("G-M1", "Ordeña vacas 4 veces", goal1Initialization);
+
+        }
+
+        /// <summary>
+        /// Crea el objetivo 2 de la mision de tutorial.
+        /// "Consigue 1 de trigo"
+        /// </summary>
+        /// <returns></returns>
+        public static Goal CreateGlobalGoal1()
+        {
+            UnityAction<Goal> goal1Initialization = (Goal goal) =>
+            {
+                UnityAction OnStatisticChanged = null;
+
+                OnStatisticChanged = () =>
+                {
+                    //Comprobar condicion del objetivo
+                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CowsMilked);
+
+                    if (stat.Uses >= 4)
+                        goal.IsCompleted = true;
+
+                    //si esta clompleto
+                    if (goal.IsCompleted)
+                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
+                };
+
+                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
+            };
+            return new Goal("G-M1", "Ordeña vacas 4 veces", goal1Initialization);
+
+        }
+
+        /// <summary>
+        /// Crea el objetivo 2 de la mision de tutorial.
+        /// "Consigue 1 de trigo"
+        /// </summary>
+        /// <returns></returns>
+        public static Goal CreateGlobalGoal1()
+        {
+            UnityAction<Goal> goal1Initialization = (Goal goal) =>
+            {
+                UnityAction OnStatisticChanged = null;
+
+                OnStatisticChanged = () =>
+                {
+                    //Comprobar condicion del objetivo
+                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CowsMilked);
+
+                    if (stat.Uses >= 4)
+                        goal.IsCompleted = true;
+
+                    //si esta clompleto
+                    if (goal.IsCompleted)
+                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
+                };
+
+                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
+            };
+            return new Goal("G-M1", "Ordeña vacas 4 veces", goal1Initialization);
+
+        }
+
+        /// <summary>
+        /// Crea el objetivo 2 de la mision de tutorial.
+        /// "Consigue 1 de trigo"
+        /// </summary>
+        /// <returns></returns>
+        public static Goal CreateGlobalGoal1()
+        {
+            UnityAction<Goal> goal1Initialization = (Goal goal) =>
+            {
+                UnityAction OnStatisticChanged = null;
+
+                OnStatisticChanged = () =>
+                {
+                    //Comprobar condicion del objetivo
+                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CowsMilked);
+
+                    if (stat.Uses >= 4)
+                        goal.IsCompleted = true;
+
+                    //si esta clompleto
+                    if (goal.IsCompleted)
+                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
+                };
+
+                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
+            };
+            return new Goal("G-M1", "Ordeña vacas 4 veces", goal1Initialization);
+
+        }
+
+        /// <summary>
+        /// Crea el objetivo 2 de la mision de tutorial.
+        /// "Consigue 1 de trigo"
+        /// </summary>
+        /// <returns></returns>
+        public static Goal CreateGlobalGoal1()
+        {
+            UnityAction<Goal> goal1Initialization = (Goal goal) =>
+            {
+                UnityAction OnStatisticChanged = null;
+
+                OnStatisticChanged = () =>
+                {
+                    //Comprobar condicion del objetivo
+                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CowsMilked);
+
+                    if (stat.Uses >= 4)
+                        goal.IsCompleted = true;
+
+                    //si esta clompleto
+                    if (goal.IsCompleted)
+                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
+                };
+
+                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
+            };
+            return new Goal("G-M1", "Ordeña vacas 4 veces", goal1Initialization);
+
+        }
+
+        /// <summary>
+        /// Crea el objetivo 2 de la mision de tutorial.
+        /// "Consigue 1 de trigo"
+        /// </summary>
+        /// <returns></returns>
+        public static Goal CreateGlobalGoal1()
+        {
+            UnityAction<Goal> goal1Initialization = (Goal goal) =>
+            {
+                UnityAction OnStatisticChanged = null;
+
+                OnStatisticChanged = () =>
+                {
+                    //Comprobar condicion del objetivo
+                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CowsMilked);
+
+                    if (stat.Uses >= 4)
+                        goal.IsCompleted = true;
+
+                    //si esta clompleto
+                    if (goal.IsCompleted)
+                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
+                };
+
+                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
+            };
+            return new Goal("G-M1", "Ordeña vacas 4 veces", goal1Initialization);
+
+        }
 
         #endregion
 

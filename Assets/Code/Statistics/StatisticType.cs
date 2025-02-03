@@ -40,6 +40,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [EnumMember(Value = "Purchased zones")]
         ZonesPurchased,
 
+        [EnumMember(Value = "Purchased zone upgrade")]
+        ZonesUpgradePurchased,
+
         [EnumMember(Value = "Purchased zones with cards")]
         ZonesWithCardsPurchased,
 
@@ -62,6 +65,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         [EnumMember(Value = "Total used muuney")]
         MuuneyTotalUsed,
+
+        [EnumMember(Value = "Total used customers")]
+        CustomersTotalUsed,
 
         [EnumMember(Value = "Used AP")]
         APUsed
