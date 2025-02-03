@@ -18,10 +18,10 @@ MonoBehaviour:
   name: Super Stable
   description: 
   lifeCycleDays: 1
-  actionPointsCost: 3
+  actionPointsCost: 0
   requiredResources: []
   producedResources: []
-  marketCost: 15
+  marketCost: 25
   discardCost: 2
   dayToUnlock: 0
   targetCardType: 0

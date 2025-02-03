@@ -17,12 +17,14 @@ MonoBehaviour:
   cardType: 5
   name: Helper
   description: Una vez colocada no podras moverme, ten cuidao
-  actionPointsCost: 0
   lifeCycleDays: 1
+  actionPointsCost: 0
   requiredResources: []
   producedResources:
   - resourceType: 0
     resourceQuantity: 6
-  marketCost: 5
+  marketCost: 30
+  discardCost: 0
+  dayToUnlock: 0
   targetCardType: 6
   multiplier: 1
