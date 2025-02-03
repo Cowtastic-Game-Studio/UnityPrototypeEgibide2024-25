@@ -4191,9 +4191,9 @@ MonoBehaviour:
   - {fileID: 1742472996}
   InitMarketCards: {fileID: 908711202}
   slotList: {fileID: 1278379601}
-  cardPreview: {fileID: 378393501}
   page: {fileID: 1278379599}
   shopItem: {fileID: 7452128422540233453, guid: fe74523c84c6fee46a1671e8c626867c, type: 3}
+  cardPreview: {fileID: 378393501}
 --- !u!114 &908711202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5541,7 +5541,7 @@ MonoBehaviour:
   mulliganButton: {fileID: 71420113}
   actionPointsPanel: {fileID: 1850745887}
   resourcesPanel: {fileID: 1247059323}
-  marketGUI: {fileID: 908711199}
+  marketGUI: {fileID: 1278379599}
 --- !u!1 &1036477890 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2853958446008171405, guid: 2e8bd63428ca10f4e9fe2ab4ae7fdf67, type: 3}

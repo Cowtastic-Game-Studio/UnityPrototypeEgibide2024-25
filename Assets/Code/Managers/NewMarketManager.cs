@@ -40,10 +40,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         void Start()
         {
             cardPreview.SetActive(false);
-            InitMarketCards.Initialize();
 
+            InitMarketCards.Initialize();
             shopItemsData = InitMarketCards.ShopItemsData;
-            GetMuuney();
 
             pageItemsList = page.GetComponent<SlotList>()?.slotsList;
             UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Cow && x.isActive).ConvertAll(x => x.cardTemplate));
@@ -70,6 +69,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     }
                 }
             }
+        }
+
+        public void RestartMarket()
+        {
+            cardPreview.SetActive(false);
+            Debug.Log(shopItemsData);
+
+            UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Cow && x.isActive).ConvertAll(x => x.cardTemplate));
         }
 
         /// <summary>
@@ -121,6 +128,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 case "BuyButton":
                     // TODO: Logica de comprar la carta
+
+                    ShopItem shopItem = shopItemGO.GetComponent<ShopItem>();
+
+
                     shopItemGO.GetComponent<ShopItem>()?.TriggerPrice();
                     break;
 
@@ -158,7 +169,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// Updates the shop item display
         /// </summary>
         /// <param name="cardList">The list to show</param>
-        public void UpdateShopItemDisplay(List<CardTemplate> cardList)
+        private void UpdateShopItemDisplay(List<CardTemplate> cardList)
         {
             ClearPageItemsList();
             actualCardList = cardList;
@@ -187,14 +198,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 }
             }
         }
-
-        private void GetMuuney()
-        {
-            int totalMuuney = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Muuney);
-
-            Debug.Log($"Total Muuney: {totalMuuney}");
-        }
-
         #endregion  
 
     }

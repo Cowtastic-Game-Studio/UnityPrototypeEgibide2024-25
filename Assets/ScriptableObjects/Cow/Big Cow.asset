@@ -27,6 +27,6 @@ MonoBehaviour:
     resourceQuantity: 2
   marketCost: 5
   discardCost: 3
-  dayToUnlock: 1
+  dayToUnlock: 3
   targetCardType: 6
   multiplier: 1

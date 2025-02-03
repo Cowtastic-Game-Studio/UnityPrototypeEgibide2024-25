@@ -9,22 +9,22 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [SerializeField] private TMP_Text price;
         [SerializeField] private CardDisplay card;
 
-        public void UpdateDisplayData(CardTemplate cardTemplate)
+        private CardTemplate cardTemplate;
+        public void UpdateDisplayData(CardTemplate cardT)
         {
+            cardTemplate = cardT;
             card.UpdateDisplay(cardTemplate, false);
             price.text = cardTemplate.marketCost.ToString();
         }
 
         public void TriggerCard()
         {
+            // TODO: Show Card Preview
             Debug.Log("TriggerCard");
         }
 
         public void TriggerPrice()
         {
-            Debug.Log("TriggerPrice");
-            Debug.Log("Price: " + price.text);
-
             BuyCard(int.Parse(price.text));
         }
 
@@ -32,10 +32,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (GameManager.Instance.Tabletop.StorageManager.CheckMuuney(price))
             {
-                //Muuney = Muuney - x;
                 int muuney = GameManager.Instance.Tabletop.StorageManager.WasteMuuney(price);
 
-                //GameManager.Instance.Tabletop.CardManager.buyCard(cardType);
+                GameManager.Instance.Tabletop.CardManager.BuyCard(cardTemplate.name);
             }
         }
 

@@ -15,7 +15,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void CheckUnlock(int currentDay)
         {
-            if (currentDay >= dayToUnlock)
+            if (dayToUnlock <= currentDay)
                 isActive = true;
         }
     }
