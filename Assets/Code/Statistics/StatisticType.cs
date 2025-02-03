@@ -64,6 +64,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         MuuneyTotalUsed,
 
         [EnumMember(Value = "Used AP")]
-        APUsed
+        APUsed,
+        MilkSelled
     }
 }

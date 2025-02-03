@@ -11,7 +11,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private List<Statistic> statsList = new();
 
         public static StatisticsManager Instance { get; private set; }
-        public UnityEvent OnStatisticChanged = new();
+        public UnityEvent OnStatisticChanged;
 
         private void Awake()
         {
@@ -27,6 +27,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void Initialized()
         {
+            OnStatisticChanged = new UnityEvent();
+
             // Cards
             statsList.Add(new Statistic(StatisticType.CowsMilked, CardType.Cow, GameResource.None, 0, true));
             statsList.Add(new Statistic(StatisticType.SeedsHarvested, CardType.Seed, GameResource.None, 0, true));

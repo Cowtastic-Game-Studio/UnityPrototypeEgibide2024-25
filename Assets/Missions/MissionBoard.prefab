@@ -162,7 +162,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &2648200558604054565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,21 +286,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialMission
       objectReference: {fileID: 0}
-    - target: {fileID: 5860875797403541556, guid: 990f4cb736185674a97fad7612a00135, type: 3}
+    - target: {fileID: 1778483645128944349, guid: 990f4cb736185674a97fad7612a00135, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597818018937777461, guid: 990f4cb736185674a97fad7612a00135, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5860875797403541556, guid: 990f4cb736185674a97fad7612a00135, type: 3}
+    - target: {fileID: 2597818018937777461, guid: 990f4cb736185674a97fad7612a00135, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4994256919402101109, guid: 990f4cb736185674a97fad7612a00135, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860875797403541556, guid: 990f4cb736185674a97fad7612a00135, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860875797403541556, guid: 990f4cb736185674a97fad7612a00135, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8967046718795314911, guid: 990f4cb736185674a97fad7612a00135, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8967046718795314911, guid: 990f4cb736185674a97fad7612a00135, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -417,6 +433,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeeklyMission
       objectReference: {fileID: 0}
+    - target: {fileID: 1778483645128944349, guid: 990f4cb736185674a97fad7612a00135, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2312753704985612295, guid: 990f4cb736185674a97fad7612a00135, type: 3}
       propertyPath: m_Value
       value: 1
@@ -469,13 +489,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.00012019105
       objectReference: {fileID: 0}
-    - target: {fileID: 5860875797403541556, guid: 990f4cb736185674a97fad7612a00135, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 4994256919402101109, guid: 990f4cb736185674a97fad7612a00135, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5860875797403541556, guid: 990f4cb736185674a97fad7612a00135, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860875797403541556, guid: 990f4cb736185674a97fad7612a00135, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5960174783742665491, guid: 990f4cb736185674a97fad7612a00135, type: 3}
       propertyPath: m_AnchorMax.y
@@ -495,11 +519,11 @@ PrefabInstance:
       objectReference: {fileID: -4940489031096921970, guid: 4e2dce36ae38acf418bbf9c4200bb66e, type: 2}
     - target: {fileID: 8967046718795314911, guid: 990f4cb736185674a97fad7612a00135, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8967046718795314911, guid: 990f4cb736185674a97fad7612a00135, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
