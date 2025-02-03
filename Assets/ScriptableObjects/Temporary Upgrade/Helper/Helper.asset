@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 032636d2554a6eb45b0d64d499715a37, type: 3}
+  m_Name: Helper
+  m_EditorClassIdentifier: 
+  artwork: {fileID: 21300000, guid: e18b857f1eb16dc48b31f49ae3db9709, type: 3}
+  baseCard: {fileID: 21300000, guid: 3381212bab47d73469e383e6f98f5d64, type: 3}
+  cardType: 5
+  name: Helper
+  description: Una vez colocada no podras moverme, ten cuidao
+  lifeCycleDays: 1
+  actionPointsCost: 0
+  requiredResources: []
+  producedResources:
+  - resourceType: 0
+    resourceQuantity: 6
+  marketCost: 30
+  discardCost: 0
+  dayToUnlock: 0
+  targetCardType: 6
+  multiplier: 1
