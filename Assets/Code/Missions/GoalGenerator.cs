@@ -86,6 +86,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             CreateWeeklyGoal1,
             CreateWeeklyGoal2,
             CreateWeeklyGoal3,
+            CreateWeeklyGoal4,
+            CreateWeeklyGoal5,
+            CreateWeeklyGoal6,
+            CreateWeeklyGoal7
         };
 
         /// <summary>
@@ -302,7 +306,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
                     //Comprobar condicion del objetivo
                     Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CustomersServed);
 
-                    if (stat.Uses >= 1)
+                    if (stat.Uses >= 5)
                         goal.IsCompleted = true;
 
                     //si esta clompleto
