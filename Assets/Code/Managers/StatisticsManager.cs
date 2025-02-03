@@ -111,9 +111,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             stat.Uses += quantity;
 
-            Debug.Log(stat.StatType.GetEnumString() + ": " + stat.Uses);
-            Debug.Log(GetStat(StatisticType.CardsTotalUsed).StatType.GetEnumString() + ": " + GetStat(StatisticType.CardsTotalUsed).Uses);
-            Debug.Log(GetStat(StatisticType.TemporaryUsedCards).StatType.GetEnumString() + ": " + GetStat(StatisticType.TemporaryUsedCards).Uses);
+            //Debug.Log(stat.StatType.GetEnumString() + ": " + stat.Uses);
+            //Debug.Log(GetStat(StatisticType.CardsTotalUsed).StatType.GetEnumString() + ": " + GetStat(StatisticType.CardsTotalUsed).Uses);
+            //Debug.Log(GetStat(StatisticType.TemporaryUsedCards).StatType.GetEnumString() + ": " + GetStat(StatisticType.TemporaryUsedCards).Uses);
 
             RaiseOnStatisticChanged();
         }

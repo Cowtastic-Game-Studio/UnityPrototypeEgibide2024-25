@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -121,9 +122,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void InvokeCardClicked()
         {
-            // Pasar la instancia ICard
-            ICard card = gameObject.GetComponent<ICard>();
-            GameManager.Instance?.CardClicked(card);
+            if (IsActive)
+            {
+                // Pasar la instancia ICard
+                ICard card = gameObject.GetComponent<ICard>();
+                GameManager.Instance?.CardClicked(card);
+            }
         }
 
         //public void OnPointerClick(PointerEventData eventData)
@@ -135,7 +139,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Pasa el estado activo
             display.UpdateDisplay(template, isActive);
         }
-
         #endregion
 
 
