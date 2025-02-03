@@ -48,6 +48,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             setMarkArray();
         }
 
+        /// <summary>
+        /// Genera un array con la posicion de cada dia del calendario
+        /// </summary>
         private void setMarkArray()
         {
             positionCount = 1;
@@ -139,6 +142,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return DayOfWeek.ToString();
         }
 
+        /// <summary>
+        /// Funcion que hace avanzar el array cambiando la posicion de la marca del dia y lo reinicia si llega al untimo dia del mes
+        /// </summary>
         public void ChangeCallendar()
         {
             calendarMark.transform.localPosition = positions[positionCount];
