@@ -18,10 +18,10 @@ MonoBehaviour:
   name: Muussive Tavern
   description: Mejora una zona
   lifeCycleDays: 1
-  actionPointsCost: 3
+  actionPointsCost: 0
   requiredResources: []
   producedResources: []
-  marketCost: 10
+  marketCost: 20
   discardCost: 2
   dayToUnlock: 0
   targetCardType: 2
