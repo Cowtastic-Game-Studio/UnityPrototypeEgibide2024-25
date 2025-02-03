@@ -27,7 +27,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
-
         private void OnMouseEnter()
         {
             // Solo resalta si se está arrastrando una carta
@@ -98,6 +97,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     {
                         deactiveNextDay = true;
                         SetIsActive(true);
+                        card.Deactivate();
+                        GameManager.Instance.Tabletop.CardManager.MoveLastCardsToHand(1);
                     }
 
                 }
@@ -106,6 +107,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     // PlaceMultiplier solo se activa si está activo y está vacío
                     canPlace = isActive && isEmpty && isCardTypeMatch;
                     stayEmpty = canPlace;
+                    card.Deactivate();
+                    GameManager.Instance.Tabletop.CardManager.MoveLastCardsToHand(1);
                 }
                 else
                 {
@@ -138,9 +141,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return item.type;
         }
 
-        public bool GetIsActive(PlaceSpaceBehaviour item)
+        public bool GetIsActive()
         {
-            return item.isActive;
+            return isActive;
         }
 
         public void SetIsActive(bool active)
@@ -183,5 +186,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (deactiveNextDay)
                 isActive = false;
         }
+
     }
 }

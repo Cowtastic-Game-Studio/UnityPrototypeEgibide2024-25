@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +8,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <summary>
         /// Constructor para inicializar el evento generico.
         /// </summary>
-        public Heist() 
+        public Heist()
             : base("¡Te han robado!", "Algo o laguien ha entrado a tu granja y...", 1)
         {
 
@@ -38,9 +37,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             if (validThefts.Count == 0)
             {
-                GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(1, GameResource.Muuney);
+                GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(1, GameResource.Muuney, true);
                 Debug.Log("como no tenias nada que robar les has dado pena y te han dejado uno de muuuney");
-            } else 
+            }
+            else
             {
                 // Elegir un recurso al azar para robar
                 var theft = validThefts[Random.Range(0, validThefts.Count)];
