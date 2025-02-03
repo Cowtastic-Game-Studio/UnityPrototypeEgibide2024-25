@@ -57,7 +57,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         [SerializeField] private GameObject resourcesPanel;
 
-        [SerializeField] private GameObject marketGUI;
+        [SerializeField] private GameObject pageGUI;
+        [SerializeField] private GameObject buttonsGUI;
 
 
         /// <summary>
@@ -211,12 +212,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void ShowMarket()
         {
-            marketGUI.SetActive(true);
+            pageGUI.SetActive(true);
+            buttonsGUI.SetActive(true);
         }
 
         private void HideMarket()
         {
-            marketGUI.SetActive(false);
+            pageGUI.SetActive(false);
+            buttonsGUI.SetActive(false);
         }
 
         #endregion

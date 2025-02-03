@@ -31,7 +31,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             // C�digo para entrar en la fase
             Console.WriteLine("Entering Market Phase");
-            GameManager.Instance.Tabletop.marketManager.updateMuuney();
+            int currentDay = GameManager.Instance.GameCalendar.CurrentDay;
+            GameManager.Instance.Tabletop.NewMarketManager.CheckDay(currentDay);
+            if (currentDay > 1)
+            {
+                GameManager.Instance.Tabletop.NewMarketManager.RestartMarket();
+
+            }
         }
 
         public void ExecutePhase()
