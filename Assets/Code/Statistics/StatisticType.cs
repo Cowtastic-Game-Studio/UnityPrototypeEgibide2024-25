@@ -14,11 +14,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [EnumMember(Value = "Served customers")]
         CustomersServed,
 
-        // Tempoeary cards
+        // Temporary cards
         [EnumMember(Value = "Used activator")]
         PlaceActivatorCards,
 
-        [EnumMember(Value = "Used multiplayers")]
+        [EnumMember(Value = "Used multiplier")]
         PlaceMultiplierCards,
 
         [EnumMember(Value = "Used helpers")]
@@ -40,18 +40,21 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [EnumMember(Value = "Purchased zones")]
         ZonesPurchased,
 
+        [EnumMember(Value = "Purchased zone upgrade")]
+        ZonesUpgradePurchased,
+
         [EnumMember(Value = "Purchased zones with cards")]
         ZonesWithCardsPurchased,
 
-        // Resources adquired
-        [EnumMember(Value = "Total adquired Milk")]
-        MilkTotalAdquired,
+        // Resources acquired
+        [EnumMember(Value = "Total acquired Milk")]
+        MilkTotalAcquired,
 
-        [EnumMember(Value = "Total adquired cereal")]
-        CerealTotalAdquired,
+        [EnumMember(Value = "Total acquired cereal")]
+        CerealTotalAcquired,
 
-        [EnumMember(Value = "Total adquired muuney")]
-        MuuneyTotalAdquired,
+        [EnumMember(Value = "Total acquired muuney")]
+        MuuneyTotalAcquired,
 
         // Resources used
         [EnumMember(Value = "Total used milk")]
@@ -63,8 +66,38 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [EnumMember(Value = "Total used muuney")]
         MuuneyTotalUsed,
 
+        [EnumMember(Value = "Total used customers")]
+        CustomersTotalUsed,
+
         [EnumMember(Value = "Used AP")]
         APUsed,
-        MilkSelled
+
+        [EnumMember(Value = "Count uppgrade stable")]
+        StableCountUpgrade,
+
+        [EnumMember(Value = "Count uppgrade garden")]
+        GardenCountUpgrade,
+
+        [EnumMember(Value = "Count uppgrade tavern")]
+        TavernCountUpgrade,
+
+        [EnumMember(Value = "Count uppgrade fridge")]
+        FridgeCountUpgrade,
+
+        [EnumMember(Value = "Count uppgrade silo")]
+        SiloCountUpgrade,
+
+        // New Objectives
+        [EnumMember(Value = "Fill all stable slots with cows")]
+        StableFilledWithCowsMaxUpgrade,
+
+        [EnumMember(Value = "Plant crops in all garden slots")]
+        GardenFilledWithCropsMaxUpgrade,
+
+        [EnumMember(Value = "Fill the entire tavern with customers")]
+        TavernFilledWithCustomersMaxUpgrade,
+
+        [EnumMember(Value = "Complete 3 events")]
+        EventsCompleted,
     }
 }

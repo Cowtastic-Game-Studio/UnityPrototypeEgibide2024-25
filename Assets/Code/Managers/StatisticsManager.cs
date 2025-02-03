@@ -48,9 +48,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             statsList.Add(new Statistic(StatisticType.ZonesWithCardsPurchased, CardType.None, GameResource.None, 0, false));
 
             // Resources adquired
-            statsList.Add(new Statistic(StatisticType.MilkTotalAdquired, CardType.None, GameResource.Milk, 0, false));
-            statsList.Add(new Statistic(StatisticType.CerealTotalAdquired, CardType.None, GameResource.Cereal, 0, false));
-            statsList.Add(new Statistic(StatisticType.MuuneyTotalAdquired, CardType.None, GameResource.Muuney, 0, false));
+            statsList.Add(new Statistic(StatisticType.MilkTotalAcquired, CardType.None, GameResource.Milk, 0, false));
+            statsList.Add(new Statistic(StatisticType.CerealTotalAcquired, CardType.None, GameResource.Cereal, 0, false));
+            statsList.Add(new Statistic(StatisticType.MuuneyTotalAcquired, CardType.None, GameResource.Muuney, 0, false));
 
             // Resources used
             statsList.Add(new Statistic(StatisticType.MilkTotalUsed, CardType.None, GameResource.Milk, 0, true));
@@ -111,9 +111,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             stat.Uses += quantity;
 
-            Debug.Log(stat.StatType.GetEnumString() + ": " + stat.Uses);
-            Debug.Log(GetStat(StatisticType.CardsTotalUsed).StatType.GetEnumString() + ": " + GetStat(StatisticType.CardsTotalUsed).Uses);
-            Debug.Log(GetStat(StatisticType.TemporaryUsedCards).StatType.GetEnumString() + ": " + GetStat(StatisticType.TemporaryUsedCards).Uses);
+            //Debug.Log(stat.StatType.GetEnumString() + ": " + stat.Uses);
+            //Debug.Log(GetStat(StatisticType.CardsTotalUsed).StatType.GetEnumString() + ": " + GetStat(StatisticType.CardsTotalUsed).Uses);
+            //Debug.Log(GetStat(StatisticType.TemporaryUsedCards).StatType.GetEnumString() + ": " + GetStat(StatisticType.TemporaryUsedCards).Uses);
 
             RaiseOnStatisticChanged();
         }

@@ -123,7 +123,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             InitHandCardLifes();
         }
 
-        private void MoveLastCardsToHand(int cardsToDraw)
+        public void MoveLastCardsToHand(int cardsToDraw)
         {
             // Verificar que hay suficientes cartas en el mazo de robo
             if (drawDeck.Cards.Count < 5)
@@ -144,6 +144,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     // Agregar la carta a la lista de la mano
                     //handDeck.Place(cardToMove);
                     SetCardState(cardToMove, CardState.onHand);
+
+                    //activar las cartas al ir a la mano
+                    var cardBH = cardToMove.GetComponent<CardBehaviour>();
+                    cardBH.Activate();
                 }
             }
 
@@ -441,7 +445,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, mask))
             {
                 // Mover la carta sobre el plano
-                Vector3 newPosition = hit.point + Vector3.up * 0.1f;
+                Vector3 newPosition = hit.point + Vector3.up;
 
                 selectedCard.transform.position = newPosition;
             }
@@ -483,6 +487,17 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     cardBH.IsPlaced = true;
                     cardBH.Activate();
                     selectedCard = null;
+
+
+                    //Special case
+                    if (cardBH.Type == CardType.Helper)
+                    {
+                        cardBH.Deactivate();
+                        GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(6, GameResource.ActionPoints, false);
+                        GameManager.Instance.Tabletop.HUDManager.UpdateResources();
+                        MoveLastCardsToHand(1);
+                    }
+
                 }
             }
         }
@@ -518,14 +533,25 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 CardBehaviour cardBH = card.GetComponent<CardBehaviour>();
                 cardBH.LifeCycleDaysRemaining -= 1;
+                //cardBH.Activate();
             }
         }
 
+        public void ActivateHandDeckCards()
+        {
+            foreach (GameObject card in HandDeck.Cards)
+            {
+                CardBehaviour cardBH = card.GetComponent<CardBehaviour>();
+                cardBH.Activate();
+            }
+        }
 
+        //TODO: change to receive scriptableObject CardTemplate
+        // + move card prefab back to Prefab folder
         internal void buyCard(CardType cardType)
         {
             GameObject card = null;
-            string path = "Prefabs/Cards/";
+            string path = "Cards/Prefab/";
 
             switch (cardType)
             {
