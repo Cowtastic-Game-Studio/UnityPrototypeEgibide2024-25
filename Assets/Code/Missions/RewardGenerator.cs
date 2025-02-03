@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
@@ -49,7 +44,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
                 // Añadir dinero y actualizar hud
                 GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(roundedMuuney, GameResource.Muuney, true);
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
-                Debug.Log("Se ha aadido Muuney: " + roundedMuuney);
+                Debug.Log("Se ha añadido Muuney: " + roundedMuuney);
                 
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
             };

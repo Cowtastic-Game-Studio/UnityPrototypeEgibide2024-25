@@ -77,14 +77,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void InitializeMissions()
         {
-
             CreateTutorialMission();
 
             RenewWeeklyMission();
 
-            CreateGlobalMissions();
-
-            
+            CreateGlobalMissions();            
         }
 
         /// <summary>
@@ -92,14 +89,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private void CreateTutorialMission()
         {
-            Goal goal1, goal2;
+            Goal goal1, goal2, goal3, goal4, goal5, goal6;
+            Reward reward;
 
             goal1 = GoalGenerator.CreateTutorialGoal1();
             goal2 = GoalGenerator.CreateTutorialGoal2();
+            goal3 = GoalGenerator.CreateTutorialGoal3();
+            goal4 = GoalGenerator.CreateTutorialGoal4();
+            goal5 = GoalGenerator.CreateTutorialGoal5();
+            goal6 = GoalGenerator.CreateTutorialGoal6();
 
+            reward = RewardGenerator.CreateTutorialReward();
 
-
-            this.Tutorial = new Mission("Tutorial", "Tutorial", Mission.MissionTypes.Tutorial, new List<Goal>() { goal1, goal2 }, new List<Reward>());
+            this.Tutorial = new Mission("Tutorial", "Tutorial", Mission.MissionTypes.Tutorial, new List<Goal>() { goal1, goal2, goal3, goal4, goal5, goal6 }, new List<Reward>() { reward });
 
         }
 
@@ -110,10 +112,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private Mission GenerateWeeklyMission()
         {
             List<Goal> goals;
+            Reward reward;
 
             goals = GoalGenerator.GetWeeklyRandomGoals();
+            reward = RewardGenerator.CreateWeekReward();
 
-            Mission mission = new Mission("Weekly", "Weekly", MissionTypes.Weekly, goals, new List<Reward>());
+            Mission mission = new Mission("Weekly", "Weekly", MissionTypes.Weekly, goals, new List<Reward>() { reward });
 
             return mission;
         }
@@ -123,7 +127,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private void CreateGlobalMissions()
         {
-            this.GlobalMissions = new List<Mission>();            
+            Mission mission1;
+            Goal goal1;
+            Reward reward1;
+
+            this.GlobalMissions = new List<Mission>();
+
+            goal1 = GoalGenerator.CreateGlobalGoal1();
+            reward1 = RewardGenerator.CreateGoalReward(50);
+            mission1 = new Mission("G1", "Global 1", MissionTypes.Weekly, goal1, reward1);
+
+            //TODO: meter el resto
+
+            this.GlobalMissions.Add(mission1);
 
         }
 

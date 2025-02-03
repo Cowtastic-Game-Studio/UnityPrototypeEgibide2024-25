@@ -64,13 +64,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             }
         }
 
-
-
         public Mission(string name, string description, MissionTypes type, Goal goal, Reward reward) :
             this(name, description, type, new List<Goal>() { goal }, new List<Reward>() { reward })
         {
         }
-
 
         #endregion
 
@@ -80,7 +77,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
         #endregion
 
-
         private void OnCompleteGoal(Goal goal)
         {
             Debug.Log("Goal complete:" + goal.Description);
@@ -89,7 +85,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             this.Updated.Invoke(this);
 
         }
-
 
     }
 }

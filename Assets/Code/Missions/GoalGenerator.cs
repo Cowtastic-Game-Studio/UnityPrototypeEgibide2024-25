@@ -20,27 +20,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal1()
         {
-            UnityAction<Goal> goal1Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CardsTotalUsed);
-
-                    if (stat.Uses >= 1)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-
-            return new Goal("T-M1", "Coloca 1 carta en la mesa", goal1Initialization);
+            return GenerateStatGoal("T-M1", "Coloca 1 carta en la mesa", StatisticType.CardsTotalUsed, 1);
         }
 
         /// <summary>
@@ -50,27 +30,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal2()
         {
-            UnityAction<Goal> goal2Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                //Crea 
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CerealTotalAcquired);
-
-                    if (stat.Uses >= 1)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            return new Goal("T-M2", "Consigue 1 de trigo", goal2Initialization);
+            return GenerateStatGoal("T-M2", "Consigue 1 de trigo", StatisticType.CerealTotalAcquired, 1);
 
         }
 
@@ -81,27 +41,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal3()
         {
-            UnityAction<Goal> goal2Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                //Crea 
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.MilkTotalAcquired);
-
-                    if (stat.Uses >= 1)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            return new Goal("T-M3", "Consigue 1 de leche", goal2Initialization);
+            return GenerateStatGoal("T-M3", "Consigue 1 de leche", StatisticType.MilkTotalAcquired, 1);
 
         }
 
@@ -112,27 +52,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal4()
         {
-            UnityAction<Goal> goal2Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                //Crea 
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CustomersTotalUsed);
-
-                    if (stat.Uses >= 1)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            return new Goal("T-M4", "Consigue un cliente", goal2Initialization);
+            return GenerateStatGoal("T-M4", "Consigue un cliente", StatisticType.CustomersTotalUsed, 1);
 
         }
 
@@ -143,27 +63,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal5()
         {
-            UnityAction<Goal> goal2Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                //Crea 
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CardsPurchased);
-
-                    if (stat.Uses >= 1)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            return new Goal("T-M5", "Compra una carta", goal2Initialization);
+            return GenerateStatGoal("T-M5", "Compra una carta", StatisticType.CardsPurchased, 1);
 
         }
 
@@ -174,28 +74,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal6()
         {
-            UnityAction<Goal> goal2Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                //Crea 
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.ZonesUpgradePurchased);
-
-                    if (stat.Uses >= 1)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            return new Goal("T-M6", "Compra una mejora de zona", goal2Initialization);
-
+            return GenerateStatGoal("T-M6", "Compra una mejora de zona", StatisticType.ZonesUpgradePurchased, 1);
         }
 
         #endregion
@@ -227,7 +106,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             Goal goal;
 
             //Genera los indices de los objetivos
-            randomIndexs = GenerateNotRepeatedRandomNumbers(0, WeeklyGoalFunctions.Count, 1);
+            randomIndexs = GenerateNotRepeatedRandomNumbers(0, WeeklyGoalFunctions.Count, 4);
 
             foreach (int index in randomIndexs)
             {
@@ -246,26 +125,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal1()
         {
-            UnityAction<Goal> goal1Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CowsMilked);
-
-                    if (stat.Uses >= 4)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            return new Goal("W-M1", "Ordeña vacas 4 veces", goal1Initialization);
+            return GenerateStatGoal("W-M1", "Ordeña vacas 4 veces", StatisticType.CowsMilked, 4);
         }
 
         /// <summary>
@@ -275,26 +135,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal2()
         {
-            UnityAction<Goal> goal1Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.SeedsHarvested);
-
-                    if (stat.Uses >= 5)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            return new Goal("W-M2", "Cosecha trigo 5 veces", goal1Initialization);
+            return GenerateStatGoal("W-M2", "Cosecha trigo 5 veces", StatisticType.SeedsHarvested, 5);
         }
 
         /// <summary>
@@ -304,26 +145,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal3()
         {
-            UnityAction<Goal> goal1Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.MilkTotalUsed);
-
-                    if (stat.Uses >= 3)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            return new Goal("W-M3", "Vende 3 leches", goal1Initialization);
+            return GenerateStatGoal("W-M3", "Vende 3 leches", StatisticType.MilkTotalUsed, 3);
         }
 
         /// <summary>
@@ -333,26 +155,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal4()
         {
-            UnityAction<Goal> goal1Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CardsPurchased);
-
-                    if (stat.Uses >= 2)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            return new Goal("W-M4", "Compra 2 cartas", goal1Initialization);
+            return GenerateStatGoal("W-M4", "Compra 2 cartas", StatisticType.CardsPurchased, 2);
         }
 
         /// <summary>
@@ -362,26 +165,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal5()
         {
-            UnityAction<Goal> goal1Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.MuuneyTotalAcquired);
-
-                    if (stat.Uses >= 20)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            return new Goal("W-M5", "Adquiere 20 de Muuney", goal1Initialization);
+            return GenerateStatGoal("W-M5", "Adquiere 20 de Muuney", StatisticType.MuuneyTotalAcquired, 20);
         }
 
         /// <summary>
@@ -391,27 +175,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal6()
         {
-            UnityAction<Goal> goal1Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    // TODO No estoy seguro si esta es la estadistica para las mejoras temporales o para cartas temporales como tal
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.TemporaryUsedCards);
-
-                    if (stat.Uses >= 1)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            return new Goal("W-M6", "Usa una mejora temporal", goal1Initialization);
+            return GenerateStatGoal("W-M6", "Usa una mejora temporal", StatisticType.TemporaryUsedCards, 1);
         }
 
         /// <summary>
@@ -421,26 +185,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal7()
         {
-            UnityAction<Goal> goal1Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.CustomersServed);
-
-                    if (stat.Uses >= 5)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            return new Goal("W-M7", "Atiende a 5 clientes", goal1Initialization);
+            return GenerateStatGoal("W-M7", "Atiende a 5 clientes", StatisticType.CustomersServed, 5);
         }
 
         #endregion
@@ -454,27 +199,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal1()
         {
-            UnityAction<Goal> goal1Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.StableCountUpgrade);
-
-                    if (stat.Uses >= 6)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            return new Goal("G-M1", "Establo mejorado al maximo", goal1Initialization);
-
+            return GenerateStatGoal("G-M1", "Establo mejorado al maximo", StatisticType.StableCountUpgrade, 6);
         }
 
         /// <summary>
@@ -484,27 +209,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal2()
         {
-            UnityAction<Goal> goal1Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.GardenCountUpgrade);
-
-                    if (stat.Uses >= 8)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            return new Goal("G-M2", "Huerto mejorado al maximo", goal1Initialization);
-
+            return GenerateStatGoal("G-M2", "Huerto mejorado al maximo", StatisticType.GardenCountUpgrade, 8);
         }
 
         /// <summary>
@@ -514,27 +219,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal3()
         {
-            UnityAction<Goal> goal1Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.TavernCountUpgrade);
-
-                    if (stat.Uses >= 4)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            return new Goal("G-M3", "Taverna mejorada al maximo", goal1Initialization);
-
+            return GenerateStatGoal("G-M3", "Taverna mejorada al maximo", StatisticType.TavernCountUpgrade, 4);
         }
 
         /// <summary>
@@ -544,27 +229,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal4()
         {
-            UnityAction<Goal> goal1Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.StableFilledWithCowsMaxUpgrade);
-
-                    if (stat.Uses >= 1)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            return new Goal("G-M4", "Llena el establo con vacas cuando este al maximo", goal1Initialization);
-
+            return GenerateStatGoal("G-M4", "Llena el establo con vacas cuando este al maximo", StatisticType.StableFilledWithCowsMaxUpgrade, 1);
         }
 
         /// <summary>
@@ -574,27 +239,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal5()
         {
-            UnityAction<Goal> goal1Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.GardenFilledWithCropsMaxUpgrade);
-
-                    if (stat.Uses >= 1)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            return new Goal("G-M5", "GardenFilledWithCropsMaxUpgrade", goal1Initialization);
-
+            return GenerateStatGoal("G-M5", "GardenFilledWithCropsMaxUpgrade", StatisticType.GardenFilledWithCropsMaxUpgrade, 1);
         }
 
         /// <summary>
@@ -604,27 +249,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal6()
         {
-            UnityAction<Goal> goal1Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.TavernFilledWithCustomersMaxUpgrade);
-
-                    if (stat.Uses >= 1)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            return new Goal("G-M6", "Llena la taverna con clientes cuando este al maximo", goal1Initialization);
-
+            return GenerateStatGoal("G-M6", "Llena la taverna con clientes cuando este al maximo", StatisticType.TavernFilledWithCustomersMaxUpgrade, 1);
         }
 
         /// <summary>
@@ -634,28 +259,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal7()
         {
-            UnityAction<Goal> goal1Initialization = (Goal goal) =>
+            Func<bool> condition = () =>
             {
-                UnityAction OnStatisticChanged = null;
+                //Comprobar condicion del objetivo
+                Statistic statFridge = StatisticsManager.Instance.GetStat(StatisticType.FridgeCountUpgrade);
+                Statistic statSilo = StatisticsManager.Instance.GetStat(StatisticType.SiloCountUpgrade);
 
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic statFridge = StatisticsManager.Instance.GetStat(StatisticType.FridgeCountUpgrade);
-                    Statistic statSilo = StatisticsManager.Instance.GetStat(StatisticType.SiloCountUpgrade);
-
-                    if (statFridge.Uses >= 8 & statSilo.Uses >= 8)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
+                return (statFridge.Uses >= 8 && statSilo.Uses >= 8);
             };
-            return new Goal("G-M7", "Ten los almacenes silo y frigorifico al maximo", goal1Initialization);
 
+            return GenerateStatGoal("G-M7", "Ten los almacenes silo y frigorifico al maximo", condition);
         }
 
         /// <summary>
@@ -665,27 +278,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal8()
         {
-            UnityAction<Goal> goal1Initialization = (Goal goal) =>
-            {
-                UnityAction OnStatisticChanged = null;
-
-                OnStatisticChanged = () =>
-                {
-                    //Comprobar condicion del objetivo
-                    Statistic stat = StatisticsManager.Instance.GetStat(StatisticType.EventsCompleted);
-
-                    if (stat.Uses >= 3)
-                        goal.IsCompleted = true;
-
-                    //si esta clompleto
-                    if (goal.IsCompleted)
-                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
-                };
-
-                //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
-            };
-            return new Goal("G-M8", "Supera 3 eventos", goal1Initialization);
-
+            return GenerateStatGoal("G-M8", "Supera 3 eventos", StatisticType.EventsCompleted, 3);
         }
 
         #endregion
@@ -720,6 +313,45 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
             return randomNumbers;
         }
+
+        private static Goal GenerateStatGoal(string goalName, string goalDescription, StatisticType statisticType, int usesToComplete)
+        {
+            Func<bool> condition = () =>
+            {
+                //Comprobar condicion del objetivo
+                Statistic stat = StatisticsManager.Instance.GetStat(statisticType);
+
+                return (stat.Uses >= usesToComplete);
+            };
+
+            return GenerateStatGoal(goalName, goalDescription, condition);
+        }
+
+        private static Goal GenerateStatGoal(string goalName, string goalDescription, Func<bool> condition)
+        {
+            UnityAction<Goal> goal1Initialization = (Goal goal) =>
+            {
+                UnityAction OnStatisticChanged = null;
+
+                OnStatisticChanged = () =>
+                {
+                    bool result;
+
+                    result = condition.Invoke();
+
+                    if (result)
+                        goal.IsCompleted = true;
+
+                    //si esta clompleto
+                    if (goal.IsCompleted)
+                        StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
+                };
+
+                StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
+            };
+            return new Goal(goalName, goalDescription, goal1Initialization);
+        }
+
 
         #endregion
     }
