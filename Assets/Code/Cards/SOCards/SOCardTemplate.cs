@@ -30,6 +30,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public CardType targetCardType = CardType.None;
         public int multiplier = 1;
 
+        public GameResource targetResoruceType = GameResource.None;
+
         public void Print()
         {
             string sRequired = "Required Resources:\n";

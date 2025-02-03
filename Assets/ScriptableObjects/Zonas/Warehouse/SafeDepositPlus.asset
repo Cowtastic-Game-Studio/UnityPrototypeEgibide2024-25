@@ -9,20 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8a96622ca49dec44b0832fc9c555eed, type: 3}
-  m_Name: Super Stable
+  m_Script: {fileID: 11500000, guid: c49a391d00c55ea488932e8659b04053, type: 3}
+  m_Name: SafeDepositPlus
   m_EditorClassIdentifier: 
-  artwork: {fileID: 21300000, guid: a56b9c8602fef2940bf683830c929279, type: 3}
+  artwork: {fileID: 21300000, guid: 142d1839ce7f9f142ac7523df06b35be, type: 3}
   baseCard: {fileID: 21300000, guid: 3381212bab47d73469e383e6f98f5d64, type: 3}
-  cardType: 3
-  name: Super Stable
+  cardType: 6
+  name: Safe deposit +
   description: 
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []
   producedResources: []
-  marketCost: 25
-  discardCost: 2
-  dayToUnlock: 1
-  targetCardType: 0
-  multiplier: 2
+  marketCost: 10
+  discardCost: 0
+  dayToUnlock: 0
+  targetCardType: 6
+  multiplier: 1
+  targetResoruceType: 1

@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85b4d1d63d404d74bbd7263021c46de1, type: 3}
-  m_Name: Little Cow
+  m_Name: FastCow
   m_EditorClassIdentifier: 
   artwork: {fileID: 21300000, guid: edd12774263256b41873b42751038d08, type: 3}
   baseCard: {fileID: 21300000, guid: 3381212bab47d73469e383e6f98f5d64, type: 3}
   cardType: 0
-  name: Little Cow
+  name: Fast Cow
   description: Muuuu
-  lifeCycleDays: 2
-  actionPointsCost: 2
+  lifeCycleDays: 1
+  actionPointsCost: 1
   requiredResources:
   - resourceType: 3
-    resourceQuantity: 1
+    resourceQuantity: 3
   producedResources:
   - resourceType: 2
-    resourceQuantity: 1
-  marketCost: 3
-  discardCost: 4
-  dayToUnlock: 1
+    resourceQuantity: 3
+  marketCost: 8
+  discardCost: 2
+  dayToUnlock: 2
   targetCardType: 6
   multiplier: 1
