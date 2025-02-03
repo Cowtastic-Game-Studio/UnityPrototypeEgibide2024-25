@@ -58,6 +58,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             statsList.Add(new Statistic(StatisticType.MuuneyTotalUsed, CardType.None, GameResource.Muuney, 0, true));
             statsList.Add(new Statistic(StatisticType.APUsed, CardType.None, GameResource.ActionPoints, 0, true));
 
+
+            //TODO: Revisar
+            statsList.Add(new Statistic(StatisticType.CustomersTotalUsed, CardType.Customer, GameResource.None, 0, true));
+            statsList.Add(new Statistic(StatisticType.ZonesUpgradePurchased, CardType.None, GameResource.None, 0, true));
+            statsList.Add(new Statistic(StatisticType.StableCountUpgrade, CardType.None, GameResource.None, 0, true));
+
+
         }
 
         public void RaiseOnStatisticChanged()
