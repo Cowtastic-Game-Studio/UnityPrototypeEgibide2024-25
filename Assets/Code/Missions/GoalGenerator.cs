@@ -294,7 +294,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
                 //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
             };
-            return new Goal("W-M1", "Cosecha trigo 5 veces", goal1Initialization);
+            return new Goal("W-M2", "Cosecha trigo 5 veces", goal1Initialization);
         }
 
         /// <summary>
@@ -323,7 +323,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
                 //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
             };
-            return new Goal("W-M1", "Vende 3 leches", goal1Initialization);
+            return new Goal("W-M3", "Vende 3 leches", goal1Initialization);
         }
 
         /// <summary>
@@ -352,7 +352,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
                 //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
             };
-            return new Goal("W-M1", "Vende 3 leches", goal1Initialization);
+            return new Goal("W-M4", "Compra 2 cartas", goal1Initialization);
         }
 
         /// <summary>
@@ -381,7 +381,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
                 //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
             };
-            return new Goal("W-M1", "Vende 3 leches", goal1Initialization);
+            return new Goal("W-M5", "Adquiere 20 de Muuney", goal1Initialization);
         }
 
         /// <summary>
@@ -411,7 +411,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
                 //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
             };
-            return new Goal("W-M1", "Vende 3 leches", goal1Initialization);
+            return new Goal("W-M6", "Usa una mejora temporal", goal1Initialization);
         }
 
         /// <summary>
@@ -440,7 +440,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
                 //StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
             };
-            return new Goal("W-M1", "Vende 3 leches", goal1Initialization);
+            return new Goal("W-M7", "Atiende a 5 clientes", goal1Initialization);
         }
 
         #endregion
