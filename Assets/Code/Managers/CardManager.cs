@@ -515,6 +515,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             card.transform.SetParent(handArea);
             card.transform.localPosition = new Vector3(cardBH.PositionInHand.Value, 0, 0);
             card.transform.rotation = handArea.transform.rotation;
+            playedCardsDeck.RemoveCard(card);
         }
 
 

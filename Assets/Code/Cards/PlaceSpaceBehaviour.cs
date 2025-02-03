@@ -132,6 +132,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             //{
             Transform placeTrans = gameObject.transform;
             GameManager.Instance?.PlaceSpaceClicked(placeTrans);
+            isEmpty = true;
 
             //}
         }
