@@ -1,6 +1,6 @@
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    struct ShopItemData
+    public class ShopItemData
     {
         public bool isActive;
         public CardTemplate cardTemplate;

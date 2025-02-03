@@ -112,11 +112,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     break;
 
                 case "TemporalButton":
-                    UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.PlaceMultiplier && x.isActive).ConvertAll(x => x.cardTemplate));
+                    UpdateShopItemDisplay(shopItemsData.FindAll(x => (x.cardTemplate.cardType == CardType.PlaceMultiplier || x.cardTemplate.cardType == CardType.PlaceActivator || x.cardTemplate.cardType == CardType.Helper) && x.isActive).ConvertAll(x => x.cardTemplate));
                     break;
 
                 case "ZonesButton":
-                    UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Helper && x.isActive).ConvertAll(x => x.cardTemplate));
+                    // TODO: Hacer SO de zonas
+                    UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.None && x.isActive).ConvertAll(x => x.cardTemplate));
                     break;
 
                 case "CardDisplayTemplate":
@@ -127,10 +128,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     break;
 
                 case "BuyButton":
-                    // TODO: Logica de comprar la carta
-
                     ShopItem shopItem = shopItemGO.GetComponent<ShopItem>();
-
 
                     shopItemGO.GetComponent<ShopItem>()?.TriggerPrice();
                     break;
