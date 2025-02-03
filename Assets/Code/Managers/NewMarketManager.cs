@@ -15,13 +15,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [SerializeField] private GameObject cardPreview;
 
         [SerializeField]
-        private SlotList shopSlotList;
+        private SlotList slotList;
 
         private List<ShopItemData> shopItemsData;
 
         private List<GameObject> pageItemsList = new();
 
-        private List<CardTemplate> cardList = new();
+        private List<CardTemplate> actualCardList = new();
+
+        private int counter = 0;
+        private int actualItem;
 
         private void Awake()
         {
@@ -64,6 +67,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
+        public void CheckDay(int day)
+        {
+            shopItemsData.ForEach(x => x.CheckUnlock(day));
+        }
 
         private void ChangePanel(string name, GameObject shopItemGO)
         {
@@ -100,7 +107,44 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     // TODO: Logica de comprar la carta
                     shopItemGO.GetComponent<ShopItem>()?.TriggerPrice();
                     break;
+                case "NextButton":
+                    slotList.NextPage();
+                    ClearPageItemsList();
 
+
+                    for (int i = 0; i < pageItemsList.Count; i++)
+                    {
+                        if (counter < actualCardList.Count)
+                        {
+                            GameObject slot = pageItemsList[i];
+                            GameObject createdItem = GameObject.Instantiate(shopItem, slot.transform);
+
+                            createdItem.GetComponent<ShopItem>()?.UpdateDisplayData(actualCardList[counter]);
+                            counter++;
+                            actualItem++;
+                        }
+                    }
+
+
+                    break;
+                case "PreviousButton":
+                    slotList.PreviousPage();
+                    counter -= pageItemsList.Count + actualItem;
+                    ClearPageItemsList();
+
+                    for (int i = 0; i < pageItemsList.Count; i++)
+                    {
+                        if (counter < actualCardList.Count)
+                        {
+                            GameObject slot = pageItemsList[i];
+                            GameObject createdItem = GameObject.Instantiate(shopItem, slot.transform);
+
+                            createdItem.GetComponent<ShopItem>()?.UpdateDisplayData(actualCardList[counter]);
+                            counter++;
+                        }
+                    }
+
+                    break;
                 default:
                     break;
             }
@@ -109,21 +153,22 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void UpdateShopItemDisplay(List<CardTemplate> cardList)
         {
             ClearPageItemsList();
+            actualCardList = cardList;
+            counter = 0;
 
-            int counter = 0;
-            foreach (CardTemplate card in cardList)
+            for (int i = 0; i < pageItemsList.Count; i++)
             {
-                if (counter < pageItemsList.Count)
+                if (counter < actualCardList.Count)
                 {
-                    GameObject slot = pageItemsList[counter];
-
+                    GameObject slot = pageItemsList[i];
                     GameObject createdItem = GameObject.Instantiate(shopItem, slot.transform);
 
-                    createdItem.GetComponent<ShopItem>()?.UpdateDisplayData(card);
+                    createdItem.GetComponent<ShopItem>()?.UpdateDisplayData(actualCardList[counter]);
                     counter++;
                 }
             }
 
+            slotList.totalPage = Mathf.CeilToInt((float) cardList.Count / 8);
         }
 
         private void ClearPageItemsList()
@@ -144,7 +189,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             int totalMuuney = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Muuney);
 
             Debug.Log($"Total Muuney: {totalMuuney}");
-
         }
     }
 }

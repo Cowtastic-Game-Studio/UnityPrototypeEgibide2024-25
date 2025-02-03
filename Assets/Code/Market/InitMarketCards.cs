@@ -34,10 +34,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
-        // TODO: Change 0 to current day in the future
         private bool CanUnlock(int dayToUnlock)
         {
-            return 0 >= dayToUnlock;
+            int currentDay = GameManager.Instance.GameCalendar.CurrentDay;
+            return currentDay >= dayToUnlock;
         }
     }
 }

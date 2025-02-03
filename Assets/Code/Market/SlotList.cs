@@ -10,21 +10,45 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [SerializeField] private GameObject nextPage;
         [SerializeField] private GameObject previousPage;
 
-        private int currentPage = 0;
+        public int totalPage;
+        public int currentPage;
+
+        private void Update()
+        {
+            if (currentPage == 1)
+            {
+                previousPage.SetActive(false);
+            }
+            else
+            {
+                previousPage.SetActive(true);
+            }
+
+            if (totalPage > 1)
+            {
+                nextPage.SetActive(true);
+            }
+            else
+            {
+                nextPage.SetActive(false);
+            }
+
+            if (totalPage == currentPage)
+            {
+                nextPage.SetActive(false);
+            }
+        }
 
         public void NextPage()
         {
-            if (currentPage < slotsList.Count - 1)
-            {
-
-            }
+            if (currentPage < totalPage)
+                currentPage++;
         }
 
         public void PreviousPage()
         {
-            if (currentPage > 0)
-            {
-            }
+            if (currentPage > 1)
+                currentPage--;
         }
     }
 }
