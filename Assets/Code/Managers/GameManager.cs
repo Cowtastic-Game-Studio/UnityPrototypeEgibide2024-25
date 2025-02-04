@@ -12,8 +12,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public Tabletop Tabletop;
 
-        private PlagueEvent plagueEvent = new PlagueEvent();
-
         // Evento global para manejar clics en cartas
         public event Action<ICard> OnCardClickedGlobal;
         public event Action<Transform> OnPlaceSpaceClickedGlobal;
