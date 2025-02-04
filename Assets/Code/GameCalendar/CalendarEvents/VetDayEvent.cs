@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    public class VentDayEvent : CalendarEvent
+    public class VetDayEvent : CalendarEvent
     {
         /// <summary>
         /// Constructor para inicializar el evento generico.
         /// </summary>
-        public VentDayEvent() 
+        public VetDayEvent() 
             : base("El veterinario a venido", "Ahora tus vacas duraran un dia mas... no te encariñes con ellas moriran como todos nostros algun dia :D", 1)
         {
 

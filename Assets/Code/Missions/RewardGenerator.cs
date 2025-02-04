@@ -15,10 +15,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         {
             UnityAction rewardReceiveDelegate = () =>
             {
-                //TODO: Añadir 10 de oro
                 GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(10, GameResource.Muuney, true);
 
-                //TODO: Añadir 1 carta de vaca veloz
                 GameManager.Instance.Tabletop.CardManager.BuyCard("FastCow");
 
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
@@ -52,7 +50,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             return new Reward(rewardReceiveDelegate);
         }
 
-        // TODO hablar con Mikel para ver si esto le sirve para los rewards
         public static Reward CreateGoalReward(int muuney)
         {
             UnityAction rewardReceiveDelegate = () =>

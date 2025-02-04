@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -29,7 +27,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (rentAmount >= currentMuuney)
             {
                 //TODO poner aqui la fncion de GameOver cuando exista
-            } else
+                Debug.LogWarning("piu piu GAME OVER piu piu");
+            }
+            else
             {
                 GameManager.Instance.Tabletop.StorageManager.WasteMuuney(rentAmount);
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
