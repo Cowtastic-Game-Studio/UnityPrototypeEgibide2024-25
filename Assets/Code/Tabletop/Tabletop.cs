@@ -100,8 +100,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             foreach (PlaceSpaceBehaviour farm in farms)
             {
-                int i = 0;
-
                 if (!farm.GetIsActive())
                 {
                     farm.SetIsActive(true);
