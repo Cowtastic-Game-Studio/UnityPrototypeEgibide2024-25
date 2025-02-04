@@ -124,7 +124,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
 
             RemoveResources(_paCost, _paStorage);
-            StatisticsManager.Instance.UpdateByResource(GameResource.ActionPoints, 1, true);
+            StatisticsManager.Instance.UpdateByResource(GameResource.ActionPoints, _paCost, true);
 
             return true;
         }
@@ -353,6 +353,26 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             GameManager.Instance.Tabletop.HUDManager.UpdateResources();
         }
+
+        public void UpgradeStorage(GameResource resource)
+        {
+            switch (resource)
+            {
+                case GameResource.ActionPoints:
+                    UpgradeStorage(_paStorage);
+                    break;
+                case GameResource.Milk:
+                    UpgradeStorage(_fridgeStorage);
+                    break;
+                case GameResource.Muuney:
+                    UpgradeStorage(_bankStorage);
+                    break;
+                case GameResource.Cereal:
+                    UpgradeStorage(_silo);
+                    break;
+            }
+        }
+
 
         /// <summary>
         /// Mejora del almacen de APs

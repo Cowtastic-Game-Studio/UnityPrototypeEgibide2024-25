@@ -24,6 +24,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GameManager.Instance.Tabletop.StorageManager.RemoveResourceDownToMin(currentMilk, GameResource.Milk);
             GameManager.Instance.Tabletop.HUDManager.UpdateResources();
             Debug.Log("El evento de la nevera rota ha terminado.");
+
+            StatisticsManager.Instance.UpdateByStatisticType(StatisticType.EventsCompleted, 1);
         }
     }
 }

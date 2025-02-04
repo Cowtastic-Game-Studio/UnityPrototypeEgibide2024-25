@@ -52,7 +52,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal4()
         {
-            return GenerateStatGoal("T-M4", "Consigue un cliente", StatisticType.CustomersTotalUsed, 1);
+            return GenerateStatGoal("T-M4", "Consigue un cliente", StatisticType.CustomersServed, 1);
 
         }
 

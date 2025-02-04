@@ -50,6 +50,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 item.SetIsActive(true);
             }
+
+            StatisticsManager.Instance.UpdateByStatisticType(StatisticType.EventsCompleted, 1);
         }
     }
 }
