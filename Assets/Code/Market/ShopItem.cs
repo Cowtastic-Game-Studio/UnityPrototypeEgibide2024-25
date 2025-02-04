@@ -10,11 +10,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [SerializeField] private CardDisplay card;
 
         private CardTemplate cardTemplate;
-        public void UpdateDisplayData(CardTemplate cardT)
+
+        public void UpdateDisplayData(CardTemplate cardT, float discountPercentage)
         {
             cardTemplate = cardT;
             card.UpdateDisplay(cardTemplate, false);
-            price.text = cardTemplate.marketCost.ToString();
+            float finalPrice = Utils.RoundMuuney(cardTemplate.marketCost * discountPercentage);
+            price.text = finalPrice.ToString();
         }
 
         public void TriggerCard()

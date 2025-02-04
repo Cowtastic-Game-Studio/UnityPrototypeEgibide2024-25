@@ -18,7 +18,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public override void InitEvent()
         {
             spaceBehaviourList = GameObject.FindObjectsOfType(typeof(PlaceSpaceBehaviour)) as PlaceSpaceBehaviour[];
-            Debug.Log("Found " + spaceBehaviourList.Length + " instances with this script attached");
             foreach (PlaceSpaceBehaviour item in spaceBehaviourList)
             {
                 if (item.GetType(item) == CardType.Seed && item.GetIsActive() == true)
@@ -26,15 +25,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     gardenList.Add(item);
                 }
             }
-
-            Debug.Log("Found " + gardenList.Count + " gardens with seeds");
         }
 
         public override void ApplyEffects()
         {
-            Debug.Log("�Plaga! Los cultivos han sido destruidos.");
-            // L�gica para destruir cultivos
-
             for (int i = 0; i < gardenList.Count / 2; i++)
             {
                 gardenList[i].SetIsActive(false);
@@ -45,7 +39,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public override void EndEvent()
         {
             // Posible limpieza de efectos si la plaga tiene un impacto a largo plazo
-            Debug.Log("La plaga ha terminado.");
             foreach (PlaceSpaceBehaviour item in inactiveGardenList)
             {
                 item.SetIsActive(true);
