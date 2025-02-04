@@ -1,4 +1,5 @@
 using System;
+using CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -100,6 +101,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 Tabletop.FarmsActivateZone();
                 Tabletop.StablesActivateZone();
                 Tabletop.TavernActivateZone();
+            }
+
+            if (Input.GetKeyDown(KeyCode.V))
+            {
+                Reward reward = RewardGenerator.CreateTutorialReward();
+                reward.Receive();
             }
 
             #endregion
