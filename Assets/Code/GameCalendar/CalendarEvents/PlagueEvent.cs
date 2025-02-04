@@ -39,7 +39,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public override void EndEvent()
         {
             // Posible limpieza de efectos si la plaga tiene un impacto a largo plazo
-            Debug.Log("La plaga ha terminado.");
             foreach (PlaceSpaceBehaviour item in inactiveGardenList)
             {
                 item.SetIsActive(true);

@@ -10,13 +10,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
         }
 
-
         public override void InitEvent()
         {
-
         }
-
-
 
         public override void ApplyEffects()
         {
