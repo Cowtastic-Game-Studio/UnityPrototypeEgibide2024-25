@@ -199,7 +199,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Mueve las cartas de nuevo al mazo de robo
             foreach (ICard card in discardCards)
             {
-                GameObject cardGameObject = ((MonoBehaviour)card).gameObject;
+                GameObject cardGameObject = ((MonoBehaviour) card).gameObject;
                 cardGameObject.transform.SetParent(deckArea);
                 cardGameObject.transform.localPosition = Vector3.zero;
                 cardGameObject.transform.localRotation = Quaternion.Euler(90f, -90f, 0f);
@@ -548,26 +548,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         //TODO: change to receive scriptableObject CardTemplate
         // + move card prefab back to Prefab folder
-        internal void buyCard(CardType cardType)
+        public void BuyCard(string cardName)
         {
             GameObject card = null;
-            string path = "Cards/Prefab/";
-
-            switch (cardType)
-            {
-                case CardType.Cow:
-                    path += "CowCard";
-                    break;
-                case CardType.Seed:
-                    path += "SeedCard";
-                    break;
-                case CardType.Customer:
-                    path += "CustomerCard";
-                    break;
-                case CardType.None:
-                default:
-                    return;
-            }
+            string path = "Cards/Prefab/" + cardName;
 
             card = Resources.Load<GameObject>(path);
             if (card != null)

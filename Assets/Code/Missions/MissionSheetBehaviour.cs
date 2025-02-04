@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -80,7 +79,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             this.UpdateGoals(mission.Goals.ToList());
 
             mission.Updated.AddListener(OnUpdated);
-
         }
 
         /// <summary>

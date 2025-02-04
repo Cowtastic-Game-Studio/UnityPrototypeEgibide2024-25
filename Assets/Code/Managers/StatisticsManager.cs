@@ -44,19 +44,25 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Market
             statsList.Add(new Statistic(StatisticType.CardsDiscarded, CardType.None, GameResource.None, 0, false));
             statsList.Add(new Statistic(StatisticType.CardsPurchased, CardType.None, GameResource.None, 0, false));
-            statsList.Add(new Statistic(StatisticType.ZonesPurchased, CardType.None, GameResource.None, 0, false));
+            statsList.Add(new Statistic(StatisticType.ZonesUpgradePurchased, CardType.None, GameResource.None, 0, true));
             statsList.Add(new Statistic(StatisticType.ZonesWithCardsPurchased, CardType.None, GameResource.None, 0, false));
 
             // Resources adquired
-            statsList.Add(new Statistic(StatisticType.MilkTotalAdquired, CardType.None, GameResource.Milk, 0, false));
-            statsList.Add(new Statistic(StatisticType.CerealTotalAdquired, CardType.None, GameResource.Cereal, 0, false));
-            statsList.Add(new Statistic(StatisticType.MuuneyTotalAdquired, CardType.None, GameResource.Muuney, 0, false));
+            statsList.Add(new Statistic(StatisticType.MilkTotalAcquired, CardType.None, GameResource.Milk, 0, false));
+            statsList.Add(new Statistic(StatisticType.CerealTotalAcquired, CardType.None, GameResource.Cereal, 0, false));
+            statsList.Add(new Statistic(StatisticType.MuuneyTotalAcquired, CardType.None, GameResource.Muuney, 0, false));
 
             // Resources used
             statsList.Add(new Statistic(StatisticType.MilkTotalUsed, CardType.None, GameResource.Milk, 0, true));
             statsList.Add(new Statistic(StatisticType.CerealTotalUsed, CardType.None, GameResource.Cereal, 0, true));
             statsList.Add(new Statistic(StatisticType.MuuneyTotalUsed, CardType.None, GameResource.Muuney, 0, true));
             statsList.Add(new Statistic(StatisticType.APUsed, CardType.None, GameResource.ActionPoints, 0, true));
+
+
+            //TODO: Revisar
+            statsList.Add(new Statistic(StatisticType.CustomersTotalUsed, CardType.Customer, GameResource.None, 0, true));
+            statsList.Add(new Statistic(StatisticType.StableCountUpgrade, CardType.None, GameResource.None, 0, true));
+
 
         }
 

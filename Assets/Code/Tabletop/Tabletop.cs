@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -14,7 +12,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public CardManager CardManager;
         public HUDManager HUDManager;
         public StorageManager StorageManager;
-        public MarketManager marketManager;
+        //public MarketManager marketManager;
+        public NewMarketManager NewMarketManager;
 
         [Header("Board")]
         [Space(1)]
@@ -26,9 +25,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         //public StableZone Stables;
         //public TavernZone Taverna;
 
-/// <summary>
-/// Listas de zonas para poder activarlas
-/// </summary>
+        /// <summary>
+        /// Listas de zonas para poder activarlas
+        /// </summary>
         public List<PlaceSpaceBehaviour> farms = new List<PlaceSpaceBehaviour>();
         public List<PlaceSpaceBehaviour> stables = new List<PlaceSpaceBehaviour>();
         public List<PlaceSpaceBehaviour> taverns = new List<PlaceSpaceBehaviour>();
@@ -94,15 +93,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
-/// <summary>
-/// Estos 3 metodos son los que activan la siguiente zona a activar cuando mejoren alguna zona.(Nota: Asegurarse de que las casillas que tienen que empezar activas estan las primeras en la lista , gracias.)
-/// </summary>
+        /// <summary>
+        /// Estos 3 metodos son los que activan la siguiente zona a activar cuando mejoren alguna zona.(Nota: Asegurarse de que las casillas que tienen que empezar activas estan las primeras en la lista , gracias.)
+        /// </summary>
         public void FarmsActivateZone()
         {
-            foreach(PlaceSpaceBehaviour farm in farms)
+            foreach (PlaceSpaceBehaviour farm in farms)
             {
-                int i = 0;
-
                 if (!farm.GetIsActive())
                 {
                     farm.SetIsActive(true);
@@ -113,7 +110,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void StablesActivateZone()
         {
-            foreach(PlaceSpaceBehaviour stable in stables)
+            foreach (PlaceSpaceBehaviour stable in stables)
             {
                 if (!stable.GetIsActive())
                 {
@@ -125,7 +122,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void TavernActivateZone()
         {
-            foreach(PlaceSpaceBehaviour tavern in taverns)
+            foreach (PlaceSpaceBehaviour tavern in taverns)
             {
                 if (!tavern.GetIsActive())
                 {
