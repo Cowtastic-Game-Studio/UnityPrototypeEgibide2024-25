@@ -77,6 +77,22 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
         #endregion
 
+        #region Public methods
+
+        public void DeactivateMision()
+        {
+            foreach (Goal goal in Goals)
+            {
+                goal.OnCompleted.RemoveListener(OnCompleteGoal);
+            }
+        }
+
+
+
+        #endregion
+
+        #region Private methods
+
         private void OnCompleteGoal(Goal goal)
         {
             Debug.Log("Goal complete:" + goal.Description);
@@ -90,6 +106,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             //Si se han completado todos los goals, se reciben las recompensas
 
         }
+
+        #endregion
 
     }
 }

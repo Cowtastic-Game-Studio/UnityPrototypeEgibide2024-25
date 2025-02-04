@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
@@ -21,6 +22,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public int CurrentMonth { get; private set; }
         private int DayOfMonth; //{ get; private set; }
         public int CurrentYear { get; private set; }
+
+        public UnityEvent<int> DayChanged = new UnityEvent<int>();
 
         private GameCalendarEventManager eventManager;
 
@@ -103,10 +106,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 CurrentYear++;
             }
 
-            ChangeCallendar();
+            ChangeCallendar();            
 
             //Comprobar si hay que activar un evento
             CheckForEvent();
+
+            RaiseDayChanged();
         }
 
         // Comprobar si debe ocurrir un evento
@@ -132,6 +137,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 positionCount = 0;
             }
+        }
+    
+        private void RaiseDayChanged()
+        {
+            this.DayChanged.Invoke(this.CurrentDay);
         }
     }
 }
