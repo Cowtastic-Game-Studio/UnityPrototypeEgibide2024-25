@@ -64,6 +64,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
         #endregion
 
+        public override string ToString()
+        {
+            return this.Name;
+        }
 
     }
 }

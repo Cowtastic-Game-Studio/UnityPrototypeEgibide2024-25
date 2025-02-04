@@ -10,7 +10,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         [SerializeField] private GameObject WeeklyMission;
 
-
         #endregion
 
         #region Unity methods

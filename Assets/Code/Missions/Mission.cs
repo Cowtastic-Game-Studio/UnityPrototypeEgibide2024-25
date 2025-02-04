@@ -64,13 +64,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             }
         }
 
-
-
         public Mission(string name, string description, MissionTypes type, Goal goal, Reward reward) :
             this(name, description, type, new List<Goal>() { goal }, new List<Reward>() { reward })
         {
         }
-
 
         #endregion
 
@@ -80,16 +77,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
         #endregion
 
-
         private void OnCompleteGoal(Goal goal)
         {
             Debug.Log("Goal complete:" + goal.Description);
             goal.OnCompleted.RemoveListener(OnCompleteGoal);
-            
+
             this.Updated.Invoke(this);
 
-        }
 
+            //TODO: Comprobar si se han completado todos los goals
+
+            //Si se han completado todos los goals, se reciben las recompensas
+
+        }
 
     }
 }
