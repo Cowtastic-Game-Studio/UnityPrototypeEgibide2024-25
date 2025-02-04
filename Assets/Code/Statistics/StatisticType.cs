@@ -37,9 +37,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [EnumMember(Value = "Purchased cards")]
         CardsPurchased,
 
-        [EnumMember(Value = "Purchased zones")]
-        ZonesPurchased,
-
         [EnumMember(Value = "Purchased zone upgrade")]
         ZonesUpgradePurchased,
 
@@ -72,22 +69,22 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [EnumMember(Value = "Used AP")]
         APUsed,
 
-        [EnumMember(Value = "Count uppgrade stable")]
+        // Mission globals
+        [EnumMember(Value = "Count upgrade stable")]
         StableCountUpgrade,
 
-        [EnumMember(Value = "Count uppgrade garden")]
+        [EnumMember(Value = "Count upgrade garden")]
         GardenCountUpgrade,
 
-        [EnumMember(Value = "Count uppgrade tavern")]
+        [EnumMember(Value = "Count upgrade tavern")]
         TavernCountUpgrade,
 
-        [EnumMember(Value = "Count uppgrade fridge")]
+        [EnumMember(Value = "Count upgrade fridge")]
         FridgeCountUpgrade,
 
-        [EnumMember(Value = "Count uppgrade silo")]
+        [EnumMember(Value = "Count upgrade silo")]
         SiloCountUpgrade,
 
-        // New Objectives
         [EnumMember(Value = "Fill all stable slots with cows")]
         StableFilledWithCowsMaxUpgrade,
 
@@ -97,7 +94,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [EnumMember(Value = "Fill the entire tavern with customers")]
         TavernFilledWithCustomersMaxUpgrade,
 
-        [EnumMember(Value = "Complete 3 events")]
+        [EnumMember(Value = "Complete events")]
         EventsCompleted,
     }
 }

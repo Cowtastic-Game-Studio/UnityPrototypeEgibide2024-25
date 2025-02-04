@@ -74,5 +74,10 @@ crashlytics-build.properties
 # Directorio de configuracion de vscode
 .vscode
 .idea
+
 Assets/Scenes/GYM_MIKEL.unity
 Assets/Scenes/GYM_MIKEL.unity.meta
+
+
+Assets/TextMesh Pro/
+
