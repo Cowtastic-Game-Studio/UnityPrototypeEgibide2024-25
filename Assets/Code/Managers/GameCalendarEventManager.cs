@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
@@ -41,23 +42,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             AddDynamicEvent(new NewMemberEvent());
         }
 
-        public void TestActiveEvent()
-        {
-            activeEvent = staticEvents[1];
-            activeEvent.TriggerEvent();
-        }
-
-        public void TriggerDailyEvent(int currentDay)
+        public void TriggerDailyEvent(int currentDay, int currentWeek)
         {
             EndActiveEvent();
 
             if (staticEvents.ContainsKey(currentDay))
             {
+                //Debug.LogWarning("Static event day: " + currentDay);
                 activeEvent = staticEvents[currentDay];
                 activeEvent.TriggerEvent();
             }
-            else if (currentDay > 7 && random.Next(100) < 20) // 20% chance
+            else if (currentWeek > 0 && random.Next(100) < 20) // 20% chance
             {
+                //Debug.LogWarning("random event day: " + currentDay);
                 int index = random.Next(dynamicEvents.Count);
                 activeEvent = dynamicEvents[index];
                 activeEvent.TriggerEvent();
@@ -66,8 +63,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Activar el evento de renta cada séptimo día de la semana
             if (currentDay % 7 == 0)
             {
+                Debug.LogWarning("Rent day " + currentDay);
                 rent.TriggerEvent();
-                rentEvent = rent; 
+                rentEvent = rent;
             }
         }
 
