@@ -338,7 +338,8 @@ MonoBehaviour:
   mulliganButton: {fileID: 803618313422417201}
   actionPointsPanel: {fileID: 6626816876641624770}
   resourcesPanel: {fileID: 336903739922636347}
-  marketGUI: {fileID: 0}
+  pageGUI: {fileID: 0}
+  buttonsGUI: {fileID: 0}
 --- !u!1 &2086916474375116783
 GameObject:
   m_ObjectHideFlags: 0
@@ -1803,6 +1804,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6329618972181211525}
     m_Modifications:
+    - target: {fileID: 3934345919103901975, guid: bf03e2b6099c154418439f6a8e406750, type: 3}
+      propertyPath: template
+      value: 
+      objectReference: {fileID: 11400000, guid: b7700593aa106884c9d72d493d004526, type: 2}
     - target: {fileID: 5522997473445575745, guid: bf03e2b6099c154418439f6a8e406750, type: 3}
       propertyPath: m_SortingLayer
       value: 0

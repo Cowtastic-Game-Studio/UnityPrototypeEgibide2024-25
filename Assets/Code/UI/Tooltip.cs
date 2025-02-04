@@ -66,41 +66,44 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void HandleCardHover(RaycastHit hit)
         {
-            if (hit.collider.CompareTag("CardCow") ||
-                hit.collider.CompareTag("CardSeed") ||
-                hit.collider.CompareTag("CardClient"))
+            if (GameManager.Instance.GamePhaseManager.CurrentPhaseType != GamePhaseTypes.Market)
             {
-                if (currentHoveredCard != hit.collider.gameObject)
+                if (hit.collider.CompareTag("CardCow") ||
+                    hit.collider.CompareTag("CardSeed") ||
+                    hit.collider.CompareTag("CardClient"))
                 {
-                    isHoveringCard = true;
-                    cardHoverCounter = 0f;
-                    currentHoveredCard = hit.collider.gameObject;
+                    if (currentHoveredCard != hit.collider.gameObject)
+                    {
+                        isHoveringCard = true;
+                        cardHoverCounter = 0f;
+                        currentHoveredCard = hit.collider.gameObject;
+                    }
+
+                    cardHoverCounter += Time.deltaTime;
+
+                    if (cardHoverCounter >= hoverTime)
+                    {
+                        selectedCard = currentHoveredCard;
+
+                        CardBehaviour selctedCardBehaviour = selectedCard.GetComponent<CardBehaviour>();
+
+                        CardBehaviour cardTool = cardTooltip.GetComponent<CardBehaviour>();
+                        CardDisplay cardToolDisplay = cardTool.GetComponent<CardDisplay>();
+
+                        cardToolDisplay.UpdateDisplay(selctedCardBehaviour.GetTemplate(), false);
+
+                        // Mueve el cardTooltip a la posición del ratón
+                        //Vector3 mousePosition = Input.mousePosition;                    
+                        //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+                        //cardTooltip.transform.position = worldPosition;
+
+                        cardTooltip.SetActive(true);
+                    }
                 }
-
-                cardHoverCounter += Time.deltaTime;
-
-                if (cardHoverCounter >= hoverTime)
+                else
                 {
-                    selectedCard = currentHoveredCard;
-
-                    CardBehaviour selctedCardBehaviour = selectedCard.GetComponent<CardBehaviour>();
-
-                    CardBehaviour cardTool = cardTooltip.GetComponent<CardBehaviour>();
-                    CardDisplay cardToolDisplay = cardTool.GetComponent<CardDisplay>();
-
-                    cardToolDisplay.UpdateDisplay(selctedCardBehaviour.GetTemplate(), false);
-
-                    // Mueve el cardTooltip a la posición del ratón
-                    //Vector3 mousePosition = Input.mousePosition;                    
-                    //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-                    //cardTooltip.transform.position = worldPosition;
-
-                    cardTooltip.SetActive(true);
+                    ResetCardHover();
                 }
-            }
-            else
-            {
-                ResetCardHover();
             }
         }
 
