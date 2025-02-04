@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public Text requieredQuantityText;
         public Text producedTypeText;
         public Text producedQuantityText;
+        public int cost;
 
         //TODO: El Image que actúa como filtro gris
         [SerializeField]
@@ -56,6 +58,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 if (cardTemplate.cardType == CardType.PlaceActivator ||
                     cardTemplate.cardType == CardType.PlaceMultiplier)
                     producedTypeText.text = cardTemplate.targetCardType.ToString();
+
+                cost = cardTemplate.marketCost;
 
                 // Actualiza la visibilidad del filtro gris según el estado de la carta
                 SetOverlayActive(!isActive);
