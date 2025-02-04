@@ -102,6 +102,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         #endregion
 
+     
+
         #region Public methods
         public void Activate()
         {
@@ -138,6 +140,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             // Pasa el estado activo
             display.UpdateDisplay(template, isActive);
+        }
+
+        public CardTemplate GetTemplate()
+        {
+            return template;
         }
         #endregion
 
