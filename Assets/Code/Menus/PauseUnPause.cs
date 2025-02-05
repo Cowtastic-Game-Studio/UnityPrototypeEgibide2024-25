@@ -8,7 +8,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     {
         public GameObject pauseMenuObject;
         // Update is called once per frame
-        public bool pause = false;
+        public static bool pause = false;
+
 
 
         public void PauseMenuOff()
@@ -24,22 +25,23 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         }
 
-         void Update()
+        void FixedUpdate()
         {
-            
-                if (Input.GetKeyDown(KeyCode.Tab) && pause == false)
+            if (Input.GetKeyDown(KeyCode.Escape)) 
+            {
+
+
+                if (pause == false)
                 {
                     PauseMenuOn();
                     pause = true;
 
 
                 }
+
+
+            }
             
-                if (Input.GetKeyDown(KeyCode.CapsLock) && pause == true)
-                {
-                    PauseMenuOff();
-                    pause = false;
-                }
             
         }
     }

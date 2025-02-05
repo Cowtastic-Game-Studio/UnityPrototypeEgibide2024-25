@@ -21,7 +21,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             SceneManager.LoadSceneAsync("Pruebas3d", LoadSceneMode.Single);
             SceneManager.UnloadSceneAsync("MainMenu", UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
-            isPaused = false;
+            
         }
         public void MainMenu()
         {
@@ -50,7 +50,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
 
             pauseMenuObject.SetActive(false);
-            pauseUnPause.pause = false;
+            
+            PauseUnPause.pause = false;
 
 
         }
