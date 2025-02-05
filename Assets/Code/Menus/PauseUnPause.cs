@@ -25,7 +25,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         }
 
-        void FixedUpdate()
+        void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape)) 
             {
