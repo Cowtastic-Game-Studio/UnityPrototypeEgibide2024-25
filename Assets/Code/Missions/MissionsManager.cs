@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Reflection;
 using CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions;
 using UnityEngine;
 using UnityEngine.Events;
@@ -79,11 +78,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (this.IsTutorialEnabled && day > 7)
             {
-                //GameManager.Instance.GameCalendar.DayChanged.RemoveListener(OnDayChange);
-
                 this.IsTutorialEnabled = false;
-
             }
+            // TODO cada lunes renewWeeklyMission 
 
         }
 
@@ -104,11 +101,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         #region Private methods
 
         private void InitializeMissions()
-        {   
+        {
             CreateTutorialMission();
             this.IsTutorialEnabled = true;
 
-            CreateGlobalMissions();            
+            CreateGlobalMissions();
         }
 
         /// <summary>
@@ -168,7 +165,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             this.GlobalMissions.Add(mission2);
 
             goal3 = GoalGenerator.CreateGlobalGoal3();
-            mission3 = CreateGlobalMission("G3", "Global 3",goal3, 50);
+            mission3 = CreateGlobalMission("G3", "Global 3", goal3, 50);
             this.GlobalMissions.Add(mission3);
 
             goal4 = GoalGenerator.CreateGlobalGoal4();

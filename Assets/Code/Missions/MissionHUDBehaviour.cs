@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -23,19 +22,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             MissionSheetManager weeklyMissionManager;
             GlobalMissionSheetManager globalMissionManager;
 
-
-            
-
-            //MissionsManager.Instance.NewWeeklyMission.AddListener(OnNewWeeklyMission);
-
+            MissionsManager.Instance.NewWeeklyMission.AddListener(OnNewWeeklyMission);
 
             tutorialMisionManager = TutorialMission.GetComponent<MissionSheetManager>();
             tutorialMisionManager.Mission = MissionsManager.Instance.Tutorial;
 
-
             weeklyMissionManager = WeeklyMission.GetComponent<MissionSheetManager>();
             weeklyMissionManager.Mission = MissionsManager.Instance.WeeklyMission;
-
 
             globalMissionManager = GlobalMission.GetComponent<GlobalMissionSheetManager>();
             globalMissionManager.Missions = MissionsManager.Instance.GlobalMissions;
@@ -51,6 +44,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             MissionSheetManager weeklyMissionManager;
             weeklyMissionManager = WeeklyMission.GetComponent<MissionSheetManager>();
             weeklyMissionManager.Mission = MissionsManager.Instance.WeeklyMission;
+            ChangeTutorialForWeekly(); // TODO una vez
         }
 
 
