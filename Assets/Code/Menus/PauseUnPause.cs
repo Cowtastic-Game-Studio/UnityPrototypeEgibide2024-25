@@ -27,22 +27,31 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape)) 
+            if (Input.GetKeyDown(KeyCode.Escape) && pause ==false) 
             {
 
 
-                if (pause == false)
-                {
+                
                     PauseMenuOn();
                     pause = true;
 
 
                 }
+            else if (Input.GetKeyDown(KeyCode.Escape)&& pause==true)
+            {
+
+
+
+                PauseMenuOff();
+                pause = false;
 
 
             }
+
+
+        }
             
             
         }
     }
-}
+
