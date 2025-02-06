@@ -92,12 +92,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             CurrentDay++;
             DayOfMonth++;
 
+
             if (CurrentDay % 7 == 0)
             {
                 CurrentWeek++;
                 MissionsManager.Instance.RenewWeeklyMission();
             }
-            if (CurrentDay % 29 == 0) // 29 seria principio de mes
+            if (DayOfMonth % 29 == 0) // 29 seria principio de mes
             {
                 DayOfMonth = 1;
                 CurrentMonth++;
@@ -132,12 +133,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void ChangeCallendar()
         {
-            calendarMark.transform.localPosition = positions[positionCount];
-            positionCount++;
-            if (CurrentDay % 29 == 0)
-            {
-                positionCount = 0;
-            }
+            calendarMark.transform.localPosition = positions[DayOfMonth - 1];
         }
 
         private void RaiseDayChanged()
