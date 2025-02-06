@@ -42,7 +42,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
                 // Añadir dinero y actualizar hud
                 GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(roundedMuuney, GameResource.Muuney, true);
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
-                Debug.Log("Se ha añadido Muuney: " + roundedMuuney);
+                Debug.LogWarning("Muuney has been added: " + roundedMuuney); // No estoy muy segura
 
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
             };

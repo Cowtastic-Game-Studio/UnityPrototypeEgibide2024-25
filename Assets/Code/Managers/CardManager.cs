@@ -193,13 +193,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             if (discardCards.Count == 0)
             {
-                Debug.LogWarning("No hay cartas en el mazo de descarte para barajar.");
+                Debug.LogWarning("No hay cartas en el mazo de descarte para barajar."); // ESTA NO
                 return;
             }
             // Mueve las cartas de nuevo al mazo de robo
             foreach (ICard card in discardCards)
             {
-                GameObject cardGameObject = ((MonoBehaviour)card).gameObject;
+                GameObject cardGameObject = ((MonoBehaviour) card).gameObject;
                 cardGameObject.transform.SetParent(deckArea);
                 cardGameObject.transform.localPosition = Vector3.zero;
                 cardGameObject.transform.localRotation = Quaternion.Euler(90f, -90f, 0f);
@@ -288,7 +288,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             else
             {
-                Debug.LogWarning("La carta no se encuentra en la mano.");
+                Debug.LogWarning("La carta no se encuentra en la mano."); // ESTA NO
             }
         }
 

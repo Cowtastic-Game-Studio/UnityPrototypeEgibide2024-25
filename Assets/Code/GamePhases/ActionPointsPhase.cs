@@ -1,4 +1,4 @@
-using System;
+using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
@@ -28,8 +28,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void EnterPhase()
         {
-            Console.WriteLine("Entering Action Points Phase");
-
             // Suscribirse al evento global de clic de carta en GameManager
             GameManager.Instance.OnCardClickedGlobal += OnCardClickedHandler;
         }
@@ -37,14 +35,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void ExecutePhase()
         {
-            //Console.WriteLine("Executing Action Points Phase Logic.");
         }
 
 
         public void EndPhase()
         {
-            Console.WriteLine("Ending Action Points Phase");
-
             // Desuscribirse del evento global para evitar referencias persistentes
             GameManager.Instance.OnCardClickedGlobal -= OnCardClickedHandler;
 
@@ -60,13 +55,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             //comprobar que si se ha seleccionado una carta
             if (card != null)
             {
-                Console.WriteLine($"Card selected: {card.Name}");
+                Debug.Log($"Card selected: {card.Name}");
 
                 CheckAgainstStorage(card);
             }
             else
             {
-                Console.WriteLine("No card selected.");
+                Debug.Log("No card selected.");
             }
 
         }
@@ -74,43 +69,41 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void CheckAgainstStorage(ICard selectedCard)
         {
             // Comprobar si hay una carta seleccionada
-            if (selectedCard != null)
+            if (selectedCard == null)
             {
-                // Verificar si hay suficientes puntos de acción para usar la carta
-                hasActionPoints = GameManager.Instance.Tabletop.StorageManager.CheckActionPoints(selectedCard.ActionPointsCost);
-
-                if (hasActionPoints)
-                {
-                    // Verificar si hay suficientes recursos para la acción de la carta
-                    hasResources = GameManager.Instance.Tabletop.StorageManager.CheckResources(selectedCard.RequiredResources, selectedCard.ProducedResources);
-
-                    if (hasResources)
-                    {
-                        // Ejecutar la acción de la carta y producir/consumir los recursos necesarios
-                        isProduced = GameManager.Instance.Tabletop.StorageManager.ProduceResources();
-                        Console.WriteLine($"Action executed for card {selectedCard.Name}.");
-                        if (isProduced)
-                        {
-                            CardBehaviour cardBehaviour = selectedCard as CardBehaviour;
-                            cardBehaviour.Deactivate();
-                            GameManager.Instance.Tabletop.HUDManager.UpdateResources();
-                            StatisticsManager.Instance.UpdateByType(selectedCard);
-                            Console.WriteLine("Resources have been produced :)");
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Not enough resources.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine($"Not enough action points.");
-                }
+                Debug.Log("No card selected.");
+                return;
             }
-            else
+
+            // Verificar si hay suficientes puntos de acción para usar la carta
+            hasActionPoints = GameManager.Instance.Tabletop.StorageManager.CheckActionPoints(selectedCard.ActionPointsCost);
+
+            if (!hasActionPoints)
             {
-                Console.WriteLine("No card selected.");
+                Debug.LogWarning($"Not enough action points."); // No estoy muy segura
+                return;
+            }
+
+            // Verificar si hay suficientes recursos para la acción de la carta
+            hasResources = GameManager.Instance.Tabletop.StorageManager.CheckResources(selectedCard.RequiredResources, selectedCard.ProducedResources);
+
+            if (!hasResources)
+            {
+                Debug.LogWarning($"Not enough resources."); // No estoy muy segura
+                return;
+            }
+
+            // Ejecutar la acción de la carta y producir/consumir los recursos necesarios
+            isProduced = GameManager.Instance.Tabletop.StorageManager.ProduceResources();
+            Debug.Log($"Action executed for card {selectedCard.Name}.");
+
+            if (isProduced)
+            {
+                CardBehaviour cardBehaviour = selectedCard as CardBehaviour;
+                cardBehaviour.Deactivate();
+                GameManager.Instance.Tabletop.HUDManager.UpdateResources();
+                StatisticsManager.Instance.UpdateByType(selectedCard);
+                Debug.LogWarning("Resources have been produced :)"); // No estoy muy segura
             }
         }
     }

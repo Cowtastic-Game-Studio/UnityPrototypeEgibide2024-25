@@ -101,14 +101,18 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             goal.OnCompleted.RemoveListener(OnCompleteGoal);
             this.Updated.Invoke(this);
 
-            //TODO: Comprobar si se han completado todos los goals
             List<Goal> filteredGoals = Goals.Where(_goal => _goal.IsCompleted == false).ToList();
 
             //Si se han completado todos los goals, se reciben las recompensas
             if (filteredGoals.Count == 0)
             {
                 Rewards.ToList().ForEach(reward => reward.Receive());
-                Debug.LogWarning("Reward recibido");
+                foreach (Reward reward in Rewards.ToList())
+                {
+                    reward.Receive();
+                    // TODO mirarlo
+                    Debug.LogWarning($"Reward {reward} received.");
+                }
             }
         }
 

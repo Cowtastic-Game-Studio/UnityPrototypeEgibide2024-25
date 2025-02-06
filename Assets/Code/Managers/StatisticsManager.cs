@@ -114,25 +114,25 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             switch (cardType)
             {
                 //case CardType.Cow:
-                //    Console.WriteLine("La carta es de tipo Cow.");
+                //    Debug.Log("La carta es de tipo Cow.");
                 //    break;
                 //case CardType.Seed:
-                //    Console.WriteLine("La carta es de tipo Seed.");
+                //    Debug.Log("La carta es de tipo Seed.");
                 //    break;
                 //case CardType.Customer:
-                //    Console.WriteLine("La carta es de tipo Customer.");
+                //    Debug.Log("La carta es de tipo Customer.");
                 //    break;
                 case CardType.PlaceActivator:
                     UpdateByStatisticType(StatisticType.ZonesWithCardsPurchased, 1);
                     break;
                     //case CardType.PlaceMultiplier:
-                    //    Console.WriteLine("La carta es de tipo PlaceMultiplier.");
+                    //    Debug.Log("La carta es de tipo PlaceMultiplier.");
                     //    break;
                     //case CardType.Helper:
-                    //    Console.WriteLine("La carta es de tipo Helper.");
+                    //    Debug.Log("La carta es de tipo Helper.");
                     //    break;
                     //case CardType.None:
-                    //    Console.WriteLine("No hay carta.");
+                    //    Debug.Log("No hay carta.");
                     //    break;
             }
 

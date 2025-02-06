@@ -38,7 +38,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (validThefts.Count == 0)
             {
                 GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(1, GameResource.Muuney, true);
-                Debug.Log("como no tenias nada que robar les has dado pena y te han dejado uno de muuuney");
+                Debug.LogWarning("Since you didn't have anything to steal, they took pity on you and left you some money.");
             }
             else
             {
@@ -49,17 +49,17 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 {
                     case GameResource.Milk:
                         GameManager.Instance.Tabletop.StorageManager.RemoveResourceDownToMin(theft.amount, GameResource.Milk);
-                        Debug.Log($"Te han robado {theft.amount} de leche.");
+                        Debug.LogWarning($"Te han robado {theft.amount} de leche.");
                         break;
 
                     case GameResource.Cereal:
                         GameManager.Instance.Tabletop.StorageManager.RemoveResourceDownToMin(theft.amount, GameResource.Cereal);
-                        Debug.Log($"Te han robado {theft.amount} de cereal.");
+                        Debug.LogWarning($"Te han robado {theft.amount} de cereal.");
                         break;
 
                     case GameResource.Muuney:
                         GameManager.Instance.Tabletop.StorageManager.WasteMuuney(theft.amount);
-                        Debug.Log($"Te han robado {theft.amount} de muuney.");
+                        Debug.LogWarning($"Te han robado {theft.amount} de muuney.");
                         break;
                 }
             }

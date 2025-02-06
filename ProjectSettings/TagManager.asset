@@ -9,6 +9,8 @@ TagManager:
   - CardClient
   - CardCow
   - CardSeed
+  - Storage
+  - CardTooltip
   layers:
   - Default
   - TransparentFX

@@ -66,7 +66,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         string name = hit.collider.name;
                         GameObject shopItemGO = hit.collider.gameObject.transform.parent.gameObject;
 
-                        Debug.Log("Name: " + name);
+                        //Debug.Log("Name: " + name);
 
                         ChangePanel(name, shopItemGO);
                     }
@@ -77,7 +77,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void RestartMarket()
         {
             cardPreview.SetActive(false);
-            Debug.Log(shopItemsData);
 
             UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Cow && x.isActive).ConvertAll(x => x.cardTemplate));
         }

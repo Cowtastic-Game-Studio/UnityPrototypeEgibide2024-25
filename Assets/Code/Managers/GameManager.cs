@@ -72,7 +72,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     }
                     else
                     {
-                        Debug.LogWarning("La carta seleccionada no tiene el componente ICard.");
+                        Debug.LogWarning("La carta seleccionada no tiene el componente ICard."); // ESTA NO
                     }
                 }
 

@@ -1,5 +1,3 @@
-using System;
-
 using UnityEngine.UI;
 
 
@@ -30,7 +28,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void EnterPhase()
         {
             // C�digo para entrar en la fase
-            Console.WriteLine("Entering Market Phase");
             int currentDay = GameManager.Instance.GameCalendar.CurrentDay;
             GameManager.Instance.Tabletop.NewMarketManager.CheckDay(currentDay);
             if (currentDay > 1)
@@ -43,15 +40,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void ExecutePhase()
         {
             // C�digo que define la l�gica de la fase
-            Console.WriteLine("Executing Market Phase");
-
         }
 
 
         public void EndPhase()
         {
             // C�digo para finalizar la fase
-            Console.WriteLine("Ending Market Phase");
 
             //pasar al siguiente dia
             GameManager.Instance.GameCalendar.NextDay();

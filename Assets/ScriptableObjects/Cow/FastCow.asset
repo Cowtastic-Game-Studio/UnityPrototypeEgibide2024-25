@@ -30,3 +30,4 @@ MonoBehaviour:
   dayToUnlock: 2
   targetCardType: 6
   multiplier: 1
+  targetResoruceType: 4

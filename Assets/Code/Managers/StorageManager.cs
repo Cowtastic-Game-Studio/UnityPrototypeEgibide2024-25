@@ -204,7 +204,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 if (espacioDisponible <= 0)
                 {
-                    Debug.LogWarning($"El almacenamiento de {type} está lleno.");
+                    Debug.LogWarning($"The {type} storage is full.");
                     return;
                 }
             }
@@ -234,7 +234,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             if (storage.Resource <= 0)
             {
-                Debug.LogWarning($"El almacenamiento de {type} ya está vacío.");
+                Debug.LogWarning($"The {type} storage is already empty.");
                 return;
             }
 
@@ -283,7 +283,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             int leftResources = storage.Resource - quantity;
             if (quantity > storage.Resource || leftResources < 0)
             {
-                Debug.Log("No hay suficientes recursos");
+                Debug.LogWarning("Not enough resources");
                 return false;
             }
 
@@ -302,7 +302,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             if (newResources > storage.MaxResources)
             {
-                Debug.Log("No hay suficientes espacio para almacenar el recurso.");
+                Debug.LogWarning("There is not enough space to store the resource.");
                 return false;
             }
 
@@ -409,7 +409,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     _paStorage.MaxResources += 2;
                     AddLevel(_paStorage);
                     WasteMuuney(upgradeCost);
-                    Debug.Log("PAs mejorados.");
+                    Debug.LogWarning("Upgraded PA.");
                 }
             }
         }
@@ -425,7 +425,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 _bankStorage.MaxResources += 5;
                 AddLevel(_bankStorage);
                 WasteMuuney(upgradeCost);
-                Debug.Log("Banco mejorado.");
+                Debug.LogWarning("Upgraded bank.");
             }
         }
 
@@ -441,7 +441,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     _fridgeStorage.MaxResources += 2;
                     AddLevel(_fridgeStorage);
                     WasteMuuney(15);
-                    Debug.Log("Nevera mejorada.");
+                    Debug.LogWarning("Upgraded fridge.");
                 }
             }
         }
@@ -458,7 +458,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     _silo.MaxResources += 3;
                     AddLevel(_silo);
                     WasteMuuney(10);
-                    Debug.Log("Silo mejorado.");
+                    Debug.LogWarning("Upgraded silo.");
                 }
             }
         }

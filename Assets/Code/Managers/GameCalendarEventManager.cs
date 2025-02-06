@@ -25,10 +25,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void InitializeStaticEvents()
         {
-            staticEvents[8] = new ResourceMultipleEvent("Día de la cosecha", "¡Los cultivos dan el doble de recursos!", GameResource.Cereal, 2);
-            staticEvents[13] = new ResourceMultipleEvent("Día de las vacas", "¡Las vacas dan el doble de recursos!", GameResource.Milk, 2);
+            staticEvents[8] = new ResourceMultipleEvent("Harvest Day", "The seeds yield double the resources!", GameResource.Cereal, 2);
+            staticEvents[13] = new ResourceMultipleEvent("Cow Day", "The cows yield double the resources!", GameResource.Milk, 2);
             staticEvents[18] = new VetDayEvent();
-            staticEvents[21] = new ResourceMultipleEvent("Festival de la granja", "Vendes el doble de caro, misma calidad y nadie se queja", GameResource.Muuney, 2);
+            staticEvents[21] = new ResourceMultipleEvent("Farm Festival", "You sell at double the price, same quality, and no one complains.", GameResource.Muuney, 2);
             staticEvents[28] = new BlackFridayEvent();
         }
 
