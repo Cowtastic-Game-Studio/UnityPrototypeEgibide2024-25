@@ -19,14 +19,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void NewGame() 
         {
-            SceneManager.LoadSceneAsync("Pruebas3d", LoadSceneMode.Single);
+            SceneManager.LoadSceneAsync("Pruebas3dMenus", LoadSceneMode.Single);
             SceneManager.UnloadSceneAsync("MainMenu", UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
             
         }
         public void MainMenu()
         {
             SceneManager.LoadSceneAsync("MainMenu", LoadSceneMode.Single);
-            SceneManager.UnloadSceneAsync("Pruebas3d", UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+            SceneManager.UnloadSceneAsync("Pruebas3dMenus", UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
         }
     
 

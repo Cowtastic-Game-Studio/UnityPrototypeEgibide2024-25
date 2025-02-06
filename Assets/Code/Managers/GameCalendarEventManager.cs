@@ -29,7 +29,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             staticEvents[13] = new ResourceMultipleEvent("Día de las vacas", "¡Las vacas dan el doble de recursos!", GameResource.Milk, 2);
             staticEvents[18] = new VetDayEvent();
             staticEvents[21] = new ResourceMultipleEvent("Festival de la granja", "Vendes el doble de caro, misma calidad y nadie se queja", GameResource.Muuney, 2);
-            //staticEvents[28] = new BlackFriday();
+            staticEvents[28] = new BlackFridayEvent();
         }
 
         private void InitializeDynamicEvents()
