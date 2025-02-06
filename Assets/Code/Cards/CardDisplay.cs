@@ -83,7 +83,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             else
             {
-                Debug.LogError("No card template provided to CardDisplay.");
+                //Debug.LogError("No card template provided to CardDisplay.");
             }
         }
 

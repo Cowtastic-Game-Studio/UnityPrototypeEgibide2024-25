@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -68,9 +65,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (GameManager.Instance.GamePhaseManager.CurrentPhaseType != GamePhaseTypes.Market)
             {
-                if (hit.collider.CompareTag("CardCow") ||
-                    hit.collider.CompareTag("CardSeed") ||
-                    hit.collider.CompareTag("CardClient"))
+                if (hit.collider.CompareTag("Carta"))
                 {
                     if (currentHoveredCard != hit.collider.gameObject)
                     {
