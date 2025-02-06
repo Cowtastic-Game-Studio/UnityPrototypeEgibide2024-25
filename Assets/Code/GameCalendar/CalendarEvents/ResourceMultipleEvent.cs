@@ -27,12 +27,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public override void ApplyEffects()
         {
-            GameManager.Instance.Tabletop.StorageManager.SetResourceMultiplierAndType(resourceMultiplier, resourceType);
+            GameManager.Instance.Tabletop.StorageManager.SetResourceMultiplierEventAndType(resourceMultiplier, resourceType);
         }
 
         public override void EndEvent()
         {
-            GameManager.Instance.Tabletop.StorageManager.ClearResourceMultiplierAndType();
+            GameManager.Instance.Tabletop.StorageManager.ClearResourceMultiplierEventAndType();
         }
 
         public override void InitEvent()
