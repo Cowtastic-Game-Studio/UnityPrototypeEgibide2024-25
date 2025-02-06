@@ -7,7 +7,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     public class ShopItem : MonoBehaviour
     {
         [SerializeField] private TMP_Text price;
-        [SerializeField] private CardDisplay card;
+        [SerializeField] public CardDisplay card;
 
         private CardTemplate cardTemplate;
 
