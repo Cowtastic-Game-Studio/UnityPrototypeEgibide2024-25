@@ -32,7 +32,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     materials[1] = newMaterial;
                     targetMeshRenderer.materials = materials;
 
-                    Debug.Log("Material en el índice 1 actualizado correctamente.");
+                    //Debug.Log("Material en el índice 1 actualizado correctamente.");
                 }
             }
             else
@@ -83,8 +83,27 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             else
             {
-                //Debug.LogError("No card template provided to CardDisplay.");
+                Debug.LogError("No card template provided to CardDisplay.");
             }
+        }
+
+        public void UpdateDisplayAndMat(CardTemplate cardTemplate, bool isActive)
+        {
+            if (targetMeshRenderer != null)
+            {
+                // Verifica si el MeshRenderer tiene suficientes materiales
+                if (targetMeshRenderer.sharedMaterials.Length > 1)
+                {
+                    // Crea una copia de los materiales para asignar el nuevo material
+                    Material[] materials = targetMeshRenderer.materials;
+                    materials[1] = cardTemplate.artwork;
+                    targetMeshRenderer.materials = materials;
+
+                    //Debug.Log("Material en el índice 1 actualizado correctamente.");
+                }
+            }
+
+            UpdateDisplay(cardTemplate, isActive);
         }
 
         // M�todo para activar o desactivar el filtro gris

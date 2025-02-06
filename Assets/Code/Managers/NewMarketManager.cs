@@ -52,7 +52,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
 
         // Update is called once per frame
-        void Update()
+        public void UpdateMarket()
         {
             if (Input.GetMouseButtonDown(0)) // Detecta clic izquierdo del mouse
             {
@@ -178,7 +178,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             CreateShopItems(false);
 
-            slotList.totalPage = Mathf.CeilToInt((float) cardList.Count / 8);
+            slotList.totalPage = Mathf.CeilToInt((float)cardList.Count / 8);
         }
 
         private void CreateShopItems(bool isNextPage)
@@ -189,6 +189,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 {
                     GameObject slot = pageItemsList[i];
                     GameObject createdItem = GameObject.Instantiate(shopItem, slot.transform);
+                    createdItem.name = actualCardList[counter].name;
 
                     createdItem.GetComponent<ShopItem>()?.UpdateDisplayData(actualCardList[counter], discountPercentage);
                     counter++;

@@ -14,7 +14,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void UpdateDisplayData(CardTemplate cardT, float discountPercentage)
         {
             cardTemplate = cardT;
-            card.UpdateDisplay(cardTemplate, false);
+            card.UpdateDisplayAndMat(cardTemplate, false);
             float finalPrice = Utils.RoundMuuney(cardTemplate.marketCost * discountPercentage);
             price.text = finalPrice.ToString();
         }
