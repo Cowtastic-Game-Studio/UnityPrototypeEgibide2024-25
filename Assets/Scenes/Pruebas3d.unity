@@ -4222,7 +4222,7 @@ PrefabInstance:
     - target: {fileID: 6831369305238976374, guid: 14ec606f02fd63e4a9832df2fbf138f5, type: 3}
       propertyPath: HUDManager
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2036027649}
     - target: {fileID: 6831369305238976374, guid: 14ec606f02fd63e4a9832df2fbf138f5, type: 3}
       propertyPath: marketManager
       value: 
@@ -7537,6 +7537,17 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &2036027649 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7027593613843939066, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
+  m_PrefabInstance: {fileID: 712040962}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 644af868d2329d94eb58e8d07cf65639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2037062482
 GameObject:
   m_ObjectHideFlags: 0
