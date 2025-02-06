@@ -10,7 +10,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private bool isEmpty = true;
         private bool deactiveNextDay = false;
 
-        [SerializeField]
+        [SerializeField] 
         private CardType type;
 
         private Renderer myRenderer;

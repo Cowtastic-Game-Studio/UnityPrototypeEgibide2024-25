@@ -21,6 +21,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             SceneManager.LoadSceneAsync("Pruebas3dMenus", LoadSceneMode.Single);
             SceneManager.UnloadSceneAsync("MainMenu", UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+            PauseUnPause.pause = false;
             
         }
         public void MainMenu()
@@ -36,6 +37,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             SceneManager.LoadSceneAsync("GameOvers", LoadSceneMode.Single);
             SceneManager.UnloadSceneAsync("MainMenu", UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+            PauseUnPause.pause = false;
            
         }
         public void MainMenuGameOver()
@@ -47,14 +49,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
 
         public void ResumeGame()
-        {
-
-            pauseMenuObject.SetActive(false);
-            
+            {
+            pauseMenuObject.SetActive(false);            
             PauseUnPause.pause = false;
-
-
-        }
+            }
      
         public void ExitGame()
         {
