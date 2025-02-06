@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -25,8 +24,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void EnterPhase()
         {
             // C�digo para entrar en la fase
-            Console.WriteLine("Entering Place Cards Phase");
-
             GameManager.Instance.Tabletop.CardManager.ActivateHandDeckCards();
 
             // Suscribirse al evento global de clic de carta en GameManager
@@ -37,15 +34,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void ExecutePhase()
         {
             // C�digo que define la l�gica de la fase
-            Console.WriteLine("Executing Place Cards Phase");
             GameManager.Instance.Tabletop.CardManager.UpdatePlacement();
         }
 
         public void EndPhase()
         {
             // C�digo para finalizar la fase
-            Console.WriteLine("Ending Place Cards Phase");
-
             // Desuscribirse del evento global para evitar referencias persistentes
             GameManager.Instance.OnCardClickedGlobal -= OnCardClickedHandler;
             GameManager.Instance.OnPlaceSpaceClickedGlobal -= OnPlaceSpaceClickedHandler;
@@ -57,7 +51,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void OnCardClickedHandler(ICard card)
         {
-            var cardGameObject = ((MonoBehaviour)card).gameObject;
+            var cardGameObject = ((MonoBehaviour) card).gameObject;
             GameManager.Instance.Tabletop.CardManager.SelectCard(cardGameObject);
         }
 

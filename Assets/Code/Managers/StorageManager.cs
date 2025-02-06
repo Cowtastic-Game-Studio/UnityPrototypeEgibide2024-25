@@ -351,6 +351,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 UpgradeSiloStorage();
             }
 
+            Debug.LogWarning($"Upgraded storage: {storage}.");
             GameManager.Instance.Tabletop.HUDManager.UpdateResources();
         }
 

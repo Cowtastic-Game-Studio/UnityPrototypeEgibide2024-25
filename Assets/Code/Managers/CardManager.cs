@@ -560,6 +560,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 newCard.transform.SetParent(deckArea.transform);
                 newCard.transform.localPosition = Vector3.zero;
 
+                Debug.LogWarning($"Card buyed {cardName}");
+
                 // Agrega la carta al mazo
                 drawDeck.Place(newCard);
 
