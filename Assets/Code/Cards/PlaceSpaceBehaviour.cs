@@ -119,7 +119,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 }
 
                 if (canPlace)
+                    stayEmpty= true;
                     OnPlaceSpaceClicked(stayEmpty);
+
 
             }
         }
@@ -127,11 +129,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void OnPlaceSpaceClicked(bool shouldStayEmpty)
         {
             isEmpty = shouldStayEmpty;
-
+            Debug.Log("log del  la vairable should  " + shouldStayEmpty);
             //if (isActive && isEmpty)
             //{
             Transform placeTrans = gameObject.transform;
             GameManager.Instance?.PlaceSpaceClicked(placeTrans);
+            
 
             //}
         }
