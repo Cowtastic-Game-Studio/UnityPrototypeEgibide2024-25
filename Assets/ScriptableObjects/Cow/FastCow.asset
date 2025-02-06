@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b4d1d63d404d74bbd7263021c46de1, type: 3}
   m_Name: FastCow
   m_EditorClassIdentifier: 
-  artwork: {fileID: 21300000, guid: edd12774263256b41873b42751038d08, type: 3}
-  baseCard: {fileID: 21300000, guid: 3381212bab47d73469e383e6f98f5d64, type: 3}
+  artwork: {fileID: 2100000, guid: 72612c4b3ec61764f871d56de380851c, type: 2}
   cardType: 0
   name: Fast Cow
   description: Muuuu
@@ -27,6 +26,7 @@ MonoBehaviour:
     resourceQuantity: 3
   marketCost: 8
   discardCost: 2
-  dayToUnlock: 2
+  dayToUnlock: 0
   targetCardType: 6
   multiplier: 1
+  targetResoruceType: 4
