@@ -16,14 +16,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
 
             pauseMenuObject.SetActive(false);
-            Time.timeScale = 1;
+            //Time.timeScale = 1;
 
         }
         public void PauseMenuOn()
         {
 
             pauseMenuObject.SetActive(true);
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
 
         }
 
