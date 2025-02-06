@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -143,7 +142,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 GameObject newCard = Instantiate(cardPrefab, deckArea);
                 newCard.name = cardTemplate.name;
                 newCard.transform.SetParent(deckArea.transform);
-                //newCard.transform.localPosition = Vector3.zero;
+                newCard.transform.localPosition = Vector3.zero;
+                newCard.transform.localRotation = Quaternion.identity;
 
                 CardBehaviour cardBH = newCard.GetComponent<CardBehaviour>();
                 cardBH.setCardTemplate(cardTemplate);
@@ -207,7 +207,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 {
                     // Cambia la posición de la carta en la mano
                     card.transform.localPosition = new Vector3(i * cardSpacing, 0, 0);
-                    card.transform.rotation = Quaternion.Euler(90, -90, 0);
+                    card.transform.localRotation = Quaternion.identity;
                     var cardBH = card.GetComponent<CardBehaviour>();
                     cardBH.IsPlaced = false;
                     cardBH.PositionInHand = i * cardSpacing;
@@ -242,7 +242,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 GameObject cardGameObject = ((MonoBehaviour)card).gameObject;
                 cardGameObject.transform.SetParent(deckArea);
                 cardGameObject.transform.localPosition = Vector3.zero;
-                cardGameObject.transform.localRotation = Quaternion.Euler(90f, -90f, 0f);
+                cardGameObject.transform.localRotation = Quaternion.identity;
                 drawDeck.Place(cardGameObject); // Vuelve a colocar en el mazo
             }
             // Baraja el mazo
@@ -323,7 +323,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 handDeck.Draw();
                 card.transform.SetParent(discardDeckArea);
                 card.transform.localPosition = Vector3.zero;
-                card.transform.localRotation = Quaternion.Euler(90f, -90f, 0f);
+                card.transform.localRotation = Quaternion.identity;
                 SetCardState(card, CardState.onDiscard);
             }
             else
@@ -364,7 +364,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                     card.transform.SetParent(discardDeckArea);
                     card.transform.localPosition = Vector3.zero;
-                    card.transform.localRotation = Quaternion.Euler(90f, -90f, 0f);
+                    card.transform.localRotation = Quaternion.identity;
                     SetCardState(card, CardState.onDiscard);
                 }
             }
@@ -450,6 +450,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             isDragging = true;
 
+            //roatcion para que la carta mire a camara
             if (selectedCard.transform.parent.CompareTag("Place") && selectedCard.transform.rotation.y != 180 && selectedCard.transform.rotation.y != -90)
             {
                 selectedCard.transform.rotation = Quaternion.Euler(-90, 0, 90); ;
@@ -593,11 +594,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 CardTemplate cardTemplate = cardNameMap[cardName];
 
-                GameObject card = Instantiate(cardPrefab);
-
-                GameObject newCard = Instantiate(card, deckArea);
+                GameObject newCard = Instantiate(cardPrefab, deckArea);
+                newCard.name = cardName;
                 newCard.transform.SetParent(deckArea.transform);
                 newCard.transform.localPosition = Vector3.zero;
+                newCard.transform.localRotation = Quaternion.identity;
 
                 CardBehaviour cardBH = newCard.GetComponent<CardBehaviour>();
                 cardBH.setCardTemplate(cardTemplate);

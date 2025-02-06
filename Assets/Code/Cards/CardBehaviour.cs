@@ -132,14 +132,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
-        //public void OnPointerClick(PointerEventData eventData)
-
-
-        // M�todo para configurar la visualizaci�n en CardDisplay
         public void SetupDisplay(CardDisplay display)
         {
             // Pasa el estado activo
-            display.UpdateDisplay(template, isActive);
+            display.UpdateDisplayAndMat(template, isActive);
         }
 
         public CardTemplate GetTemplate()
