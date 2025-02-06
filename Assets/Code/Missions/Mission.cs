@@ -106,12 +106,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             //Si se han completado todos los goals, se reciben las recompensas
             if (filteredGoals.Count == 0)
             {
-                Rewards.ToList().ForEach(reward => reward.Receive());
+                //Rewards.ToList().ForEach(reward => reward.Receive());
                 foreach (Reward reward in Rewards.ToList())
                 {
                     reward.Receive();
-                    // TODO mirarlo
-                    Debug.LogWarning($"Reward {reward} received.");
                 }
             }
         }

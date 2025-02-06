@@ -51,15 +51,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         {
                             case CardType.Cow:
                                 GameManager.Instance.Tabletop.StablesActivateZone();
-                                Debug.LogWarning("Updated stable.");
                                 break;
                             case CardType.Seed:
                                 GameManager.Instance.Tabletop.FarmsActivateZone();
-                                Debug.LogWarning("Updated garden.");
                                 break;
                             case CardType.Customer:
                                 GameManager.Instance.Tabletop.TavernActivateZone();
-                                Debug.LogWarning("Updated shop.");
                                 break;
                         }
 

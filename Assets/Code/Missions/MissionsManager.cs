@@ -178,15 +178,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             this.GlobalMissions.Add(mission5);
 
             goal6 = GoalGenerator.CreateGlobalGoal1();
-            mission6 = CreateGlobalMission("G6", "Global 6", goal1, 100);
+            mission6 = CreateGlobalMission("G6", "Global 6", goal6, 100);
             this.GlobalMissions.Add(mission6);
 
             goal7 = GoalGenerator.CreateGlobalGoal1();
-            mission7 = CreateGlobalMission("G7", "Global 7", goal1, 75);
+            mission7 = CreateGlobalMission("G7", "Global 7", goal7, 75);
             this.GlobalMissions.Add(mission7);
 
             goal8 = GoalGenerator.CreateGlobalGoal1();
-            mission8 = CreateGlobalMission("G8", "Global 8", goal1, 20);
+            mission8 = CreateGlobalMission("G8", "Global 8", goal8, 20);
             this.GlobalMissions.Add(mission8);
         }
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -136,7 +137,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 _bankStorage.Resource -= quantity;
             }
-
+            GameManager.Instance.Tabletop.HUDManager.UpdateResources();
             return _bankStorage.Resource;
         }
 
@@ -351,7 +352,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 UpgradeSiloStorage();
             }
 
-            Debug.LogWarning($"Upgraded storage: {storage}.");
             GameManager.Instance.Tabletop.HUDManager.UpdateResources();
         }
 
@@ -380,38 +380,41 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private void UpgradePAStorage()
         {
-            if (_paStorage.MaxResources < 18)
+            if (_paStorage.Level <= 6)
             {
-                int upgradeCost = 0;
+                Debug.LogWarning("Reached AP storage max level.");
+                return;
+            }
 
-                switch (_paStorage.Level)
-                {
-                    case 1:
-                        upgradeCost = 30;
-                        break;
-                    case 2:
-                        upgradeCost = 50;
-                        break;
-                    case 3:
-                        upgradeCost = 75;
-                        break;
-                    case 4:
-                        upgradeCost = 100;
-                        break;
-                    case 5:
-                        upgradeCost = 200;
-                        break;
-                    case 6:
-                        upgradeCost = 300;
-                        break;
-                }
-                if (CheckMuuney(upgradeCost))
-                {
-                    _paStorage.MaxResources += 2;
-                    AddLevel(_paStorage);
-                    WasteMuuney(upgradeCost);
-                    Debug.LogWarning("Upgraded PA.");
-                }
+            int upgradeCost = 0;
+
+            switch (_paStorage.Level)
+            {
+                case 1:
+                    upgradeCost = 30;
+                    break;
+                case 2:
+                    upgradeCost = 50;
+                    break;
+                case 3:
+                    upgradeCost = 75;
+                    break;
+                case 4:
+                    upgradeCost = 100;
+                    break;
+                case 5:
+                    upgradeCost = 200;
+                    break;
+                case 6:
+                    upgradeCost = 300;
+                    break;
+            }
+            if (CheckMuuney(upgradeCost))
+            {
+                _paStorage.MaxResources += 2;
+                AddLevel(_paStorage);
+                WasteMuuney(upgradeCost);
+                Debug.LogWarning("Upgraded AP storage.");
             }
         }
 
@@ -435,15 +438,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private void UpgradeFridgeStorage()
         {
-            if (_fridgeStorage.MaxResources < 20)
+            if (_fridgeStorage.Level <= 8)
             {
-                if (CheckMuuney(15))
-                {
-                    _fridgeStorage.MaxResources += 2;
-                    AddLevel(_fridgeStorage);
-                    WasteMuuney(15);
-                    Debug.LogWarning("Upgraded fridge.");
-                }
+                Debug.LogWarning("Reached Fridge max level.");
+                return;
+            }
+
+            if (CheckMuuney(15))
+            {
+                _fridgeStorage.MaxResources += 2;
+                AddLevel(_fridgeStorage);
+                WasteMuuney(15);
+                Debug.LogWarning("Upgraded fridge.");
+
             }
         }
 
@@ -452,15 +459,18 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private void UpgradeSiloStorage()
         {
-            if (_silo.MaxResources < 30)
+            if (_silo.Level <= 6)
             {
-                if (CheckMuuney(10))
-                {
-                    _silo.MaxResources += 3;
-                    AddLevel(_silo);
-                    WasteMuuney(10);
-                    Debug.LogWarning("Upgraded silo.");
-                }
+                Debug.LogWarning("Reached Silo max level.");
+                return;
+            }
+
+            if (CheckMuuney(10))
+            {
+                _silo.MaxResources += 4;
+                AddLevel(_silo);
+                WasteMuuney(10);
+                Debug.LogWarning("Upgraded silo.");
             }
         }
 

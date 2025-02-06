@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+
 using UnityEngine;
 
 
@@ -98,11 +99,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void FarmsActivateZone()
         {
+            if (farms.FindAll(x => !x.GetIsActive()).Count == 0)
+            {
+                Debug.LogWarning("Max gardens.");
+                return;
+            }
+
+
             foreach (PlaceSpaceBehaviour farm in farms)
             {
                 if (!farm.GetIsActive())
                 {
                     farm.SetIsActive(true);
+                    Debug.LogWarning("Updated garden.");
                     break;
                 }
             }
@@ -110,11 +119,18 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void StablesActivateZone()
         {
+            if (stables.FindAll(x => !x.GetIsActive()).Count == 0)
+            {
+                Debug.LogWarning("Max stables.");
+                return;
+            }
+
             foreach (PlaceSpaceBehaviour stable in stables)
             {
                 if (!stable.GetIsActive())
                 {
                     stable.SetIsActive(true);
+                    Debug.LogWarning("Updated stable.");
                     break;
                 }
             }
@@ -122,11 +138,18 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void TavernActivateZone()
         {
+            if (taverns.FindAll(x => !x.GetIsActive()).Count == 0)
+            {
+                Debug.LogWarning("Max shop.");
+                return;
+            }
+
             foreach (PlaceSpaceBehaviour tavern in taverns)
             {
                 if (!tavern.GetIsActive())
                 {
                     tavern.SetIsActive(true);
+                    Debug.LogWarning("Updated shop.");
                     break;
                 }
             }
