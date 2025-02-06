@@ -34,7 +34,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 return;
 
             // Recuperamos el componente CardBehaviour
-            GameObject selectedCard = GameManager.Instance.Tabletop.CardManager.selectedCard;
+            GameObject selectedCard = GameManager.Instance.Tabletop.CardManager.getSelectedCard();
             CardBehaviour card = selectedCard.GetComponent<CardBehaviour>();
 
             bool shouldHighlight = false;
@@ -76,7 +76,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (gameObject.layer == LayerMask.NameToLayer("PlaceSpace"))
             {
                 // Recuperamos el componente CardBehaviour
-                GameObject selectedCard = GameManager.Instance.Tabletop.CardManager.selectedCard;
+                GameObject selectedCard = GameManager.Instance.Tabletop.CardManager.getSelectedCard();
                 if (!selectedCard)
                     return;
 

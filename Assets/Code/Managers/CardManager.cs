@@ -78,7 +78,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public IDeck DiscardDeck => discardDeck;
 
         //Place card
-        public GameObject selectedCard = null;
+        private GameObject selectedCard = null;
 
         private bool isDragging = false;
         public bool IsDraggingCard => isDragging;
@@ -106,14 +106,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Recorre cada CardTemplate en la lista cardTemplates
             foreach (var cardTemplate in cardTemplates)
             {
-                // Asumiendo que CardTemplate tiene una propiedad "name"
                 if (!cardNameMap.ContainsKey(cardTemplate.name))
                 {
                     cardNameMap.Add(cardTemplate.name, cardTemplate);
                 }
                 else
                 {
-                    // Si ya existe una entrada con el mismo nombre, puedes actualizarla o manejarlo como prefieras
+                    // Si ya existe una entrada con el mismo nombre
+                    // actualizarla
                     cardNameMap[cardTemplate.name] = cardTemplate;
                 }
             }
@@ -140,9 +140,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Recorre cada carta en el ScriptableObject y crea una instancia
             foreach (CardTemplate cardTemplate in initialCards.Cards)
             {
-                GameObject card = Instantiate(cardPrefab);
-
-                GameObject newCard = Instantiate(card, deckArea);
+                GameObject newCard = Instantiate(cardPrefab, deckArea);
                 newCard.name = cardTemplate.name;
                 newCard.transform.SetParent(deckArea.transform);
                 //newCard.transform.localPosition = Vector3.zero;
@@ -607,6 +605,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 // Agrega la carta al mazo
                 drawDeck.Place(newCard);
             }
+        }
+
+        public GameObject getSelectedCard()
+        {
+            return selectedCard;
         }
 
         //GameObject card = null;
