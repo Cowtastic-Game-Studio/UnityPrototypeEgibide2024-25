@@ -12,12 +12,5 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             cardType = CardType.Seed;
         }
 
-        private void Awake()
-        {
-            // Cargar los sprites directamente desde la carpeta Resources
-            artwork = Resources.Load<Sprite>("Cards/Seed");
-            baseCard = Resources.Load<Sprite>("Base");
-        }
-
     }
 }

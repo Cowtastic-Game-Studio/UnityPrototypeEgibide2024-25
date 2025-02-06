@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
@@ -11,6 +9,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public TMP_Text nameText;
         public TMP_Text descriptionText;
         public TMP_Text actionPointsText;
+        public TMP_Text lifeCycleDaysText;
         public TMP_Text requieredTypeText;
         public TMP_Text requieredQuantityText;
         public TMP_Text producedTypeText;
@@ -55,6 +54,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     descriptionText.text = "";
 
                 actionPointsText.text = cardTemplate.actionPointsCost.ToString();
+                lifeCycleDaysText.text = cardTemplate.lifeCycleDays.ToString();
 
                 if (cardTemplate.requiredResources.Count != 0)
                 {
