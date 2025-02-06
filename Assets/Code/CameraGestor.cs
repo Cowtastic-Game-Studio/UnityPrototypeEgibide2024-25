@@ -94,7 +94,7 @@ public class CameraGestor : MonoBehaviour
 
     private void SwitchToCamera(CinemachineVirtualCamera targetCamera, string cameraState)
     {
-        Debug.Log("Cambiando a cámara: " + cameraState);
+        //Debug.Log("Cambiando a cámara: " + cameraState);
         cameraState = cameraState.Replace(" ", "");
 
         // Desactivar todas las cámaras
@@ -110,7 +110,7 @@ public class CameraGestor : MonoBehaviour
         targetCamera.gameObject.SetActive(true);
         cameraAnimator.Play(cameraState);
 
-        Debug.Log("Cámara actual: " + targetCamera.name);
+        //Debug.Log("Cámara actual: " + targetCamera.name);
     }
     private bool IsMainCameraActive()
     {

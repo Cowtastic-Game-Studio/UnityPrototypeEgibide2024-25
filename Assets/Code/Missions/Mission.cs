@@ -97,7 +97,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
         private void OnCompleteGoal(Goal goal)
         {
-            Debug.Log("Goal complete:" + goal.Description);
+            Debug.LogWarning("Goal completed: " + goal.Description);
             goal.OnCompleted.RemoveListener(OnCompleteGoal);
             this.Updated.Invoke(this);
 
