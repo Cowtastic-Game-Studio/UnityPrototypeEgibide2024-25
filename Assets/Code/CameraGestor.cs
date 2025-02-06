@@ -25,6 +25,8 @@ public class CameraGestor : MonoBehaviour
         cameraAnimator = GetComponent<Animator>();
         cameraSwitchAction.performed += OnCameraSwitch;
         // playerInput.Enable();
+
+        SwitchToCamera(VirtualCameraIdle, nameof(VirtualCameraIdle));
     }
 
     private void OnCameraSwitch(InputAction.CallbackContext context)
