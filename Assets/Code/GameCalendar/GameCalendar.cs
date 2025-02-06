@@ -95,6 +95,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (CurrentDay % 7 == 0)
             {
                 CurrentWeek++;
+                MissionsManager.Instance.RenewWeeklyMission();
             }
             if (CurrentDay % 29 == 0) // 29 seria principio de mes
             {
@@ -106,7 +107,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 CurrentYear++;
             }
 
-            ChangeCallendar();            
+            ChangeCallendar();
 
             //Comprobar si hay que activar un evento
             CheckForEvent();
@@ -138,7 +139,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 positionCount = 0;
             }
         }
-    
+
         private void RaiseDayChanged()
         {
             this.DayChanged.Invoke(this.CurrentDay);

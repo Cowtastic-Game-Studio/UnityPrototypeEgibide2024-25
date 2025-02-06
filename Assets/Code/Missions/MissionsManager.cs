@@ -1,7 +1,10 @@
 using System.Collections.Generic;
+
 using CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions;
+
 using UnityEngine;
 using UnityEngine.Events;
+
 using static CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions.Mission;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -80,8 +83,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 this.IsTutorialEnabled = false;
             }
-            // TODO cada lunes renewWeeklyMission 
-
         }
 
         #endregion
