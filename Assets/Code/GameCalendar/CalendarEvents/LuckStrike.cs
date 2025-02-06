@@ -29,7 +29,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public override void EndEvent()
         {
-
+            StatisticsManager.Instance.UpdateByStatisticType(StatisticType.EventsCompleted, 1);
         }
 
         public override void InitEvent()

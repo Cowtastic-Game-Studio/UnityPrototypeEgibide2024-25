@@ -28,6 +28,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private List<GameObject> pageItemsList = new();
 
+        public float discountPercentage = 1f;
+
+
         /// <summary>
         /// Actual list of cards of a specific type
         /// </summary>
@@ -187,7 +190,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     GameObject slot = pageItemsList[i];
                     GameObject createdItem = GameObject.Instantiate(shopItem, slot.transform);
 
-                    createdItem.GetComponent<ShopItem>()?.UpdateDisplayData(actualCardList[counter]);
+                    createdItem.GetComponent<ShopItem>()?.UpdateDisplayData(actualCardList[counter], discountPercentage);
                     counter++;
                     if (isNextPage)
                     {

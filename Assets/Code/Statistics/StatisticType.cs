@@ -63,8 +63,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [EnumMember(Value = "Total used muuney")]
         MuuneyTotalUsed,
 
-        [EnumMember(Value = "Total used customers")]
-        CustomersTotalUsed,
+        //[EnumMember(Value = "Total used customers")]
+        //CustomersTotalUsed,
 
         [EnumMember(Value = "Used AP")]
         APUsed,

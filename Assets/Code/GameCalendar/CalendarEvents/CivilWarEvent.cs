@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class CivilWarEvent : CalendarEvent
@@ -9,7 +5,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <summary>
         /// Constructor para inicializar el evento generico.
         /// </summary>
-        public CivilWarEvent() 
+        public CivilWarEvent()
             : base("La guerra estalla y tu pagas", "El reino entra en guerra y el rey te exige el 20% de tu Muuuney", 1)
         {
 
@@ -31,7 +27,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public override void EndEvent()
         {
-
+            StatisticsManager.Instance.UpdateByStatisticType(StatisticType.EventsCompleted, 1);
         }
 
         public override void InitEvent()

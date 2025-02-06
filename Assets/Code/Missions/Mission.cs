@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -97,14 +98,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         {
             Debug.Log("Goal complete:" + goal.Description);
             goal.OnCompleted.RemoveListener(OnCompleteGoal);
-
             this.Updated.Invoke(this);
 
-
             //TODO: Comprobar si se han completado todos los goals
+            List<Goal> filteredGoals = Goals.Where(_goal => _goal.IsCompleted == false).ToList();
 
             //Si se han completado todos los goals, se reciben las recompensas
-
+            if (filteredGoals.Count == 0)
+            {
+                Rewards.ToList().ForEach(reward => reward.Receive());
+            }
         }
 
         #endregion
