@@ -108,6 +108,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             if (filteredGoals.Count == 0)
             {
                 Rewards.ToList().ForEach(reward => reward.Receive());
+                Debug.LogWarning("Reward recibido");
             }
         }
 

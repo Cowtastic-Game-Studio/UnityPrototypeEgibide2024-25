@@ -34,7 +34,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         // Propiedad para obtener el d�a de la semana (1 = Lunes, 7 = Domingo)
         public DayOfWeek DayOfWeek
         {
-            get { return (DayOfWeek)((CurrentDay - 1) % 7 + 1); }
+            get { return (DayOfWeek) ((CurrentDay - 1) % 7 + 1); }
         }
 
         public GameCalendar()
@@ -134,7 +134,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             calendarMark.transform.localPosition = positions[positionCount];
             positionCount++;
-            if (CurrentDay % 28 == 0)
+            if (CurrentDay % 29 == 0)
             {
                 positionCount = 0;
             }

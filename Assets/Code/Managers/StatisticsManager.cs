@@ -45,7 +45,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Market
             statsList.Add(new Statistic(StatisticType.CardsDiscarded, CardType.None, GameResource.None, 0, false)); //TODO
             statsList.Add(new Statistic(StatisticType.CardsPurchased, CardType.None, GameResource.None, 0, false));
-            statsList.Add(new Statistic(StatisticType.ZonesUpgradePurchased, CardType.None, GameResource.None, 0, true));//TODO
+            statsList.Add(new Statistic(StatisticType.ZonesUpgradePurchased, CardType.None, GameResource.None, 0, true));
             statsList.Add(new Statistic(StatisticType.ZonesWithCardsPurchased, CardType.None, GameResource.None, 0, false));
 
             // Resources adquired
@@ -155,7 +155,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
 
             UpdateByStatisticType(StatisticType.ZonesWithCardsPurchased, 1);
-            //UpdateByStatisticType(StatisticType.ZonesUpgradePurchased, 1);
         }
 
         public void UpdateByBuyedZone(GameResource targedCardType)
