@@ -7137,6 +7137,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1011660057}
     m_Modifications:
+    - target: {fileID: 2779458080910309848, guid: 1b476d602deaf9e4ab926f35a1f3ea46, type: 3}
+      propertyPath: m_fontSize
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 2779458080910309848, guid: 1b476d602deaf9e4ab926f35a1f3ea46, type: 3}
+      propertyPath: m_margin.x
+      value: -15.697525
+      objectReference: {fileID: 0}
+    - target: {fileID: 2779458080910309848, guid: 1b476d602deaf9e4ab926f35a1f3ea46, type: 3}
+      propertyPath: m_margin.z
+      value: -18.470825
+      objectReference: {fileID: 0}
+    - target: {fileID: 2779458080910309848, guid: 1b476d602deaf9e4ab926f35a1f3ea46, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 22
+      objectReference: {fileID: 0}
     - target: {fileID: 3480336128155294958, guid: 1b476d602deaf9e4ab926f35a1f3ea46, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -7252,6 +7268,12 @@ PrefabInstance:
     - target: {fileID: 7820316517183440207, guid: 1b476d602deaf9e4ab926f35a1f3ea46, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7946901106745929455, guid: 1b476d602deaf9e4ab926f35a1f3ea46, type: 3}
+      propertyPath: m_text
+      value: 'Main Menu
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 8590062817184226272, guid: 1b476d602deaf9e4ab926f35a1f3ea46, type: 3}
       propertyPath: m_Name
