@@ -67,7 +67,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             Instance = this;
 
-            GameManager.Instance.GameCalendar.DayChanged.AddListener(OnDayChange);
+            //GameManager.Instance.GameCalendar.DayChanged.AddListener(OnDayChange);
 
             InitializeMissions();
         }
@@ -77,13 +77,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         #region Event handlers
 
 
-        private void OnDayChange(int day)
-        {
-            if (this.IsTutorialEnabled && day > 7)
-            {
-                this.IsTutorialEnabled = false;
-            }
-        }
+        //private void OnDayChange(int day)
+        //{
+        //    if (this.IsTutorialEnabled && day > 7)
+        //    {
+        //        this.IsTutorialEnabled = false;
+        //    }
+        //}
 
         #endregion
 

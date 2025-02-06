@@ -44,7 +44,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             MissionSheetManager weeklyMissionManager;
             weeklyMissionManager = WeeklyMission.GetComponent<MissionSheetManager>();
             weeklyMissionManager.Mission = MissionsManager.Instance.WeeklyMission;
-            ChangeTutorialForWeekly(); // TODO una vez
+
+            if (GameManager.Instance.GameCalendar.CurrentWeek == 1)
+            {
+                ChangeTutorialForWeekly();
+            }
+
         }
 
 

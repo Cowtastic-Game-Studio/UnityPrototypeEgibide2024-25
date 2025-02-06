@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -95,7 +96,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     UpdateStatistic(item, 1);
                 }
             }
-
         }
 
         public void UpdateByResource(GameResource resource, int quantity, bool isConsumed)
@@ -155,6 +155,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
 
             UpdateByStatisticType(StatisticType.ZonesWithCardsPurchased, 1);
+            //UpdateByStatisticType(StatisticType.ZonesUpgradePurchased, 1);
         }
 
         public void UpdateByBuyedZone(GameResource targedCardType)
@@ -181,9 +182,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void UpdateByStatisticType(StatisticType statType, int quantity)
         {
             List<Statistic> filteredStats = statsList.Where(stat => stat.StatType == statType).ToList();
-            foreach (var item in statsList)
+            foreach (var item in filteredStats)
             {
-                UpdateByStatisticType(item.StatType, quantity);
+                UpdateStatistic(item, quantity);
             }
         }
 

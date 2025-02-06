@@ -39,7 +39,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public GameCalendar()
         {
-            CurrentDay = 1;
+            CurrentDay = 0;
             CurrentWeek = 0;
             eventManager = new GameCalendarEventManager();
             // Inicialmente no hay evento
