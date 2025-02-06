@@ -207,5 +207,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             RaiseOnStatisticChanged();
         }
+
+        public void ShowStatistics()
+        {
+            foreach (var item in statsList)
+            {
+                Debug.Log(item.StatType.GetEnumString() + ": " + item.Uses);
+            }
+        }
     }
 }
