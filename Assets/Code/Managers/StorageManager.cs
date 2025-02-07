@@ -13,7 +13,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [SerializeField] private Silo _silo;
 
         private int multiEvent = 1;
-        private int multiCard = 1;
+        private int multiCard = 0;
         private GameResource typeResource = GameResource.None;
         private List<ResourceAmount> _requiredResources;
         private List<ResourceAmount> _producedResources;
@@ -113,12 +113,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 // Comprobamos el tipo de recurso para aplicar el multiplicador en solo ese producto
                 if (typeResource == producedType)
                 {
-                    producedQuantity = resource.resourceQuantity * multiEvent;
+                    int multi = multiEvent + multiCard;
+                    producedQuantity = resource.resourceQuantity * multi;
                 }
                 else
                 {
                     producedQuantity = resource.resourceQuantity;
                 }
+
+                Debug.LogError("Producto producido");
+                Debug.LogError(producedQuantity);
 
                 var storage = GetStorage<IStorage>(producedType);
                 AddResources(producedQuantity, storage);
@@ -190,7 +194,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void ClearResourceMultiplierCardAndType()
         {
-            multiCard = 1;
+            multiCard = 0;
             typeResource = GameResource.None;
         }
 
