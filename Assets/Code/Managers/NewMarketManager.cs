@@ -1,5 +1,6 @@
 using System.Collections.Generic;
-
+using Unity.VisualScripting;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -17,6 +18,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [SerializeField] private GameObject page;
         [SerializeField] private GameObject shopItem;
         [SerializeField] private GameObject cardPreview;
+        [SerializeField] private BuyButtonBehaviour normalPriceButton;
+        [SerializeField] private BuyButtonBehaviour discountPriceButton;
+
+
+
 
         /// <summary>
         /// List of all the shop items/cards
@@ -42,7 +48,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         // Start is called before the first frame update
         void Start()
         {
-            cardPreview.SetActive(false);
+            ShowHideCardPreviewZone(false);
 
             InitMarketCards.Initialize();
             shopItemsData = InitMarketCards.ShopItemsData;
@@ -76,7 +82,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void RestartMarket()
         {
-            cardPreview.SetActive(false);
+            ShowHideCardPreviewZone(false);
             Debug.Log(shopItemsData);
 
             UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Cow && x.isActive).ConvertAll(x => x.cardTemplate));
@@ -124,8 +130,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     break;
 
                 case "CardDisplayTemplate":
-                    // TODO: Mostrar la información de la carta bien
+                    // TODO: Mostrar la informaciï¿½n de la carta bien
                     Debug.Log("CardDisplay Template");
+                    OnShopItemClicked(shopItemGO);                    
                     cardPreview.SetActive(true);
                     //shopItemGO.GetComponent<ShopItem>()?.TriggerCard();
                     ShopItem clickItem = shopItemGO.GetComponent<ShopItem>();
@@ -133,10 +140,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         cardPreview.GetComponent<CardDisplay>()?.UpdateDisplayAndMat(clickItem.getCardTemplate(), false);
                     break;
 
-                case "BuyButton":
-                    ShopItem shopItem = shopItemGO.GetComponent<ShopItem>();
-                    shopItemGO.GetComponent<ShopItem>()?.TriggerPrice();
-                    cardPreview.SetActive(false);
+                case "NormalBuyButton":
+                    OnBuyButtonClicked(shopItemGO);                    
+                    break;
+
+                case "DiscountBuyButton":
+                    OnDiscountBuyButtonClicked(shopItemGO);
                     break;
 
                 case "NextButton":
@@ -155,7 +164,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     break;
 
                 default:
-                    break;
+                    break;                    
             }
         }
 
@@ -184,7 +193,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             CreateShopItems(false);
             cardPreview.SetActive(false);
 
-            slotList.totalPage = Mathf.CeilToInt((float)cardList.Count / 8);
+            slotList.totalPage = Mathf.CeilToInt((float) cardList.Count / 8);
+
+            //Limpia la carta previsualizada
+            ShowHideCardPreviewZone(false);
+
         }
 
         private void CreateShopItems(bool isNextPage)
@@ -206,6 +219,89 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 }
             }
         }
+
+        /// <summary>
+        /// Obtiene el item clicado y muestra la informacion
+        /// </summary>
+        private void OnShopItemClicked(GameObject shopItemGO)
+        {
+            ShopItem shopItem = shopItemGO.GetComponent<ShopItem>();
+            shopItem?.TriggerCard();
+
+            ShowHideCardPreviewZone(true);
+
+            //TODO: buscar si tiene una carta de descuento
+
+            SetCardPrices(shopItem.card.cost, false, 0);
+        }
+
+        private void OnBuyButtonClicked(GameObject shopItemGO)
+        {
+            ShopItem shopItem = shopItemGO.GetComponent<ShopItem>();
+            shopItemGO.GetComponent<ShopItem>()?.TriggerPrice();
+
+            //TODO: comprar con el valor del 
+        }
+
+        private void OnDiscountBuyButtonClicked(GameObject shopItemGO)
+        {
+            ShopItem shopItem = shopItemGO.GetComponent<ShopItem>();
+            shopItemGO.GetComponent<ShopItem>()?.TriggerPrice();
+
+            //TODO: comprar con el valor del boton
+        }
+
+
+
+        /// <summary>
+        /// Activa o desactiva 
+        /// </summary>
+        /// <param name="active"></param>
+        private void ShowHideCardPreviewZone(bool active)
+        {
+            cardPreview.SetActive(active);
+            normalPriceButton.SetActive(active);
+            discountPriceButton.SetActive(active);
+        }
+
+        /// <summary>
+        /// Asigna el precio de las cartas
+        /// </summary>
+        /// <param name="cardPrice"></param>
+        /// <param name="hasDiscount"></param>
+        /// <param name="discount"></param>
+        private void SetCardPrices(int cardPrice, bool hasDiscount, int discount)
+        {
+            float price, discountPrice;
+
+            if (GameManager.Instance.GameCalendar.IsVacFriday())
+            {
+                price = Utils.RoundMuuney(cardPrice / 2f);
+
+                normalPriceButton.SetVacFridayColor();
+            }
+            else
+            {
+                price = cardPrice;
+                normalPriceButton.SetNormalColor();
+            }
+
+            normalPriceButton.SetPrice((int)price);
+
+            if (hasDiscount)
+            {
+                discountPrice = Utils.RoundMuuney((cardPrice / 100) * discount);
+
+                discountPriceButton.SetPrice((int)discountPrice);
+            }
+            else
+            {
+                discountPriceButton.SetActive(false);
+            }
+
+        }
+
+
         #endregion  
 
     }

@@ -133,5 +133,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 positionCount = 0;
             }
         }
+
+        /// <summary>
+        /// Indica si el dia actual es VacFriday
+        /// </summary>
+        /// <returns></returns>
+        public bool IsVacFriday()
+        {
+            return this.DayOfMonth == 27;
+        }
+
     }
 }

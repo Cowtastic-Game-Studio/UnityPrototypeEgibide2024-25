@@ -1548,6 +1548,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 342758359}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &346624656 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7027593613843939066, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
+  m_PrefabInstance: {fileID: 712040962}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 644af868d2329d94eb58e8d07cf65639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &355235521
 GameObject:
   m_ObjectHideFlags: 0
@@ -3572,6 +3583,17 @@ Transform:
   - {fileID: 1069529265}
   m_Father: {fileID: 955672993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &847852751 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7958626004331795894, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+  m_PrefabInstance: {fileID: 4881766979425161687}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ccf4fa9799b5b4e9bd1991b6530802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &862676425 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4454439545273188205, guid: b112cb9b5add16e4abc6abe1561cefb1, type: 3}
@@ -4327,7 +4349,7 @@ PrefabInstance:
     - target: {fileID: 6831369305238976374, guid: 14ec606f02fd63e4a9832df2fbf138f5, type: 3}
       propertyPath: HUDManager
       value: 
-      objectReference: {fileID: 2036027649}
+      objectReference: {fileID: 346624656}
     - target: {fileID: 6831369305238976374, guid: 14ec606f02fd63e4a9832df2fbf138f5, type: 3}
       propertyPath: marketManager
       value: 
@@ -4840,6 +4862,11 @@ Transform:
   - {fileID: 386859576}
   m_Father: {fileID: 829167217}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1070620096 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1866651238599665966, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+  m_PrefabInstance: {fileID: 4881766979425161687}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1098348445
 GameObject:
   m_ObjectHideFlags: 0
@@ -7406,6 +7433,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1885400274}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1914198127 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 687126763591199267, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+  m_PrefabInstance: {fileID: 4881766979425161687}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ccf4fa9799b5b4e9bd1991b6530802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1935928561
 GameObject:
   m_ObjectHideFlags: 0
@@ -9534,9 +9572,37 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 429198149402544463, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+      propertyPath: m_Name
+      value: NormalPriceBuyButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 506343248721261719, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+      propertyPath: normalPriceButton
+      value: 
+      objectReference: {fileID: 1914198127}
+    - target: {fileID: 506343248721261719, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+      propertyPath: discountPriceButton
+      value: 
+      objectReference: {fileID: 847852751}
+    - target: {fileID: 506343248721261719, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+      propertyPath: buttonList.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 506343248721261719, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+      propertyPath: buttonList.Array.data[5]
+      value: 
+      objectReference: {fileID: 1070620096}
+    - target: {fileID: 4544569551292182983, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+      propertyPath: m_Name
+      value: BuyButton
+      objectReference: {fileID: 0}
     - target: {fileID: 4685252753872326998, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
       propertyPath: m_Name
       value: Market
+      objectReference: {fileID: 0}
+    - target: {fileID: 6406968485380214354, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+      propertyPath: m_Name
+      value: BuyButton
       objectReference: {fileID: 0}
     - target: {fileID: 7084885520371430563, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9582,6 +9648,12 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2620610512511557608, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 4874536822790791293, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 5013967948600069183, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
