@@ -5,6 +5,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class MenuManager : MonoBehaviour
     {
+
+        [SerializeField]private AudioSource audioSource;
+        [SerializeField]private AudioClip audioClip;
         public GameObject pauseMenuObject;
         private bool isPaused = false;
 
@@ -72,6 +75,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void NewGame()
         {
+            audioSource.PlayOneShot(audioClip);
             SceneManager.LoadScene("Pruebas3dMenus", LoadSceneMode.Single);
             isPaused = false;
             Time.timeScale = 1;
@@ -79,6 +83,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void MainMenu()
         {
+            audioSource.PlayOneShot(audioClip);
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
             isPaused = false;
             Time.timeScale = 1;
@@ -86,6 +91,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void GameOverScene()
         {
+            audioSource.PlayOneShot(audioClip);
             SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
             isPaused = false;
             Time.timeScale = 1;
@@ -93,6 +99,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void MainMenuGameOver()
         {
+            audioSource.PlayOneShot(audioClip);
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
             isPaused = false;
             Time.timeScale = 1;
@@ -100,6 +107,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void ResumeGame()
         {
+            audioSource.PlayOneShot(audioClip);
             isPaused = false;
             if (pauseMenuObject != null)
             {
@@ -110,10 +118,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void ExitGame()
         {
+            audioSource.PlayOneShot(audioClip);
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false; // Detiene el juego en el Editor
 #else
-        Application.Quit(); // Cierra la aplicación en compilación
+        Application.Quit(); // Cierra la aplicaciï¿½n en compilaciï¿½n
 #endif
         }
 

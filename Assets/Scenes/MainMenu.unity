@@ -1015,6 +1015,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1910754741}
   - component: {fileID: 1910754740}
+  - component: {fileID: 1910754743}
+  - component: {fileID: 1910754742}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -1034,6 +1036,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2896384ae0a361c4da05fef10610eb0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 1910754743}
+  audioClip: {fileID: 8300000, guid: 5aabc6bfa24d9954d96f894962e7ad27, type: 3}
   pauseMenuObject: {fileID: 0}
 --- !u!4 &1910754741
 Transform:
@@ -1050,6 +1054,128 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1910754742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910754739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c9a04645ed656e4a806c63e0bde3cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 1910754743}
+  audioClip: {fileID: 0}
+  listOfThemes:
+  - {fileID: 8300000, guid: b36126f2e0649164f9be2009e4dbcf89, type: 3}
+  - {fileID: 8300000, guid: 3d89f5faf187b8e48ad40f63c1a8efe4, type: 3}
+  - {fileID: 8300000, guid: d68ea186299b28543ba04187ea112b5d, type: 3}
+  - {fileID: 8300000, guid: 5a2768689d01c0b47ace11bcfb6cfd28, type: 3}
+  - {fileID: 8300000, guid: 31191041f0fbb324fb49257d0394cb84, type: 3}
+  - {fileID: 8300000, guid: 8b821b9ac59964f47b763d386fad8c93, type: 3}
+  - {fileID: 8300000, guid: 30086f36a7be51041a54d7818fe4a0d3, type: 3}
+  - {fileID: 8300000, guid: 30086f36a7be51041a54d7818fe4a0d3, type: 3}
+  - {fileID: 8300000, guid: dcc6b645bc4741147b0052008bcb76d2, type: 3}
+  - {fileID: 8300000, guid: cca30d5144ebe9549a408a0365f39763, type: 3}
+  themeSelector: 0
+--- !u!82 &1910754743
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1910754739}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1983379649
 GameObject:
   m_ObjectHideFlags: 0
