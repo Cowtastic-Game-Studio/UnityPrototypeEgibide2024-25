@@ -49,14 +49,36 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [SerializeField] private GameObject mulliganButton;
 
         /// <summary>
-        /// Referencua el panel de puntos de accion
+        /// Referencia el panel de puntos de accion
         /// </summary>
         [SerializeField] private GameObject actionPointsPanel;
 
         /// <summary>
-        /// Referencua el panel de puntos de accion
+        /// Referencia el panel de fase actual
         /// </summary>
         [SerializeField] private GameObject resourcesPanel;
+
+        /// <summary>
+        /// Referencia el panel de muuney
+        /// </summary>
+        [SerializeField] private GameObject muuneyPanel;
+
+        /// <summary>
+        /// Referencua el panel de puntos de accion
+        /// </summary>
+        [SerializeField] private GameObject currentPhasePanel;
+        /// <summary>
+        /// Referencua el panel de puntos de accion
+        /// </summary>
+        [SerializeField] private GameObject exitPanel;
+        /// <summary>
+        /// Referencua el panel de puntos de accion
+        /// </summary>
+        [SerializeField] private GameObject catButton;
+        /// <summary>
+        /// Referencua el panel de puntos de accion
+        /// </summary>
+        [SerializeField] private GameObject savePanel;
 
         [SerializeField] private GameObject pageGUI;
         [SerializeField] private GameObject buttonsGUI;
@@ -133,20 +155,58 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void UpdateHUDForCamera(CinemachineVirtualCamera activeCamera)
         {
             // Ocultar todo por defecto
-            currentPhaseTextUI.gameObject.SetActive(false);
-            bankResourceTextUI.gameObject.SetActive(false);
+            //currentPhaseTextUI.gameObject.SetActive(false);
+            //bankResourceTextUI.gameObject.SetActive(false);
+            catButton.gameObject.SetActive(false);
+            savePanel.gameObject.SetActive(false);
+            exitPanel.gameObject.SetActive(false);
 
-            //if (activeCamera == "VirtualCameraExterior")
-            //{
-            //    // Mostrar fase actual y dinero
-            //    currentPhaseTextUI.gameObject.SetActive(true);
-            //    bankResourceTextUI.gameObject.SetActive(true);
-            //}
-            //else if (activeCamera == )
-            //{
-            //    // Mostrar solo fase actual
-            //    currentPhaseTextUI.gameObject.SetActive(true);
-            //}
+            if (activeCamera.gameObject.name == "VirtualCameraIdle")
+            {
+                // Mostrar fase actual y dinero
+                currentPhasePanel.gameObject.SetActive(true);
+                muuneyPanel.gameObject.SetActive(true);
+                actionPointsPanel.gameObject.SetActive(true);
+                exitPanel.gameObject.SetActive(false);
+                catButton.gameObject.SetActive(false);
+                savePanel.gameObject.SetActive(false);
+            }
+            else if (activeCamera.gameObject.name == "VirtualCameraDerecha")
+            {
+                // Mostrar fase actual y dinero
+                currentPhasePanel.gameObject.SetActive(true);
+                muuneyPanel.gameObject.SetActive(true);
+                actionPointsPanel.gameObject.SetActive(false);
+                exitPanel.gameObject.SetActive(false);
+                catButton.gameObject.SetActive(false);
+                savePanel.gameObject.SetActive(false);
+
+
+
+            }
+            else if (activeCamera.gameObject.name == "VirtualCameraAtras")
+            {
+                // Mostrar solo fase actual
+                currentPhasePanel.gameObject.SetActive(true);
+                muuneyPanel.gameObject.SetActive(false);
+                actionPointsPanel.gameObject.SetActive(false);
+                exitPanel.gameObject.SetActive(false);
+                catButton.gameObject.SetActive(true);
+                savePanel.gameObject.SetActive(true);
+
+
+            }
+            else if (activeCamera.gameObject.name == "VirtualCameraIzquierda")
+            {
+                // Mostrar fase actual y dinero
+                currentPhasePanel.gameObject.SetActive(false);
+                muuneyPanel.gameObject.SetActive(false);
+                actionPointsPanel.gameObject.SetActive(false);
+                exitPanel.gameObject.SetActive(true);
+                catButton.gameObject.SetActive(false);
+                savePanel.gameObject.SetActive(false);
+
+            }
         }
 
 

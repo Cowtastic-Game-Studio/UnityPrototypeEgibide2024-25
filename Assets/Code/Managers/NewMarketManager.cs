@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.VersionControl;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -132,16 +130,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 case "CardDisplayTemplate":
                     // TODO: Mostrar la informaci�n de la carta bien
                     Debug.Log("CardDisplay Template");
-                    OnShopItemClicked(shopItemGO);                    
+                    OnShopItemClicked(shopItemGO);
                     cardPreview.SetActive(true);
                     //shopItemGO.GetComponent<ShopItem>()?.TriggerCard();
-                    ShopItem clickItem = shopItemGO.GetComponent<ShopItem>();
-                    if (clickItem)
-                        cardPreview.GetComponent<CardDisplay>()?.UpdateDisplayAndMat(clickItem.getCardTemplate(), false);
+
+                    break;
+                case "BuyButton":
+                    ShopItem shopItem = shopItemGO.GetComponent<ShopItem>();
+                    shopItemGO.GetComponent<ShopItem>()?.TriggerPrice();
+                    cardPreview.SetActive(false);
                     break;
 
                 case "NormalBuyButton":
-                    OnBuyButtonClicked(shopItemGO);                    
+                    OnBuyButtonClicked(shopItemGO);
                     break;
 
                 case "DiscountBuyButton":
@@ -164,7 +165,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     break;
 
                 default:
-                    break;                    
+                    break;
             }
         }
 
@@ -193,7 +194,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             CreateShopItems(false);
             cardPreview.SetActive(false);
 
-            slotList.totalPage = Mathf.CeilToInt((float) cardList.Count / 8);
+            slotList.totalPage = Mathf.CeilToInt((float)cardList.Count / 8);
 
             //Limpia la carta previsualizada
             ShowHideCardPreviewZone(false);
@@ -226,7 +227,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void OnShopItemClicked(GameObject shopItemGO)
         {
             ShopItem shopItem = shopItemGO.GetComponent<ShopItem>();
-            shopItem?.TriggerCard();
+            //shopItem?.TriggerCard();
+            ShopItem clickItem = shopItemGO.GetComponent<ShopItem>();
+            if (clickItem)
+                cardPreview.GetComponent<CardDisplay>()?.UpdateDisplayAndMat(clickItem.getCardTemplate(), false);
 
             ShowHideCardPreviewZone(true);
 
@@ -241,6 +245,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             shopItemGO.GetComponent<ShopItem>()?.TriggerPrice();
 
             //TODO: comprar con el valor del 
+
         }
 
         private void OnDiscountBuyButtonClicked(GameObject shopItemGO)

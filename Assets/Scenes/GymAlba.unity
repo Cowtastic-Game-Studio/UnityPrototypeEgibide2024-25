@@ -2093,6 +2093,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 406636489}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &434068457 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4580754209251375895, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+  m_PrefabInstance: {fileID: 435429869}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &435429869
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2104,7 +2109,7 @@ PrefabInstance:
     - target: {fileID: 506343248721261719, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
       propertyPath: cardPreview
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 434068457}
     - target: {fileID: 4685252753872326998, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
       propertyPath: m_Name
       value: Market
@@ -2935,6 +2940,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3861198256828047066, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4466179223127878900, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5639421414477099762, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
