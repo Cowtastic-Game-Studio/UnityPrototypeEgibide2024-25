@@ -239,7 +239,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal5()
         {
-            return GenerateStatGoal("G-M5", "GardenFilledWithCropsMaxUpgrade", StatisticType.FarmFull, 1);
+            return GenerateStatGoal("G-M5", "Fill the garden with crops when it is fully upgraded.", StatisticType.FarmFull, 1);
         }
 
         /// <summary>

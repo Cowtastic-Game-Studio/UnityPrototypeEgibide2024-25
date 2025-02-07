@@ -76,7 +76,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <param name="mission"></param>
         private void Initialize(List<Mission> missions)
         {
-            this.TitleText.text = "Logros";
+            this.TitleText.text = "Achievements";
             this.UpdateGoals(missions);
 
             foreach(Mission mission in missions)
