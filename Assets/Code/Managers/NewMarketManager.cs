@@ -127,19 +127,23 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     // TODO: Mostrar la información de la carta bien
                     Debug.Log("CardDisplay Template");
                     cardPreview.SetActive(true);
-                    shopItemGO.GetComponent<ShopItem>()?.TriggerCard();
+                    //shopItemGO.GetComponent<ShopItem>()?.TriggerCard();
+                    ShopItem clickItem = shopItemGO.GetComponent<ShopItem>();
+                    if (clickItem)
+                        cardPreview.GetComponent<CardDisplay>()?.UpdateDisplayAndMat(clickItem.getCardTemplate(), false);
                     break;
 
                 case "BuyButton":
                     ShopItem shopItem = shopItemGO.GetComponent<ShopItem>();
-
                     shopItemGO.GetComponent<ShopItem>()?.TriggerPrice();
+                    cardPreview.SetActive(false);
                     break;
 
                 case "NextButton":
                     slotList.NextPage();
                     ClearPageItemsList();
                     CreateShopItems(false);
+                    cardPreview.SetActive(false);
                     break;
 
                 case "PreviousButton":
@@ -147,6 +151,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     counter -= pageItemsList.Count + nActualItems;
                     ClearPageItemsList();
                     CreateShopItems(false);
+                    cardPreview.SetActive(false);
                     break;
 
                 default:
@@ -177,6 +182,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             counter = 0;
 
             CreateShopItems(false);
+            cardPreview.SetActive(false);
 
             slotList.totalPage = Mathf.CeilToInt((float)cardList.Count / 8);
         }

@@ -23,6 +23,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             // TODO: Show Card Preview
             Debug.Log("TriggerCard");
+            card.UpdateDisplayAndMat(cardTemplate, false);
         }
 
         public void TriggerPrice()
@@ -40,5 +41,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
+        public CardTemplate getCardTemplate()
+        {
+            return cardTemplate;
+        }
     }
 }
