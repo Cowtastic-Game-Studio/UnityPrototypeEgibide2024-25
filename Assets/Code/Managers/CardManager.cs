@@ -412,7 +412,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             if (selectedCard.transform.parent.CompareTag("Place") && selectedCard.transform.rotation.y != 180 && selectedCard.transform.rotation.y != -90)
             {
-                selectedCard.transform.rotation = Quaternion.Euler(-90, 0, 90); ;
+                selectedCard.transform.rotation = Quaternion.Euler(-90, 0, 90);
+
+                var placeSpace = selectedCard.transform.parent?.GetComponent<PlaceSpaceBehaviour>();
+                if (placeSpace != null)
+                {
+                    placeSpace.updateEmpty();
+                }
             }
         }
 
