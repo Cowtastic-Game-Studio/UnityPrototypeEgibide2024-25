@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 032636d2554a6eb45b0d64d499715a37, type: 3}
   m_Name: Helper
   m_EditorClassIdentifier: 
-  artwork: {fileID: 21300000, guid: e18b857f1eb16dc48b31f49ae3db9709, type: 3}
-  baseCard: {fileID: 21300000, guid: 3381212bab47d73469e383e6f98f5d64, type: 3}
+  artwork: {fileID: 2100000, guid: 647795d87d7a5e5408ada197d6c1821d, type: 2}
   cardType: 5
   name: Helper
   description: Una vez colocada no podras moverme, ten cuidao
@@ -25,6 +24,7 @@ MonoBehaviour:
     resourceQuantity: 6
   marketCost: 30
   discardCost: 0
-  dayToUnlock: 5
+  dayToUnlock: 0
   targetCardType: 6
   multiplier: 1
+  targetResoruceType: 4

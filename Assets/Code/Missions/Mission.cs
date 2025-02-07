@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Linq;
+
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -77,19 +79,42 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
         #endregion
 
+        #region Public methods
+
+        public void DeactivateMision()
+        {
+            foreach (Goal goal in Goals)
+            {
+                goal.OnCompleted.RemoveListener(OnCompleteGoal);
+            }
+        }
+
+
+
+        #endregion
+
+        #region Private methods
+
         private void OnCompleteGoal(Goal goal)
         {
-            Debug.Log("Goal complete:" + goal.Description);
+            Debug.LogWarning("Goal completed: " + goal.Description);
             goal.OnCompleted.RemoveListener(OnCompleteGoal);
-
             this.Updated.Invoke(this);
 
-
-            //TODO: Comprobar si se han completado todos los goals
+            List<Goal> filteredGoals = Goals.Where(_goal => _goal.IsCompleted == false).ToList();
 
             //Si se han completado todos los goals, se reciben las recompensas
-
+            if (filteredGoals.Count == 0)
+            {
+                //Rewards.ToList().ForEach(reward => reward.Receive());
+                foreach (Reward reward in Rewards.ToList())
+                {
+                    reward.Receive();
+                }
+            }
         }
+
+        #endregion
 
     }
 }

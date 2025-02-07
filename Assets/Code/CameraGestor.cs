@@ -29,6 +29,8 @@ public class CameraGestor : MonoBehaviour
         cameraAnimator = GetComponent<Animator>();
         cameraSwitchAction.performed += OnCameraSwitch;
         // playerInput.Enable();
+
+        SwitchToCamera(VirtualCameraIdle, nameof(VirtualCameraIdle));
     }
 
     private void OnCameraSwitch(InputAction.CallbackContext context)
@@ -99,7 +101,7 @@ public class CameraGestor : MonoBehaviour
 
     private void SwitchToCamera(CinemachineVirtualCamera targetCamera, string cameraState)
     {
-        Debug.Log("Cambiando a cámara: " + cameraState);
+        //Debug.Log("Cambiando a cámara: " + cameraState);
         cameraState = cameraState.Replace(" ", "");
 
         // Desactivar todas las cámaras
@@ -118,7 +120,7 @@ public class CameraGestor : MonoBehaviour
         // Actualizar el hud con un delay para que no aparezca el hud en mitad de la transición de camaras
         StartCoroutine(DelayedHUDUpdate(targetCamera, 1f));
 
-        Debug.Log("Cámara actual: " + targetCamera.name);
+        //Debug.Log("Cámara actual: " + targetCamera.name);
     }
 
     // Corrutina para retrasar la actualización del HUD
