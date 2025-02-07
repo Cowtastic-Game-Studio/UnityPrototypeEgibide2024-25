@@ -61,7 +61,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// Espaciado entre cartas en la mano.
         /// </summary>
         [SerializeField]
-        private float cardSpacing = 0.4f;
+        private float cardSpacing = 0.1f;
 
         /// <summary>
         /// Variable para definir desde el editor la cantidad de cartas a robar por turno.
@@ -192,7 +192,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
 
             // Organizar las cartas en la mano
-            ArrangeHand();
+            //ArrangeHand();
+            ArrangeCardsInCurve();
         }
 
         private void ArrangeHand()
@@ -211,6 +212,45 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     var cardBH = card.GetComponent<CardBehaviour>();
                     cardBH.IsPlaced = false;
                     cardBH.PositionInHand = i * cardSpacing;
+                }
+            }
+        }
+        void ArrangeCardsInCurve()
+        {
+            // Crea una lista temporal de cartas en la mano
+            List<GameObject> cardsInHand = new List<GameObject>(handDeck.Cards.ToArray());
+            float arcAngle = 15f; // Ángulo total de la curva (ajustable)
+            float radius = 5f; // Radio de la curva (ajustable)
+            int cardCount = cardsInHand.Count;
+
+            float startAngle = -arcAngle / 2; // Comenzar desde la izquierda del arco
+            float angleStep = arcAngle / (cardCount - 1); // Espaciado entre cartas
+
+            for (int i = 0; i < cardCount; i++)
+            {
+                GameObject card = cardsInHand[i];
+                if (card != null)
+                {
+                    // Ángulo individual para la carta
+                    float angle = startAngle + (angleStep * i); 
+                    // Convertir a radianes
+                    float radian = angle * Mathf.Deg2Rad; 
+
+                    // Calcular posición en arco
+                    Vector3 cardPosition = new Vector3(
+                        Mathf.Sin(radian) * radius,
+                        Mathf.Cos(radian) * radius - radius,
+                        // Aumenta la Z progresivamente
+                        i * -0.01f 
+                    );
+
+                    // Ajustar la rotación para que sigan la curva
+                    Quaternion cardRotation = Quaternion.Euler(0, 0, -angle);
+                  
+                    cardsInHand[i].transform.localPosition = cardPosition;
+                    cardsInHand[i].transform.localRotation = cardRotation;
+                    var cardBH = card.GetComponent<CardBehaviour>();
+                    cardBH.IsPlaced = false;
                 }
             }
         }
