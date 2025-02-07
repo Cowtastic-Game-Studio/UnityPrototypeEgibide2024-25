@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using UnityEngine.Events;
 
 namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
@@ -52,7 +53,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal4()
         {
-            return GenerateStatGoal("T-M4", "Consigue un cliente", StatisticType.CustomersTotalUsed, 1);
+            return GenerateStatGoal("T-M4", "Consigue un cliente", StatisticType.CustomersServed, 1);
 
         }
 
@@ -199,7 +200,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal1()
         {
-            return GenerateStatGoal("G-M1", "Establo mejorado al maximo", StatisticType.StableCountUpgrade, 6);
+            return GenerateStatGoal("G-M1", "Establo mejorado al maximo", StatisticType.StableCountUpgrade, 4);
         }
 
         /// <summary>
@@ -209,7 +210,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal2()
         {
-            return GenerateStatGoal("G-M2", "Huerto mejorado al maximo", StatisticType.GardenCountUpgrade, 8);
+            return GenerateStatGoal("G-M2", "Huerto mejorado al maximo", StatisticType.GardenCountUpgrade, 6);
         }
 
         /// <summary>
@@ -219,7 +220,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal3()
         {
-            return GenerateStatGoal("G-M3", "Taverna mejorada al maximo", StatisticType.TavernCountUpgrade, 4);
+            return GenerateStatGoal("G-M3", "Taverna mejorada al maximo", StatisticType.TavernCountUpgrade, 2);
         }
 
         /// <summary>

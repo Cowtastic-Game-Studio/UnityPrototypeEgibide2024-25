@@ -20,6 +20,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
                 GameManager.Instance.Tabletop.CardManager.BuyCard("FastCow");
 
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
+
+                Debug.LogWarning("Tutorial reward has been received. 10 Muuneys and 1 Fast Cow");
             };
 
             return new Reward(rewardReceiveDelegate);
@@ -37,12 +39,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
                 // Calculo del 20 porciento del dinero total que puede tener el jugador
                 int currentMaxMuuney = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.Muuney);
                 double tenPercentMuuney = currentMaxMuuney * 0.20;
-                int roundedMuuney = Utils.RoundMuuney((int) tenPercentMuuney);
+                int roundedMuuney = Utils.RoundMuuney((int)tenPercentMuuney);
 
                 // Añadir dinero y actualizar hud
                 GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(roundedMuuney, GameResource.Muuney, true);
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
-                Debug.Log("Se ha añadido Muuney: " + roundedMuuney);
+                Debug.LogWarning("Muuney has been added: " + roundedMuuney);
 
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
             };
@@ -56,6 +58,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             {
                 GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(muuney, GameResource.Muuney, true);
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
+                Debug.LogWarning("Muuney has been added: " + muuney);
             };
 
             return new Reward(rewardReceiveDelegate);

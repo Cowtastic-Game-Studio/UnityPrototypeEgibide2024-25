@@ -106,6 +106,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 tmp = newtext.GetComponent<TMP_Text>();
 
                 tmp.text = goal.Description;
+                tmp.color = new Color(0,0,0);
 
                 if(goal.IsCompleted)
                     tmp.fontStyle = FontStyles.Strikethrough;

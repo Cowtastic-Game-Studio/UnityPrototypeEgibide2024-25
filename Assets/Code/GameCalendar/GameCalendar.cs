@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
@@ -22,11 +23,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private int DayOfMonth; //{ get; private set; }
         public int CurrentYear { get; private set; }
 
+        public UnityEvent<int> DayChanged = new UnityEvent<int>();
+
         private GameCalendarEventManager eventManager;
 
         private GameObject calendarMark;
         private Vector3[] positions;
-        private int positionCount;
+        private bool isFirstWeek = true;
 
         // Propiedad para obtener el d�a de la semana (1 = Lunes, 7 = Domingo)
         public DayOfWeek DayOfWeek
@@ -36,8 +39,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public GameCalendar()
         {
-            CurrentDay = 1;
+            CurrentDay = 0;
             CurrentWeek = 0;
+            DayOfMonth = 0;
             eventManager = new GameCalendarEventManager();
             // Inicialmente no hay evento
             calendarMark = GameObject.Find("MarkDay");
@@ -49,7 +53,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private void setMarkArray()
         {
-            positionCount = 1;
             positions = new Vector3[28];
             positions[0] = new Vector3(0.005f, 3.535f, -6.293f);
             positions[1] = new Vector3(0.005f, 3.535f, -4.267f);
@@ -86,14 +89,18 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             eventManager.EndActiveEvent();
 
-            CurrentDay++;
             DayOfMonth++;
+            Debug.Log("CurrentDay: " + CurrentDay);
+            Debug.Log("CurrentWeek: " + CurrentWeek);
 
-            if (CurrentDay % 7 == 0)
+            if (CurrentDay % 7 == 0 && !isFirstWeek)
             {
+                Debug.Log("He entrado");
+
                 CurrentWeek++;
+                MissionsManager.Instance.RenewWeeklyMission();
             }
-            if (CurrentDay % 29 == 0) // 29 seria principio de mes
+            if (DayOfMonth % 29 == 0) // 29 seria principio de mes
             {
                 DayOfMonth = 1;
                 CurrentMonth++;
@@ -103,10 +110,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 CurrentYear++;
             }
 
+            CurrentDay++;
+            isFirstWeek = false;
+
             ChangeCallendar();
 
             //Comprobar si hay que activar un evento
             CheckForEvent();
+
+            RaiseDayChanged();
         }
 
         // Comprobar si debe ocurrir un evento
@@ -126,12 +138,22 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void ChangeCallendar()
         {
-            calendarMark.transform.localPosition = positions[positionCount];
-            positionCount++;
-            if (CurrentDay % 28 == 0)
-            {
-                positionCount = 0;
-            }
+            calendarMark.transform.localPosition = positions[DayOfMonth - 1];
         }
+
+        private void RaiseDayChanged()
+        {
+            this.DayChanged.Invoke(this.CurrentDay);
+        }
+
+        /// <summary>
+        /// Indica si el dia actual es VacFriday
+        /// </summary>
+        /// <returns></returns>
+        public bool IsVacFriday()
+        {
+            return this.DayOfMonth == 27;
+        }
+
     }
 }
