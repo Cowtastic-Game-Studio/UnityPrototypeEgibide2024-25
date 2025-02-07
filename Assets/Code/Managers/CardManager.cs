@@ -553,6 +553,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 CardBehaviour cardBH = card.GetComponent<CardBehaviour>();
                 cardBH.Activate();
             }
+
+            foreach (GameObject card in playedCardsDeck.Cards)
+            {
+                CardBehaviour cardBH = card.GetComponent<CardBehaviour>();
+                cardBH.Activate();
+            }
         }
 
         //TODO: change to receive scriptableObject CardTemplate
