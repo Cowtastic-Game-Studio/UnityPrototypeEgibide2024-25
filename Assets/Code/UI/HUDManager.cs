@@ -123,10 +123,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             int milk = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Milk);
             int muuney = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Muuney);
 
-            actionPointTextUI.text = "AP: " + pa.ToString() + "/" + paMax.ToString();
-            wheatResourceTextUI.text = "Wheat: " + wheat.ToString() + "/" + wheatMax.ToString();
-            milkResourceTextUI.text = "Milk: " + milk.ToString() + "/" + milkMax.ToString();
-            bankResourceTextUI.text = "Muuney: " + muuney.ToString() + "/" + muuneyMax.ToString();
+            actionPointTextUI.text = pa.ToString() + "/" + paMax.ToString();
+            wheatResourceTextUI.text = wheat.ToString() + "/" + wheatMax.ToString();
+            milkResourceTextUI.text = milk.ToString() + "/" + milkMax.ToString();
+            bankResourceTextUI.text = muuney.ToString() + "/" + muuneyMax.ToString();
         }
         #endregion
 
