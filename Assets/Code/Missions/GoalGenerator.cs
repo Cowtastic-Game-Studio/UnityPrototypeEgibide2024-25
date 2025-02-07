@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using UnityEngine.Events;
 
 namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
@@ -9,7 +8,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
     /// <summary>
     /// Genera los objetivos
     /// </summary>
-    internal static class GoalGenerator
+    public class GoalGenerator
     {
 
         #region Tutorial
@@ -200,7 +199,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal1()
         {
-            return GenerateStatGoal("G-M1", "Establo mejorado al maximo", StatisticType.StableCountUpgrade, 4);
+            return GenerateStatGoal("G-M1", "Establo mejorado al maximo", StatisticType.StableCountUpgrade, GetMaxSpace(GameManager.Instance.Tabletop.farms));
         }
 
         /// <summary>
@@ -210,7 +209,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal2()
         {
-            return GenerateStatGoal("G-M2", "Huerto mejorado al maximo", StatisticType.GardenCountUpgrade, 6);
+            return GenerateStatGoal("G-M2", "Huerto mejorado al maximo", StatisticType.GardenCountUpgrade, GetMaxSpace(GameManager.Instance.Tabletop.stables));
         }
 
         /// <summary>
@@ -220,7 +219,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal3()
         {
-            return GenerateStatGoal("G-M3", "Taverna mejorada al maximo", StatisticType.TavernCountUpgrade, 2);
+            return GenerateStatGoal("G-M3", "Taverna mejorada al maximo", StatisticType.TavernCountUpgrade, GetMaxSpace(GameManager.Instance.Tabletop.taverns));
         }
 
         /// <summary>
@@ -297,7 +296,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         {
             List<int> randomNumbers = new List<int>();
             int randomNumber;
-            Random rand = new Random();
+            System.Random rand = new System.Random();
 
             if (numberCount > max)
                 throw new Exception("El numero de numeros necesarios es mayor que el numero de numeros disponibles");
@@ -353,6 +352,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             return new Goal(goalName, goalDescription, goal1Initialization);
         }
 
+        private static int GetMaxSpace(List<PlaceSpaceBehaviour> completeList)
+        {
+            List<PlaceSpaceBehaviour> notActiveSpacesList = completeList.FindAll(f => !f.GetIsActive());
+            return notActiveSpacesList.Count;
+        }
 
         #endregion
     }

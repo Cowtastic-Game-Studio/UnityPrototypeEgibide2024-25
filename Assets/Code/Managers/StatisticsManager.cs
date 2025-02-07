@@ -215,5 +215,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 Debug.Log(item.StatType.GetEnumString() + ": " + item.Uses);
             }
         }
+
+        private int GetMaxSpace(List<PlaceSpaceBehaviour> completeList)
+        {
+            GetMaxSpace(GameManager.Instance.Tabletop.farms);
+            List<PlaceSpaceBehaviour> notActiveSpacesList = completeList.FindAll(f => !f.GetIsActive());
+
+            return notActiveSpacesList.Count();
+        }
     }
 }
