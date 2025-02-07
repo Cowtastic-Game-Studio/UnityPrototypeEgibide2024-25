@@ -29,18 +29,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private GameObject calendarMark;
         private Vector3[] positions;
-        private int positionCount;
+        private bool isFirstWeek = true;
 
         // Propiedad para obtener el d�a de la semana (1 = Lunes, 7 = Domingo)
         public DayOfWeek DayOfWeek
         {
-            get { return (DayOfWeek) ((CurrentDay - 1) % 7 + 1); }
+            get { return (DayOfWeek)((CurrentDay - 1) % 7 + 1); }
         }
 
         public GameCalendar()
         {
             CurrentDay = 0;
             CurrentWeek = 0;
+            DayOfMonth = 0;
             eventManager = new GameCalendarEventManager();
             // Inicialmente no hay evento
             calendarMark = GameObject.Find("MarkDay");
@@ -52,7 +53,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private void setMarkArray()
         {
-            positionCount = 1;
             positions = new Vector3[28];
             positions[0] = new Vector3(0.005f, 3.535f, -6.293f);
             positions[1] = new Vector3(0.005f, 3.535f, -4.267f);
@@ -89,12 +89,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             eventManager.EndActiveEvent();
 
-            CurrentDay++;
             DayOfMonth++;
+            Debug.Log("CurrentDay: " + CurrentDay);
+            Debug.Log("CurrentWeek: " + CurrentWeek);
 
-
-            if (CurrentDay % 7 == 0)
+            if (CurrentDay % 7 == 0 && !isFirstWeek)
             {
+                Debug.Log("He entrado");
+
                 CurrentWeek++;
                 MissionsManager.Instance.RenewWeeklyMission();
             }
@@ -107,6 +109,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 CurrentYear++;
             }
+
+            CurrentDay++;
+            isFirstWeek = false;
 
             ChangeCallendar();
 
