@@ -33,7 +33,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public virtual void TriggerEvent()
         {
             isActive = true;
-            Debug.Log($"{eventName} ha comenzado. {eventDescription}");
+            Debug.LogWarning($"{eventName} started. {eventDescription}");
             ApplyEffects();
         }
 
@@ -44,7 +44,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public virtual void EndEvent()
         {
             isActive = false;
-            Debug.Log($"Evento {eventName} ha terminado.");
+            Debug.LogWarning($"Event {eventName} ended.");
         }
     }
 }

@@ -1,5 +1,6 @@
 using Cinemachine;
 using CowtasticGameStudio.MuuliciousHarvest;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -100,7 +101,7 @@ public class CameraGestor : MonoBehaviour
 
     private void SwitchToCamera(CinemachineVirtualCamera targetCamera, string cameraState)
     {
-        Debug.Log("Cambiando a cámara: " + cameraState);
+        //Debug.Log("Cambiando a cámara: " + cameraState);
         cameraState = cameraState.Replace(" ", "");
 
         // Desactivar todas las cámaras
@@ -115,19 +116,27 @@ public class CameraGestor : MonoBehaviour
         // Activar la nueva cámara
         targetCamera.gameObject.SetActive(true);
         cameraAnimator.Play(cameraState);
-
-        Debug.Log("Cámara actual: " + targetCamera.name);
-    }
-    private bool IsMainCameraActive()
-    {
        
+        // Actualizar el hud con un delay para que no aparezca el hud en mitad de la transición de camaras
+        StartCoroutine(DelayedHUDUpdate(targetCamera, 1f));
 
+        //Debug.Log("Cámara actual: " + targetCamera.name);
+    }
+
+    // Corrutina para retrasar la actualización del HUD
+    private IEnumerator DelayedHUDUpdate(CinemachineVirtualCamera targetCamera, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        HUDManager.UpdateHUDForCamera(targetCamera);
+    }
+
+    private bool IsMainCameraActive()
+    {      
         return VirtualCameraIdle.gameObject.activeSelf;
     }
 
     private bool IsInteriorCameraActive()
     {
-
         return VirtualCameraInterior.gameObject.activeSelf;
     }
 

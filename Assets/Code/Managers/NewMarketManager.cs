@@ -72,7 +72,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         string name = hit.collider.name;
                         GameObject shopItemGO = hit.collider.gameObject.transform.parent.gameObject;
 
-                        Debug.Log("Name: " + name);
+                        //Debug.Log("Name: " + name);
 
                         ChangePanel(name, shopItemGO);
                     }

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class SetUpPhase : IGamePhase
@@ -32,8 +30,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void EndPhase()
         {
-            Debug.Log("Termina la fase de empezar el d a.");
-            Debug.Log("Termina la primera fase de todas, si me ves dos veces hay algo mal");
+
         }
         #endregion
 

@@ -101,6 +101,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         GameManager.Instance.Tabletop.CardManager.MoveLastCardsToHand(1);
                     }
 
+
+                    //actualizar la estadistica
+                    StatisticsManager.Instance.UpdateByType(card);
                 }
                 else if (card.Type == CardType.PlaceMultiplier)
                 {
@@ -109,9 +112,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     stayEmpty = canPlace;
                     card.Deactivate();
                     GameManager.Instance.Tabletop.CardManager.MoveLastCardsToHand(1);
+
+                    //actualizar la estadistica
+                    StatisticsManager.Instance.UpdateByType(card);
                 }
                 else
                 {
+                    //actualizar la estadistica HELPER
+                    if (card.Type == CardType.Helper)
+                        StatisticsManager.Instance.UpdateByType(card);
+
                     isCardTypeMatch = card.Type == type;
                     // Para otros tipos de carta, solo se activa si está activo, vacío y coincide el tipo
                     canPlace = isActiveConditionMet && isCardTypeMatch;
