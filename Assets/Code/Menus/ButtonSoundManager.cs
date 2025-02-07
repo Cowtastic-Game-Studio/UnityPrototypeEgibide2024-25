@@ -8,26 +8,37 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     {
         // Start is called before the first frame update
         [SerializeField] private AudioSource audioSource;
-        [SerializeField]private AudioClip audioClip,audioMulligan;
+        [SerializeField]private AudioClip audioClip,audioMulligan,audioCardPlace,audioShuffleCard;
         [SerializeField]private List<AudioClip> phaseListAudio;
-        private int indexAudioPhase = 0;
+        
 
-        void Update()
+
+        public void PhaseAudioPlayer()
         {
-        indexAudioPhase = Random.Range(0,phaseListAudio.Count);
-            PhaseAudioPlayer(indexAudioPhase);
-        }
-    
-        public void PhaseAudioPlayer(int indexAudio)
-        {
+            int indexAudio = Random.Range(0,phaseListAudio.Count);
                 audioClip = phaseListAudio[indexAudio];
                 audioSource.PlayOneShot(audioClip);
                 
         }
+
+
+        public void ShuffleAudioPlayer()
+        {
+            audioSource.PlayOneShot(audioShuffleCard);            
+        }
+
+        public void CardPlaceAudioPlayer()
+            {
+                
+                 audioSource.PlayOneShot(audioCardPlace);
+        
+            }
+
          public void MulliganAudioPlayer()
                 {
                     audioSource.PlayOneShot(audioMulligan);
                 }
-    
+
+            
     }
 }

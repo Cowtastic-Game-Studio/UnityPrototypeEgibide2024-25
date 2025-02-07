@@ -2435,6 +2435,8 @@ MonoBehaviour:
   audioSource: {fileID: 712040965}
   audioClip: {fileID: 0}
   audioMulligan: {fileID: 8300000, guid: 97c642aa0d0c5df49a8fdef25f34bf01, type: 3}
+  audioCardPlace: {fileID: 0}
+  audioShuffleCard: {fileID: 0}
   phaseListAudio:
   - {fileID: 8300000, guid: c10adde5ec0d3524bba76694600a88c0, type: 3}
   - {fileID: 8300000, guid: 612104770725f2341a71db395bf21b30, type: 3}
@@ -3832,6 +3834,10 @@ PrefabInstance:
       propertyPath: discardDeckArea
       value: 
       objectReference: {fileID: 671203745}
+    - target: {fileID: 7130352884580539777, guid: 14ec606f02fd63e4a9832df2fbf138f5, type: 3}
+      propertyPath: buttonSoundManager
+      value: 
+      objectReference: {fileID: 988621423}
     - target: {fileID: 7471884313110937568, guid: 14ec606f02fd63e4a9832df2fbf138f5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
@@ -3885,6 +3891,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3036162273535094358, guid: 14ec606f02fd63e4a9832df2fbf138f5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 988621415}
+    - targetCorrespondingSourceObject: {fileID: 3036162273535094358, guid: 14ec606f02fd63e4a9832df2fbf138f5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 988621423}
   m_SourcePrefab: {fileID: 100100000, guid: 14ec606f02fd63e4a9832df2fbf138f5, type: 3}
 --- !u!1 &988621413 stripped
 GameObject:
@@ -4028,6 +4037,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &988621423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 988621413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10611cbba8dd9e54293a380ccefbfe98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  audioClip: {fileID: 0}
+  audioMulligan: {fileID: 0}
+  audioCardPlace: {fileID: 0}
+  audioShuffleCard: {fileID: 8300000, guid: 5ff012173a539e440b317a3915163b74, type: 3}
+  phaseListAudio: []
 --- !u!1 &1000599816
 GameObject:
   m_ObjectHideFlags: 0
