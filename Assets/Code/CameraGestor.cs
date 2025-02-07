@@ -1,5 +1,6 @@
 using Cinemachine;
 using CowtasticGameStudio.MuuliciousHarvest;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -96,27 +97,6 @@ public class CameraGestor : MonoBehaviour
         SwitchToCamera(mainCameras[currentCameraIndex], mainCameras[currentCameraIndex].name);
     }
 
-    //private void SwitchToCamera(CinemachineVirtualCamera targetCamera, string cameraState)
-    //{
-    //    Debug.Log("Cambiando a cámara: " + cameraState);
-    //    cameraState = cameraState.Replace(" ", "");
-
-    //    // Desactivar todas las cámaras
-    //    VirtualCameraAtras.gameObject.SetActive(false);
-    //    VirtualCameraIzquierda.gameObject.SetActive(false);
-    //    VirtualCameraDerecha.gameObject.SetActive(false);
-    //    VirtualCameraIdle.gameObject.SetActive(false);
-    //    VirtualCameraPared.gameObject.SetActive(false);
-    //    VirtualCameraExterior.gameObject.SetActive(false);
-    //    VirtualCameraInterior.gameObject.SetActive(false);
-
-    //    // Activar la nueva cámara
-    //    targetCamera.gameObject.SetActive(true);
-    //    cameraAnimator.Play(cameraState);
-
-    //    Debug.Log("Cámara actual: " + targetCamera.name);
-    //}
-
     private void SwitchToCamera(CinemachineVirtualCamera targetCamera, string cameraState)
     {
         Debug.Log("Cambiando a cámara: " + cameraState);
@@ -134,22 +114,27 @@ public class CameraGestor : MonoBehaviour
         // Activar la nueva cámara
         targetCamera.gameObject.SetActive(true);
         cameraAnimator.Play(cameraState);
-
-        // Actualizar HUD en base a la nueva cámara activa
-        HUDManager.UpdateHUDForCamera(targetCamera);
+       
+        // Actualizar el hud con un delay para que no aparezca el hud en mitad de la transición de camaras
+        StartCoroutine(DelayedHUDUpdate(targetCamera, 1f));
 
         Debug.Log("Cámara actual: " + targetCamera.name);
     }
-    private bool IsMainCameraActive()
-    {
-       
 
+    // Corrutina para retrasar la actualización del HUD
+    private IEnumerator DelayedHUDUpdate(CinemachineVirtualCamera targetCamera, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        HUDManager.UpdateHUDForCamera(targetCamera);
+    }
+
+    private bool IsMainCameraActive()
+    {      
         return VirtualCameraIdle.gameObject.activeSelf;
     }
 
     private bool IsInteriorCameraActive()
     {
-
         return VirtualCameraInterior.gameObject.activeSelf;
     }
 
