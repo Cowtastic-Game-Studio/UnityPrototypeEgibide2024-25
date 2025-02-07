@@ -17,7 +17,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         // Update is called once per frame
         void Update()
         {
-            themeSelector = Random.Range(0,10);
+            themeSelector = Random.Range(0,listOfThemes.Count);
 
             MusicPlayerTheme(themeSelector);
         }

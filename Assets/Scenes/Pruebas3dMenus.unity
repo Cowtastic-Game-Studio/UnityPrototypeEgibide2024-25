@@ -5126,6 +5126,7 @@ GameObject:
   - component: {fileID: 1056168496}
   - component: {fileID: 1056168498}
   - component: {fileID: 1056168499}
+  - component: {fileID: 1056168500}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -5272,6 +5273,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1056168500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056168495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c9a04645ed656e4a806c63e0bde3cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 1056168499}
+  audioClip: {fileID: 0}
+  listOfThemes:
+  - {fileID: 8300000, guid: b83cc2efda4d17842b29b812c42b2b91, type: 3}
+  - {fileID: 8300000, guid: ac20c227984d1cd4fac44637359ff6e0, type: 3}
+  - {fileID: 8300000, guid: 3d89f5faf187b8e48ad40f63c1a8efe4, type: 3}
+  - {fileID: 8300000, guid: 5a2768689d01c0b47ace11bcfb6cfd28, type: 3}
+  - {fileID: 8300000, guid: dd7840e424f483c4790398b923cc10d7, type: 3}
+  - {fileID: 8300000, guid: 8011deadac130f34fa15be132b4497bc, type: 3}
+  - {fileID: 8300000, guid: 3722397fec8e224479dc3a413ce91b78, type: 3}
+  - {fileID: 8300000, guid: 82de22f6e913861458ee608fccc9b0df, type: 3}
+  - {fileID: 8300000, guid: 30086f36a7be51041a54d7818fe4a0d3, type: 3}
+  - {fileID: 8300000, guid: ac20c227984d1cd4fac44637359ff6e0, type: 3}
+  themeSelector: 0
 --- !u!1 &1069529264
 GameObject:
   m_ObjectHideFlags: 0
