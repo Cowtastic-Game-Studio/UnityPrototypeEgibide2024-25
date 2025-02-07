@@ -239,7 +239,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Mueve las cartas de nuevo al mazo de robo
             foreach (ICard card in discardCards)
             {
-                GameObject cardGameObject = ((MonoBehaviour)card).gameObject;
+                GameObject cardGameObject = ((MonoBehaviour) card).gameObject;
                 cardGameObject.transform.SetParent(deckArea);
                 cardGameObject.transform.localPosition = Vector3.zero;
                 cardGameObject.transform.localRotation = Quaternion.identity;
@@ -633,8 +633,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 // Agrega la carta al mazo
                 drawDeck.Place(newCard);
-
-                CardBehaviour cardBH = newCard.GetComponent<CardBehaviour>();
 
                 //StatisticsManager.UpdateByBuyedCard(cardBH);
                 StatisticsManager.Instance.UpdateByStatisticType(StatisticType.CardsPurchased, 1);
