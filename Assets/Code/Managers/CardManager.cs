@@ -453,7 +453,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             //roatcion para que la carta mire a camara
             if (selectedCard.transform.parent.CompareTag("Place") && selectedCard.transform.rotation.y != 180 && selectedCard.transform.rotation.y != -90)
             {
-                selectedCard.transform.rotation = Quaternion.Euler(-90, 0, 90); ;
+                selectedCard.transform.rotation = Quaternion.Euler(-90, 0, 90);
+
+                var placeSpace = selectedCard.transform.parent?.GetComponent<PlaceSpaceBehaviour>();
+                if (placeSpace != null)
+                {
+                    placeSpace.updateEmpty();
+                }
             }
         }
 
@@ -473,6 +479,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (isDragging && selectedCard != null)
             {
                 MoveSelectedCardWithMouse();
+
+                if (Input.GetMouseButtonDown(1))
+                {
+                    StopDragging();
+                }
             }
         }
 
@@ -548,6 +559,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void RemovePlacedCard(GameObject card)
         {
+            // Verificar si el padre tiene el componente PlaceSpaceBehaviour
+            var placeSpace = card.transform.parent?.GetComponent<PlaceSpaceBehaviour>();
+            if (placeSpace != null)
+            {
+                placeSpace.updateEmpty();
+            }
+
+            // Proceder a mover la carta de regreso a la mano
             handDeck.Place(card);
 
             var cardBH = card.GetComponent<CardBehaviour>();
@@ -556,8 +575,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             card.transform.SetParent(handArea);
             card.transform.localPosition = new Vector3(cardBH.PositionInHand.Value, 0, 0);
             card.transform.rotation = handArea.transform.rotation;
-        }
 
+            playedCardsDeck.RemoveCard(card);
+        }
 
         private void InitHandCardLifes()
         {
@@ -581,6 +601,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void ActivateHandDeckCards()
         {
             foreach (GameObject card in HandDeck.Cards)
+            {
+                CardBehaviour cardBH = card.GetComponent<CardBehaviour>();
+                cardBH.Activate();
+            }
+
+            foreach (GameObject card in playedCardsDeck.Cards)
             {
                 CardBehaviour cardBH = card.GetComponent<CardBehaviour>();
                 cardBH.Activate();
