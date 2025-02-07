@@ -11,13 +11,5 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             lifeCycleDays = 1;
             cardType = CardType.Helper;
         }
-
-        private void Awake()
-        {
-            // Cargar los sprites directamente desde la carpeta Resources
-            artwork = Resources.Load<Sprite>("Cards/helper");
-            baseCard = Resources.Load<Sprite>("Base");
-        }
-
     }
 }

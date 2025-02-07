@@ -12,12 +12,5 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             cardType = CardType.PlaceMultiplier;
             targetCardType = CardType.None;
         }
-
-        private void Awake()
-        {
-            // Cargar los sprites directamente desde la carpeta Resources
-            artwork = Resources.Load<Sprite>("Cards/multiplier");
-            baseCard = Resources.Load<Sprite>("Base");
-        }
     }
 }

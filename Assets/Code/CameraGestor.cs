@@ -1,4 +1,5 @@
 using Cinemachine;
+using CowtasticGameStudio.MuuliciousHarvest;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,6 +19,8 @@ public class CameraGestor : MonoBehaviour
     // Lista de cámaras en el orden de rotación
     public CinemachineVirtualCamera[] mainCameras;
     private int currentCameraIndex = 0; // Índice de la cámara actual
+
+    [SerializeField] private HUDManager HUDManager;
 
     private void Awake()
     {
@@ -39,6 +42,7 @@ public class CameraGestor : MonoBehaviour
 
                 if (IsMainCameraActive())
                 {
+
                     SwitchToCamera(VirtualCameraPared, "VirtualCameraPared");
                 }
 
@@ -116,6 +120,7 @@ public class CameraGestor : MonoBehaviour
     }
     private bool IsMainCameraActive()
     {
+       
 
         return VirtualCameraIdle.gameObject.activeSelf;
     }

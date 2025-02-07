@@ -77,13 +77,46 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public IDeck DiscardDeck => discardDeck;
 
         //Place card
-        public GameObject selectedCard = null;
+        private GameObject selectedCard = null;
 
         private bool isDragging = false;
         public bool IsDraggingCard => isDragging;
 
         public float placementHeightOffset = 4f;
         private Vector3 originalPosition;
+
+        public GameObject cardPrefab;
+
+        [SerializeField]
+        private List<CardTemplate> cardTemplates = new List<CardTemplate>();
+
+        private Dictionary<string, CardTemplate> cardNameMap;
+
+        private void Awake()
+        {
+            InitializeCardNameMap();
+        }
+
+        private void InitializeCardNameMap()
+        {
+            // Inicializa el diccionario vacío
+            cardNameMap = new Dictionary<string, CardTemplate>();
+
+            // Recorre cada CardTemplate en la lista cardTemplates
+            foreach (var cardTemplate in cardTemplates)
+            {
+                if (!cardNameMap.ContainsKey(cardTemplate.name))
+                {
+                    cardNameMap.Add(cardTemplate.name, cardTemplate);
+                }
+                else
+                {
+                    // Si ya existe una entrada con el mismo nombre
+                    // actualizarla
+                    cardNameMap[cardTemplate.name] = cardTemplate;
+                }
+            }
+        }
 
         /// <summary>
         /// Inicializa un mazo con cartas desde el ScriptableObject.
@@ -104,10 +137,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             discardDeck = new CardDeck();
 
             // Recorre cada carta en el ScriptableObject y crea una instancia
-            foreach (GameObject card in initialCards.Cards)
+            foreach (CardTemplate cardTemplate in initialCards.Cards)
             {
-                GameObject newCard = Instantiate(card, deckArea);
+                GameObject newCard = Instantiate(cardPrefab, deckArea);
+                newCard.name = cardTemplate.name;
+                newCard.transform.SetParent(deckArea.transform);
                 newCard.transform.localPosition = Vector3.zero;
+                newCard.transform.localRotation = Quaternion.identity;
+
+                CardBehaviour cardBH = newCard.GetComponent<CardBehaviour>();
+                cardBH.setCardTemplate(cardTemplate);
 
                 // Agrega la carta al mazo
                 drawDeck.Place(newCard);
@@ -139,6 +178,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 {
                     // Cambiar la posición y padre de la carta para moverla a la mano
                     cardToMove.transform.SetParent(handArea);
+                    cardToMove.transform.localRotation = Quaternion.identity;
                     cardToMove.transform.localPosition = new Vector3(i * cardSpacing, 0, 0);
 
                     // Agregar la carta a la lista de la mano
@@ -167,7 +207,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 {
                     // Cambia la posición de la carta en la mano
                     card.transform.localPosition = new Vector3(i * cardSpacing, 0, 0);
-                    card.transform.rotation = Quaternion.Euler(90, -90, 0);
+                    card.transform.localRotation = Quaternion.identity;
                     var cardBH = card.GetComponent<CardBehaviour>();
                     cardBH.IsPlaced = false;
                     cardBH.PositionInHand = i * cardSpacing;
@@ -202,7 +242,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 GameObject cardGameObject = ((MonoBehaviour)card).gameObject;
                 cardGameObject.transform.SetParent(deckArea);
                 cardGameObject.transform.localPosition = Vector3.zero;
-                cardGameObject.transform.localRotation = Quaternion.Euler(90f, -90f, 0f);
+                cardGameObject.transform.localRotation = Quaternion.identity;
                 drawDeck.Place(cardGameObject); // Vuelve a colocar en el mazo
             }
             // Baraja el mazo
@@ -283,7 +323,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 handDeck.Draw();
                 card.transform.SetParent(discardDeckArea);
                 card.transform.localPosition = Vector3.zero;
-                card.transform.localRotation = Quaternion.Euler(90f, -90f, 0f);
+                card.transform.localRotation = Quaternion.identity;
                 SetCardState(card, CardState.onDiscard);
             }
             else
@@ -324,7 +364,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                     card.transform.SetParent(discardDeckArea);
                     card.transform.localPosition = Vector3.zero;
-                    card.transform.localRotation = Quaternion.Euler(90f, -90f, 0f);
+                    card.transform.localRotation = Quaternion.identity;
                     SetCardState(card, CardState.onDiscard);
                 }
             }
@@ -410,6 +450,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             isDragging = true;
 
+            //roatcion para que la carta mire a camara
             if (selectedCard.transform.parent.CompareTag("Place") && selectedCard.transform.rotation.y != 180 && selectedCard.transform.rotation.y != -90)
             {
                 selectedCard.transform.rotation = Quaternion.Euler(-90, 0, 90);
@@ -572,23 +613,44 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
-        //TODO: change to receive scriptableObject CardTemplate
-        // + move card prefab back to Prefab folder
+
         public void BuyCard(string cardName)
         {
-            GameObject card = null;
-            string path = "Cards/Prefab/" + cardName;
-
-            card = Resources.Load<GameObject>(path);
-            if (card != null)
+            if (cardNameMap.ContainsKey(cardName))
             {
-                GameObject newCard = Instantiate(card, deckArea);
+                CardTemplate cardTemplate = cardNameMap[cardName];
+
+                GameObject newCard = Instantiate(cardPrefab, deckArea);
+                newCard.name = cardName;
                 newCard.transform.SetParent(deckArea.transform);
                 newCard.transform.localPosition = Vector3.zero;
+                newCard.transform.localRotation = Quaternion.identity;
+
+                CardBehaviour cardBH = newCard.GetComponent<CardBehaviour>();
+                cardBH.setCardTemplate(cardTemplate);
 
                 // Agrega la carta al mazo
                 drawDeck.Place(newCard);
             }
         }
+
+        public GameObject getSelectedCard()
+        {
+            return selectedCard;
+        }
+
+        //GameObject card = null;
+        //string path = "Cards/Prefab/" + cardName;
+
+        //card = Resources.Load<GameObject>(path);
+        //if (card != null)
+        //{
+        //    GameObject newCard = Instantiate(card, deckArea);
+        //    newCard.transform.SetParent(deckArea.transform);
+        //    newCard.transform.localPosition = Vector3.zero;
+
+        //    // Agrega la carta al mazo
+        //    drawDeck.Place(newCard);
+        //}
     }
 }
