@@ -199,7 +199,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Mueve las cartas de nuevo al mazo de robo
             foreach (ICard card in discardCards)
             {
-                GameObject cardGameObject = ((MonoBehaviour) card).gameObject;
+                GameObject cardGameObject = ((MonoBehaviour)card).gameObject;
                 cardGameObject.transform.SetParent(deckArea);
                 cardGameObject.transform.localPosition = Vector3.zero;
                 cardGameObject.transform.localRotation = Quaternion.Euler(90f, -90f, 0f);
@@ -507,6 +507,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void RemovePlacedCard(GameObject card)
         {
+            // Verificar si el padre tiene el componente PlaceSpaceBehaviour
+            var placeSpace = card.transform.parent?.GetComponent<PlaceSpaceBehaviour>();
+            if (placeSpace != null)
+            {
+                placeSpace.updateEmpty();
+            }
+
+            // Proceder a mover la carta de regreso a la mano
             handDeck.Place(card);
 
             var cardBH = card.GetComponent<CardBehaviour>();
@@ -515,8 +523,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             card.transform.SetParent(handArea);
             card.transform.localPosition = new Vector3(cardBH.PositionInHand.Value, 0, 0);
             card.transform.rotation = handArea.transform.rotation;
-        }
 
+            playedCardsDeck.RemoveCard(card);
+        }
 
         private void InitHandCardLifes()
         {
