@@ -40,6 +40,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void ExecutePhase()
         {
             // C�digo que define la l�gica de la fase
+            GameManager.Instance.Tabletop.NewMarketManager.UpdateMarket();
         }
 
 

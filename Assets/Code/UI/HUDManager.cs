@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
@@ -128,6 +129,27 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             milkResourceTextUI.text = milk.ToString() + "/" + milkMax.ToString();
             bankResourceTextUI.text = muuney.ToString() + "/" + muuneyMax.ToString();
         }
+
+        public void UpdateHUDForCamera(CinemachineVirtualCamera activeCamera)
+        {
+            // Ocultar todo por defecto
+            currentPhaseTextUI.gameObject.SetActive(false);
+            bankResourceTextUI.gameObject.SetActive(false);
+
+            //if (activeCamera == "VirtualCameraExterior")
+            //{
+            //    // Mostrar fase actual y dinero
+            //    currentPhaseTextUI.gameObject.SetActive(true);
+            //    bankResourceTextUI.gameObject.SetActive(true);
+            //}
+            //else if (activeCamera == )
+            //{
+            //    // Mostrar solo fase actual
+            //    currentPhaseTextUI.gameObject.SetActive(true);
+            //}
+        }
+
+
         #endregion
 
         #region Private methods

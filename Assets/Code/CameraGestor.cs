@@ -1,4 +1,5 @@
 using Cinemachine;
+using CowtasticGameStudio.MuuliciousHarvest;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,12 +20,16 @@ public class CameraGestor : MonoBehaviour
     public CinemachineVirtualCamera[] mainCameras;
     private int currentCameraIndex = 0; // Índice de la cámara actual
 
+    [SerializeField] private HUDManager HUDManager;
+
     private void Awake()
     {
         // Inicializar el Input System        
         cameraAnimator = GetComponent<Animator>();
         cameraSwitchAction.performed += OnCameraSwitch;
         // playerInput.Enable();
+
+        SwitchToCamera(VirtualCameraIdle, nameof(VirtualCameraIdle));
     }
 
     private void OnCameraSwitch(InputAction.CallbackContext context)
@@ -37,6 +42,7 @@ public class CameraGestor : MonoBehaviour
 
                 if (IsMainCameraActive())
                 {
+
                     SwitchToCamera(VirtualCameraPared, "VirtualCameraPared");
                 }
 
@@ -114,6 +120,7 @@ public class CameraGestor : MonoBehaviour
     }
     private bool IsMainCameraActive()
     {
+       
 
         return VirtualCameraIdle.gameObject.activeSelf;
     }

@@ -1,28 +1,47 @@
 using System.Collections.Generic;
-
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class CardDisplay : MonoBehaviour
     {
-        public Text nameText;
-        public Text descriptionText;
-        public Image artworkImage;
-        public Image baseCardImage;
-        public Text actionPointsText;
-        public Text requieredTypeText;
-        public Text requieredQuantityText;
-        public Text producedTypeText;
-        public Text producedQuantityText;
+        public TMP_Text nameText;
+        public TMP_Text descriptionText;
+        public TMP_Text actionPointsText;
+        public TMP_Text lifeCycleDaysText;
+        public TMP_Text requieredTypeText;
+        public TMP_Text requieredQuantityText;
+        public TMP_Text producedTypeText;
+        public TMP_Text producedQuantityText;
         public int cost;
 
-        //TODO: El Image que actúa como filtro gris
-        [SerializeField]
-        private Image overlayImage;
+        //TODO: El Image que actï¿½a como filtro gris
+        [SerializeField] private MeshRenderer targetMeshRenderer;
+        public Material newMaterial;
 
-        // Método para actualizar la visualización con los datos de la plantilla
+        void Awake()
+        {
+            if (targetMeshRenderer != null && newMaterial != null)
+            {
+                // Verifica si el MeshRenderer tiene suficientes materiales
+                if (targetMeshRenderer.sharedMaterials.Length > 1)
+                {
+                    // Crea una copia de los materiales para asignar el nuevo material
+                    Material[] materials = targetMeshRenderer.materials;
+                    materials[1] = newMaterial;
+                    targetMeshRenderer.materials = materials;
+
+                    //Debug.Log("Material en el Ã­ndice 1 actualizado correctamente.");
+                }
+            }
+            else
+            {
+                Debug.LogError("Falta asignar el MeshRenderer o el nuevo material.");
+            }
+        }
+
+        // Mï¿½todo para actualizar la visualizaciï¿½n con los datos de la plantilla
         public void UpdateDisplay(CardTemplate cardTemplate, bool isActive)
         {
             if (cardTemplate != null)
@@ -34,10 +53,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 else
                     descriptionText.text = "";
 
-                artworkImage.sprite = cardTemplate.artwork;
-                baseCardImage.sprite = cardTemplate.baseCard;
-
                 actionPointsText.text = cardTemplate.actionPointsCost.ToString();
+                lifeCycleDaysText.text = cardTemplate.lifeCycleDays.ToString();
 
                 if (cardTemplate.requiredResources.Count != 0)
                 {
@@ -61,7 +78,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 cost = cardTemplate.marketCost;
 
-                // Actualiza la visibilidad del filtro gris según el estado de la carta
+                // Actualiza la visibilidad del filtro gris segï¿½n el estado de la carta
                 SetOverlayActive(!isActive);
             }
             else
@@ -70,13 +87,32 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
-        // Método para activar o desactivar el filtro gris
+        public void UpdateDisplayAndMat(CardTemplate cardTemplate, bool isActive)
+        {
+            if (targetMeshRenderer != null)
+            {
+                // Verifica si el MeshRenderer tiene suficientes materiales
+                if (targetMeshRenderer.sharedMaterials.Length > 1)
+                {
+                    // Crea una copia de los materiales para asignar el nuevo material
+                    Material[] materials = targetMeshRenderer.materials;
+                    materials[1] = cardTemplate.artwork;
+                    targetMeshRenderer.materials = materials;
+
+                    //Debug.Log("Material en el Ã­ndice 1 actualizado correctamente.");
+                }
+            }
+
+            UpdateDisplay(cardTemplate, isActive);
+        }
+
+        // Mï¿½todo para activar o desactivar el filtro gris
         public void SetOverlayActive(bool isActive)
         {
             // overlayImage.gameObject.SetActive(isActive);
         }
 
-        // Método para formatear los recursos en un string
+        // Mï¿½todo para formatear los recursos en un string
         private string FormatResources(List<ResourceAmount> resources, bool isType)
         {
             if (resources == null || resources.Count == 0) return "N/A";

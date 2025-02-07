@@ -7,14 +7,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     public class ShopItem : MonoBehaviour
     {
         [SerializeField] private TMP_Text price;
-        [SerializeField] private CardDisplay card;
+        [SerializeField] public CardDisplay card;
 
         private CardTemplate cardTemplate;
 
         public void UpdateDisplayData(CardTemplate cardT, float discountPercentage)
         {
             cardTemplate = cardT;
-            card.UpdateDisplay(cardTemplate, false);
+            card.UpdateDisplayAndMat(cardTemplate, false);
             float finalPrice = Utils.RoundMuuney(cardTemplate.marketCost * discountPercentage);
             price.text = finalPrice.ToString();
         }
@@ -23,6 +23,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             // TODO: Show Card Preview
             Debug.Log("TriggerCard");
+            card.UpdateDisplayAndMat(cardTemplate, false);
         }
 
         public void TriggerPrice()
@@ -70,6 +71,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     StatisticsManager.Instance.UpdateByBuyedCard(cardTemplate.cardType);
                 }
             }
+        }
+
+        public CardTemplate getCardTemplate()
+        {
+            return cardTemplate;
         }
     }
 }
