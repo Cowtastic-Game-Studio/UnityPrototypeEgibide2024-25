@@ -85,7 +85,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         CardBehaviour cardTool = cardTooltip.GetComponent<CardBehaviour>();
                         CardDisplay cardToolDisplay = cardTool.GetComponent<CardDisplay>();
 
-                        cardToolDisplay.UpdateDisplay(selctedCardBehaviour.GetTemplate(), false);
+                        cardToolDisplay.UpdateDisplayAndMat(selctedCardBehaviour.GetTemplate(), false);
 
                         // Mueve el cardTooltip a la posición del ratón
                         //Vector3 mousePosition = Input.mousePosition;                    

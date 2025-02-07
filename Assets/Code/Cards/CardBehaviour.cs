@@ -154,7 +154,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             CardDisplay display = GetComponent<CardDisplay>();
             if (display != null)
             {
-                display.UpdateDisplay(template, isActive);
+                display.UpdateDisplayAndMat(template, isActive);
                 // Llama al m�todo para activar/desactivar el overlay
                 // display.SetOverlayActive(!isActive);
             }
