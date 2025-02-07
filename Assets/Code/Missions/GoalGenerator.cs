@@ -265,7 +265,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
                 Statistic statFridge = StatisticsManager.Instance.GetStat(StatisticType.FridgeCountUpgrade);
                 Statistic statSilo = StatisticsManager.Instance.GetStat(StatisticType.SiloCountUpgrade);
 
-                return (statFridge.Uses >= 8 && statSilo.Uses >= 8);
+                int maxLevelFridge = GameManager.Instance.Tabletop.StorageManager.GetStorageMaxLevel(GameResource.Milk);
+                int maxLevelSilo = GameManager.Instance.Tabletop.StorageManager.GetStorageMaxLevel(GameResource.Cereal);
+
+                return (statFridge.Uses >= maxLevelFridge && statSilo.Uses >= maxLevelSilo);
             };
 
             return GenerateStatGoal("G-M7", "Ten los almacenes silo y frigorifico al maximo", condition);
