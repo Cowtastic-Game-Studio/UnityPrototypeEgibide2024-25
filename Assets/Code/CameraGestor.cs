@@ -96,6 +96,27 @@ public class CameraGestor : MonoBehaviour
         SwitchToCamera(mainCameras[currentCameraIndex], mainCameras[currentCameraIndex].name);
     }
 
+    //private void SwitchToCamera(CinemachineVirtualCamera targetCamera, string cameraState)
+    //{
+    //    Debug.Log("Cambiando a cámara: " + cameraState);
+    //    cameraState = cameraState.Replace(" ", "");
+
+    //    // Desactivar todas las cámaras
+    //    VirtualCameraAtras.gameObject.SetActive(false);
+    //    VirtualCameraIzquierda.gameObject.SetActive(false);
+    //    VirtualCameraDerecha.gameObject.SetActive(false);
+    //    VirtualCameraIdle.gameObject.SetActive(false);
+    //    VirtualCameraPared.gameObject.SetActive(false);
+    //    VirtualCameraExterior.gameObject.SetActive(false);
+    //    VirtualCameraInterior.gameObject.SetActive(false);
+
+    //    // Activar la nueva cámara
+    //    targetCamera.gameObject.SetActive(true);
+    //    cameraAnimator.Play(cameraState);
+
+    //    Debug.Log("Cámara actual: " + targetCamera.name);
+    //}
+
     private void SwitchToCamera(CinemachineVirtualCamera targetCamera, string cameraState)
     {
         Debug.Log("Cambiando a cámara: " + cameraState);
@@ -113,6 +134,9 @@ public class CameraGestor : MonoBehaviour
         // Activar la nueva cámara
         targetCamera.gameObject.SetActive(true);
         cameraAnimator.Play(cameraState);
+
+        // Actualizar HUD en base a la nueva cámara activa
+        HUDManager.UpdateHUDForCamera(targetCamera);
 
         Debug.Log("Cámara actual: " + targetCamera.name);
     }
