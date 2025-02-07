@@ -52,7 +52,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             shopItemsData = InitMarketCards.ShopItemsData;
 
             pageItemsList = page.GetComponent<SlotList>()?.slotsList;
-            UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Cow && x.isActive).ConvertAll(x => x.cardTemplate));
+            //UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Cow && x.isActive).ConvertAll(x => x.cardTemplate));
         }
 
         // Update is called once per frame
@@ -132,7 +132,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     Debug.Log("CardDisplay Template");
                     OnShopItemClicked(shopItemGO);
                     cardPreview.SetActive(true);
-                    //shopItemGO.GetComponent<ShopItem>()?.TriggerCard();
+                    shopItemGO.GetComponent<ShopItem>()?.TriggerCard();
 
                     break;
                 case "BuyButton":
@@ -198,7 +198,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             //Limpia la carta previsualizada
             ShowHideCardPreviewZone(false);
-
         }
 
         private void CreateShopItems(bool isNextPage)
