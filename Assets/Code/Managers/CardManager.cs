@@ -432,6 +432,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (isDragging && selectedCard != null)
             {
                 MoveSelectedCardWithMouse();
+
+                if (Input.GetMouseButtonDown(1))
+                {
+                    StopDragging();
+                }
             }
         }
 
