@@ -111,6 +111,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 GameResource producedType = resource.resourceType;
 
                 // Comprobamos el tipo de recurso para aplicar el multiplicador en solo ese producto
+                Debug.LogError(typeResource);
                 if (typeResource == producedType)
                 {
                     int multi = multiEvent + multiCard;
