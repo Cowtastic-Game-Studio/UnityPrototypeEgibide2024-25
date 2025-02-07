@@ -44,7 +44,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     {
                         GameManager.Instance.Tabletop.StorageManager.UpgradeStorage(cardTemplate.targetResoruceType);
 
-                        StatisticsManager.Instance.UpdateByBuyedZone(cardTemplate.targetResoruceType);
                     }
                     else if (cardTemplate.targetCardType != CardType.None && cardTemplate.targetResoruceType == GameResource.None)
                     {

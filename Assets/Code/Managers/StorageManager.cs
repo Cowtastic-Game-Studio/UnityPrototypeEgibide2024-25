@@ -246,6 +246,35 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             Debug.Log($"Quitados {cantidadAQuitar} {type}. Cantidad actual: {storage.Resource}/{storage.MaxResources}");
         }
 
+        public void UpgradeStorage(GameResource resource)
+        {
+            switch (resource)
+            {
+                case GameResource.ActionPoints:
+                    UpgradeStorage(_paStorage);
+                    break;
+                case GameResource.Milk:
+                    UpgradeStorage(_fridgeStorage);
+                    break;
+                case GameResource.Muuney:
+                    UpgradeStorage(_bankStorage);
+                    break;
+                case GameResource.Cereal:
+                    UpgradeStorage(_silo);
+                    break;
+            }
+        }
+
+        public int GetStorageMaxLevel(GameResource resource)
+        {
+            var storage = GetStorage<IStorage>(resource);
+            return storage.MaxLevel;
+        }
+
+        public bool CheckMuuney(int cardPrice)
+        {
+            return CheckStorage(cardPrice, _bankStorage);
+        }
         #endregion
 
         #region Private
@@ -329,6 +358,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             storage.Level += 1;
         }
 
+        #region UpgradeStorage
+
         /// <summary>
         /// Llama a la funcion de mejora del almacen pasado como parametro
         /// </summary>
@@ -355,32 +386,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GameManager.Instance.Tabletop.HUDManager.UpdateResources();
         }
 
-        public void UpgradeStorage(GameResource resource)
-        {
-            switch (resource)
-            {
-                case GameResource.ActionPoints:
-                    UpgradeStorage(_paStorage);
-                    break;
-                case GameResource.Milk:
-                    UpgradeStorage(_fridgeStorage);
-                    break;
-                case GameResource.Muuney:
-                    UpgradeStorage(_bankStorage);
-                    break;
-                case GameResource.Cereal:
-                    UpgradeStorage(_silo);
-                    break;
-            }
-        }
-
-
         /// <summary>
         /// Mejora del almacen de APs
         /// </summary>
         private void UpgradePAStorage()
         {
-            if (_paStorage.Level <= 6)
+            if (_paStorage.Level > _paStorage.MaxLevel)
             {
                 Debug.LogWarning("Reached AP storage max level.");
                 return;
@@ -438,7 +449,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private void UpgradeFridgeStorage()
         {
-            if (_fridgeStorage.Level <= 8)
+            if (_fridgeStorage.Level > _fridgeStorage.MaxLevel)
             {
                 Debug.LogWarning("Reached Fridge max level.");
                 return;
@@ -450,7 +461,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 AddLevel(_fridgeStorage);
                 WasteMuuney(15);
                 Debug.LogWarning("Upgraded fridge.");
-
+                StatisticsManager.Instance.UpdateByBuyedZone(GameResource.Milk);
             }
         }
 
@@ -459,7 +470,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private void UpgradeSiloStorage()
         {
-            if (_silo.Level <= 6)
+            if (_silo.Level > _silo.MaxLevel)
             {
                 Debug.LogWarning("Reached Silo max level.");
                 return;
@@ -471,8 +482,18 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 AddLevel(_silo);
                 WasteMuuney(10);
                 Debug.LogWarning("Upgraded silo.");
+                StatisticsManager.Instance.UpdateByBuyedZone(GameResource.Cereal);
             }
         }
+
+        #endregion
+
+
+
+        #endregion
+
+        #endregion
+
 
         // Este update se puede borrar, solo es para pruebas.
         public void Update()
@@ -500,14 +521,5 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
-        internal bool CheckMuuney(int cardPrice)
-        {
-            return CheckStorage(cardPrice, _bankStorage);
-        }
-
-
-        #endregion
-
-        #endregion
     }
 }

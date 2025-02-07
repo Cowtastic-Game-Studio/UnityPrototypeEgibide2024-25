@@ -83,13 +83,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         SiloCountUpgrade,
 
         [EnumMember(Value = "Fill all stable slots with cows")]
-        StableFilledWithCowsMaxUpgrade,
+        StableFull,
 
         [EnumMember(Value = "Plant crops in all garden slots")]
-        GardenFilledWithCropsMaxUpgrade,
+        FarmFull,
 
         [EnumMember(Value = "Fill the entire tavern with customers")]
-        TavernFilledWithCustomersMaxUpgrade,
+        ShopFull,
 
         [EnumMember(Value = "Complete events")]
         EventsCompleted,
