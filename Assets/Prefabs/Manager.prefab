@@ -64,7 +64,7 @@ MonoBehaviour:
   CardManager: {fileID: 7130352884580539777}
   HUDManager: {fileID: 0}
   StorageManager: {fileID: 3014971678426901391}
-  marketManager: {fileID: 0}
+  NewMarketManager: {fileID: 0}
   board: {fileID: 0}
   farms:
   - {fileID: 0}
@@ -105,8 +105,21 @@ MonoBehaviour:
   discardDeckArea: {fileID: 0}
   cardSpacing: 0.5
   drawCards: 5
-  selectedCard: {fileID: 0}
   placementHeightOffset: 0.5
+  cardPrefab: {fileID: 5936057646601637794, guid: 0149fccb3b6dd6b4d989e46195c605f2, type: 3}
+  cardTemplates:
+  - {fileID: 11400000, guid: 399f6a5b9f658b249b1d74398bdfb5f3, type: 2}
+  - {fileID: 11400000, guid: e507273f925deae4da6538d2b80e7079, type: 2}
+  - {fileID: 11400000, guid: d061abe0f0a690e4fad3d0b388dff391, type: 2}
+  - {fileID: 11400000, guid: b7700593aa106884c9d72d493d004526, type: 2}
+  - {fileID: 11400000, guid: dcdefe3b6f64e1f4f92f2ea9a3f52dbb, type: 2}
+  - {fileID: 11400000, guid: 600bff30ba3cf514c9b804d922cb1a27, type: 2}
+  - {fileID: 11400000, guid: e5eb5203aae703d4d9281fb8afb1b3a7, type: 2}
+  - {fileID: 11400000, guid: 1122af5a6f7ec5c4bbea7d4db2ec6313, type: 2}
+  - {fileID: 11400000, guid: ebf3f9a4a10ec7b49bd4d7110dd723a2, type: 2}
+  - {fileID: 11400000, guid: 64e4cfbb9ec58054b8648dd17ee7f7b6, type: 2}
+  - {fileID: 11400000, guid: 4cc832856110f7642b7283c99c9b5712, type: 2}
+  - {fileID: 11400000, guid: cc3a281f70743a045a1f4d08eca68822, type: 2}
 --- !u!114 &3014971678426901391
 MonoBehaviour:
   m_ObjectHideFlags: 0

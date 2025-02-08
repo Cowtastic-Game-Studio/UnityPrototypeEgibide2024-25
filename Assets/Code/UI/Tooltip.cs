@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -68,9 +65,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (GameManager.Instance.GamePhaseManager.CurrentPhaseType != GamePhaseTypes.Market)
             {
-                if (hit.collider.CompareTag("CardCow") ||
-                    hit.collider.CompareTag("CardSeed") ||
-                    hit.collider.CompareTag("CardClient"))
+                if (hit.collider.CompareTag("Carta"))
                 {
                     if (currentHoveredCard != hit.collider.gameObject)
                     {
@@ -90,7 +85,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         CardBehaviour cardTool = cardTooltip.GetComponent<CardBehaviour>();
                         CardDisplay cardToolDisplay = cardTool.GetComponent<CardDisplay>();
 
-                        cardToolDisplay.UpdateDisplay(selctedCardBehaviour.GetTemplate(), false);
+                        cardToolDisplay.UpdateDisplayAndMat(selctedCardBehaviour.GetTemplate(), false);
 
                         // Mueve el cardTooltip a la posición del ratón
                         //Vector3 mousePosition = Input.mousePosition;                    
