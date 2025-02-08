@@ -70,6 +70,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [SerializeField]
         private int drawCards = 5;
 
+        private float hoveredHeight = 0.2f;
+
         //TODO: revisar esto en clase, usar las Propiedades en mayus, da problemas si no se gestiona bien
         // Properties implementing ICardsManager
         public IDeck DrawDeck => drawDeck;
@@ -79,6 +81,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         //Place card
         private GameObject selectedCard = null;
+        private CardBehaviour hoveredCard = null;
 
         private bool isDragging = false;
         public bool IsDraggingCard => isDragging;
@@ -216,7 +219,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 }
             }
         }
-        void ArrangeCardsInCurve()
+        void ArrangeCardsInCurves()
         {
             // Crea una lista temporal de cartas en la mano
             List<GameObject> cardsInHand = new List<GameObject>(handDeck.Cards.ToArray());
@@ -233,21 +236,65 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 if (card != null)
                 {
                     // Ángulo individual para la carta
-                    float angle = startAngle + (angleStep * i); 
+                    float angle = startAngle + (angleStep * i);
                     // Convertir a radianes
-                    float radian = angle * Mathf.Deg2Rad; 
+                    float radian = angle * Mathf.Deg2Rad;
 
                     // Calcular posición en arco
                     Vector3 cardPosition = new Vector3(
                         Mathf.Sin(radian) * radius,
                         Mathf.Cos(radian) * radius - radius,
                         // Aumenta la Z progresivamente
-                        i * -0.01f 
+                        i * -0.01f
                     );
 
                     // Ajustar la rotación para que sigan la curva
                     Quaternion cardRotation = Quaternion.Euler(0, 0, -angle);
-                  
+
+                    cardsInHand[i].transform.localPosition = cardPosition;
+                    cardsInHand[i].transform.localRotation = cardRotation;
+                    var cardBH = card.GetComponent<CardBehaviour>();
+                    cardBH.IsPlaced = false;
+                }
+            }
+        }
+
+        void ArrangeCardsInCurve()
+        {
+            List<GameObject> cardsInHand = new List<GameObject>(handDeck.Cards.ToArray());
+            int cardCount = cardsInHand.Count;
+            if (cardCount == 0) return;          
+
+            float baseArcAngle = 15f; // Ángulo base para 5 cartas
+            float arcAngle = Mathf.Clamp(baseArcAngle + (cardCount - 5) * 4f, 15f, 50f); // Ajuste dinámico
+            float radius = Mathf.Clamp(3.5f + (cardCount - 5) * 0.2f, 3f, 5f); // Radio ajustado
+
+            // Reducir la separación cuando solo hay 2 cartas
+            if (cardCount == 2) arcAngle = 5f;  
+            if (cardCount == 1) arcAngle = 0f;   
+
+            float startAngle = -arcAngle / 2f;
+            float angleStep = cardCount > 1 ? arcAngle / (cardCount - 1) : 0;
+
+            for (int i = 0; i < cardCount; i++)
+            {
+                GameObject card = cardsInHand[i];
+                if (card != null)
+                {
+                    float angle = startAngle + (angleStep * i);
+                    float radian = angle * Mathf.Deg2Rad;
+
+                    // Posición en curva
+                    Vector3 cardPosition = new Vector3(
+                        Mathf.Sin(radian) * radius,
+                        Mathf.Cos(radian) * radius - radius,
+                        i * -0.015f 
+                    );
+
+                    // Rotación para que sigan la curva
+                    Quaternion cardRotation = Quaternion.Euler(0, 0, -angle * 0.75f);
+
+                    // Aplicar transformaciones                   
                     cardsInHand[i].transform.localPosition = cardPosition;
                     cardsInHand[i].transform.localRotation = cardRotation;
                     var cardBH = card.GetComponent<CardBehaviour>();
@@ -452,6 +499,40 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     break;
             }
         }
+        
+        /// <summary>
+        /// Resaltar la carta de la mano al hacer hover
+        /// </summary>
+        /// <param name="card"></param>
+        public void SetHoveredCard(CardBehaviour card)
+        {
+            if (card.Equals(hoveredCard)) return;
+            if (hoveredCard)
+            {
+                hoveredCard.gameObject.transform.localPosition = new Vector3(hoveredCard.gameObject.transform.localPosition.x, hoveredCard.gameObject.transform.localPosition.y, hoveredCard.gameObject.transform.localPosition.z - hoveredHeight);
+            }
+            card.gameObject.transform.localPosition = new Vector3(card.gameObject.transform.localPosition.x, card.gameObject.transform.localPosition.y, card.gameObject.transform.localPosition.z + hoveredHeight);
+            hoveredCard = card;
+
+        }
+
+        /// <summary>
+        /// Resetear el resaltado de la carta caundo se deja de hacer hover
+        /// </summary>
+        /// <param name="card"></param>
+        public void ClearHoveredCard(CardBehaviour card)
+        {
+            if (hoveredCard == card) 
+            {
+                hoveredCard.gameObject.transform.localPosition = new Vector3(
+                    hoveredCard.gameObject.transform.localPosition.x,
+                    hoveredCard.gameObject.transform.localPosition.y,
+                    hoveredCard.gameObject.transform.localPosition.z - hoveredHeight
+                );
+                hoveredCard = null;
+            }
+        }
+
 
         //drag and drop
 
