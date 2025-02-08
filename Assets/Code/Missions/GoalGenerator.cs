@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using UnityEngine.Events;
 
 namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
@@ -10,6 +11,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
     /// </summary>
     public class GoalGenerator
     {
+        private static int goalW1, goalW2, goalW3, goalW4, goalW5, goalW6, goalW7;
 
         #region Tutorial
 
@@ -125,7 +127,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal1()
         {
-            return GenerateStatGoal("W-M1", "Milk cows 4 times", StatisticType.CowsMilked, 4);
+            Func<bool> condition = () =>
+            {
+                Statistic statCowsMilked = StatisticsManager.Instance.GetStat(StatisticType.CowsMilked);
+                return (statCowsMilked.Uses >= goalW1);
+            };
+
+            return GenerateStatGoal("W-M1", "Milk cows 4 times", condition);
         }
 
         /// <summary>
@@ -135,7 +143,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal2()
         {
-            return GenerateStatGoal("W-M2", "Harvest wheat 5 times", StatisticType.SeedsHarvested, 5);
+            Func<bool> condition = () =>
+            {
+                Statistic statHarvestWheat = StatisticsManager.Instance.GetStat(StatisticType.SeedsHarvested);
+                return (statHarvestWheat.Uses >= goalW2);
+            };
+
+            return GenerateStatGoal("W-M2", "Harvest wheat 5 times", condition);
         }
 
         /// <summary>
@@ -145,7 +159,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal3()
         {
-            return GenerateStatGoal("W-M3", "Sell 3 milks", StatisticType.MilkTotalUsed, 3);
+            Func<bool> condition = () =>
+            {
+                Statistic statMilkSelled = StatisticsManager.Instance.GetStat(StatisticType.MilkTotalUsed);
+                return (statMilkSelled.Uses >= goalW3);
+            };
+
+            return GenerateStatGoal("W-M3", "Sell 3 milks", condition);
         }
 
         /// <summary>
@@ -155,7 +175,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal4()
         {
-            return GenerateStatGoal("W-M4", "Buy 2 cards", StatisticType.CardsPurchased, 2);
+            Func<bool> condition = () =>
+            {
+                Statistic statCardBuyed = StatisticsManager.Instance.GetStat(StatisticType.CardsPurchased);
+                return (statCardBuyed.Uses >= goalW4);
+            };
+
+            return GenerateStatGoal("W-M4", "Buy 2 cards", condition);
         }
 
         /// <summary>
@@ -165,7 +191,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal5()
         {
-            return GenerateStatGoal("W-M5", "Get 20 Muuney", StatisticType.MuuneyTotalAcquired, 20);
+            Func<bool> condition = () =>
+            {
+                Statistic statMuuneyAcquired = StatisticsManager.Instance.GetStat(StatisticType.MuuneyTotalAcquired);
+                return (statMuuneyAcquired.Uses >= goalW5);
+            };
+
+            return GenerateStatGoal("W-M5", "Get 20 Muuney", condition);
         }
 
         /// <summary>
@@ -175,7 +207,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal6()
         {
-            return GenerateStatGoal("W-M6", "Use an upgrade card", StatisticType.TemporaryUsedCards, 1);
+            Func<bool> condition = () =>
+            {
+                Statistic statMuuneyAcquired = StatisticsManager.Instance.GetStat(StatisticType.TemporaryUsedCards);
+                return (statMuuneyAcquired.Uses >= goalW6);
+            };
+
+            return GenerateStatGoal("W-M6", "Use an upgrade card", condition);
         }
 
         /// <summary>
@@ -185,7 +223,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal7()
         {
-            return GenerateStatGoal("W-M7", "Serve 5 clients", StatisticType.CustomersServed, 5);
+            Func<bool> condition = () =>
+            {
+                Statistic statMuuneyAcquired = StatisticsManager.Instance.GetStat(StatisticType.CustomersServed);
+                return (statMuuneyAcquired.Uses >= goalW7);
+            };
+
+            return GenerateStatGoal("W-M7", "Serve 5 clients", condition);
         }
 
         #endregion
@@ -361,6 +405,36 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             return notActiveSpacesList.Count;
         }
 
+
+        public static void SetWeeklyGoals()
+        {
+            int actualUses = GetActualStatisticUses(StatisticType.CowsMilked);
+            goalW1 = actualUses + 4;
+
+            actualUses = GetActualStatisticUses(StatisticType.SeedsHarvested);
+            goalW2 = actualUses + 5;
+
+            actualUses = GetActualStatisticUses(StatisticType.MilkTotalUsed);
+            goalW3 = actualUses + 3;
+
+            actualUses = GetActualStatisticUses(StatisticType.CardsPurchased);
+            goalW4 = actualUses + 2;
+
+            actualUses = GetActualStatisticUses(StatisticType.MuuneyTotalAcquired);
+            goalW5 = actualUses + 20;
+
+            actualUses = GetActualStatisticUses(StatisticType.TemporaryUsedCards);
+            goalW6 = actualUses + 1;
+
+            actualUses = GetActualStatisticUses(StatisticType.CustomersServed);
+            goalW7 = actualUses + 5;
+        }
+
+        private static int GetActualStatisticUses(StatisticType statisticType)
+        {
+            Statistic stat = StatisticsManager.Instance.GetStat(statisticType);
+            return stat.Uses;
+        }
 
         #endregion
     }
