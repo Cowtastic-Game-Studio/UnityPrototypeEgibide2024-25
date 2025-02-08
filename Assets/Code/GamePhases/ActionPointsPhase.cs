@@ -103,7 +103,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             if (cardTemplate != null)
             {
-                Debug.LogError(cardTemplate.targetResoruceType);
                 GameManager.Instance.Tabletop.StorageManager.SetResourceMultiplierCardAndType(cardTemplate.multiplier, cardTemplate.targetResoruceType);
             }
 
