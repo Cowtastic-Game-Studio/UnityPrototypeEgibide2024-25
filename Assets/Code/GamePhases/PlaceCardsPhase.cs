@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -47,6 +48,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GameManager.Instance.Tabletop.CardManager.StopDragging();
 
             GameManager.Instance.Tabletop.CardManager.DiscardHand();
+
+            CheckFillPlaces();
         }
 
         private void OnCardClickedHandler(ICard card)
@@ -58,6 +61,29 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void OnPlaceSpaceClickedHandler(Transform placeSpace)
         {
             GameManager.Instance.Tabletop.CardManager.PlaceSelectedCard(placeSpace);
+        }
+
+        private static void CheckFillPlaces()
+        {
+            if (CheckMaxActiveFullSpaces(GameManager.Instance.Tabletop.farms))
+            {
+                StatisticsManager.Instance.UpdateByStatisticType(StatisticType.FarmFull, 1);
+            }
+            if (CheckMaxActiveFullSpaces(GameManager.Instance.Tabletop.stables))
+            {
+                StatisticsManager.Instance.UpdateByStatisticType(StatisticType.StableFull, 1);
+            }
+            if (CheckMaxActiveFullSpaces(GameManager.Instance.Tabletop.taverns))
+            {
+                StatisticsManager.Instance.UpdateByStatisticType(StatisticType.ShopFull, 1);
+            }
+        }
+
+
+        private static bool CheckMaxActiveFullSpaces(List<PlaceSpaceBehaviour> completeList)
+        {
+            List<PlaceSpaceBehaviour> activeSpaceNotEmptyList = completeList.FindAll(f => f.GetIsActive() && !f.GetIsEmpty());
+            return completeList.Count == activeSpaceNotEmptyList.Count;
         }
     }
 }

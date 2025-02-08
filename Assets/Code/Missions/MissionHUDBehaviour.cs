@@ -62,6 +62,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             this.TutorialMission.SetActive(false);
             this.WeeklyMission.SetActive(true);
 
+            MissionsManager.Instance.IsTutorialEnabled = false;
         }
 
         #endregion

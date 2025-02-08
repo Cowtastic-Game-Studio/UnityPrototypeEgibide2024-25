@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using UnityEngine.Events;
 
 namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
@@ -9,7 +8,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
     /// <summary>
     /// Genera los objetivos
     /// </summary>
-    internal static class GoalGenerator
+    public class GoalGenerator
     {
 
         #region Tutorial
@@ -200,7 +199,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal1()
         {
-            return GenerateStatGoal("G-M1", "Establo mejorado al maximo", StatisticType.StableCountUpgrade, 4);
+            return GenerateStatGoal("G-M1", "Establo mejorado al maximo", StatisticType.StableCountUpgrade, GetMaxSpace(GameManager.Instance.Tabletop.farms));
         }
 
         /// <summary>
@@ -210,7 +209,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal2()
         {
-            return GenerateStatGoal("G-M2", "Huerto mejorado al maximo", StatisticType.GardenCountUpgrade, 6);
+            return GenerateStatGoal("G-M2", "Huerto mejorado al maximo", StatisticType.GardenCountUpgrade, GetMaxSpace(GameManager.Instance.Tabletop.stables));
         }
 
         /// <summary>
@@ -220,7 +219,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal3()
         {
-            return GenerateStatGoal("G-M3", "Taverna mejorada al maximo", StatisticType.TavernCountUpgrade, 2);
+            return GenerateStatGoal("G-M3", "Taverna mejorada al maximo", StatisticType.TavernCountUpgrade, GetMaxSpace(GameManager.Instance.Tabletop.taverns));
         }
 
         /// <summary>
@@ -230,7 +229,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal4()
         {
-            return GenerateStatGoal("G-M4", "Llena el establo con vacas cuando este al maximo", StatisticType.StableFilledWithCowsMaxUpgrade, 1);
+            return GenerateStatGoal("G-M4", "Llena el establo con vacas cuando este al maximo", StatisticType.StableFull, 1);
         }
 
         /// <summary>
@@ -240,7 +239,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal5()
         {
-            return GenerateStatGoal("G-M5", "GardenFilledWithCropsMaxUpgrade", StatisticType.GardenFilledWithCropsMaxUpgrade, 1);
+            return GenerateStatGoal("G-M5", "GardenFilledWithCropsMaxUpgrade", StatisticType.FarmFull, 1);
         }
 
         /// <summary>
@@ -250,7 +249,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal6()
         {
-            return GenerateStatGoal("G-M6", "Llena la taverna con clientes cuando este al maximo", StatisticType.TavernFilledWithCustomersMaxUpgrade, 1);
+            return GenerateStatGoal("G-M6", "Llena la taverna con clientes cuando este al maximo", StatisticType.ShopFull, 1);
         }
 
         /// <summary>
@@ -266,7 +265,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
                 Statistic statFridge = StatisticsManager.Instance.GetStat(StatisticType.FridgeCountUpgrade);
                 Statistic statSilo = StatisticsManager.Instance.GetStat(StatisticType.SiloCountUpgrade);
 
-                return (statFridge.Uses >= 8 && statSilo.Uses >= 8);
+                int maxLevelFridge = GameManager.Instance.Tabletop.StorageManager.GetStorageMaxLevel(GameResource.Milk);
+                int maxLevelSilo = GameManager.Instance.Tabletop.StorageManager.GetStorageMaxLevel(GameResource.Cereal);
+
+                return (statFridge.Uses >= maxLevelFridge && statSilo.Uses >= maxLevelSilo);
             };
 
             return GenerateStatGoal("G-M7", "Ten los almacenes silo y frigorifico al maximo", condition);
@@ -297,7 +299,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         {
             List<int> randomNumbers = new List<int>();
             int randomNumber;
-            Random rand = new Random();
+            System.Random rand = new System.Random();
 
             if (numberCount > max)
                 throw new Exception("El numero de numeros necesarios es mayor que el numero de numeros disponibles");
@@ -351,6 +353,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
                 StatisticsManager.Instance.OnStatisticChanged.AddListener(OnStatisticChanged);
             };
             return new Goal(goalName, goalDescription, goal1Initialization);
+        }
+
+        private static int GetMaxSpace(List<PlaceSpaceBehaviour> completeList)
+        {
+            List<PlaceSpaceBehaviour> notActiveSpacesList = completeList.FindAll(f => !f.GetIsActive());
+            return notActiveSpacesList.Count;
         }
 
 

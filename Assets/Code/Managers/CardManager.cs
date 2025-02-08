@@ -562,7 +562,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                     selectedCard.transform.rotation = target.transform.rotation;
 
-                    selectedCard.transform.position = target.transform.position;
+                    selectedCard.transform.position = target.transform.position + new Vector3(0.8f, -0.2f, 0);
 
                     selectedCard.transform.localPosition += new Vector3(
                         0,

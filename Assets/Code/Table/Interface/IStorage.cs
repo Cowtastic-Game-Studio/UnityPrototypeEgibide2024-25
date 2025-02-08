@@ -17,6 +17,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <summary>
         /// Nivel del almacenamiento.
         /// </summary>
+        public int MaxLevel { get; set; }
+
+        /// <summary>
+        /// Nivel del almacenamiento.
+        /// </summary>
         public int Level { get; set; }
 
         /// <summary>

@@ -67,9 +67,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             statsList.Add(new Statistic(StatisticType.FridgeCountUpgrade, CardType.None, GameResource.None, 0, true));
             statsList.Add(new Statistic(StatisticType.SiloCountUpgrade, CardType.None, GameResource.None, 0, true));
 
-            statsList.Add(new Statistic(StatisticType.StableFilledWithCowsMaxUpgrade, CardType.None, GameResource.None, 0, true)); //TODO
-            statsList.Add(new Statistic(StatisticType.GardenFilledWithCropsMaxUpgrade, CardType.None, GameResource.None, 0, true)); //TODO
-            statsList.Add(new Statistic(StatisticType.TavernFilledWithCustomersMaxUpgrade, CardType.None, GameResource.None, 0, true)); //TODO
+            statsList.Add(new Statistic(StatisticType.StableFull, CardType.None, GameResource.None, 0, true));
+            statsList.Add(new Statistic(StatisticType.FarmFull, CardType.None, GameResource.None, 0, true));
+            statsList.Add(new Statistic(StatisticType.ShopFull, CardType.None, GameResource.None, 0, true));
 
             statsList.Add(new Statistic(StatisticType.EventsCompleted, CardType.None, GameResource.None, 0, true));
         }
@@ -214,6 +214,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 Debug.Log(item.StatType.GetEnumString() + ": " + item.Uses);
             }
+        }
+
+        private int GetMaxSpace(List<PlaceSpaceBehaviour> completeList)
+        {
+            GetMaxSpace(GameManager.Instance.Tabletop.farms);
+            List<PlaceSpaceBehaviour> notActiveSpacesList = completeList.FindAll(f => !f.GetIsActive());
+
+            return notActiveSpacesList.Count();
         }
     }
 }

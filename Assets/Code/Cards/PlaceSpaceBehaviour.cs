@@ -156,6 +156,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return isActive;
         }
 
+        public bool GetIsEmpty()
+        {
+            return isEmpty;
+        }
+
         public void SetIsActive(bool active)
         {
             isActive = active;

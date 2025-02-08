@@ -45,8 +45,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         #endregion
 
-
-
         #endregion
 
         #region Events
@@ -67,23 +65,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             Instance = this;
 
-            //GameManager.Instance.GameCalendar.DayChanged.AddListener(OnDayChange);
-
             InitializeMissions();
         }
-
-        #endregion
-
-        #region Event handlers
-
-
-        //private void OnDayChange(int day)
-        //{
-        //    if (this.IsTutorialEnabled && day > 7)
-        //    {
-        //        this.IsTutorialEnabled = false;
-        //    }
-        //}
 
         #endregion
 
@@ -177,15 +160,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             mission5 = CreateGlobalMission("G5", "Global 5", goal5, 100);
             this.GlobalMissions.Add(mission5);
 
-            goal6 = GoalGenerator.CreateGlobalGoal1();
+            goal6 = GoalGenerator.CreateGlobalGoal6();
             mission6 = CreateGlobalMission("G6", "Global 6", goal6, 100);
             this.GlobalMissions.Add(mission6);
 
-            goal7 = GoalGenerator.CreateGlobalGoal1();
+            goal7 = GoalGenerator.CreateGlobalGoal7();
             mission7 = CreateGlobalMission("G7", "Global 7", goal7, 75);
             this.GlobalMissions.Add(mission7);
 
-            goal8 = GoalGenerator.CreateGlobalGoal1();
+            goal8 = GoalGenerator.CreateGlobalGoal8();
             mission8 = CreateGlobalMission("G8", "Global 8", goal8, 20);
             this.GlobalMissions.Add(mission8);
         }
@@ -205,8 +188,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             reward = RewardGenerator.CreateGoalReward(rewardMuuney);
             return new Mission(missionName, missionDescription, MissionTypes.Global, goal, reward);
         }
-
-
 
         #endregion
 
