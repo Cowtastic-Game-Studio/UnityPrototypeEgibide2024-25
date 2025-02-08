@@ -122,6 +122,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             List<Goal> goals;
             Reward reward;
 
+            GoalGenerator.SetWeeklyGoals();
             goals = GoalGenerator.GetWeeklyRandomGoals();
             reward = RewardGenerator.CreateWeekReward();
 

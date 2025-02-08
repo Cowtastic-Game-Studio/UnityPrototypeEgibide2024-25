@@ -136,7 +136,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     //    break;
             }
 
-            UpdateByStatisticType(StatisticType.CardsPurchased, 1);
         }
 
         public void UpdateByBuyedZone(CardType targedCardType)
