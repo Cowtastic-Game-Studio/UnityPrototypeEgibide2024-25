@@ -37,7 +37,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             else
             {
-                Debug.LogError("Falta asignar el MeshRenderer o el nuevo material.");
+                Debug.LogWarning("Falta asignar el MeshRenderer o el nuevo material.");
             }
         }
 
@@ -125,4 +125,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return formattedText;
         }
     }
+
+
+
+
 }

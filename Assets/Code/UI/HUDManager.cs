@@ -1,5 +1,5 @@
-using Cinemachine;
 using System.Text.RegularExpressions;
+using Cinemachine;
 using TMPro;
 using UnityEngine;
 
@@ -82,7 +82,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         [SerializeField] private GameObject pageGUI;
         [SerializeField] private GameObject buttonsGUI;
-
+        [SerializeField] private GameObject discardBtn;
 
         /// <summary>
         /// Referencia al GamePhaseManager
@@ -294,12 +294,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void ShowMarket()
         {
+            discardBtn.SetActive(true);
             pageGUI.SetActive(true);
             buttonsGUI.SetActive(true);
         }
 
         private void HideMarket()
         {
+            discardBtn.SetActive(false);
             pageGUI.SetActive(false);
             buttonsGUI.SetActive(false);
         }

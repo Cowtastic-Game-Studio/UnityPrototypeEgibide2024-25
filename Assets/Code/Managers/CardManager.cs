@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-
+using System.Linq;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -263,15 +263,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             List<GameObject> cardsInHand = new List<GameObject>(handDeck.Cards.ToArray());
             int cardCount = cardsInHand.Count;
-            if (cardCount == 0) return;          
+            if (cardCount == 0) return;
 
             float baseArcAngle = 15f; // Ángulo base para 5 cartas
             float arcAngle = Mathf.Clamp(baseArcAngle + (cardCount - 5) * 4f, 15f, 50f); // Ajuste dinámico
             float radius = Mathf.Clamp(3.5f + (cardCount - 5) * 0.2f, 3f, 5f); // Radio ajustado
 
             // Reducir la separación cuando solo hay 2 cartas
-            if (cardCount == 2) arcAngle = 5f;  
-            if (cardCount == 1) arcAngle = 0f;   
+            if (cardCount == 2) arcAngle = 5f;
+            if (cardCount == 1) arcAngle = 0f;
 
             float startAngle = -arcAngle / 2f;
             float angleStep = cardCount > 1 ? arcAngle / (cardCount - 1) : 0;
@@ -288,7 +288,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     Vector3 cardPosition = new Vector3(
                         Mathf.Sin(radian) * radius,
                         Mathf.Cos(radian) * radius - radius,
-                        i * -0.015f 
+                        i * -0.015f
                     );
 
                     // Rotación para que sigan la curva
@@ -499,7 +499,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     break;
             }
         }
-        
+
         /// <summary>
         /// Resaltar la carta de la mano al hacer hover
         /// </summary>
@@ -522,7 +522,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <param name="card"></param>
         public void ClearHoveredCard(CardBehaviour card)
         {
-            if (hoveredCard == card) 
+            if (hoveredCard == card)
             {
                 hoveredCard.gameObject.transform.localPosition = new Vector3(
                     hoveredCard.gameObject.transform.localPosition.x,
@@ -772,18 +772,71 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return selectedCard;
         }
 
-        //GameObject card = null;
-        //string path = "Cards/Prefab/" + cardName;
+        public List<GameObject> getAllCardsList()
+        {
+            return discardDeck.Cards.Concat(
+                    drawDeck.Cards).Concat(
+                    playedCardsDeck.Cards).ToList();
+        }
 
-        //card = Resources.Load<GameObject>(path);
-        //if (card != null)
-        //{
-        //    GameObject newCard = Instantiate(card, deckArea);
-        //    newCard.transform.SetParent(deckArea.transform);
-        //    newCard.transform.localPosition = Vector3.zero;
+        public void DeleteCards(List<CardToDelete> cardsToDelete)
+        {
+            foreach (var cardToDelete in cardsToDelete)
+            {
+                // Buscar cartas del tipo especificado en el discardDeck, drawDeck, y playedCardsDeck
+                int remainingQuantity = cardToDelete.Quantity;
 
-        //    // Agrega la carta al mazo
-        //    drawDeck.Place(newCard);
-        //}
+                // Intentar eliminar cartas del discardDeck
+                remainingQuantity = TryRemoveCardsFromDeck(discardDeck, cardToDelete.CardType, remainingQuantity);
+
+                // Intentar eliminar cartas del drawDeck
+                if (remainingQuantity > 0)
+                {
+                    remainingQuantity = TryRemoveCardsFromDeck(drawDeck, cardToDelete.CardType, remainingQuantity);
+                }
+
+                // Intentar eliminar cartas del playedCardsDeck
+                if (remainingQuantity > 0)
+                {
+                    remainingQuantity = TryRemoveCardsFromDeck(playedCardsDeck, cardToDelete.CardType, remainingQuantity);
+                }
+
+                // Si aún queda alguna cantidad no eliminada, puedes manejarlo si es necesario
+                if (remainingQuantity > 0)
+                {
+                    Debug.LogWarning($"No se pudieron eliminar todas las cartas del tipo {cardToDelete.CardType}. Cartas restantes: {remainingQuantity}");
+                }
+            }
+        }
+
+        private int TryRemoveCardsFromDeck(IDeck deck, CardType cardType, int quantityToRemove)
+        {
+            // Filtrar las cartas del deck que coincidan con el tipo especificado
+            var cardsToRemove = deck.Cards.Where(card => card.GetComponent<CardBehaviour>()?.GetTemplate().cardType == cardType).ToList();
+
+            // Limitar la cantidad a eliminar según la cantidad restante
+            int cardsRemoved = 0;
+
+            // Eliminar cartas hasta que la cantidad a eliminar sea 0 o no haya más cartas que coincidan
+            foreach (var card in cardsToRemove)
+            {
+                if (cardsRemoved >= quantityToRemove)
+                    break;
+
+                // Llamar a la función RemoveCard para eliminar la carta
+                deck.RemoveCard(card);
+                RemoveCard(card); // Llamar al método RemoveCard correspondiente
+
+                cardsRemoved++;
+            }
+
+            return quantityToRemove - cardsRemoved;
+        }
+
+        private void RemoveCard(GameObject card)
+        {
+            // Lógica de eliminación de carta (esta es la función que debe eliminar la carta en el juego)
+            Destroy(card);  // Aquí solo se usa Destroy para eliminarla de la escena
+        }
     }
 }
