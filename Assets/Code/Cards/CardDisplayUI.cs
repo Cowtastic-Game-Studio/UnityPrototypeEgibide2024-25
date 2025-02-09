@@ -1,10 +1,10 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
-    public class CardDisplay : MonoBehaviour
+    public class CardDisplayUI : MonoBehaviour
     {
         public TMP_Text nameText;
         public TMP_Text descriptionText;
@@ -16,7 +16,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public TMP_Text producedQuantityText;
         public int cost;
 
-        //TODO: El Image que act�a como filtro gris
         [SerializeField] private MeshRenderer targetMeshRenderer;
         public Material newMaterial;
 
@@ -125,6 +124,4 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return formattedText;
         }
     }
-
-
 }
