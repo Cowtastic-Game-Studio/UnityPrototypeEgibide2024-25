@@ -93,6 +93,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 return;
             }
 
+
+            // Extraer el CardTemplate
+            MonoBehaviour cardComponent = selectedCard as MonoBehaviour;
+            Transform parentTransform = cardComponent.transform.parent;
+            Transform firstChildTransform = parentTransform.GetChild(0);
+            CardBehaviour cardBehaviourMultiplier = firstChildTransform.GetComponent<CardBehaviour>();
+            CardTemplate cardTemplate = cardBehaviourMultiplier.GetTemplate();
+
+            if (cardTemplate != null)
+            {
+                GameManager.Instance.Tabletop.StorageManager.SetResourceMultiplierCardAndType(cardTemplate.multiplier, cardTemplate.targetResoruceType);
+            }
+
             // Ejecutar la acción de la carta y producir/consumir los recursos necesarios
             isProduced = GameManager.Instance.Tabletop.StorageManager.ProduceResources();
             Debug.Log($"Action executed for card {selectedCard.Name}.");
@@ -105,11 +118,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 StatisticsManager.Instance.UpdateByType(selectedCard);
                 Debug.LogWarning("Resources have been produced :)"); // No estoy muy segura
             }
+
+            if (cardTemplate != null)
+            {
+                GameManager.Instance.Tabletop.StorageManager.ClearResourceMultiplierCardAndType();
+            }
         }
     }
-
-
-
-
-
 }

@@ -25,4 +25,4 @@ MonoBehaviour:
   dayToUnlock: 0
   targetCardType: 0
   multiplier: 2
-  targetResoruceType: 4
+  targetResoruceType: 2

@@ -672,6 +672,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         MoveLastCardsToHand(1);
                     }
 
+                    if (cardBH.Type == CardType.PlaceMultiplier)
+                    {
+                        // Desactivo el box colaider de la carta seleccionada
+                        cardBH.transform.localPosition += new Vector3(0, 0, -0.06f);
+                    }
+
                 }
             }
         }
