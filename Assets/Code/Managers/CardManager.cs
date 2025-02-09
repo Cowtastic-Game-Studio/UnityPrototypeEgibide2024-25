@@ -773,6 +773,21 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     playedCardsDeck.Cards).ToList();
         }
 
+        public List<GameObject> getDiscardDeckList()
+        {
+            return discardDeck.Cards.ToList();
+        }
+
+        public List<GameObject> getDrawDeckList()
+        {
+            return drawDeck.Cards.ToList();
+        }
+
+        public List<GameObject> getPlayedDeckList()
+        {
+            return playedCardsDeck.Cards.ToList();
+        }
+
         //GameObject card = null;
         //string path = "Cards/Prefab/" + cardName;
 
