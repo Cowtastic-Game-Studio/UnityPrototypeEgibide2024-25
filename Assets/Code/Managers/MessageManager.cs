@@ -37,12 +37,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape)) 
-            {
+                Debug.Log("Pulsado");
                 ShowMessage("Este es el mensaje de notificación");
-            }
-
-            
         }
     }
 }

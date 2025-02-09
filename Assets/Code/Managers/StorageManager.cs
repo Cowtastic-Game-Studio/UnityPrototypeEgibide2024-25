@@ -327,6 +327,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             int leftResources = storage.Resource - quantity;
             if (quantity > storage.Resource || leftResources < 0)
             {
+                MessageManager.Instance.ShowMessage("Este es el mensaje de notificación");
+
                 Debug.LogWarning("Not enough resources");
                 return false;
             }
