@@ -98,6 +98,18 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 GameManager.Instance.Tabletop.CardManager.StopDragging();
             }
+            if (State.Equals(CardState.onHand))
+            {
+                GameManager.Instance.Tabletop.CardManager.SetHoveredCard(this);
+            }
+        }
+
+        private void OnMouseExit()
+        {
+            if (State.Equals(CardState.onHand))
+            {
+                GameManager.Instance.Tabletop.CardManager.ClearHoveredCard(this);
+            }
         }
 
         #endregion
