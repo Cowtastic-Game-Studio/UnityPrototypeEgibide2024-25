@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-
+using System.Linq;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -263,15 +263,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             List<GameObject> cardsInHand = new List<GameObject>(handDeck.Cards.ToArray());
             int cardCount = cardsInHand.Count;
-            if (cardCount == 0) return;          
+            if (cardCount == 0) return;
 
             float baseArcAngle = 15f; // Ángulo base para 5 cartas
             float arcAngle = Mathf.Clamp(baseArcAngle + (cardCount - 5) * 4f, 15f, 50f); // Ajuste dinámico
             float radius = Mathf.Clamp(3.5f + (cardCount - 5) * 0.2f, 3f, 5f); // Radio ajustado
 
             // Reducir la separación cuando solo hay 2 cartas
-            if (cardCount == 2) arcAngle = 5f;  
-            if (cardCount == 1) arcAngle = 0f;   
+            if (cardCount == 2) arcAngle = 5f;
+            if (cardCount == 1) arcAngle = 0f;
 
             float startAngle = -arcAngle / 2f;
             float angleStep = cardCount > 1 ? arcAngle / (cardCount - 1) : 0;
@@ -288,7 +288,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     Vector3 cardPosition = new Vector3(
                         Mathf.Sin(radian) * radius,
                         Mathf.Cos(radian) * radius - radius,
-                        i * -0.015f 
+                        i * -0.015f
                     );
 
                     // Rotación para que sigan la curva
@@ -499,7 +499,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     break;
             }
         }
-        
+
         /// <summary>
         /// Resaltar la carta de la mano al hacer hover
         /// </summary>
@@ -522,7 +522,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <param name="card"></param>
         public void ClearHoveredCard(CardBehaviour card)
         {
-            if (hoveredCard == card) 
+            if (hoveredCard == card)
             {
                 hoveredCard.gameObject.transform.localPosition = new Vector3(
                     hoveredCard.gameObject.transform.localPosition.x,
@@ -764,6 +764,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public GameObject getSelectedCard()
         {
             return selectedCard;
+        }
+
+        public List<GameObject> getAllCardsList()
+        {
+            return discardDeck.Cards.Concat(
+                    drawDeck.Cards).Concat(
+                    playedCardsDeck.Cards).ToList();
         }
 
         //GameObject card = null;
