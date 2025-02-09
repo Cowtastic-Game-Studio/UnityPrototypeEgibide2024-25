@@ -19,9 +19,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private List<GameObject> allDiscardedCards = new List<GameObject>();
         private float totalCost = 0f;
 
+        public int minDeckSize /*{ get; private set; }*/ = 35;
+        public int maxDiscardLimit /*{ get; private set; }*/ = 5;
+        public int currentDiscardCount = 0;
+
+        private bool discardLimitReached = false;
+
         private void Awake()
         {
             gameObject.SetActive(false);
+            ResetDiscardCount();
         }
 
         void OnEnable()
@@ -32,6 +39,21 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void ToggleMenu()
         {
+            // Verificar si el número de cartas en la baraja es suficiente
+            if (GameManager.Instance.Tabletop.CardManager.getAllCardsList().Count <= minDeckSize)
+            {
+                Debug.LogWarning($"No se pueden borrar cartas. Se necesitan al menos {minDeckSize} cartas.");
+                return;
+            }
+
+            //// Verificar si el número de descartes actuales ha alcanzado el límite
+            //if (currentDiscardCount >= maxDiscardLimit)
+            //{
+            //    Debug.LogWarning($"No se pueden abrir más el menú. Ya has alcanzado el límite de {maxDiscardLimit} descartes.");
+            //    return;
+            //}
+
+            // Abrir o cerrar el menú
             gameObject.SetActive(!gameObject.activeSelf);
         }
 
@@ -82,11 +104,18 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
-        // Actualizar el costo total y crear un SummaryItem en el panel correspondiente
         private void UpdateTotalCost(GameObject cardGO, int selectedCount, CardTemplate cardTemplate)
         {
             // Calcular el costo total basado en la cantidad de cartas seleccionadas y su costo de descarte
             float cardCost = cardTemplate.discardCost;
+
+            // Verificar si el número total de eliminaciones excede el límite
+            if (currentDiscardCount > maxDiscardLimit)
+            {
+                Debug.LogWarning("No se pueden eliminar más de 5 cartas por turno.");
+                return;
+            }
+
             totalCost = selectedCount * cardCost;
 
             // Mostrar el costo total en el UI
@@ -116,6 +145,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 var summaryItemComponent = summaryItem.GetComponent<SummaryItem>();
                 summaryItemComponent.Setup(cardTemplate, selectedCount);
             }
+        }
+        public void ResetDiscardCount()
+        {
+            discardLimitReached = false;
+            currentDiscardCount = 0;
         }
     }
 }

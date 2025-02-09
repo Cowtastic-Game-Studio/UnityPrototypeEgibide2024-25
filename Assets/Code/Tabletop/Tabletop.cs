@@ -15,6 +15,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public StorageManager StorageManager;
         //public MarketManager marketManager;
         public NewMarketManager NewMarketManager;
+        public DiscardManager DiscardManager;
 
         [Header("Board")]
         [Space(1)]

@@ -25,14 +25,21 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             InitCountText();
             cardDisplayUI.UpdateDisplay(cardTemplate, true);
         }
-
         public void IncrementCount()
         {
-            if (selectedCount < totalCount)
+            // Accedemos a discardManager desde GameManager.Instance.Tabletop
+            var discardManager = GameManager.Instance.Tabletop.DiscardManager;
+
+            if (selectedCount < totalCount && discardManager.currentDiscardCount < discardManager.maxDiscardLimit)
             {
                 selectedCount++;
                 UpdateCountText();
                 NotifyManager();
+                discardManager.currentDiscardCount++; // Incrementar el contador de eliminaciones
+            }
+            else if (discardManager.currentDiscardCount >= discardManager.maxDiscardLimit)
+            {
+                Debug.LogWarning("Has alcanzado el límite de eliminaciones para este turno.");
             }
         }
 
@@ -43,6 +50,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 selectedCount--;
                 UpdateCountText();
                 NotifyManager();
+                GameManager.Instance.Tabletop.DiscardManager.currentDiscardCount--; // Decrementar el contador de eliminaciones
             }
         }
 

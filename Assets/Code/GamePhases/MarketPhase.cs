@@ -33,8 +33,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (currentDay > 1)
             {
                 GameManager.Instance.Tabletop.NewMarketManager.RestartMarket();
-
             }
+
+            GameManager.Instance.Tabletop.DiscardManager.ResetDiscardCount();
         }
 
         public void ExecutePhase()
