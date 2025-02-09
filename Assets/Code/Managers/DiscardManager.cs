@@ -18,7 +18,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public TMP_Text muuneyCostText;
 
         private List<GameObject> allDiscardedCards = new List<GameObject>();
-        private float totalCost = 0f;
+        public int TotalCost { get; private set; } = 0;
 
         public int minDeckSize /*{ get; private set; }*/ = 35;
         public int maxDiscardLimit /*{ get; private set; }*/ = 5;
@@ -49,11 +49,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
 
             //// Verificar si el número de descartes actuales ha alcanzado el límite
-            //if (currentDiscardCount >= maxDiscardLimit)
-            //{
-            //    Debug.LogWarning($"No se pueden abrir más el menú. Ya has alcanzado el límite de {maxDiscardLimit} descartes.");
-            //    return;
-            //}
+            if (currentDiscardCount >= maxDiscardLimit && !gameObject.activeSelf)
+            {
+                Debug.LogWarning($"No se pueden abrir más el menú. Ya has alcanzado el límite de {maxDiscardLimit} descartes.");
+                return;
+            }
 
             // Abrir o cerrar el menú
             gameObject.SetActive(!gameObject.activeSelf);
@@ -83,7 +83,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 discardItem.OnCountChanged += UpdateTotalCost;
             }
 
-            muuneyCostText.text = $"Cost: {totalCost.ToString()}";
+            muuneyCostText.text = $"Cost: {TotalCost.ToString()}";
         }
 
         private void UpdateSummaryGrid()
@@ -138,6 +138,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             if (existingCardToDelete != null)
             {
+                if (selectedCount <= 0)
+                    cardsToDelete.Remove(existingCardToDelete);
                 // Si ya existe, actualizamos la cantidad
                 existingCardToDelete.Quantity = selectedCount;
             }
@@ -159,7 +161,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void UpdateTotalCostFromCardsToDelete()
         {
             // Reiniciar el totalCost
-            totalCost = 0f;
+            TotalCost = 0;
 
             // Recorrer la lista de cartas a eliminar y sumar el costo
             foreach (var cardToDelete in cardsToDelete)
@@ -170,12 +172,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 if (cardTemplate != null)
                 {
                     // Sumar el costo de las cartas (cantidad * costo de descarte)
-                    totalCost += cardToDelete.Quantity * cardTemplate.discardCost;
+                    TotalCost += cardToDelete.Quantity * cardTemplate.discardCost;
                 }
             }
 
             // Actualizar el texto en el UI con el costo total de las cartas seleccionadas para eliminar
-            muuneyCostText.text = $"Cost: {totalCost.ToString()}";
+            muuneyCostText.text = $"Cost: {TotalCost.ToString()}";
         }
 
         // Crear el SummaryItem en el panel de resumen
@@ -188,6 +190,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             if (existingSummaryItem != null)
             {
+                if (selectedCount <= 0)
+                    Destroy(existingSummaryItem.gameObject);
+
                 // Si ya existe, simplemente actualizar el conteo
                 existingSummaryItem.GetComponent<SummaryItem>().UpdateSummary(selectedCount);
             }
@@ -207,24 +212,29 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void AttemptToDeleteCards()
         {
             // Verificar si se ha alcanzado el límite de descartes
-            if (currentDiscardCount >= maxDiscardLimit)
+            if (currentDiscardCount > maxDiscardLimit)
             {
                 Debug.LogWarning($"No puedes eliminar más de {maxDiscardLimit} cartas por turno.");
                 return;
             }
 
+            if (!GameManager.Instance.Tabletop.StorageManager.CheckMuuney(TotalCost))
+            {
+                Debug.LogWarning($"No hay suficnte dinero para eliminar esa cartas.");
+                return;
+            }
+
             // Llamar a la función del CardManager para eliminar las cartas
+            GameManager.Instance.Tabletop.StorageManager.WasteMuuney(TotalCost);
             GameManager.Instance.Tabletop.CardManager.DeleteCards(cardsToDelete);
 
-            // Restablecer el contador de eliminaciones después de la eliminación
-            //ResetDiscardCount();
             ResetPanel();
         }
 
         private void ResetPanel()
         {
-            totalCost = 0f;
-
+            TotalCost = 0;
+            cardsToDelete = new List<CardToDelete>();
             UpdateDiscardGrid();
             UpdateSummaryGrid();
         }

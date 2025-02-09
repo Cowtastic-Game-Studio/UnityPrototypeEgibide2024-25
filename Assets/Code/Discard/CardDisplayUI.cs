@@ -53,7 +53,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private string FormatResources(List<ResourceAmount> resources, bool isType)
         {
-            if (resources == null || resources.Count == 0) return "N/A";
+            if (resources == null || resources.Count == 0) return "";
             return string.Join("\n", resources.ConvertAll(resource => isType ? resource.resourceType.ToString() : resource.resourceQuantity.ToString()));
         }
     }

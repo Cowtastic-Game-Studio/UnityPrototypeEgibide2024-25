@@ -32,10 +32,17 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             if (SelectedCount < totalCount && discardManager.currentDiscardCount < discardManager.maxDiscardLimit)
             {
-                SelectedCount++;
-                UpdateCountText();
-                NotifyManager();
-                discardManager.currentDiscardCount++; // Incrementar el contador de eliminaciones
+                if (GameManager.Instance.Tabletop.StorageManager.CheckMuuney(discardManager.TotalCost + CardTemplate.discardCost))
+                {
+                    SelectedCount++;
+                    UpdateCountText();
+                    NotifyManager();
+                    discardManager.currentDiscardCount++; // Incrementar el contador de eliminaciones
+                }
+                else if (discardManager.currentDiscardCount >= discardManager.maxDiscardLimit)
+                {
+                    Debug.LogWarning("No hay sucifiente dinero para descartar esta carta.");
+                }
             }
             else if (discardManager.currentDiscardCount >= discardManager.maxDiscardLimit)
             {
