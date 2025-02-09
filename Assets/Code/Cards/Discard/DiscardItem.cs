@@ -9,9 +9,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [SerializeField] private TMP_Text countTxt;
 
         private GameObject cardGO;
-        private CardTemplate cardTemplate;
+        public CardTemplate CardTemplate { get; private set; }
         private int totalCount;
-        private int selectedCount = 0;
+        public int SelectedCount { get; private set; } = 0;
 
         public delegate void CountChangedDelegate(GameObject cardGO, int selectedCount, CardTemplate cardTemplate);
         public event CountChangedDelegate OnCountChanged;
@@ -19,20 +19,20 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void Setup(GameObject card, int count)
         {
             cardGO = card;
-            cardTemplate = card.GetComponent<CardBehaviour>()?.GetTemplate();
+            CardTemplate = card.GetComponent<CardBehaviour>()?.GetTemplate();
             totalCount = count;
-            selectedCount = 0;
+            SelectedCount = 0;
             InitCountText();
-            cardDisplayUI.UpdateDisplay(cardTemplate, true);
+            cardDisplayUI.UpdateDisplay(CardTemplate, true);
         }
         public void IncrementCount()
         {
             // Accedemos a discardManager desde GameManager.Instance.Tabletop
             var discardManager = GameManager.Instance.Tabletop.DiscardManager;
 
-            if (selectedCount < totalCount && discardManager.currentDiscardCount < discardManager.maxDiscardLimit)
+            if (SelectedCount < totalCount && discardManager.currentDiscardCount < discardManager.maxDiscardLimit)
             {
-                selectedCount++;
+                SelectedCount++;
                 UpdateCountText();
                 NotifyManager();
                 discardManager.currentDiscardCount++; // Incrementar el contador de eliminaciones
@@ -45,9 +45,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void DecrementCount()
         {
-            if (selectedCount > 0)
+            if (SelectedCount > 0)
             {
-                selectedCount--;
+                SelectedCount--;
                 UpdateCountText();
                 NotifyManager();
                 GameManager.Instance.Tabletop.DiscardManager.currentDiscardCount--; // Decrementar el contador de eliminaciones
@@ -56,7 +56,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void UpdateCountText()
         {
-            countTxt.text = $"{selectedCount}/{totalCount}";
+            countTxt.text = $"{SelectedCount}/{totalCount}";
         }
 
         private void InitCountText()
@@ -67,7 +67,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         // Notificar al manager con el selectedCount y el discardCost
         private void NotifyManager()
         {
-            OnCountChanged?.Invoke(cardGO, selectedCount, cardTemplate); // Pasar ambos valores al manager
+            OnCountChanged?.Invoke(cardGO, SelectedCount, CardTemplate); // Pasar ambos valores al manager
         }
     }
 }

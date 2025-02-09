@@ -773,33 +773,64 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     playedCardsDeck.Cards).ToList();
         }
 
-        public List<GameObject> getDiscardDeckList()
+        public void DeleteCards(List<CardToDelete> cardsToDelete)
         {
-            return discardDeck.Cards.ToList();
+            foreach (var cardToDelete in cardsToDelete)
+            {
+                // Buscar cartas del tipo especificado en el discardDeck, drawDeck, y playedCardsDeck
+                int remainingQuantity = cardToDelete.Quantity;
+
+                // Intentar eliminar cartas del discardDeck
+                remainingQuantity = TryRemoveCardsFromDeck(discardDeck, cardToDelete.CardType, remainingQuantity);
+
+                // Intentar eliminar cartas del drawDeck
+                if (remainingQuantity > 0)
+                {
+                    remainingQuantity = TryRemoveCardsFromDeck(drawDeck, cardToDelete.CardType, remainingQuantity);
+                }
+
+                // Intentar eliminar cartas del playedCardsDeck
+                if (remainingQuantity > 0)
+                {
+                    remainingQuantity = TryRemoveCardsFromDeck(playedCardsDeck, cardToDelete.CardType, remainingQuantity);
+                }
+
+                // Si aún queda alguna cantidad no eliminada, puedes manejarlo si es necesario
+                if (remainingQuantity > 0)
+                {
+                    Debug.LogWarning($"No se pudieron eliminar todas las cartas del tipo {cardToDelete.CardType}. Cartas restantes: {remainingQuantity}");
+                }
+            }
         }
 
-        public List<GameObject> getDrawDeckList()
+        private int TryRemoveCardsFromDeck(IDeck deck, CardType cardType, int quantityToRemove)
         {
-            return drawDeck.Cards.ToList();
+            // Filtrar las cartas del deck que coincidan con el tipo especificado
+            var cardsToRemove = deck.Cards.Where(card => card.GetComponent<CardBehaviour>()?.GetTemplate().cardType == cardType).ToList();
+
+            // Limitar la cantidad a eliminar según la cantidad restante
+            int cardsRemoved = 0;
+
+            // Eliminar cartas hasta que la cantidad a eliminar sea 0 o no haya más cartas que coincidan
+            foreach (var card in cardsToRemove)
+            {
+                if (cardsRemoved >= quantityToRemove)
+                    break;
+
+                // Llamar a la función RemoveCard para eliminar la carta
+                deck.RemoveCard(card);
+                RemoveCard(card); // Llamar al método RemoveCard correspondiente
+
+                cardsRemoved++;
+            }
+
+            return quantityToRemove - cardsRemoved;
         }
 
-        public List<GameObject> getPlayedDeckList()
+        private void RemoveCard(GameObject card)
         {
-            return playedCardsDeck.Cards.ToList();
+            // Lógica de eliminación de carta (esta es la función que debe eliminar la carta en el juego)
+            Destroy(card);  // Aquí solo se usa Destroy para eliminarla de la escena
         }
-
-        //GameObject card = null;
-        //string path = "Cards/Prefab/" + cardName;
-
-        //card = Resources.Load<GameObject>(path);
-        //if (card != null)
-        //{
-        //    GameObject newCard = Instantiate(card, deckArea);
-        //    newCard.transform.SetParent(deckArea.transform);
-        //    newCard.transform.localPosition = Vector3.zero;
-
-        //    // Agrega la carta al mazo
-        //    drawDeck.Place(newCard);
-        //}
     }
 }
