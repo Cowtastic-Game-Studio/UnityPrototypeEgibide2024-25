@@ -15,7 +15,7 @@ MonoBehaviour:
   artwork: {fileID: 2100000, guid: 686b8ef4c44dc5d44b204a0750964eba, type: 2}
   cardType: 0
   name: Little Cow
-  description: Muuuu
+  description: Just a little cow, the same as other cows in a smaller package
   lifeCycleDays: 2
   actionPointsCost: 2
   requiredResources:

@@ -15,7 +15,8 @@ MonoBehaviour:
   artwork: {fileID: 2100000, guid: 647795d87d7a5e5408ada197d6c1821d, type: 2}
   cardType: 5
   name: Helper
-  description: Una vez colocada no podras moverme, ten cuidao
+  description: "It seems that you could use some help, and there isn\xB4t a better
+    help that the one that\xB4s free."
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []

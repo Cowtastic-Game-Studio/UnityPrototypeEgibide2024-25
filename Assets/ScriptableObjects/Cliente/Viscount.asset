@@ -15,7 +15,7 @@ MonoBehaviour:
   artwork: {fileID: 2100000, guid: 905bf36bdc7c0324d8936f538dce0132, type: 2}
   cardType: 2
   name: Viscount
-  description: bizcocho rico
+  description: This is the real cow of this game, milk it as much as you can.
   lifeCycleDays: 1
   actionPointsCost: 3
   requiredResources:

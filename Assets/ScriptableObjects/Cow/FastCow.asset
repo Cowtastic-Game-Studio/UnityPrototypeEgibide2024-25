@@ -15,7 +15,7 @@ MonoBehaviour:
   artwork: {fileID: 2100000, guid: 72612c4b3ec61764f871d56de380851c, type: 2}
   cardType: 0
   name: Fast Cow
-  description: Muuuu
+  description: This cow is insane, she can run faster than the speed of sound
   lifeCycleDays: 1
   actionPointsCost: 1
   requiredResources:

@@ -15,7 +15,7 @@ MonoBehaviour:
   artwork: {fileID: 2100000, guid: 1325089185c3c1043987963138d3420f, type: 2}
   cardType: 0
   name: Big Cow
-  description: Muuuu
+  description: "Someone should check her diet , doesn\xB4t look too healthy"
   lifeCycleDays: 3
   actionPointsCost: 3
   requiredResources:

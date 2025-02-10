@@ -15,7 +15,7 @@ MonoBehaviour:
   artwork: {fileID: 2100000, guid: fa23842a54458b34f9c3e4443ec5aeca, type: 2}
   cardType: 1
   name: Wheat seed
-  description: 
+  description: "Just an ordinary wheat seed, it\xB4ll grow into wheat"
   lifeCycleDays: 1
   actionPointsCost: 1
   requiredResources: []

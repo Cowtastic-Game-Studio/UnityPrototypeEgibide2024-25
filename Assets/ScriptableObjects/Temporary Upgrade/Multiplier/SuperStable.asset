@@ -15,7 +15,8 @@ MonoBehaviour:
   artwork: {fileID: 2100000, guid: 035cdf7bc4c431445840c3e16f3ae79c, type: 2}
   cardType: 4
   name: Super Stable
-  description: 
+  description: x2 to the production of the box. That stable look pretty comfy not
+    gonna lie.
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []

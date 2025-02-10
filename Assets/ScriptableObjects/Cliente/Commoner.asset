@@ -15,7 +15,7 @@ MonoBehaviour:
   artwork: {fileID: 2100000, guid: 1d19ac3121b71b8418f2d3d1eee8cb92, type: 2}
   cardType: 2
   name: Client
-  description: Dame mi bebida
+  description: "Don\xB4t worry too much , doesn\xB4t look too whealthy"
   lifeCycleDays: 1
   actionPointsCost: 2
   requiredResources:

@@ -15,7 +15,8 @@ MonoBehaviour:
   artwork: {fileID: 2100000, guid: 64bb62d064f0fb0489ca6bad09d3256d, type: 2}
   cardType: 3
   name: Muussive Stable
-  description: Mejora una zona
+  description: +1 box to your garden, There in no way you have enough seed too fill
+    the entire garden..
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []
