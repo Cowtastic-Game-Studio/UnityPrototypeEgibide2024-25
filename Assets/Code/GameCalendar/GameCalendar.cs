@@ -34,7 +34,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         // Propiedad para obtener el d�a de la semana (1 = Lunes, 7 = Domingo)
         public DayOfWeek DayOfWeek
         {
-            get { return (DayOfWeek) ((CurrentDay - 1) % 7 + 1); }
+            get { return (DayOfWeek)((CurrentDay - 1) % 7 + 1); }
         }
 
         public GameCalendar()
@@ -90,15 +90,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             eventManager.EndActiveEvent();
 
             DayOfMonth++;
-            Debug.Log("CurrentDay: " + CurrentDay);
-            Debug.Log("CurrentWeek: " + CurrentWeek);
 
-            if (CurrentDay % 7 == 0 && !isFirstWeek)
+            if (CurrentDay % 7 == 0)
             {
-                Debug.Log("He entrado");
-
                 CurrentWeek++;
-                MissionsManager.Instance.RenewWeeklyMission();
+
+                if (CurrentWeek > 1)
+                {
+                    MissionsManager.Instance.RenewWeeklyMission();
+                }
             }
             if (DayOfMonth % 29 == 0) // 29 seria principio de mes
             {
@@ -111,7 +111,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
 
             CurrentDay++;
-            isFirstWeek = false;
+
+            //Debug.Log("CurrentDay: " + CurrentDay + " CurrentWeek: " + CurrentWeek);
+            //Debug.Log("DayOfMonth: " + DayOfMonth);
 
             ChangeCallendar();
 
