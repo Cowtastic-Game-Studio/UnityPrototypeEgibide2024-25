@@ -4,6 +4,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class PlaceSpaceBehaviour : MonoBehaviour
     {
+        [SerializeField] private AudioSource source;
+        [SerializeField] private AudioClip clip;
         [SerializeField]
         private bool isActive = true;
 

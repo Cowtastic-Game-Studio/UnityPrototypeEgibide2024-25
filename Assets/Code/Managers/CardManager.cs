@@ -16,6 +16,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
     public class CardManager : MonoBehaviour, ICardsManager
     {
+        [SerializeField] private AudioSource source;
+        [SerializeField] private AudioClip clipStealCard,clipDiscard,clipPlaceCard, clipSelectedCard;
         [SerializeField]
         private ButtonSoundManager buttonSoundManager;
         private SODeck initialCards;
@@ -158,8 +160,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void DrawFromDeck()
         {
+            source.PlayOneShot(clipStealCard);
             MoveLastCardsToHand(drawCards);
-
+            source.PlayOneShot(clipStealCard);
             InitHandCardLifes();
         }
 
@@ -256,6 +259,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void Mulligan()
         {
             int handNumber = handDeck.Cards.Count;
+            source.PlayOneShot(clipDiscard);
 
             if (handNumber > 1)
             {
@@ -292,6 +296,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 var card = handDeck.Draw();
                 if (card != null)
                 {
+                    source.PlayOneShot(clipPlaceCard);
                     discardDeck.Place(card);
                     SetCardState(card, CardState.onDiscard);
                 }
@@ -422,6 +427,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 if (selectedCard != null)
                 {
+                    source.PlayOneShot(clipSelectedCard);
                     selectedCard.GetComponent<CardBehaviour>()?.Deactivate();
                 }
 
@@ -429,6 +435,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 if (selectedCard != null)
                 {
+                    source.PlayOneShot(clipSelectedCard);
                     selectedCard.GetComponent<CardBehaviour>()?.Activate();
                 }
             }

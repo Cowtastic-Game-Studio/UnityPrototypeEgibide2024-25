@@ -3823,6 +3823,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1185996139}
     - target: {fileID: 7130352884580539777, guid: 14ec606f02fd63e4a9832df2fbf138f5, type: 3}
+      propertyPath: source
+      value: 
+      objectReference: {fileID: 988621416}
+    - target: {fileID: 7130352884580539777, guid: 14ec606f02fd63e4a9832df2fbf138f5, type: 3}
       propertyPath: deckArea
       value: 
       objectReference: {fileID: 2123676424}
@@ -3831,9 +3835,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 275848564}
     - target: {fileID: 7130352884580539777, guid: 14ec606f02fd63e4a9832df2fbf138f5, type: 3}
+      propertyPath: clipDiscard
+      value: 
+      objectReference: {fileID: 8300000, guid: 612104770725f2341a71db395bf21b30, type: 3}
+    - target: {fileID: 7130352884580539777, guid: 14ec606f02fd63e4a9832df2fbf138f5, type: 3}
+      propertyPath: clipPlaceCard
+      value: 
+      objectReference: {fileID: 8300000, guid: 7b259a4ad6b7e1f448d1affb05fc044e, type: 3}
+    - target: {fileID: 7130352884580539777, guid: 14ec606f02fd63e4a9832df2fbf138f5, type: 3}
+      propertyPath: clipStealCard
+      value: 
+      objectReference: {fileID: 8300000, guid: 7b259a4ad6b7e1f448d1affb05fc044e, type: 3}
+    - target: {fileID: 7130352884580539777, guid: 14ec606f02fd63e4a9832df2fbf138f5, type: 3}
       propertyPath: discardDeckArea
       value: 
       objectReference: {fileID: 671203745}
+    - target: {fileID: 7130352884580539777, guid: 14ec606f02fd63e4a9832df2fbf138f5, type: 3}
+      propertyPath: clipSelectedCard
+      value: 
+      objectReference: {fileID: 8300000, guid: 9d20caa8953a25f49ba70daadf764220, type: 3}
     - target: {fileID: 7130352884580539777, guid: 14ec606f02fd63e4a9832df2fbf138f5, type: 3}
       propertyPath: buttonSoundManager
       value: 
@@ -4049,9 +4069,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10611cbba8dd9e54293a380ccefbfe98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 988621416}
   audioClip: {fileID: 0}
-  audioMulligan: {fileID: 0}
+  audioMulligan: {fileID: 8300000, guid: 5ff012173a539e440b317a3915163b74, type: 3}
   audioCardPlace: {fileID: 0}
   audioShuffleCard: {fileID: 8300000, guid: 5ff012173a539e440b317a3915163b74, type: 3}
   phaseListAudio: []
