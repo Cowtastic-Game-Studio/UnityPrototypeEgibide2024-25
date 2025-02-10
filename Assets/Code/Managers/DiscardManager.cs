@@ -24,7 +24,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public int maxDiscardLimit /*{ get; private set; }*/ = 5;
         public int currentDiscardCount = 0;
 
-        private bool discardLimitReached = false;
         private List<CardToDelete> cardsToDelete = new List<CardToDelete>();
 
         private void Awake()
@@ -206,8 +205,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
         public void ResetDiscardCount()
         {
-            discardLimitReached = false;
             currentDiscardCount = 0;
+            TotalCost = 0;
+            cardsToDelete = new List<CardToDelete>();
         }
         public void AttemptToDeleteCards()
         {
@@ -233,10 +233,18 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void ResetPanel()
         {
-            TotalCost = 0;
-            cardsToDelete = new List<CardToDelete>();
+            ResetDiscardCount();
+
             UpdateDiscardGrid();
             UpdateSummaryGrid();
+        }
+
+        public bool CheckMinDeckReached()
+        {
+            int currentDeckSize = GameManager.Instance.Tabletop.CardManager.getAllCardsList().Count;
+            int selectedForDeletion = cardsToDelete.Sum(card => card.Quantity);
+
+            return (currentDeckSize - selectedForDeletion) <= minDeckSize;
         }
     }
 }

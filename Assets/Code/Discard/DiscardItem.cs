@@ -29,24 +29,30 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             // Accedemos a discardManager desde GameManager.Instance.Tabletop
             var discardManager = GameManager.Instance.Tabletop.DiscardManager;
-
-            if (SelectedCount < totalCount && discardManager.currentDiscardCount < discardManager.maxDiscardLimit)
+            if (!discardManager.CheckMinDeckReached())
             {
-                if (GameManager.Instance.Tabletop.StorageManager.CheckMuuney(discardManager.TotalCost + CardTemplate.discardCost))
+                if (SelectedCount < totalCount && discardManager.currentDiscardCount < discardManager.maxDiscardLimit)
                 {
-                    SelectedCount++;
-                    UpdateCountText();
-                    NotifyManager();
-                    discardManager.currentDiscardCount++; // Incrementar el contador de eliminaciones
+                    if (GameManager.Instance.Tabletop.StorageManager.CheckMuuney(discardManager.TotalCost + CardTemplate.discardCost))
+                    {
+                        SelectedCount++;
+                        UpdateCountText();
+                        NotifyManager();
+                        discardManager.currentDiscardCount++; // Incrementar el contador de eliminaciones
+                    }
+                    else if (discardManager.currentDiscardCount >= discardManager.maxDiscardLimit)
+                    {
+                        Debug.LogWarning("No hay sucifiente dinero para descartar esta carta.");
+                    }
                 }
                 else if (discardManager.currentDiscardCount >= discardManager.maxDiscardLimit)
                 {
-                    Debug.LogWarning("No hay sucifiente dinero para descartar esta carta.");
+                    Debug.LogWarning("Has alcanzado el límite de eliminaciones para este turno.");
                 }
             }
             else if (discardManager.currentDiscardCount >= discardManager.maxDiscardLimit)
             {
-                Debug.LogWarning("Has alcanzado el límite de eliminaciones para este turno.");
+                Debug.LogWarning("Has alcanzado el límite de tamano del mazo");
             }
         }
 

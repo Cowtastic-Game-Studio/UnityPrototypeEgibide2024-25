@@ -293,7 +293,7 @@ MonoBehaviour:
   cardCountText: {fileID: 5344574381870086112}
   discardLeftCountText: {fileID: 5129185577462146032}
   muuneyCostText: {fileID: 4748513185984572109}
-  minDeckSize: 5
+  minDeckSize: 36
   maxDiscardLimit: 5
   currentDiscardCount: 0
 --- !u!1 &755881337383251964
@@ -1204,7 +1204,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000047852503}
+  m_AnchoredPosition: {x: 0, y: -0.00012248843}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3544152471222107603
