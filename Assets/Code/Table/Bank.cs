@@ -6,6 +6,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public GameResource Type { get; set; }
         public int MaxResources { get; set; }
+        public int MaxLevel { get; set; }
         public int Level { get; set; }
         public int Resource { get; set; }
 

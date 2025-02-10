@@ -6,8 +6,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     [CreateAssetMenu(fileName = "New Card", menuName = "Cards/CardTemplate")]
     public class CardTemplate : ScriptableObject
     {
-        public Sprite artwork;
-        public Sprite baseCard;
+        //public Sprite artwork;
+        //public Sprite baseCard;
+        public Material artwork;
 
         public CardType cardType;
         public new string name;
@@ -53,7 +54,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 $"Life Cycle (Days): {lifeCycleDays}\n" +
                 $"{sRequired}" +
                 $"{sProduced}" +
-                $"Market Cost: {marketCost}"
+                $"Market Cost: {marketCost}\n" +
+                $"Discard Cost: {discardCost}"
             );
         }
     }

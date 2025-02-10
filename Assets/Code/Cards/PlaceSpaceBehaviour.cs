@@ -10,7 +10,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private bool isEmpty = true;
         private bool deactiveNextDay = false;
 
-        [SerializeField]
+        [SerializeField] 
         private CardType type;
 
         private Renderer myRenderer;
@@ -34,7 +34,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 return;
 
             // Recuperamos el componente CardBehaviour
-            GameObject selectedCard = GameManager.Instance.Tabletop.CardManager.selectedCard;
+            GameObject selectedCard = GameManager.Instance.Tabletop.CardManager.getSelectedCard();
             CardBehaviour card = selectedCard.GetComponent<CardBehaviour>();
 
             bool shouldHighlight = false;
@@ -76,7 +76,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (gameObject.layer == LayerMask.NameToLayer("PlaceSpace"))
             {
                 // Recuperamos el componente CardBehaviour
-                GameObject selectedCard = GameManager.Instance.Tabletop.CardManager.selectedCard;
+                GameObject selectedCard = GameManager.Instance.Tabletop.CardManager.getSelectedCard();
                 if (!selectedCard)
                     return;
 
@@ -101,6 +101,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         GameManager.Instance.Tabletop.CardManager.MoveLastCardsToHand(1);
                     }
 
+
+                    //actualizar la estadistica
+                    StatisticsManager.Instance.UpdateByType(card);
                 }
                 else if (card.Type == CardType.PlaceMultiplier)
                 {
@@ -109,9 +112,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     stayEmpty = canPlace;
                     card.Deactivate();
                     GameManager.Instance.Tabletop.CardManager.MoveLastCardsToHand(1);
+
+                    //actualizar la estadistica
+                    StatisticsManager.Instance.UpdateByType(card);
                 }
                 else
                 {
+                    //actualizar la estadistica HELPER
+                    if (card.Type == CardType.Helper)
+                        StatisticsManager.Instance.UpdateByType(card);
+
                     isCardTypeMatch = card.Type == type;
                     // Para otros tipos de carta, solo se activa si está activo, vacío y coincide el tipo
                     canPlace = isActiveConditionMet && isCardTypeMatch;
@@ -119,7 +129,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 }
 
                 if (canPlace)
+                    stayEmpty= true;
                     OnPlaceSpaceClicked(stayEmpty);
+
 
             }
         }
@@ -127,11 +139,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void OnPlaceSpaceClicked(bool shouldStayEmpty)
         {
             isEmpty = shouldStayEmpty;
-
+            Debug.Log("log del  la vairable should  " + shouldStayEmpty);
             //if (isActive && isEmpty)
             //{
             Transform placeTrans = gameObject.transform;
             GameManager.Instance?.PlaceSpaceClicked(placeTrans);
+            
 
             //}
         }
@@ -144,6 +157,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public bool GetIsActive()
         {
             return isActive;
+        }
+
+        public bool GetIsEmpty()
+        {
+            return isEmpty;
         }
 
         public void SetIsActive(bool active)

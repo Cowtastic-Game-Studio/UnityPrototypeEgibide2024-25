@@ -1,10 +1,8 @@
-using UnityEngine;
-
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class BrokenFridgeEvent : CalendarEvent
     {
-        public BrokenFridgeEvent() : base("Nevera Rota", "Perderas toda la leche almacenada si no la vendes hoy.", 1)
+        public BrokenFridgeEvent() : base("Broken Fridge", "The fridge is broken! All the stored milk will be lost if it is not sold today.", 1)
         {
         }
 
@@ -14,7 +12,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public override void ApplyEffects()
         {
-            Debug.Log("La nevera se ha roto! Toda la leche almacenada se perdera si no se vende.");
         }
 
         public override void EndEvent()
@@ -23,7 +20,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             GameManager.Instance.Tabletop.StorageManager.RemoveResourceDownToMin(currentMilk, GameResource.Milk);
             GameManager.Instance.Tabletop.HUDManager.UpdateResources();
-            Debug.Log("El evento de la nevera rota ha terminado.");
+
+            StatisticsManager.Instance.UpdateByStatisticType(StatisticType.EventsCompleted, 1);
         }
     }
 }

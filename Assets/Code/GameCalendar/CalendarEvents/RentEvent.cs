@@ -28,6 +28,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 //TODO poner aqui la fncion de GameOver cuando exista
                 Debug.LogWarning("piu piu GAME OVER piu piu");
+                MenuManager.Instance.GameOverScene();
             }
             else
             {

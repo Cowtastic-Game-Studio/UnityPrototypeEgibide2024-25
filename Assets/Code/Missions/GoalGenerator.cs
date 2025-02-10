@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using UnityEngine.Events;
 
 namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
@@ -8,8 +9,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
     /// <summary>
     /// Genera los objetivos
     /// </summary>
-    internal static class GoalGenerator
+    public class GoalGenerator
     {
+        private static int goalW1, goalW2, goalW3, goalW4, goalW5, goalW6, goalW7;
 
         #region Tutorial
 
@@ -20,7 +22,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal1()
         {
-            return GenerateStatGoal("T-M1", "Coloca 1 carta en la mesa", StatisticType.CardsTotalUsed, 1);
+            return GenerateStatGoal("T-M1", "Place 1 card on the table", StatisticType.CardsTotalUsed, 1);
         }
 
         /// <summary>
@@ -30,7 +32,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal2()
         {
-            return GenerateStatGoal("T-M2", "Consigue 1 de trigo", StatisticType.CerealTotalAcquired, 1);
+            return GenerateStatGoal("T-M2", "Get 1 wheat", StatisticType.CerealTotalAcquired, 1);
 
         }
 
@@ -41,7 +43,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal3()
         {
-            return GenerateStatGoal("T-M3", "Consigue 1 de leche", StatisticType.MilkTotalAcquired, 1);
+            return GenerateStatGoal("T-M3", "Get 1 milk", StatisticType.MilkTotalAcquired, 1);
 
         }
 
@@ -52,7 +54,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal4()
         {
-            return GenerateStatGoal("T-M4", "Consigue un cliente", StatisticType.CustomersTotalUsed, 1);
+            return GenerateStatGoal("T-M4", "Get a client", StatisticType.CustomersServed, 1);
 
         }
 
@@ -63,7 +65,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal5()
         {
-            return GenerateStatGoal("T-M5", "Compra una carta", StatisticType.CardsPurchased, 1);
+            return GenerateStatGoal("T-M5", "Buy a card", StatisticType.CardsPurchased, 1);
 
         }
 
@@ -74,7 +76,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal6()
         {
-            return GenerateStatGoal("T-M6", "Compra una mejora de zona", StatisticType.ZonesUpgradePurchased, 1);
+            return GenerateStatGoal("T-M6", "Buy a zone upgrade", StatisticType.ZonesUpgradePurchased, 1);
         }
 
         #endregion
@@ -125,7 +127,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal1()
         {
-            return GenerateStatGoal("W-M1", "Ordeña vacas 4 veces", StatisticType.CowsMilked, 4);
+            Func<bool> condition = () =>
+            {
+                Statistic statCowsMilked = StatisticsManager.Instance.GetStat(StatisticType.CowsMilked);
+                return (statCowsMilked.Uses >= goalW1);
+            };
+
+            return GenerateStatGoal("W-M1", "Milk cows 4 times", condition);
         }
 
         /// <summary>
@@ -135,7 +143,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal2()
         {
-            return GenerateStatGoal("W-M2", "Cosecha trigo 5 veces", StatisticType.SeedsHarvested, 5);
+            Func<bool> condition = () =>
+            {
+                Statistic statHarvestWheat = StatisticsManager.Instance.GetStat(StatisticType.SeedsHarvested);
+                return (statHarvestWheat.Uses >= goalW2);
+            };
+
+            return GenerateStatGoal("W-M2", "Harvest wheat 5 times", condition);
         }
 
         /// <summary>
@@ -145,7 +159,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal3()
         {
-            return GenerateStatGoal("W-M3", "Vende 3 leches", StatisticType.MilkTotalUsed, 3);
+            Func<bool> condition = () =>
+            {
+                Statistic statMilkSelled = StatisticsManager.Instance.GetStat(StatisticType.MilkTotalUsed);
+                return (statMilkSelled.Uses >= goalW3);
+            };
+
+            return GenerateStatGoal("W-M3", "Sell 3 milks", condition);
         }
 
         /// <summary>
@@ -155,7 +175,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal4()
         {
-            return GenerateStatGoal("W-M4", "Compra 2 cartas", StatisticType.CardsPurchased, 2);
+            Func<bool> condition = () =>
+            {
+                Statistic statCardBuyed = StatisticsManager.Instance.GetStat(StatisticType.CardsPurchased);
+                return (statCardBuyed.Uses >= goalW4);
+            };
+
+            return GenerateStatGoal("W-M4", "Buy 2 cards", condition);
         }
 
         /// <summary>
@@ -165,7 +191,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal5()
         {
-            return GenerateStatGoal("W-M5", "Adquiere 20 de Muuney", StatisticType.MuuneyTotalAcquired, 20);
+            Func<bool> condition = () =>
+            {
+                Statistic statMuuneyAcquired = StatisticsManager.Instance.GetStat(StatisticType.MuuneyTotalAcquired);
+                return (statMuuneyAcquired.Uses >= goalW5);
+            };
+
+            return GenerateStatGoal("W-M5", "Get 20 Muuney", condition);
         }
 
         /// <summary>
@@ -175,7 +207,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal6()
         {
-            return GenerateStatGoal("W-M6", "Usa una mejora temporal", StatisticType.TemporaryUsedCards, 1);
+            Func<bool> condition = () =>
+            {
+                Statistic statMuuneyAcquired = StatisticsManager.Instance.GetStat(StatisticType.TemporaryUsedCards);
+                return (statMuuneyAcquired.Uses >= goalW6);
+            };
+
+            return GenerateStatGoal("W-M6", "Use an upgrade card", condition);
         }
 
         /// <summary>
@@ -185,7 +223,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         private static Goal CreateWeeklyGoal7()
         {
-            return GenerateStatGoal("W-M7", "Atiende a 5 clientes", StatisticType.CustomersServed, 5);
+            Func<bool> condition = () =>
+            {
+                Statistic statMuuneyAcquired = StatisticsManager.Instance.GetStat(StatisticType.CustomersServed);
+                return (statMuuneyAcquired.Uses >= goalW7);
+            };
+
+            return GenerateStatGoal("W-M7", "Serve 5 clients", condition);
         }
 
         #endregion
@@ -199,7 +243,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal1()
         {
-            return GenerateStatGoal("G-M1", "Establo mejorado al maximo", StatisticType.StableCountUpgrade, 6);
+            return GenerateStatGoal("G-M1", "Fully upgraded stable", StatisticType.StableCountUpgrade, GetMaxSpace(GameManager.Instance.Tabletop.farms));
         }
 
         /// <summary>
@@ -209,7 +253,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal2()
         {
-            return GenerateStatGoal("G-M2", "Huerto mejorado al maximo", StatisticType.GardenCountUpgrade, 8);
+            return GenerateStatGoal("G-M2", "Fully upgraded garden", StatisticType.GardenCountUpgrade, GetMaxSpace(GameManager.Instance.Tabletop.stables));
         }
 
         /// <summary>
@@ -219,7 +263,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal3()
         {
-            return GenerateStatGoal("G-M3", "Taverna mejorada al maximo", StatisticType.TavernCountUpgrade, 4);
+            return GenerateStatGoal("G-M3", "Fully upgraded tavern", StatisticType.TavernCountUpgrade, GetMaxSpace(GameManager.Instance.Tabletop.taverns));
         }
 
         /// <summary>
@@ -229,7 +273,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal4()
         {
-            return GenerateStatGoal("G-M4", "Llena el establo con vacas cuando este al maximo", StatisticType.StableFilledWithCowsMaxUpgrade, 1);
+            return GenerateStatGoal("G-M4", "Fill the barn with cows when it is fully upgraded.", StatisticType.StableFull, 1);
         }
 
         /// <summary>
@@ -239,7 +283,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal5()
         {
-            return GenerateStatGoal("G-M5", "GardenFilledWithCropsMaxUpgrade", StatisticType.GardenFilledWithCropsMaxUpgrade, 1);
+            return GenerateStatGoal("G-M5", "Fill the garden with crops when it is fully upgraded.", StatisticType.FarmFull, 1);
         }
 
         /// <summary>
@@ -249,7 +293,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal6()
         {
-            return GenerateStatGoal("G-M6", "Llena la taverna con clientes cuando este al maximo", StatisticType.TavernFilledWithCustomersMaxUpgrade, 1);
+            return GenerateStatGoal("G-M6", "Fill the tavern with customers when it is fully upgraded", StatisticType.ShopFull, 1);
         }
 
         /// <summary>
@@ -265,10 +309,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
                 Statistic statFridge = StatisticsManager.Instance.GetStat(StatisticType.FridgeCountUpgrade);
                 Statistic statSilo = StatisticsManager.Instance.GetStat(StatisticType.SiloCountUpgrade);
 
-                return (statFridge.Uses >= 8 && statSilo.Uses >= 8);
+                int maxLevelFridge = GameManager.Instance.Tabletop.StorageManager.GetStorageMaxLevel(GameResource.Milk);
+                int maxLevelSilo = GameManager.Instance.Tabletop.StorageManager.GetStorageMaxLevel(GameResource.Cereal);
+
+                return (statFridge.Uses >= maxLevelFridge && statSilo.Uses >= maxLevelSilo);
             };
 
-            return GenerateStatGoal("G-M7", "Ten los almacenes silo y frigorifico al maximo", condition);
+            return GenerateStatGoal("G-M7", "Have the silo and refrigerator warehouses fully upgraded", condition);
         }
 
         /// <summary>
@@ -278,7 +325,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal8()
         {
-            return GenerateStatGoal("G-M8", "Supera 3 eventos", StatisticType.EventsCompleted, 3);
+            return GenerateStatGoal("G-M8", "Beat 3 events", StatisticType.EventsCompleted, 3);
         }
 
         #endregion
@@ -296,7 +343,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         {
             List<int> randomNumbers = new List<int>();
             int randomNumber;
-            Random rand = new Random();
+            System.Random rand = new System.Random();
 
             if (numberCount > max)
                 throw new Exception("El numero de numeros necesarios es mayor que el numero de numeros disponibles");
@@ -352,6 +399,42 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             return new Goal(goalName, goalDescription, goal1Initialization);
         }
 
+        private static int GetMaxSpace(List<PlaceSpaceBehaviour> completeList)
+        {
+            List<PlaceSpaceBehaviour> notActiveSpacesList = completeList.FindAll(f => !f.GetIsActive());
+            return notActiveSpacesList.Count;
+        }
+
+
+        public static void SetWeeklyGoals()
+        {
+            int actualUses = GetActualStatisticUses(StatisticType.CowsMilked);
+            goalW1 = actualUses + 4;
+
+            actualUses = GetActualStatisticUses(StatisticType.SeedsHarvested);
+            goalW2 = actualUses + 5;
+
+            actualUses = GetActualStatisticUses(StatisticType.MilkTotalUsed);
+            goalW3 = actualUses + 3;
+
+            actualUses = GetActualStatisticUses(StatisticType.CardsPurchased);
+            goalW4 = actualUses + 2;
+
+            actualUses = GetActualStatisticUses(StatisticType.MuuneyTotalAcquired);
+            goalW5 = actualUses + 20;
+
+            actualUses = GetActualStatisticUses(StatisticType.TemporaryUsedCards);
+            goalW6 = actualUses + 1;
+
+            actualUses = GetActualStatisticUses(StatisticType.CustomersServed);
+            goalW7 = actualUses + 5;
+        }
+
+        private static int GetActualStatisticUses(StatisticType statisticType)
+        {
+            Statistic stat = StatisticsManager.Instance.GetStat(statisticType);
+            return stat.Uses;
+        }
 
         #endregion
     }

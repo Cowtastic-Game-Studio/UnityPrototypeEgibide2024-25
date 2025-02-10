@@ -16,16 +16,31 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public event Action<ICard> OnCardClickedGlobal;
         public event Action<Transform> OnPlaceSpaceClickedGlobal;
 
-        private void Awake()
+        //private void Awake()
+        //{
+        //    if (Instance != null && Instance != this)
+        //    {
+        //        Destroy(gameObject);
+        //        return;
+        //    }
+
+        //    Instance = this;
+        //    DontDestroyOnLoad(gameObject);
+        //    InitializeManagers();
+        //}
+
+        void Awake()
         {
-            if (Instance != null && Instance != this)
+            if (Instance == null)
             {
-                Destroy(gameObject);
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject); // Evitar duplicados en la misma escena
                 return;
             }
 
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
             InitializeManagers();
         }
 
@@ -72,7 +87,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     }
                     else
                     {
-                        Debug.LogWarning("La carta seleccionada no tiene el componente ICard.");
+                        Debug.LogWarning("La carta seleccionada no tiene el componente ICard."); // ESTA NO
                     }
                 }
 

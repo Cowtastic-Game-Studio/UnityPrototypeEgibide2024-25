@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa0e6f64fea4604f856e8d368b94e93, type: 3}
   m_Name: Commoner
   m_EditorClassIdentifier: 
-  artwork: {fileID: 21300000, guid: 20fda1733aaed114f92755c3cf4b1df7, type: 3}
-  baseCard: {fileID: 21300000, guid: 3381212bab47d73469e383e6f98f5d64, type: 3}
+  artwork: {fileID: 2100000, guid: 1d19ac3121b71b8418f2d3d1eee8cb92, type: 2}
   cardType: 2
   name: Client
-  description: Dame mi bebida
+  description: "Don\xB4t worry too much , doesn\xB4t look too whealthy"
   lifeCycleDays: 1
   actionPointsCost: 2
   requiredResources:
@@ -27,6 +26,7 @@ MonoBehaviour:
     resourceQuantity: 1
   marketCost: 1
   discardCost: 3
-  dayToUnlock: 1
+  dayToUnlock: 0
   targetCardType: 6
   multiplier: 1
+  targetResoruceType: 4

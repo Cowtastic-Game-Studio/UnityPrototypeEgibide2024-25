@@ -53,28 +53,28 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         #region Unity methods
 
-        private void Start()
-        {
-            LifeCycleDaysRemaining = LifeCycleDays;
+        //private void Start()
+        //{
+        //    LifeCycleDaysRemaining = LifeCycleDays;
 
-            this.PositionInHand = null;
+        //    this.PositionInHand = null;
 
-            if (template == null)
-            {
-                Debug.LogError("Card template is not assigned.");
-            }
-            else
-            {
-                // Configurar la visualizaci�n de la carta usando CardDisplay
-                CardDisplay display = GetComponent<CardDisplay>();
-                if (display != null)
-                {
-                    SetupDisplay(display);
-                }
-            }
-            // Desactiva la carta inicialmente
-            Deactivate();
-        }
+        //    if (template == null)
+        //    {
+        //        Debug.LogError("Card template is not assigned.");
+        //    }
+        //    else
+        //    {
+        //        // Configurar la visualizaci�n de la carta usando CardDisplay
+        //        CardDisplay display = GetComponent<CardDisplay>();
+        //        if (display != null)
+        //        {
+        //            SetupDisplay(display);
+        //        }
+        //    }
+        //    // Desactiva la carta inicialmente
+        //    Deactivate();
+        //}
 
         private void OnMouseDown()
         {
@@ -98,11 +98,23 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 GameManager.Instance.Tabletop.CardManager.StopDragging();
             }
+            if (State.Equals(CardState.onHand))
+            {
+                GameManager.Instance.Tabletop.CardManager.SetHoveredCard(this);
+            }
+        }
+
+        private void OnMouseExit()
+        {
+            if (State.Equals(CardState.onHand))
+            {
+                GameManager.Instance.Tabletop.CardManager.ClearHoveredCard(this);
+            }
         }
 
         #endregion
 
-     
+
 
         #region Public methods
         public void Activate()
@@ -132,14 +144,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
-        //public void OnPointerClick(PointerEventData eventData)
-
-
-        // M�todo para configurar la visualizaci�n en CardDisplay
         public void SetupDisplay(CardDisplay display)
         {
             // Pasa el estado activo
-            display.UpdateDisplay(template, isActive);
+            display.UpdateDisplayAndMat(template, isActive);
         }
 
         public CardTemplate GetTemplate()
@@ -158,8 +166,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             CardDisplay display = GetComponent<CardDisplay>();
             if (display != null)
             {
+                display.UpdateDisplayAndMat(template, isActive);
                 // Llama al m�todo para activar/desactivar el overlay
-                display.SetOverlayActive(!isActive);
+                // display.SetOverlayActive(!isActive);
             }
         }
 
@@ -196,6 +205,32 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             mouseClicksStarted = false;
             mouseClicks = 0;
+        }
+
+        public void setCardTemplate(CardTemplate cardTemplate)
+        {
+            template = cardTemplate;
+            //UpdateDisplay();
+
+            LifeCycleDaysRemaining = LifeCycleDays;
+
+            this.PositionInHand = null;
+
+            if (template == null)
+            {
+                Debug.LogError("Card template is not assigned.");
+            }
+            else
+            {
+                // Configurar la visualizaci�n de la carta usando CardDisplay
+                CardDisplay display = GetComponent<CardDisplay>();
+                if (display != null)
+                {
+                    SetupDisplay(display);
+                }
+            }
+            // Desactiva la carta inicialmente
+            Deactivate();
         }
 
         #endregion

@@ -10,6 +10,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         [SerializeField] private GameObject WeeklyMission;
 
+        [SerializeField] private GameObject GlobalMission;
+
         #endregion
 
         #region Unity methods
@@ -18,18 +20,21 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             MissionSheetManager tutorialMisionManager;
             MissionSheetManager weeklyMissionManager;
-
+            GlobalMissionSheetManager globalMissionManager;
 
             MissionsManager.Instance.NewWeeklyMission.AddListener(OnNewWeeklyMission);
-
 
             tutorialMisionManager = TutorialMission.GetComponent<MissionSheetManager>();
             tutorialMisionManager.Mission = MissionsManager.Instance.Tutorial;
 
-
             weeklyMissionManager = WeeklyMission.GetComponent<MissionSheetManager>();
             weeklyMissionManager.Mission = MissionsManager.Instance.WeeklyMission;
+
+            globalMissionManager = GlobalMission.GetComponent<GlobalMissionSheetManager>();
+            globalMissionManager.Missions = MissionsManager.Instance.GlobalMissions;
+
         }
+
 
         #endregion
 
@@ -39,9 +44,29 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             MissionSheetManager weeklyMissionManager;
             weeklyMissionManager = WeeklyMission.GetComponent<MissionSheetManager>();
             weeklyMissionManager.Mission = MissionsManager.Instance.WeeklyMission;
+
+            if (GameManager.Instance.GameCalendar.CurrentWeek == 1)
+            {
+                ChangeTutorialForWeekly();
+            }
+
+        }
+
+
+        #endregion
+
+        #region Private methods
+
+        private void ChangeTutorialForWeekly()
+        {
+            this.TutorialMission.SetActive(false);
+            this.WeeklyMission.SetActive(true);
+
+            MissionsManager.Instance.IsTutorialEnabled = false;
         }
 
         #endregion
+
 
     }
 }
