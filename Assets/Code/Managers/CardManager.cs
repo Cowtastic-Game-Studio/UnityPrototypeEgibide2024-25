@@ -305,6 +305,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 drawDeck.Shuffle();
                 this.MoveLastCardsToHand(handNumber - 1);
 
+                ArrangeCardsInCurve();
+
                 //esconder botón mulligan si no hay más de una carta en la mano
                 if (handDeck.Cards.Count <= 1)
                 {
@@ -509,6 +511,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 // Guarda la posición original de la carta
                 originalPosition = card.transform.position;
 
+                ResetCardRotation(card);
                 StartDragging();
             }
         }
@@ -640,6 +643,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         cardBH.transform.localPosition += new Vector3(0, 0, -0.06f);
                     }
 
+                    ArrangeCardsInCurve();
+
                 }
             }
         }
@@ -723,7 +728,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 // Agrega la carta al mazo
                 drawDeck.Place(newCard);
-
+                ArrangeCardsInCurve();
                 //StatisticsManager.UpdateByBuyedCard(cardBH);
                 StatisticsManager.Instance.UpdateByStatisticType(StatisticType.CardsPurchased, 1);
             }

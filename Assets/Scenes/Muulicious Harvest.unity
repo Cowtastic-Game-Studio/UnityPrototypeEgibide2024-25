@@ -2400,6 +2400,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1086963676637211725, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1292652564738594749, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
       propertyPath: m_Name
       value: HUD
@@ -2442,6 +2446,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4005885962331891138, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4082803539076280644, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4466179223127878900, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
@@ -2662,6 +2670,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8379557375674078817, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8394122654822782369, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8760850721741547441, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
