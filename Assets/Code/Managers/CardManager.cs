@@ -1,3 +1,4 @@
+using CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -200,65 +201,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             ArrangeCardsInCurve();
         }
 
-        private void ArrangeHand()
-        {
-            // Crea una lista temporal de cartas en la mano
-            List<GameObject> cardsInHand = new List<GameObject>(handDeck.Cards.ToArray());
-
-            for (int i = 0; i < cardsInHand.Count; i++)
-            {
-                GameObject card = cardsInHand[i]; // Obtén la carta de la lista temporal
-                if (card != null)
-                {
-                    // Cambia la posición de la carta en la mano
-                    card.transform.localPosition = new Vector3(i * cardSpacing, 0, 0);
-                    card.transform.localRotation = Quaternion.identity;
-                    var cardBH = card.GetComponent<CardBehaviour>();
-                    cardBH.IsPlaced = false;
-                    cardBH.PositionInHand = i * cardSpacing;
-                }
-            }
-        }
-        void ArrangeCardsInCurves()
-        {
-            // Crea una lista temporal de cartas en la mano
-            List<GameObject> cardsInHand = new List<GameObject>(handDeck.Cards.ToArray());
-            float arcAngle = 15f; // Ángulo total de la curva (ajustable)
-            float radius = 5f; // Radio de la curva (ajustable)
-            int cardCount = cardsInHand.Count;
-
-            float startAngle = -arcAngle / 2; // Comenzar desde la izquierda del arco
-            float angleStep = arcAngle / (cardCount - 1); // Espaciado entre cartas
-
-            for (int i = 0; i < cardCount; i++)
-            {
-                GameObject card = cardsInHand[i];
-                if (card != null)
-                {
-                    // Ángulo individual para la carta
-                    float angle = startAngle + (angleStep * i);
-                    // Convertir a radianes
-                    float radian = angle * Mathf.Deg2Rad;
-
-                    // Calcular posición en arco
-                    Vector3 cardPosition = new Vector3(
-                        Mathf.Sin(radian) * radius,
-                        Mathf.Cos(radian) * radius - radius,
-                        // Aumenta la Z progresivamente
-                        i * -0.01f
-                    );
-
-                    // Ajustar la rotación para que sigan la curva
-                    Quaternion cardRotation = Quaternion.Euler(0, 0, -angle);
-
-                    cardsInHand[i].transform.localPosition = cardPosition;
-                    cardsInHand[i].transform.localRotation = cardRotation;
-                    var cardBH = card.GetComponent<CardBehaviour>();
-                    cardBH.IsPlaced = false;
-                }
-            }
-        }
-
         void ArrangeCardsInCurve()
         {
             List<GameObject> cardsInHand = new List<GameObject>(handDeck.Cards.ToArray());
@@ -331,6 +273,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 cardGameObject.transform.SetParent(deckArea);
                 cardGameObject.transform.localPosition = Vector3.zero;
                 cardGameObject.transform.localRotation = Quaternion.identity;
+
+                ResetCardRotation(cardGameObject);
                 drawDeck.Place(cardGameObject); // Vuelve a colocar en el mazo
             }
             // Baraja el mazo
@@ -355,6 +299,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         cardToMove.transform.localPosition = Vector3.zero;
 
                         SetCardState(cardToMove, CardState.onDeck);
+                        ResetCardRotation(cardToMove);
                     }
                 }
                 drawDeck.Shuffle();
@@ -855,5 +800,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Lógica de eliminación de carta (esta es la función que debe eliminar la carta en el juego)
             Destroy(card);  // Aquí solo se usa Destroy para eliminarla de la escena
         }
+
+        private void ResetCardRotation(GameObject card)
+        {
+            card.transform.SetParent(deckArea.transform); 
+            card.transform.localPosition = Vector3.zero;
+            card.transform.localRotation = Quaternion.identity; 
+            
+        }
+
     }
 }
