@@ -746,6 +746,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     playedCardsDeck.Cards).ToList();
         }
 
+        public void showHand() {
+            handArea.gameObject.SetActive(true);
+        } 
+        public void hideHand() {
+            handArea.gameObject.SetActive(false);
+        }
         public void DeleteCards(List<CardToDelete> cardsToDelete)
         {
             foreach (var cardToDelete in cardsToDelete)

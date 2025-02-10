@@ -88,6 +88,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// Referencia al GamePhaseManager
         /// </summary>
         private GamePhaseManager gamePhaseManager;
+        [SerializeField] private CardManager CardManager;
 
         #endregion
 
@@ -146,6 +147,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             int milk = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Milk);
             int muuney = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Muuney);
 
+
+
             actionPointTextUI.text = pa.ToString() + "/" + paMax.ToString();
             wheatResourceTextUI.text = wheat.ToString() + "/" + wheatMax.ToString();
             milkResourceTextUI.text = milk.ToString() + "/" + milkMax.ToString();
@@ -170,7 +173,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 exitPanel.gameObject.SetActive(false);
                 catButton.gameObject.SetActive(false);
                 savePanel.gameObject.SetActive(false);
-                discardBtn.gameObject.SetActive(true);
+                //discardBtn.gameObject.SetActive(true);
+                CardManager.showHand();
 
             }
             else if (activeCamera.gameObject.name == "VirtualCameraDerecha")
@@ -184,7 +188,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 exitPanel.gameObject.SetActive(false);
                 catButton.gameObject.SetActive(false);
                 savePanel.gameObject.SetActive(false);
-
+                CardManager.hideHand();
 
 
             }
@@ -198,6 +202,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 catButton.gameObject.SetActive(true);
                 savePanel.gameObject.SetActive(true);
                 discardBtn.gameObject.SetActive(false);
+                CardManager.hideHand();
+
 
 
 
@@ -212,6 +218,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 catButton.gameObject.SetActive(false);
                 savePanel.gameObject.SetActive(false);
                 discardBtn.gameObject.SetActive(false);
+                CardManager.hideHand();
+
 
             }
         }
