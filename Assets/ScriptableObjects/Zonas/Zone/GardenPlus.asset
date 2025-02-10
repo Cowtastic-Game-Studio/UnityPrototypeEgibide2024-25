@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49a391d00c55ea488932e8659b04053, type: 3}
   m_Name: GardenPlus
   m_EditorClassIdentifier: 
+  baseCard: {fileID: 2100000, guid: edc33914b937d8244aba28c5c1eb02c5, type: 2}
   artwork: {fileID: 2100000, guid: 1561525811516c14e9dc608f2ee61558, type: 2}
   cardType: 6
   name: Garden +

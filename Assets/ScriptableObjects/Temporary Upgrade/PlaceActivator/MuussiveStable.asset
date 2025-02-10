@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6643ef818a86249948f36787333fdb, type: 3}
   m_Name: MuussiveStable
   m_EditorClassIdentifier: 
+  baseCard: {fileID: 2100000, guid: e7e5a412938c62349924c8c1bfade4e2, type: 2}
   artwork: {fileID: 2100000, guid: d892b7c4df00eaa408be5d6ab6ebb145, type: 2}
   cardType: 3
   name: Muussive Stable

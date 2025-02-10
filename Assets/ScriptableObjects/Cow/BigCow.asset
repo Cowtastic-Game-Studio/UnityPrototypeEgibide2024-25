@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b4d1d63d404d74bbd7263021c46de1, type: 3}
   m_Name: BigCow
   m_EditorClassIdentifier: 
+  baseCard: {fileID: 2100000, guid: e7e5a412938c62349924c8c1bfade4e2, type: 2}
   artwork: {fileID: 2100000, guid: 1325089185c3c1043987963138d3420f, type: 2}
   cardType: 0
   name: Big Cow
