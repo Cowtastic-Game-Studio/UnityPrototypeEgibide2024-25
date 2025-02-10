@@ -42,17 +42,21 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     }
                     else if (discardManager.currentDiscardCount >= discardManager.maxDiscardLimit)
                     {
-                        Debug.LogWarning("No hay sucifiente dinero para descartar esta carta.");
+                        MessageManager.Instance.ShowMessage("No hay sucifiente dinero para descartar esta carta.");
+
+                        //Debug.LogWarning("No hay sucifiente dinero para descartar esta carta.");
                     }
                 }
                 else if (discardManager.currentDiscardCount >= discardManager.maxDiscardLimit)
                 {
-                    Debug.LogWarning("Has alcanzado el límite de eliminaciones para este turno.");
+                    MessageManager.Instance.ShowMessage("Has alcanzado el límite de eliminaciones para este turno.");
+                    //Debug.LogWarning("Has alcanzado el límite de eliminaciones para este turno.");
                 }
             }
             else if (discardManager.currentDiscardCount >= discardManager.maxDiscardLimit)
             {
-                Debug.LogWarning("Has alcanzado el límite de tamano del mazo");
+                MessageManager.Instance.ShowMessage("Has alcanzado el límite de tamano del mazo.");
+                //Debug.LogWarning("Has alcanzado el límite de tamano del mazo");
             }
         }
 

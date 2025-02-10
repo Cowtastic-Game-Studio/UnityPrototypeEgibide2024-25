@@ -33,7 +33,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public virtual void TriggerEvent()
         {
             isActive = true;
-            Debug.LogWarning($"{eventName} started. {eventDescription}");
+            MessageManager.Instance.ShowMessage($"{eventName} started. {eventDescription}");
+            //Debug.LogWarning($"{eventName} started. {eventDescription}");
             ApplyEffects();
         }
 
