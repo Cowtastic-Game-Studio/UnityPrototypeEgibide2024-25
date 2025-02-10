@@ -572,6 +572,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             isDragging = true;
 
+            // Ocultar todas las cartas en la mano excepto la seleccionada
+            foreach (Transform card in handArea.transform)
+            {
+                if (card.gameObject != selectedCard)
+                {
+                    card.gameObject.SetActive(false);
+                }
+            }
+
             //roatcion para que la carta mire a camara
             if (selectedCard.transform.parent.CompareTag("Place") && selectedCard.transform.rotation.y != 180 && selectedCard.transform.rotation.y != -90)
             {
@@ -583,6 +592,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     placeSpace.updateEmpty();
                 }
             }
+
+
         }
 
         public void StopDragging()
@@ -594,6 +605,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
 
             isDragging = false;
+
+            // Mostrar todas las cartas en la mano nuevamente
+            foreach (Transform card in handArea.transform)
+            {
+                card.gameObject.SetActive(true);
+            }
         }
 
         public void UpdatePlacement()
