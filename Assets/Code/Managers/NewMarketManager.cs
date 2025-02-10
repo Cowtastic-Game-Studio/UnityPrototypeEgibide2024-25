@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -19,9 +20,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [SerializeField] private BuyButtonBehaviour normalPriceButton;
         [SerializeField] private BuyButtonBehaviour discountPriceButton;
 
-
-
-
         /// <summary>
         /// List of all the shop items/cards
         /// </summary>
@@ -33,6 +31,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private List<GameObject> pageItemsList = new();
 
         public float discountPercentage = 1f;
+        public int discountPrice = 5;
 
 
         /// <summary>
@@ -128,11 +127,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     break;
 
                 case "CardDisplayTemplate":
-                    // TODO: Mostrar la informaci�n de la carta bien
-                    Debug.Log("CardDisplay Template");
                     OnShopItemClicked(shopItemGO);
-                    cardPreview.SetActive(true);
-                    shopItemGO.GetComponent<ShopItem>()?.TriggerCard();
 
                     break;
                 case "BuyButton":
@@ -194,7 +189,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             CreateShopItems(false);
             cardPreview.SetActive(false);
 
-            slotList.totalPage = Mathf.CeilToInt((float)cardList.Count / 8);
+            slotList.totalPage = Mathf.CeilToInt((float) cardList.Count / 8);
 
             //Limpia la carta previsualizada
             ShowHideCardPreviewZone(false);
@@ -225,7 +220,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private void OnShopItemClicked(GameObject shopItemGO)
         {
-            ShopItem shopItem = shopItemGO.GetComponent<ShopItem>();
+            //ShopItem shopItem = shopItemGO.GetComponent<ShopItem>();
             //shopItem?.TriggerCard();
             ShopItem clickItem = shopItemGO.GetComponent<ShopItem>();
             if (clickItem)
@@ -233,15 +228,31 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             ShowHideCardPreviewZone(true);
 
-            //TODO: buscar si tiene una carta de descuento
-            /**
-             * 1. Hacer una funcion en el CardManager, que busque una carta de descuento para la carta que se quiere comprar
-             *  * var cartaQueAplicaDescuento = FindDiscountForCard(string identificadorDeCartaAComprar)
-             * 2. Si encuentra cartaQueAplicaDescuento
-             *  *  A la funcion de ahi abajo \/ SetCardPrices ponerle el parametro a true, y el descuento que se quiera aplicar
-             */
+            List<GameObject> allCardsList = GameManager.Instance.Tabletop.CardManager.getAllCardsList();
+            List<GameObject> temporalCardsList = new();
 
-            SetCardPrices(shopItem.card.cost, false, 0);
+            switch (clickItem.getCardTemplate().name)
+            {
+                case "Garden+":
+                    temporalCardsList = allCardsList.Where(x => x.GetComponent<CardDisplay>().name == "MuussiveGarden").ToList();
+                    break;
+                case "Stable+":
+                    temporalCardsList = allCardsList.Where(x => x.GetComponent<CardDisplay>().name == "MuussiveStable").ToList();
+                    break;
+                case "Tavern+":
+                    temporalCardsList = allCardsList.Where(x => x.GetComponent<CardDisplay>().name == "MuussiveTavern").ToList();
+                    break;
+                default:
+                    discountPercentage = 1f;
+                    SetCardPrices(clickItem.card.cost, false, 0);
+                    break;
+            }
+
+            if (temporalCardsList.Count > 0)
+            {
+                SetCardPrices(clickItem.card.cost, true, discountPrice);
+            }
+
         }
 
         private void OnBuyButtonClicked(GameObject shopItemGO)
@@ -301,9 +312,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             float price, discountPrice;
 
             //Comprueba si es black friday
+            Debug.Log("IsVacFriday: " + GameManager.Instance.GameCalendar.IsVacFriday());
             if (GameManager.Instance.GameCalendar.IsVacFriday())
             {
-                //Rebaja e la mitad el precio
+                //Rebaja a la mitad el precio
                 price = Utils.RoundMuuney(cardPrice / 2f);
 
                 //Le pone un color especial
@@ -316,17 +328,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
 
             //Asigna el precio normal
-            normalPriceButton.SetPrice((int)price);
-
+            normalPriceButton.SetPrice((int) price);
 
             //Si tiene descuento
             if (hasDiscount)
             {
                 //Calcula el descuento
-                discountPrice = Utils.RoundMuuney((cardPrice / 100) * discount);
+                discountPrice = cardPrice - discount;
 
                 //Aplica el precio con descuento
-                discountPriceButton.SetPrice((int)discountPrice);
+                discountPriceButton.SetPrice((int) discountPrice);
             }
             else//Si no existe descuento
             {
