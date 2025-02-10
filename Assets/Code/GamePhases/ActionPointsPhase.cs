@@ -81,6 +81,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             if (!hasActionPoints)
             {
+                MessageManager.Instance.ShowMessage("Not action points.");
                 Debug.LogWarning($"Not enough action points."); // No estoy muy segura
                 return;
             }
@@ -90,6 +91,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             if (!hasResources)
             {
+                MessageManager.Instance.ShowMessage("Not enough resources.");
                 Debug.LogWarning($"Not enough resources."); // No estoy muy segura
                 return;
             }
