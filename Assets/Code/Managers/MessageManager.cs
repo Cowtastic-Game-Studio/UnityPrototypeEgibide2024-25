@@ -31,12 +31,12 @@ public class MessageManager : MonoBehaviour
         }
 
         RectTransform rectTransform = messageGO.GetComponent<RectTransform>();
-        if (rectTransform != null)
-        {
-            rectTransform.anchorMin = new Vector2(1, 1);
-            rectTransform.anchorMax = new Vector2(1, 1);
-            rectTransform.pivot = new Vector2(1, 1);
-            rectTransform.anchoredPosition = new Vector2(-20, -20);
-        }
+        // if (rectTransform != null)
+        //{
+        //  rectTransform.anchorMin = new Vector2(1, 1);
+        // rectTransform.anchorMax = new Vector2(1, 1);
+        //rectTransform.pivot = new Vector2(1, 1);
+        //rectTransform.anchoredPosition = new Vector2(-20, -20);
+        //}
     }
 }
