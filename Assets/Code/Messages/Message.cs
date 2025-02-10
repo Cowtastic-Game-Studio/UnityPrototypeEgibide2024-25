@@ -1,40 +1,39 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
 using TMPro;
-namespace CowtasticGameStudio.MuuliciousHarvest
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Message : MonoBehaviour
 {
-    public class Message : MonoBehaviour
+    // Referencia al componente TextMeshProUGUI que mostrará el mensaje.
+    public TextMeshProUGUI messageText;
+
+    // (Opcional) Referencia al componente Image del fondo, por si deseas modificar su color vía código.
+    public Image backgroundImage;
+
+    // Tiempo (en segundos) que la notificación permanecerá en pantalla.
+    public float displayDuration = 3f;
+
+    // Método para asignar el texto del mensaje.
+    public void SetText(string text)
     {
-        // Asigna estas referencias en el inspector (o bien, búsquelas en Start)
-        public TextMeshProUGUI messageText;       // Referencia al componente Text que muestra el mensaje
-        public Image backgroundImage;  // Referencia al componente Image del fondo (para si deseas cambiar su color vía código)
-
-
-        // Tiempo que la notificación permanecerá en pantalla (en segundos)
-        public float displayDuration = 3f;
-
-        // Método para asignar el mensaje
-        public void SetText(string text)
+        if (messageText != null)
         {
-            if (messageText != null)
-            {
-                messageText.text = text;
-            }
-        }
-
-        // Inicia la cuenta regresiva para destruir la notificación
-        void Start()
-        {
-            StartCoroutine(HideAfterDelay());
-        }
-
-        IEnumerator HideAfterDelay()
-        {
-            yield return new WaitForSeconds(displayDuration);
-            // Puedes agregar aquí animaciones de salida si lo deseas
-            Destroy(gameObject);
+            messageText.text = text;
         }
     }
 
+    // Se inicia la cuenta regresiva para ocultar la notificación.
+    void Start()
+    {
+        StartCoroutine(HideAfterDelay());
+    }
+
+    // Corutina que espera 'displayDuration' segundos y luego destruye el objeto.
+    IEnumerator HideAfterDelay()
+    {
+        yield return new WaitForSeconds(displayDuration);
+        // Aquí podrías agregar animaciones de salida antes de destruir el objeto.
+        Destroy(gameObject);
+    }
 }
