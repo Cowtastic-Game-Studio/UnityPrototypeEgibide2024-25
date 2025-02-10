@@ -1,4 +1,3 @@
-using CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -637,10 +636,17 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         MoveLastCardsToHand(1);
                     }
 
+                    if (cardBH.Type == CardType.PlaceActivator)
+                    {
+                        MoveLastCardsToHand(1);
+                    }
+
                     if (cardBH.Type == CardType.PlaceMultiplier)
                     {
                         // Desactivo el box colaider de la carta seleccionada
                         cardBH.transform.localPosition += new Vector3(0, 0, -0.06f);
+
+                        MoveLastCardsToHand(1);
                     }
 
                     ArrangeCardsInCurve();
@@ -672,6 +678,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             card.transform.rotation = handArea.transform.rotation;
 
             playedCardsDeck.RemoveCard(card);
+
+            // ArrangeCardsInCurve();
         }
 
         private void InitHandCardLifes()
@@ -808,10 +816,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void ResetCardRotation(GameObject card)
         {
-            card.transform.SetParent(deckArea.transform); 
+            card.transform.SetParent(deckArea.transform);
             card.transform.localPosition = Vector3.zero;
-            card.transform.localRotation = Quaternion.identity; 
-            
+            card.transform.localRotation = Quaternion.identity;
+
         }
 
     }
