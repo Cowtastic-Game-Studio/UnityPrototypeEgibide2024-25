@@ -1,37 +1,47 @@
-using TMPro;
-
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class ShopItem : MonoBehaviour
     {
-        [SerializeField] private TMP_Text price;
-        [SerializeField] public CardDisplay card;
+        [SerializeField] private CardDisplay card;
 
-        private CardTemplate cardTemplate;
+        public CardTemplate cardTemplate;
+        public int price;
+        public int discountPrice;
 
         public void UpdateDisplayData(CardTemplate cardT, float discountPercentage)
         {
             cardTemplate = cardT;
             card.UpdateDisplayAndMat(cardTemplate, false);
-            float finalPrice = Utils.RoundMuuney(cardTemplate.marketCost * discountPercentage);
-            price.text = finalPrice.ToString();
+            int finalPrice = Utils.RoundMuuney(cardTemplate.marketCost * discountPercentage);
+            price = finalPrice;
+        }
+
+        public void SetDiscountPrice(int discount)
+        {
+            discountPrice = price - discount;
         }
 
         public void TriggerCard()
         {
-            // TODO: Show Card Preview
             Debug.Log("TriggerCard");
             card.UpdateDisplayAndMat(cardTemplate, false);
         }
 
-        public void TriggerPrice()
+        public void TriggerPrice(bool hasDiscount, GameObject cardToDelete)
         {
-            BuyCard(int.Parse(price.text));
+            if (hasDiscount)
+            {
+                BuyCard(discountPrice, hasDiscount, cardToDelete);
+            }
+            else
+            {
+                BuyCard(price, hasDiscount, null);
+            }
         }
 
-        public void BuyCard(int price)
+        private void BuyCard(int price, bool hasDiscount, GameObject cardToDelete)
         {
             if (GameManager.Instance.Tabletop.StorageManager.CheckMuuney(price))
             {
@@ -43,7 +53,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     if (cardTemplate.targetCardType == CardType.None && cardTemplate.targetResoruceType != GameResource.None)
                     {
                         GameManager.Instance.Tabletop.StorageManager.UpgradeStorage(cardTemplate.targetResoruceType);
-
                     }
                     else if (cardTemplate.targetCardType != CardType.None && cardTemplate.targetResoruceType == GameResource.None)
                     {
@@ -59,6 +68,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                                 GameManager.Instance.Tabletop.TavernActivateZone();
                                 break;
                         }
+
+
+                        if (hasDiscount) { GameManager.Instance.Tabletop.CardManager.TryRemoveCardsGOFromDecks(cardToDelete); }
 
                         StatisticsManager.Instance.UpdateByBuyedZone(cardTemplate.targetCardType);
                     }

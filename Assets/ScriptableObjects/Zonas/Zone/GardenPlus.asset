@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   artwork: {fileID: 2100000, guid: 1561525811516c14e9dc608f2ee61558, type: 2}
   cardType: 6
-  name: Garden +
+  name: Garden+
   description: 
   lifeCycleDays: 1
   actionPointsCost: 0
