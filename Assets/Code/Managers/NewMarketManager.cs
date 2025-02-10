@@ -234,6 +234,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             ShowHideCardPreviewZone(true);
 
             //TODO: buscar si tiene una carta de descuento
+            /**
+             * 1. Hacer una funcion en el CardManager, que busque una carta de descuento para la carta que se quiere comprar
+             *  * var cartaQueAplicaDescuento = FindDiscountForCard(string identificadorDeCartaAComprar)
+             * 2. Si encuentra cartaQueAplicaDescuento
+             *  *  A la funcion de ahi abajo \/ SetCardPrices ponerle el parametro a true, y el descuento que se quiera aplicar
+             */
 
             SetCardPrices(shopItem.card.cost, false, 0);
         }
@@ -243,8 +249,17 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             ShopItem shopItem = shopItemGO.GetComponent<ShopItem>();
             shopItemGO.GetComponent<ShopItem>()?.TriggerPrice();
 
-            //TODO: comprar con el valor del 
-
+            //TODO: Ejecutar la compra de la carta
+            /**
+             * 1. Otener el precio(hacer unas de las 3 cosas)
+             * * Se puede obtener del shop item, y hacer los mismos calculos que en SetCardPrices
+             * * Se pueden obtener del texto del boton pulsado(lo mas sencillo)
+             * * Pasar la funcion del SetCardPrices, pasarlo al shopItem(lo mas limpio) y llamarle de otra forma(GetCardPrice y GetDiscountPrices)
+             * 2. Comprobar que tiene el dinero
+             *  * Si no tiene mostrar error
+             * 3. Restar el dinero
+             * 4. Añadir la nueva carta al mazo
+             */
         }
 
         private void OnDiscountBuyButtonClicked(GameObject shopItemGO)
@@ -252,7 +267,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             ShopItem shopItem = shopItemGO.GetComponent<ShopItem>();
             shopItemGO.GetComponent<ShopItem>()?.TriggerPrice();
 
-            //TODO: comprar con el valor del boton
+            //TODO: Ejecutar la compra de la carta con descuento
+            /**
+             * 1. Usar la funcion FindDiscountForCard o guardado la carta de descuento vinculada al shop item o aqui en una variable(RECORDAR LIMPIARLA CADA VEZ QUE SE seleccione otra carta)
+             * 2. Comprobar que tiene el dinero
+             *  * Si no tiene mostrar error
+             * 3. Restar el dinero
+             * 4. Añadir la nueva carta al mazo
+             */
         }
 
 
@@ -278,28 +300,37 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             float price, discountPrice;
 
+            //Comprueba si es black friday
             if (GameManager.Instance.GameCalendar.IsVacFriday())
             {
+                //Rebaja e la mitad el precio
                 price = Utils.RoundMuuney(cardPrice / 2f);
 
+                //Le pone un color especial
                 normalPriceButton.SetVacFridayColor();
             }
-            else
+            else //Deja el precio normal
             {
                 price = cardPrice;
                 normalPriceButton.SetNormalColor();
             }
 
+            //Asigna el precio normal
             normalPriceButton.SetPrice((int)price);
 
+
+            //Si tiene descuento
             if (hasDiscount)
             {
+                //Calcula el descuento
                 discountPrice = Utils.RoundMuuney((cardPrice / 100) * discount);
 
+                //Aplica el precio con descuento
                 discountPriceButton.SetPrice((int)discountPrice);
             }
-            else
+            else//Si no existe descuento
             {
+                //Oculta el boton con descuento
                 discountPriceButton.SetActive(false);
             }
 
