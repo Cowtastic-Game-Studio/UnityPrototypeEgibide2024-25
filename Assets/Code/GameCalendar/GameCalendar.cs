@@ -147,15 +147,5 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             this.DayChanged.Invoke(this.CurrentDay);
         }
-
-        /// <summary>
-        /// Indica si el dia actual es VacFriday
-        /// </summary>
-        /// <returns></returns>
-        public bool IsVacFriday()
-        {
-            return this.DayOfMonth == 27;
-        }
-
     }
 }

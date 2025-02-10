@@ -18,7 +18,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             // Le indicamos que el tipo del recurso es
             Type = GameResource.Muuney;
-            MaxResources = 25;
+            MaxResources = 2500;
             Level = 1;
             Resource = 0;
         }

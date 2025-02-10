@@ -243,7 +243,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     temporalCardsList = allCardsList.Where(x => x.GetComponent<CardDisplay>().name == "MuussiveTavern").ToList();
                     break;
                 default:
-                    discountPercentage = 1f;
                     SetCardPrices(clickItem.card.cost, false, 0);
                     break;
             }
@@ -333,11 +332,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             //Si tiene descuento
             if (hasDiscount)
             {
+                Debug.Log(cardPrice);
                 //Calcula el descuento
                 discountPrice = cardPrice - discount;
 
+                Debug.Log(discountPrice);
                 //Aplica el precio con descuento
                 discountPriceButton.SetPrice((int) discountPrice);
+                discountPriceButton.SetActive(true);
             }
             else//Si no existe descuento
             {
