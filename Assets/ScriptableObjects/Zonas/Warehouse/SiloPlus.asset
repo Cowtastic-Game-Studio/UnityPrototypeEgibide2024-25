@@ -16,7 +16,8 @@ MonoBehaviour:
   artwork: {fileID: 2100000, guid: d28d84b6177edb847a8743cc67f9a0f8, type: 2}
   cardType: 6
   name: Silo+
-  description: 
+  description: Cereals are important and you need then in great scale , so why not
+    get a small work on your Silo
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []
