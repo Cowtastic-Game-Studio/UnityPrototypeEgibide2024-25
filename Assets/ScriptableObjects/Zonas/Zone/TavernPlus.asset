@@ -16,7 +16,7 @@ MonoBehaviour:
   artwork: {fileID: 2100000, guid: 7072a6e79cd94b4418e8a7281d50c0d4, type: 2}
   cardType: 6
   name: Tavern+
-  description: 
+  description: "Need some chairs, don\xB4t worry i have some right here"
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []

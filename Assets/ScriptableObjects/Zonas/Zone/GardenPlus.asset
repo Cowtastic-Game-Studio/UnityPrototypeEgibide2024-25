@@ -16,7 +16,8 @@ MonoBehaviour:
   artwork: {fileID: 2100000, guid: 1561525811516c14e9dc608f2ee61558, type: 2}
   cardType: 6
   name: Garden+
-  description: 
+  description: "Not enough land to hold your garden, i see, don\xB4t worry i will
+    sell you the land you need"
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []
