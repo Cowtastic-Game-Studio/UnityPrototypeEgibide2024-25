@@ -19,6 +19,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         //TODO: El Image que act�a como filtro gris
         [SerializeField] private MeshRenderer targetMeshRenderer;
         public Material newMaterial;
+        public Material baseCardMaterial;
         [SerializeField] private GameObject backCard;
 
 
@@ -31,6 +32,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 {
                     // Crea una copia de los materiales para asignar el nuevo material
                     Material[] materials = targetMeshRenderer.materials;
+                    materials[0] = baseCardMaterial;
                     materials[1] = newMaterial;
                     targetMeshRenderer.materials = materials;
 
@@ -98,6 +100,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 {
                     // Crea una copia de los materiales para asignar el nuevo material
                     Material[] materials = targetMeshRenderer.materials;
+                    materials[0] = cardTemplate.baseCard;
                     materials[1] = cardTemplate.artwork;
                     targetMeshRenderer.materials = materials;
 
