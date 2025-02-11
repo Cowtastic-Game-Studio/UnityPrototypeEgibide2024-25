@@ -55,7 +55,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             else if (discardManager.currentDiscardCount >= discardManager.maxDiscardLimit)
             {
-                MessageManager.Instance.ShowMessage("Has alcanzado el límite de tamano del mazo.");
+                MessageManager.Instance.ShowMessage("The maze size limit has been reached.");
                 //Debug.LogWarning("Has alcanzado el límite de tamano del mazo");
             }
         }
