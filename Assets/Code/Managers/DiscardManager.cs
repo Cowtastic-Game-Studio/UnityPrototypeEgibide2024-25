@@ -83,6 +83,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 var discardItem = stackedItem.GetComponent<DiscardItem>();
                 discardItem.Setup(group.First(), group.Count());
 
+
                 // Suscribirse al evento de cambio de selección
                 discardItem.OnCountChanged += UpdateTotalCost;
             }
