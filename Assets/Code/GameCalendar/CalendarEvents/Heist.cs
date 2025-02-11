@@ -38,7 +38,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (validThefts.Count == 0)
             {
                 GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(1, GameResource.Muuney, true);
-                Debug.LogWarning("Since you didn't have anything to steal, they took pity on you and left you some money.");
+                //Debug.LogWarning("Since you didn't have anything to steal, they took pity on you and left you some money.");
+                MessageManager.Instance.ShowMessage("Since you didn't have anything to steal, they took pity on you and left you some money.");
             }
             else
             {
@@ -49,17 +50,20 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 {
                     case GameResource.Milk:
                         GameManager.Instance.Tabletop.StorageManager.RemoveResourceDownToMin(theft.amount, GameResource.Milk);
-                        Debug.LogWarning($"Te han robado {theft.amount} de leche.");
+                        MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
+                        //Debug.LogWarning($"Te han robado {theft.amount} de leche.");
                         break;
 
                     case GameResource.Cereal:
                         GameManager.Instance.Tabletop.StorageManager.RemoveResourceDownToMin(theft.amount, GameResource.Cereal);
                         Debug.LogWarning($"Te han robado {theft.amount} de cereal.");
+                        MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
                         break;
 
                     case GameResource.Muuney:
                         GameManager.Instance.Tabletop.StorageManager.WasteMuuney(theft.amount);
                         Debug.LogWarning($"Te han robado {theft.amount} de muuney.");
+                        MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
                         break;
                 }
             }

@@ -102,6 +102,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
         private void OnCompleteGoal(Goal goal)
         {
+            MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
             Debug.LogWarning("Goal completed: " + goal.Description);
             goal.OnCompleted.RemoveListener(OnCompleteGoal);
             this.Updated.Invoke(this);

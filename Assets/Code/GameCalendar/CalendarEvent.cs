@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     //[CreateAssetMenu(fileName = "NewCalendarEvent", menuName = "Calendar/Event")]
@@ -45,7 +43,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public virtual void EndEvent()
         {
             isActive = false;
-            Debug.LogWarning($"Event {eventName} ended.");
+            MessageManager.Instance.ShowMessage($"Event {eventName} ended.");
+            //Debug.LogWarning($"Event {eventName} ended.");
         }
     }
 }

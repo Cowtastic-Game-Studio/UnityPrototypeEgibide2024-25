@@ -104,6 +104,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (farms.FindAll(x => !x.GetIsActive()).Count == 0)
             {
                 Debug.LogWarning("Max gardens.");
+                MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
                 return;
             }
 
@@ -113,6 +114,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 if (!farm.GetIsActive())
                 {
                     farm.SetIsActive(true);
+                    MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
                     Debug.LogWarning("Updated garden.");
                     break;
                 }
@@ -123,6 +125,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (stables.FindAll(x => !x.GetIsActive()).Count == 0)
             {
+                MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
                 Debug.LogWarning("Max stables.");
                 return;
             }
@@ -132,6 +135,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 if (!stable.GetIsActive())
                 {
                     stable.SetIsActive(true);
+                    MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
                     Debug.LogWarning("Updated stable.");
                     break;
                 }
@@ -143,6 +147,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (taverns.FindAll(x => !x.GetIsActive()).Count == 0)
             {
                 Debug.LogWarning("Max shop.");
+                MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
                 return;
             }
 
@@ -152,6 +157,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 {
                     tavern.SetIsActive(true);
                     Debug.LogWarning("Updated shop.");
+                    MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
                     break;
                 }
             }
