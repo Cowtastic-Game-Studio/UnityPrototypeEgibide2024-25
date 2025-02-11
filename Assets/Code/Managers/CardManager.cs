@@ -621,6 +621,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 if (target != null && target.gameObject.CompareTag("Place"))
                 {
+                    source.PlayOneShot(clipPlaceCard);
                     // Desactiva el arrastre
                     StopDragging();
 
