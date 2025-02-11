@@ -15,8 +15,8 @@ MonoBehaviour:
   artwork: {fileID: 2100000, guid: d892b7c4df00eaa408be5d6ab6ebb145, type: 2}
   cardType: 3
   name: Muussive Stable
-  description: "+1 box to your stable. You surely don\xB4t need that much space for
-    your cows."
+  description: " +1 box to your stable and draw a card. You surely don\xB4t need
+    that much space for your cows."
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []

@@ -15,8 +15,8 @@ MonoBehaviour:
   artwork: {fileID: 2100000, guid: 15a82d5830929db41b0ade2254384913, type: 2}
   cardType: 4
   name: Super Garden
-  description: x2 to the production of the garden box. That sure take a lot of care
-    to acomplish, you surely are a great gardener.
+  description: x2 to the production of the garden box and draw a card. That sure
+    take a lot of care to acomplish, you surely are a great gardener.
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []
