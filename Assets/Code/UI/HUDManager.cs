@@ -88,7 +88,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// Referencia al GamePhaseManager
         /// </summary>
         private GamePhaseManager gamePhaseManager;
-        [SerializeField] private CardManager CardManager;
+        private CardManager CardManager;
 
         #endregion
 
@@ -96,6 +96,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void Start()
         {
             this.gamePhaseManager = GameManager.Instance.GamePhaseManager;
+            this.CardManager = GameManager.Instance.Tabletop.CardManager;
             UpdateGUI(this.gamePhaseManager.CurrentPhase);
             UpdateResources();
         }
@@ -226,7 +227,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void HideHUD()
         {
 
-            actionPointsPanel.gameObject.SetActive(false );
+            actionPointsPanel.gameObject.SetActive(false);
             currentPhasePanel.gameObject.SetActive(false);
             muuneyPanel.gameObject.SetActive(false);
             catButton.gameObject.SetActive(false);
@@ -234,7 +235,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             exitPanel.gameObject.SetActive(false);
             mulliganButton.gameObject.SetActive(false);
             discardBtn.gameObject.SetActive(false);
-            
+
         }
 
 

@@ -2713,17 +2713,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5639421414477099762, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
   m_PrefabInstance: {fileID: 712040962}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &712040964 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9024624862584884985, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
-  m_PrefabInstance: {fileID: 712040962}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22f0981247c81fb4699b7f9aa2e84459, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &756413085
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7949,6 +7938,10 @@ PrefabInstance:
       propertyPath: HUDManager
       value: 
       objectReference: {fileID: 346624656}
+    - target: {fileID: 6326096403238561086, guid: 71a3458d7c9957240ac0acadb0dd3193, type: 3}
+      propertyPath: cameraAnimator
+      value: 
+      objectReference: {fileID: 3921763291175236244}
     - target: {fileID: 6423417759121158795, guid: 71a3458d7c9957240ac0acadb0dd3193, type: 3}
       propertyPath: m_Name
       value: StateDrivenCameras
@@ -8030,6 +8023,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71a3458d7c9957240ac0acadb0dd3193, type: 3}
+--- !u!95 &3921763291175236244 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8737116183209392595, guid: 71a3458d7c9957240ac0acadb0dd3193, type: 3}
+  m_PrefabInstance: {fileID: 3921763291175236243}
+  m_PrefabAsset: {fileID: 0}
 --- !u!33 &3971467105805975024
 MeshFilter:
   m_ObjectHideFlags: 0
