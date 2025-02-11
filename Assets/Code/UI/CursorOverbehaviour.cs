@@ -14,15 +14,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
 
 
-        //private void OnMouseEnter()
-        //{
-        //    ActivateCursor();
-        //}
+        private void OnMouseEnter()
+        {
+            ActivateCursor();
+        }
 
-        //private void OnMouseExit()
-        //{
-        //    DeActivateCursor();
-        //}
+        private void OnMouseExit()
+        {
+            DeActivateCursor();
+        }
 
         public void OnPointerEnter(PointerEventData eventData)
         {

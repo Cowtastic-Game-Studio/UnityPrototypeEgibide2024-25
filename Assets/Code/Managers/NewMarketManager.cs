@@ -137,13 +137,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                     break;
 
-                case "NormalPriceButton":
-                    Debug.Log("NormalPriceButton");
+                case "NormalPriceBuyButton":
                     OnBuyButtonClicked();
                     break;
 
-                case "DiscountPriceButton":
-                    Debug.Log("DiscountPriceButton");
+                case "DiscountPriceBuyButton":
                     OnDiscountBuyButtonClicked();
                     break;
 
@@ -263,13 +261,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
-        private void OnBuyButtonClicked()
+        public void OnBuyButtonClicked()
         {
+            Debug.Log("NormalPriceButton");
             actualShopItem.TriggerPrice(false, null);
         }
 
-        private void OnDiscountBuyButtonClicked()
+        public void OnDiscountBuyButtonClicked()
         {
+            Debug.Log("DiscountPriceButton");
             actualShopItem.TriggerPrice(true, temporalCardsList[0]);
             CheckCardsInDeck(actualShopItem);
         }
