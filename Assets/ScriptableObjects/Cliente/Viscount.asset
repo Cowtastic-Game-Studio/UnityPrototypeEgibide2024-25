@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa0e6f64fea4604f856e8d368b94e93, type: 3}
   m_Name: Viscount
   m_EditorClassIdentifier: 
+  baseCard: {fileID: 2100000, guid: e7e5a412938c62349924c8c1bfade4e2, type: 2}
   artwork: {fileID: 2100000, guid: 905bf36bdc7c0324d8936f538dce0132, type: 2}
   cardType: 2
   name: Viscount
@@ -23,10 +24,10 @@ MonoBehaviour:
     resourceQuantity: 2
   producedResources:
   - resourceType: 1
-    resourceQuantity: 2
+    resourceQuantity: 3
   marketCost: 3
-  discardCost: 5
-  dayToUnlock: 0
+  discardCost: 3
+  dayToUnlock: 14
   targetCardType: 6
   multiplier: 1
   targetResoruceType: 4

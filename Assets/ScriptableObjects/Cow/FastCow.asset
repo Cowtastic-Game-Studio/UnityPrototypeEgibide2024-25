@@ -12,21 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b4d1d63d404d74bbd7263021c46de1, type: 3}
   m_Name: FastCow
   m_EditorClassIdentifier: 
+  baseCard: {fileID: 2100000, guid: e7e5a412938c62349924c8c1bfade4e2, type: 2}
   artwork: {fileID: 2100000, guid: 72612c4b3ec61764f871d56de380851c, type: 2}
   cardType: 0
   name: Fast Cow
-  description: This cow is insane, she can run faster than the speed of sound
+  description: This cow is insane, it can run faster than the speed of sound.
   lifeCycleDays: 1
-  actionPointsCost: 1
+  actionPointsCost: 3
   requiredResources:
   - resourceType: 3
-    resourceQuantity: 3
+    resourceQuantity: 2
   producedResources:
   - resourceType: 2
     resourceQuantity: 3
-  marketCost: 8
-  discardCost: 2
-  dayToUnlock: 0
+  marketCost: 5
+  discardCost: 3
+  dayToUnlock: 7
   targetCardType: 6
   multiplier: 1
   targetResoruceType: 4

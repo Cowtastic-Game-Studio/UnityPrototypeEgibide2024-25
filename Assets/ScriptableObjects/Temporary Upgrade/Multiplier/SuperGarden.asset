@@ -12,18 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8a96622ca49dec44b0832fc9c555eed, type: 3}
   m_Name: SuperGarden
   m_EditorClassIdentifier: 
+  baseCard: {fileID: 2100000, guid: e7e5a412938c62349924c8c1bfade4e2, type: 2}
   artwork: {fileID: 2100000, guid: 15a82d5830929db41b0ade2254384913, type: 2}
   cardType: 4
   name: Super Garden
-  description: x2 to the production of the garden box. That sure take a lot of care
-    to acomplish, you surely are a great gardener.
+  description: x2 to the production of the garden box and draw a card. That sure
+    take a lot of care to acomplish, you surely are a great gardener.
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []
   producedResources: []
   marketCost: 25
   discardCost: 2
-  dayToUnlock: 0
+  dayToUnlock: 21
   targetCardType: 1
   multiplier: 2
   targetResoruceType: 3
