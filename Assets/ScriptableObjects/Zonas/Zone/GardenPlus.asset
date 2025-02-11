@@ -15,7 +15,7 @@ MonoBehaviour:
   baseCard: {fileID: 2100000, guid: edc33914b937d8244aba28c5c1eb02c5, type: 2}
   artwork: {fileID: 2100000, guid: 1561525811516c14e9dc608f2ee61558, type: 2}
   cardType: 6
-  name: Garden +
+  name: Garden+
   description: 
   lifeCycleDays: 1
   actionPointsCost: 0

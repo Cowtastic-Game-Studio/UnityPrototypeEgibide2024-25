@@ -15,7 +15,7 @@ MonoBehaviour:
   baseCard: {fileID: 2100000, guid: edc33914b937d8244aba28c5c1eb02c5, type: 2}
   artwork: {fileID: 2100000, guid: eba9195e96f0a514f82f9b19be03d071, type: 2}
   cardType: 6
-  name: Action Points +
+  name: ActionPoints+
   description: 
   lifeCycleDays: 1
   actionPointsCost: 0

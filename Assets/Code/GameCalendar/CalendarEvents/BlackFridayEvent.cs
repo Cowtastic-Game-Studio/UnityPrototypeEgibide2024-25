@@ -16,12 +16,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public override void ApplyEffects()
         {
-            GameManager.Instance.Tabletop.NewMarketManager.discountPercentage = 0.5f;
+            GameManager.Instance.Tabletop.NewMarketManager.ApplyDiscount(0.5f, true);
         }
 
         public override void EndEvent()
         {
-            GameManager.Instance.Tabletop.NewMarketManager.discountPercentage = 1f;
+            GameManager.Instance.Tabletop.NewMarketManager.ApplyDiscount(1f, false);
         }
     }
 }

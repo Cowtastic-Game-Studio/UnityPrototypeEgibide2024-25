@@ -15,16 +15,16 @@ MonoBehaviour:
   baseCard: {fileID: 2100000, guid: e7e5a412938c62349924c8c1bfade4e2, type: 2}
   artwork: {fileID: 2100000, guid: 64bb62d064f0fb0489ca6bad09d3256d, type: 2}
   cardType: 3
-  name: Muussive Garden
-  description: +1 box to your garden, There in no way you have enough seed too fill
-    the entire garden..
+  name: Muussive Stable
+  description: ' +1 box to your garden and draw a card, There in no way you have
+    enough seed too fill the entire garden.'
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []
   producedResources: []
   marketCost: 20
   discardCost: 2
-  dayToUnlock: 0
+  dayToUnlock: 14
   targetCardType: 1
   multiplier: 1
   targetResoruceType: 4

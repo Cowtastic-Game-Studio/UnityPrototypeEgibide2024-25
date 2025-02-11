@@ -16,14 +16,14 @@ MonoBehaviour:
   artwork: {fileID: 2100000, guid: d1b32019571c8a048abc28faea2101a1, type: 2}
   cardType: 3
   name: Muussive Tavern
-  description: "+1 box on your Tavern. That\xB4s a huuge tavern"
+  description: " +1 box on your Tavern and draw a card. That\xB4s a huuge tavern"
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []
   producedResources: []
   marketCost: 20
   discardCost: 2
-  dayToUnlock: 0
+  dayToUnlock: 14
   targetCardType: 2
   multiplier: 1
   targetResoruceType: 4

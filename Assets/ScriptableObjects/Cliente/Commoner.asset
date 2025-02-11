@@ -15,8 +15,8 @@ MonoBehaviour:
   baseCard: {fileID: 2100000, guid: e7e5a412938c62349924c8c1bfade4e2, type: 2}
   artwork: {fileID: 2100000, guid: 1d19ac3121b71b8418f2d3d1eee8cb92, type: 2}
   cardType: 2
-  name: Client
-  description: "Don\xB4t worry too much , doesn\xB4t look too whealthy"
+  name: Commoner
+  description: Don't worry too much, doesn't look too wealthy
   lifeCycleDays: 1
   actionPointsCost: 2
   requiredResources:
@@ -26,7 +26,7 @@ MonoBehaviour:
   - resourceType: 1
     resourceQuantity: 1
   marketCost: 1
-  discardCost: 3
+  discardCost: 5
   dayToUnlock: 0
   targetCardType: 6
   multiplier: 1

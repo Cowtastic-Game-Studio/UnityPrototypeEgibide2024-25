@@ -190,7 +190,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 //Vuelve a la mano
                 GameManager.Instance.Tabletop.CardManager.RemovePlacedCard(this.gameObject);
-
+                isActive = true;
             }
             else
             {
