@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   artwork: {fileID: 2100000, guid: d28d84b6177edb847a8743cc67f9a0f8, type: 2}
   cardType: 6
-  name: Silo +
+  name: Silo+
   description: 
   lifeCycleDays: 1
   actionPointsCost: 0

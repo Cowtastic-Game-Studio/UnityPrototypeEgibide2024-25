@@ -23,10 +23,10 @@ MonoBehaviour:
     resourceQuantity: 2
   producedResources:
   - resourceType: 1
-    resourceQuantity: 2
+    resourceQuantity: 3
   marketCost: 3
-  discardCost: 5
-  dayToUnlock: 0
+  discardCost: 3
+  dayToUnlock: 14
   targetCardType: 6
   multiplier: 1
   targetResoruceType: 4

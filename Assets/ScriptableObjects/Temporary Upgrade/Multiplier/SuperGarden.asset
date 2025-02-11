@@ -23,7 +23,7 @@ MonoBehaviour:
   producedResources: []
   marketCost: 25
   discardCost: 2
-  dayToUnlock: 0
+  dayToUnlock: 21
   targetCardType: 1
   multiplier: 2
   targetResoruceType: 3

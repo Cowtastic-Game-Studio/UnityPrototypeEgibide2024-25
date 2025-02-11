@@ -20,7 +20,7 @@ MonoBehaviour:
   actionPointsCost: 0
   requiredResources: []
   producedResources: []
-  marketCost: 20
+  marketCost: 30
   discardCost: 0
   dayToUnlock: 0
   targetCardType: 2
