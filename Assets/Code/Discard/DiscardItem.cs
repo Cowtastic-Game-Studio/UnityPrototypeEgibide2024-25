@@ -42,14 +42,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     }
                     else if (discardManager.currentDiscardCount >= discardManager.maxDiscardLimit)
                     {
-                        MessageManager.Instance.ShowMessage("No hay sucifiente dinero para descartar esta carta.");
+                        MessageManager.Instance.ShowMessage("There is not enough money to discard.");
 
                         //Debug.LogWarning("No hay sucifiente dinero para descartar esta carta.");
                     }
                 }
                 else if (discardManager.currentDiscardCount >= discardManager.maxDiscardLimit)
                 {
-                    MessageManager.Instance.ShowMessage("Has alcanzado el límite de eliminaciones para este turno.");
+                    MessageManager.Instance.ShowMessage("You have reached the card elimination limit for this turn.");
                     //Debug.LogWarning("Has alcanzado el límite de eliminaciones para este turno.");
                 }
             }
