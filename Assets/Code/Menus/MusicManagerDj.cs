@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,16 +7,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     {
 
 
-        [SerializeField]private AudioSource audioSource;
-        [SerializeField]private AudioClip audioClip;
-        [SerializeField]private List<AudioClip> listOfThemes;
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip audioClip;
+        [SerializeField] private List<AudioClip> listOfThemes;
         // Start is called before the first frame update
-        [SerializeField]int themeSelector =0;   
-    
+        [SerializeField] int themeSelector = 0;
+
         // Update is called once per frame
         void Update()
         {
-            themeSelector = Random.Range(0,listOfThemes.Count);
+
 
             MusicPlayerTheme(themeSelector);
         }
@@ -25,12 +24,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void MusicPlayerTheme(int song)
         {
 
-                if(!audioSource.isPlaying)
-                {
-                   audioClip= listOfThemes[song];
-                    audioSource.PlayOneShot(audioClip);
-                }
+            if (!audioSource.isPlaying)
+            {
+                song = Random.Range(0, listOfThemes.Count);
+                audioClip = listOfThemes[song];
+                audioSource.PlayOneShot(audioClip);
+            }
         }
-        
     }
 }

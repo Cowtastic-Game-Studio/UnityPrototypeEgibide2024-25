@@ -18,10 +18,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     public class CardManager : MonoBehaviour, ICardsManager
     {
         [SerializeField] private AudioSource source;
-        [SerializeField] private AudioClip clipStealCard,clipDiscard,clipPlaceCard, clipSelectedCard;
-        [SerializeField]
+        [SerializeField] private AudioClip clipStealCard, clipDiscard, clipPlaceCard, clipSelectedCard;
         private ButtonSoundManager buttonSoundManager;
-        private SODeck initialCards;
+        [SerializeField] private SODeck initialCards;
 
         /// <summary>
         /// Mazo de cartas.
@@ -158,7 +157,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 // Agrega la carta al mazo
                 drawDeck.Place(newCard);
             }
-            
+
             drawDeck.Shuffle();
         }
 
