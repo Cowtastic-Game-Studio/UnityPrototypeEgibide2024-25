@@ -25,8 +25,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
 
-                Debug.LogWarning("Tutorial reward has been received. 10 Muuneys and 1 Fast Cow");
-                MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
+                //Debug.LogWarning("Tutorial reward has been received. 10 Muuneys and 1 Fast Cow");
+                MessageManager.Instance.ShowMessage("Tutorial reward has been received. 10 Muuneys and 1 Fast Cow");
             };
 
             return new Reward(rewardReceiveDelegate);
@@ -50,7 +50,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
                 GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(roundedMuuney, GameResource.Muuney, true);
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
                 Debug.LogWarning("Muuney has been added: " + roundedMuuney);
-                MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
 
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
             };
@@ -65,7 +64,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
                 GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(muuney, GameResource.Muuney, true);
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
                 Debug.LogWarning("Muuney has been added: " + muuney);
-                MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
             };
 
             return new Reward(rewardReceiveDelegate);

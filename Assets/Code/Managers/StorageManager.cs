@@ -220,7 +220,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 if (espacioDisponible <= 0)
                 {
-                    MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
                     Debug.LogWarning($"The {type} storage is full.");
                     return;
                 }
@@ -229,7 +228,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Añadir la cantidad permitida sin exceder el máximo
             int cantidadAAgregar = Mathf.Min(quantity, espacioDisponible);
             storage.Resource += cantidadAAgregar;
-            MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
             Debug.Log($"Añadidos {cantidadAAgregar} {type}. Cantidad actual: {storage.Resource}/{storage.MaxResources}");
         }
 
@@ -251,7 +249,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             if (storage.Resource <= 0)
             {
-                MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
                 Debug.LogWarning($"The {type} storage is already empty.");
                 return;
             }
@@ -259,7 +256,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Determinar la cantidad a quitar sin quedar por debajo de 0
             int cantidadAQuitar = Mathf.Min(quantity, storage.Resource);
             storage.Resource -= cantidadAQuitar;
-            MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
             Debug.Log($"Quitados {cantidadAQuitar} {type}. Cantidad actual: {storage.Resource}/{storage.MaxResources}");
         }
 
@@ -330,9 +326,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             int leftResources = storage.Resource - quantity;
             if (quantity > storage.Resource || leftResources < 0)
             {
-                MessageManager.Instance.ShowMessage("Este es el mensaje de notificación");
+                MessageManager.Instance.ShowMessage("Not enough resources");
 
-                Debug.LogWarning("Not enough resources");
+                //Debug.LogWarning("Not enough resources");
                 return false;
             }
 
@@ -412,8 +408,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (_paStorage.Level > _paStorage.MaxLevel)
             {
-                MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
-                Debug.LogWarning("Reached AP storage max level.");
+                MessageManager.Instance.ShowMessage("Reached AP storage max level.");
+                //Debug.LogWarning("Reached AP storage max level.");
                 return;
             }
 
@@ -446,7 +442,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 AddLevel(_paStorage);
                 WasteMuuney(upgradeCost);
                 Debug.LogWarning("Upgraded AP storage.");
-                MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
             }
         }
 
@@ -462,7 +457,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 AddLevel(_bankStorage);
                 WasteMuuney(upgradeCost);
                 Debug.LogWarning("Upgraded bank.");
-                MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
             }
         }
 
@@ -473,8 +467,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (_fridgeStorage.Level > _fridgeStorage.MaxLevel)
             {
-                Debug.LogWarning("Reached Fridge max level.");
-                MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
+                //Debug.LogWarning("Reached Fridge max level.");
+                MessageManager.Instance.ShowMessage("Reached Fridge max level.");
                 return;
             }
 
@@ -484,7 +478,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 AddLevel(_fridgeStorage);
                 WasteMuuney(15);
                 Debug.LogWarning("Upgraded fridge.");
-                MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
                 StatisticsManager.Instance.UpdateByBuyedZone(GameResource.Milk);
             }
         }
@@ -496,8 +489,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (_silo.Level > _silo.MaxLevel)
             {
-                Debug.LogWarning("Reached Silo max level.");
-                MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
+                // Debug.LogWarning("Reached Silo max level.");
+                MessageManager.Instance.ShowMessage("Reached Silo max level.");
                 return;
             }
 
@@ -506,7 +499,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 _silo.MaxResources += 4;
                 AddLevel(_silo);
                 WasteMuuney(10);
-                MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
                 Debug.LogWarning("Upgraded silo.");
                 StatisticsManager.Instance.UpdateByBuyedZone(GameResource.Cereal);
             }

@@ -262,8 +262,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             if (discardCards.Count == 0)
             {
-                MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
-                Debug.LogWarning("No hay cartas en el mazo de descarte para barajar."); // ESTA NO
+                MessageManager.Instance.ShowMessage("No hay cartas en el mazo de descarte para barajar.");
+                //Debug.LogWarning("No hay cartas en el mazo de descarte para barajar."); // ESTA NO
                 return;
             }
             // Mueve las cartas de nuevo al mazo de robo
@@ -746,8 +746,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 CardBehaviour cardBH = newCard.GetComponent<CardBehaviour>();
                 cardBH.setCardTemplate(cardTemplate);
-                MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
-                Debug.LogWarning($"Card buyed {cardName}");
+                MessageManager.Instance.ShowMessage($"Card buyed {cardName}");
+                //Debug.LogWarning($"Card buyed {cardName}");
 
                 // Agrega la carta al mazo
                 drawDeck.Place(newCard);

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class LuckStrike : CalendarEvent
@@ -24,8 +22,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Añadir dinero y actualizar hud
             GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(roundedMuuney, GameResource.Muuney, true);
             GameManager.Instance.Tabletop.HUDManager.UpdateResources();
-            Debug.LogWarning("Added muuney: " + roundedMuuney);
-            MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
+            //Debug.LogWarning("Added muuney: " + roundedMuuney);
+            MessageManager.Instance.ShowMessage("Added muuney: " + roundedMuuney);
         }
 
         public override void EndEvent()

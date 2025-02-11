@@ -112,7 +112,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Ejecutar la acción de la carta y producir/consumir los recursos necesarios
             isProduced = GameManager.Instance.Tabletop.StorageManager.ProduceResources();
             Debug.Log($"Action executed for card {selectedCard.Name}.");
-            MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
 
             if (isProduced)
             {
@@ -120,7 +119,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 cardBehaviour.Deactivate();
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
                 StatisticsManager.Instance.UpdateByType(selectedCard);
-                MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
                 Debug.LogWarning("Resources have been produced :)"); // No estoy muy segura
             }
 
