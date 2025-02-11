@@ -122,7 +122,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 }
 
                 var storage = GetStorage<IStorage>(producedType);
-                AddResources(producedQuantity, storage);
+                AddResources(producedQuantity, storage, true);
                 StatisticsManager.Instance.UpdateByResource(producedType, producedQuantity, false);
             }
 
@@ -195,6 +195,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             typeResource = GameResource.None;
         }
 
+
         /// <summary>
         /// Añade una cantidad específica de recurso a un almacenamiento determinado, 
         /// pero si sobrepasa el almacenamiento máximo, lo ajusta al máximo permitido.
@@ -203,7 +204,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <param name="type">El tipo de recurso.</param>
         public void AddResourceUpToMax(int quantity, GameResource type, bool isUpToMax)
         {
-            var storage = GetStorage<IStorage>(type);
+            IStorage storage = GetStorage<IStorage>(type);
 
             if (storage == null)
             {
@@ -211,24 +212,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 return;
             }
 
-            int espacioDisponible = storage.Resource;
-            if (isUpToMax)
-            {
-                // Calcular espacio restante
-                espacioDisponible = storage.MaxResources - storage.Resource;
-
-                if (espacioDisponible <= 0)
-                {
-                    Debug.LogWarning($"The {type} storage is full.");
-                    return;
-                }
-            }
-
-            // Añadir la cantidad permitida sin exceder el máximo
-            int cantidadAAgregar = Mathf.Min(quantity, espacioDisponible);
-            storage.Resource += cantidadAAgregar;
-
-            Debug.Log($"Añadidos {cantidadAAgregar} {type}. Cantidad actual: {storage.Resource}/{storage.MaxResources}");
+            AddResources(quantity, storage, isUpToMax);
         }
 
         /// <summary>
@@ -239,7 +223,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <param name="type">El tipo de recurso.</param>
         public void RemoveResourceDownToMin(int quantity, GameResource type)
         {
-            var storage = GetStorage<IStorage>(type);
+            IStorage storage = GetStorage<IStorage>(type);
 
             if (storage == null)
             {
@@ -247,18 +231,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 return;
             }
 
-            if (storage.Resource <= 0)
-            {
-                Debug.LogWarning($"The {type} storage is already empty.");
-                return;
-            }
-
-            // Determinar la cantidad a quitar sin quedar por debajo de 0
-            int cantidadAQuitar = Mathf.Min(quantity, storage.Resource);
-            storage.Resource -= cantidadAQuitar;
-
-            Debug.Log($"Quitados {cantidadAQuitar} {type}. Cantidad actual: {storage.Resource}/{storage.MaxResources}");
+            RemoveResources(quantity, storage);
         }
+
 
         public void UpgradeStorage(GameResource resource)
         {
@@ -353,14 +328,36 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return true;
         }
 
-        private void AddResources(int quantity, IStorage storage)
+        private void AddResources(int quantity, IStorage storage, bool isUpToMax)
         {
-            storage.Resource += quantity;
+            int leftSpace = storage.Resource;
+
+            if (isUpToMax)
+            {
+                leftSpace = storage.MaxResources - storage.Resource;
+                if (leftSpace <= 0)
+                {
+                    Debug.LogWarning($"The storage is full.");
+                    return;
+                }
+            }
+
+            int quantityToAdd = Mathf.Min(quantity, leftSpace);
+            storage.Resource += quantityToAdd;
         }
 
         private void RemoveResources(int quantity, IStorage storage)
         {
             storage.Resource -= quantity;
+
+            if (storage.Resource <= 0)
+            {
+                Debug.LogWarning("The storage is already empty.");
+                return;
+            }
+
+            int quantityToRemove = Mathf.Min(quantity, storage.Resource);
+            storage.Resource -= quantityToRemove;
         }
 
         /// <summary>
