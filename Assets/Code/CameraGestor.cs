@@ -23,6 +23,7 @@ public class CameraGestor : MonoBehaviour
 
     [SerializeField] private HUDManager HUDManager;
 
+
     private void Awake()
     {
         // Inicializar el Input System        
@@ -101,6 +102,7 @@ public class CameraGestor : MonoBehaviour
 
     private void SwitchToCamera(CinemachineVirtualCamera targetCamera, string cameraState)
     {
+        HUDManager.HideHUD();
         //Debug.Log("Cambiando a cámara: " + cameraState);
         cameraState = cameraState.Replace(" ", "");
 

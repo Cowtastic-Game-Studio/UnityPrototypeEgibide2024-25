@@ -91,6 +91,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// Referencia al GamePhaseManager
         /// </summary>
         private GamePhaseManager gamePhaseManager;
+        private CardManager CardManager;
 
         #endregion
 
@@ -98,6 +99,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void Start()
         {
             this.gamePhaseManager = GameManager.Instance.GamePhaseManager;
+            this.CardManager = GameManager.Instance.Tabletop.CardManager;
             UpdateGUI(this.gamePhaseManager.CurrentPhase);
             UpdateResources();
         }
@@ -149,6 +151,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             int milk = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Milk);
             int muuney = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Muuney);
 
+
+
             actionPointTextUI.text = pa.ToString() + "/" + paMax.ToString();
             wheatResourceTextUI.text = wheat.ToString() + "/" + wheatMax.ToString();
             milkResourceTextUI.text = milk.ToString() + "/" + milkMax.ToString();
@@ -173,17 +177,22 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 exitPanel.gameObject.SetActive(false);
                 catButton.gameObject.SetActive(false);
                 savePanel.gameObject.SetActive(false);
+                //discardBtn.gameObject.SetActive(true);
+                CardManager.showHand();
+
             }
             else if (activeCamera.gameObject.name == "VirtualCameraDerecha")
             {
                 // Mostrar fase actual y dinero
                 currentPhasePanel.gameObject.SetActive(true);
                 muuneyPanel.gameObject.SetActive(true);
+                discardBtn.gameObject.SetActive(true);
+
                 actionPointsPanel.gameObject.SetActive(false);
                 exitPanel.gameObject.SetActive(false);
                 catButton.gameObject.SetActive(false);
                 savePanel.gameObject.SetActive(false);
-
+                CardManager.hideHand();
 
 
             }
@@ -196,6 +205,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 exitPanel.gameObject.SetActive(false);
                 catButton.gameObject.SetActive(true);
                 savePanel.gameObject.SetActive(true);
+                discardBtn.gameObject.SetActive(false);
+                CardManager.hideHand();
+
+
 
 
             }
@@ -208,8 +221,24 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 exitPanel.gameObject.SetActive(true);
                 catButton.gameObject.SetActive(false);
                 savePanel.gameObject.SetActive(false);
+                discardBtn.gameObject.SetActive(false);
+                CardManager.hideHand();
+
 
             }
+        }
+        public void HideHUD()
+        {
+
+            actionPointsPanel.gameObject.SetActive(false);
+            currentPhasePanel.gameObject.SetActive(false);
+            muuneyPanel.gameObject.SetActive(false);
+            catButton.gameObject.SetActive(false);
+            savePanel.gameObject.SetActive(false);
+            exitPanel.gameObject.SetActive(false);
+            mulliganButton.gameObject.SetActive(false);
+            discardBtn.gameObject.SetActive(false);
+
         }
 
 
@@ -241,12 +270,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             else if (currentPhase is ActionPointsPhase)
             {
-
+                resourcesPanel.SetActive(true);
             }
             else if (currentPhase is MarketPhase)
             {
                 HideActionPointsPanel();
                 ShowMarket();
+
             }
 
             UpdatePhaseText(currentPhase);
@@ -292,7 +322,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void ShowActionPointsPanel()
         {
             actionPointsPanel.SetActive(true);
-            resourcesPanel.SetActive(true);
+            resourcesPanel.SetActive(false);
         }
 
         private void ShowMarket()
