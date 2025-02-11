@@ -98,6 +98,18 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 GameManager.Instance.Tabletop.CardManager.StopDragging();
             }
+            if (State.Equals(CardState.onHand))
+            {
+                GameManager.Instance.Tabletop.CardManager.SetHoveredCard(this);
+            }
+        }
+
+        private void OnMouseExit()
+        {
+            if (State.Equals(CardState.onHand))
+            {
+                GameManager.Instance.Tabletop.CardManager.ClearHoveredCard(this);
+            }
         }
 
         #endregion
@@ -154,7 +166,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             CardDisplay display = GetComponent<CardDisplay>();
             if (display != null)
             {
-                display.UpdateDisplay(template, isActive);
+                display.UpdateDisplayAndMat(template, isActive);
                 // Llama al m�todo para activar/desactivar el overlay
                 // display.SetOverlayActive(!isActive);
             }
@@ -178,7 +190,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 //Vuelve a la mano
                 GameManager.Instance.Tabletop.CardManager.RemovePlacedCard(this.gameObject);
-
+                isActive = true;
             }
             else
             {
@@ -187,6 +199,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     // Verifica si la carta est� en la layer 'CardLayer'
                     if (gameObject.layer == LayerMask.NameToLayer("CardLayer"))
                     {
+                        var placeSpace = transform.parent?.GetComponent<PlaceSpaceBehaviour>();
+                        if (placeSpace != null)
+                        {
+                            placeSpace.updateEmpty();
+                        }
+
                         InvokeCardClicked();
                     }
                 }

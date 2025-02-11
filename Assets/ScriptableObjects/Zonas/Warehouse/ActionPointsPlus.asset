@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49a391d00c55ea488932e8659b04053, type: 3}
   m_Name: ActionPointsPlus
   m_EditorClassIdentifier: 
+  baseCard: {fileID: 2100000, guid: edc33914b937d8244aba28c5c1eb02c5, type: 2}
   artwork: {fileID: 2100000, guid: eba9195e96f0a514f82f9b19be03d071, type: 2}
   cardType: 6
-  name: Action Points +
+  name: ActionPoints+
   description: 
   lifeCycleDays: 1
   actionPointsCost: 0

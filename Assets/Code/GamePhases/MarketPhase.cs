@@ -33,8 +33,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (currentDay > 1)
             {
                 GameManager.Instance.Tabletop.NewMarketManager.RestartMarket();
-
             }
+
+            GameManager.Instance.Tabletop.DiscardManager.ResetDiscardCount();
         }
 
         public void ExecutePhase()
@@ -49,13 +50,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // C�digo para finalizar la fase
 
             //pasar al siguiente dia
-            GameManager.Instance.GameCalendar.NextDay();
+            //GameManager.Instance.GameCalendar.NextDay();
 
             // Establecemos los PAs en su valor por defecto
             GameManager.Instance.Tabletop.StorageManager.RestartPA();
             GameManager.Instance.Tabletop.HUDManager.UpdateResources();
 
             //StatisticsManager.Instance.ShowStatistics();
+
+            GameManager.Instance.Tabletop.DiscardManager.CloseMenu();
         }
     }
 }

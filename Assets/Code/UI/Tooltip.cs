@@ -13,14 +13,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private float storageHoverCounter = 0f;
         private float cardHoverCounter = 0f;
 
-        private bool isHoveringStorage = false;
         private bool isHoveringCard = false;
         private GameObject currentHoveredCard = null;
 
         void Start()
         {
-            storagePanel?.SetActive(false);
-            cardTooltip?.SetActive(false);
+            storagePanel.SetActive(false);
+            cardTooltip.SetActive(false);
         }
 
         void Update()
@@ -33,7 +32,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             else
             {
-                ResetStorageHover();
+                // storagePanel.SetActive(false);
                 ResetCardHover();
             }
         }
@@ -42,22 +41,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (hit.collider.CompareTag("Storage"))
             {
-                if (!isHoveringStorage)
-                {
-                    isHoveringStorage = true;
-                    storageHoverCounter = 0f;
-                }
+                storagePanel.SetActive(true);
 
-                storageHoverCounter += Time.deltaTime;
-
-                if (storageHoverCounter >= hoverTime)
-                {
-                    storagePanel.SetActive(true);
-                }
+            }
+            else if (GameManager.Instance.GamePhaseManager.CurrentPhase is ActionPointsPhase)
+            {
+                storagePanel.SetActive(true);
             }
             else
             {
-                ResetStorageHover();
+                storagePanel.SetActive(false);
             }
         }
 
@@ -85,12 +78,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         CardBehaviour cardTool = cardTooltip.GetComponent<CardBehaviour>();
                         CardDisplay cardToolDisplay = cardTool.GetComponent<CardDisplay>();
 
-                        cardToolDisplay.UpdateDisplay(selctedCardBehaviour.GetTemplate(), false);
-
-                        // Mueve el cardTooltip a la posición del ratón
-                        //Vector3 mousePosition = Input.mousePosition;                    
-                        //Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-                        //cardTooltip.transform.position = worldPosition;
+                        cardToolDisplay.UpdateDisplayAndMat(selctedCardBehaviour.GetTemplate(), false);                        
 
                         cardTooltip.SetActive(true);
                     }
@@ -100,13 +88,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     ResetCardHover();
                 }
             }
-        }
-
-        private void ResetStorageHover()
-        {
-            isHoveringStorage = false;
-            storageHoverCounter = 0f;
-            storagePanel.SetActive(false);
         }
 
         private void ResetCardHover()

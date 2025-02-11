@@ -90,15 +90,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             eventManager.EndActiveEvent();
 
             DayOfMonth++;
-            Debug.Log("CurrentDay: " + CurrentDay);
-            Debug.Log("CurrentWeek: " + CurrentWeek);
 
-            if (CurrentDay % 7 == 0 && !isFirstWeek)
+            if (CurrentDay % 7 == 0)
             {
-                Debug.Log("He entrado");
-
                 CurrentWeek++;
-                MissionsManager.Instance.RenewWeeklyMission();
+
+                if (CurrentWeek > 1)
+                {
+                    MissionsManager.Instance.RenewWeeklyMission();
+                }
             }
             if (DayOfMonth % 29 == 0) // 29 seria principio de mes
             {
@@ -111,7 +111,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
 
             CurrentDay++;
-            isFirstWeek = false;
+
+            //Debug.Log("CurrentDay: " + CurrentDay + " CurrentWeek: " + CurrentWeek);
+            //Debug.Log("DayOfMonth: " + DayOfMonth);
 
             ChangeCallendar();
 
@@ -145,15 +147,5 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             this.DayChanged.Invoke(this.CurrentDay);
         }
-
-        /// <summary>
-        /// Indica si el dia actual es VacFriday
-        /// </summary>
-        /// <returns></returns>
-        public bool IsVacFriday()
-        {
-            return this.DayOfMonth == 27;
-        }
-
     }
 }

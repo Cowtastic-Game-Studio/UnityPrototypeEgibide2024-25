@@ -55,13 +55,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                TogglePause();
-            }
-        }
+        //void Update()
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Escape))
+        //    {
+        //        TogglePause();
+        //    }
+        //}
 
         public void TogglePause()
         {
@@ -75,8 +75,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void NewGame()
         {
+            SceneManager.LoadScene("Muulicious Harvest", LoadSceneMode.Single);
             audioSource.PlayOneShot(audioClip);
-            SceneManager.LoadScene("Pruebas3dMenus", LoadSceneMode.Single);
             isPaused = false;
             Time.timeScale = 1;
         }
@@ -93,14 +93,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             audioSource.PlayOneShot(audioClip);
             SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
-            isPaused = false;
-            Time.timeScale = 1;
-        }
-
-        public void MainMenuGameOver()
-        {
-            audioSource.PlayOneShot(audioClip);
-            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
             isPaused = false;
             Time.timeScale = 1;
         }

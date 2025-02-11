@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f280cbee807c61a43b83afed36a2c197, type: 3}
   m_Name: Seed
   m_EditorClassIdentifier: 
+  baseCard: {fileID: 2100000, guid: e7e5a412938c62349924c8c1bfade4e2, type: 2}
   artwork: {fileID: 2100000, guid: fa23842a54458b34f9c3e4443ec5aeca, type: 2}
   cardType: 1
   name: Wheat seed
-  description: 
+  description: "Just an ordinary wheat seed, it\xB4ll grow into wheat"
   lifeCycleDays: 1
   actionPointsCost: 1
   requiredResources: []

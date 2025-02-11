@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -64,13 +65,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// Espaciado entre cartas en la mano.
         /// </summary>
         [SerializeField]
-        private float cardSpacing = 0.4f;
+        private float cardSpacing = 0.1f;
 
         /// <summary>
         /// Variable para definir desde el editor la cantidad de cartas a robar por turno.
         /// </summary>
         [SerializeField]
         private int drawCards = 5;
+
+        private float hoveredHeight = 0.2f;
 
         //TODO: revisar esto en clase, usar las Propiedades en mayus, da problemas si no se gestiona bien
         // Properties implementing ICardsManager
@@ -81,6 +84,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         //Place card
         private GameObject selectedCard = null;
+        private CardBehaviour hoveredCard = null;
 
         private bool isDragging = false;
         public bool IsDraggingCard => isDragging;
@@ -196,25 +200,50 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
 
             // Organizar las cartas en la mano
-            ArrangeHand();
+            //ArrangeHand();
+            ArrangeCardsInCurve();
         }
 
-        private void ArrangeHand()
+        void ArrangeCardsInCurve()
         {
-            // Crea una lista temporal de cartas en la mano
             List<GameObject> cardsInHand = new List<GameObject>(handDeck.Cards.ToArray());
+            int cardCount = cardsInHand.Count;
+            if (cardCount == 0) return;
 
-            for (int i = 0; i < cardsInHand.Count; i++)
+            float baseArcAngle = 15f; // Ángulo base para 5 cartas
+            float arcAngle = Mathf.Clamp(baseArcAngle + (cardCount - 5) * 4f, 15f, 50f); // Ajuste dinámico
+            float radius = Mathf.Clamp(3.5f + (cardCount - 5) * 0.2f, 3f, 5f); // Radio ajustado
+
+            // Reducir la separación cuando solo hay 2 cartas
+            if (cardCount == 2) arcAngle = 5f;
+            if (cardCount == 1) arcAngle = 0f;
+
+            float startAngle = -arcAngle / 2f;
+            float angleStep = cardCount > 1 ? arcAngle / (cardCount - 1) : 0;
+
+            for (int i = 0; i < cardCount; i++)
             {
-                GameObject card = cardsInHand[i]; // Obtén la carta de la lista temporal
+                GameObject card = cardsInHand[i];
                 if (card != null)
                 {
-                    // Cambia la posición de la carta en la mano
-                    card.transform.localPosition = new Vector3(i * cardSpacing, 0, 0);
-                    card.transform.localRotation = Quaternion.identity;
+                    float angle = startAngle + (angleStep * i);
+                    float radian = angle * Mathf.Deg2Rad;
+
+                    // Posición en curva
+                    Vector3 cardPosition = new Vector3(
+                        Mathf.Sin(radian) * radius,
+                        Mathf.Cos(radian) * radius - radius,
+                        i * -0.015f
+                    );
+
+                    // Rotación para que sigan la curva
+                    Quaternion cardRotation = Quaternion.Euler(0, 0, -angle * 0.75f);
+
+                    // Aplicar transformaciones                   
+                    cardsInHand[i].transform.localPosition = cardPosition;
+                    cardsInHand[i].transform.localRotation = cardRotation;
                     var cardBH = card.GetComponent<CardBehaviour>();
                     cardBH.IsPlaced = false;
-                    cardBH.PositionInHand = i * cardSpacing;
                 }
             }
         }
@@ -243,10 +272,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Mueve las cartas de nuevo al mazo de robo
             foreach (ICard card in discardCards)
             {
-                GameObject cardGameObject = ((MonoBehaviour) card).gameObject;
+                GameObject cardGameObject = ((MonoBehaviour)card).gameObject;
                 cardGameObject.transform.SetParent(deckArea);
                 cardGameObject.transform.localPosition = Vector3.zero;
                 cardGameObject.transform.localRotation = Quaternion.identity;
+
+                ResetCardRotation(cardGameObject);
                 drawDeck.Place(cardGameObject); // Vuelve a colocar en el mazo
             }
             // Baraja el mazo
@@ -272,10 +303,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         cardToMove.transform.localPosition = Vector3.zero;
 
                         SetCardState(cardToMove, CardState.onDeck);
+                        ResetCardRotation(cardToMove);
                     }
                 }
                 drawDeck.Shuffle();
                 this.MoveLastCardsToHand(handNumber - 1);
+
+                ArrangeCardsInCurve();
 
                 //esconder botón mulligan si no hay más de una carta en la mano
                 if (handDeck.Cards.Count <= 1)
@@ -418,6 +452,40 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
+        /// <summary>
+        /// Resaltar la carta de la mano al hacer hover
+        /// </summary>
+        /// <param name="card"></param>
+        public void SetHoveredCard(CardBehaviour card)
+        {
+            if (card.Equals(hoveredCard)) return;
+            if (hoveredCard)
+            {
+                hoveredCard.gameObject.transform.localPosition = new Vector3(hoveredCard.gameObject.transform.localPosition.x, hoveredCard.gameObject.transform.localPosition.y, hoveredCard.gameObject.transform.localPosition.z - hoveredHeight);
+            }
+            card.gameObject.transform.localPosition = new Vector3(card.gameObject.transform.localPosition.x, card.gameObject.transform.localPosition.y, card.gameObject.transform.localPosition.z + hoveredHeight);
+            hoveredCard = card;
+
+        }
+
+        /// <summary>
+        /// Resetear el resaltado de la carta caundo se deja de hacer hover
+        /// </summary>
+        /// <param name="card"></param>
+        public void ClearHoveredCard(CardBehaviour card)
+        {
+            if (hoveredCard == card)
+            {
+                hoveredCard.gameObject.transform.localPosition = new Vector3(
+                    hoveredCard.gameObject.transform.localPosition.x,
+                    hoveredCard.gameObject.transform.localPosition.y,
+                    hoveredCard.gameObject.transform.localPosition.z - hoveredHeight
+                );
+                hoveredCard = null;
+            }
+        }
+
+
         //drag and drop
 
         public GameObject SelectedCard
@@ -450,6 +518,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 // Guarda la posición original de la carta
                 originalPosition = card.transform.position;
 
+                ResetCardRotation(card);
                 StartDragging();
             }
         }
@@ -457,6 +526,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void StartDragging()
         {
             isDragging = true;
+
+            // Ocultar todas las cartas en la mano excepto la seleccionada
+            foreach (Transform card in handArea.transform)
+            {
+                if (card.gameObject != selectedCard)
+                {
+                    card.gameObject.SetActive(false);
+                }
+            }
 
             //roatcion para que la carta mire a camara
             if (selectedCard.transform.parent.CompareTag("Place") && selectedCard.transform.rotation.y != 180 && selectedCard.transform.rotation.y != -90)
@@ -469,6 +547,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     placeSpace.updateEmpty();
                 }
             }
+
+
         }
 
         public void StopDragging()
@@ -476,10 +556,24 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (isDragging && selectedCard != null)
             {
                 // Devuelve la carta a su posición original
-                selectedCard.transform.position = originalPosition;
+                if (playedCardsDeck.Cards.Contains(selectedCard))
+                    selectedCard.transform.position = originalPosition;
+                else
+                    selectedCard.transform.SetParent(handArea);
             }
 
             isDragging = false;
+
+            //handDeck.Place(selectedCard);
+            //playedCardsDeck.RemoveCard(selectedCard);
+
+            //ArrangeCardsInCurve();
+
+            // Mostrar todas las cartas en la mano nuevamente
+            foreach (Transform card in handArea.transform)
+            {
+                card.gameObject.SetActive(true);
+            }
         }
 
         public void UpdatePlacement()
@@ -490,7 +584,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 if (Input.GetMouseButtonDown(1))
                 {
+
+                    //handDeck.Place(selectedCard);
+                    //playedCardsDeck.RemoveCard(selectedCard);
+
                     StopDragging();
+
+                    ArrangeCardsInCurve();
                 }
             }
         }
@@ -558,6 +658,20 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         MoveLastCardsToHand(1);
                     }
 
+                    if (cardBH.Type == CardType.PlaceActivator)
+                    {
+                        MoveLastCardsToHand(1);
+                    }
+
+                    if (cardBH.Type == CardType.PlaceMultiplier)
+                    {
+                        // Desactivo el box colaider de la carta seleccionada
+                        cardBH.transform.localPosition += new Vector3(0, 0, -0.06f);
+
+                        MoveLastCardsToHand(1);
+                    }
+
+                    ArrangeCardsInCurve();
                 }
             }
         }
@@ -581,10 +695,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             cardBH.IsPlaced = false;
 
             card.transform.SetParent(handArea);
-            card.transform.localPosition = new Vector3(cardBH.PositionInHand.Value, 0, 0);
-            card.transform.rotation = handArea.transform.rotation;
+
+            card.transform.localPosition = Vector3.zero;
+            card.transform.localRotation = Quaternion.identity;
 
             playedCardsDeck.RemoveCard(card);
+
+            ArrangeCardsInCurve();
         }
 
         private void InitHandCardLifes()
@@ -641,7 +758,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 // Agrega la carta al mazo
                 drawDeck.Place(newCard);
-
+                ArrangeCardsInCurve();
                 //StatisticsManager.UpdateByBuyedCard(cardBH);
                 StatisticsManager.Instance.UpdateByStatisticType(StatisticType.CardsPurchased, 1);
             }
@@ -652,18 +769,111 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return selectedCard;
         }
 
-        //GameObject card = null;
-        //string path = "Cards/Prefab/" + cardName;
+        public List<GameObject> getAllCardsList()
+        {
+            return discardDeck.Cards.Concat(
+                    drawDeck.Cards).Concat(
+                    playedCardsDeck.Cards).ToList();
+        }
 
-        //card = Resources.Load<GameObject>(path);
-        //if (card != null)
-        //{
-        //    GameObject newCard = Instantiate(card, deckArea);
-        //    newCard.transform.SetParent(deckArea.transform);
-        //    newCard.transform.localPosition = Vector3.zero;
+        public void showHand()
+        {
+            handArea.gameObject.SetActive(true);
+        }
+        public void hideHand()
+        {
+            handArea.gameObject.SetActive(false);
+        }
+        public void DeleteCards(List<CardToDelete> cardsToDelete)
+        {
+            foreach (var cardToDelete in cardsToDelete)
+            {
+                // Buscar cartas del tipo especificado en el discardDeck, drawDeck, y playedCardsDeck
+                int remainingQuantity = cardToDelete.Quantity;
 
-        //    // Agrega la carta al mazo
-        //    drawDeck.Place(newCard);
-        //}
+                // Intentar eliminar cartas del discardDeck
+                remainingQuantity = TryRemoveCardsFromDeck(discardDeck, cardToDelete.CardType, remainingQuantity);
+
+                // Intentar eliminar cartas del drawDeck
+                if (remainingQuantity > 0)
+                {
+                    remainingQuantity = TryRemoveCardsFromDeck(drawDeck, cardToDelete.CardType, remainingQuantity);
+                }
+
+                // Intentar eliminar cartas del playedCardsDeck
+                if (remainingQuantity > 0)
+                {
+                    remainingQuantity = TryRemoveCardsFromDeck(playedCardsDeck, cardToDelete.CardType, remainingQuantity);
+                }
+
+                // Si aún queda alguna cantidad no eliminada, puedes manejarlo si es necesario
+                if (remainingQuantity > 0)
+                {
+                    Debug.LogWarning($"No se pudieron eliminar todas las cartas del tipo {cardToDelete.CardType}. Cartas restantes: {remainingQuantity}");
+                }
+            }
+        }
+
+        private int TryRemoveCardsFromDeck(IDeck deck, CardType cardType, int quantityToRemove)
+        {
+            // Filtrar las cartas del deck que coincidan con el tipo especificado
+            var cardsToRemove = deck.Cards.Where(card => card.GetComponent<CardBehaviour>()?.GetTemplate().cardType == cardType).ToList();
+
+            // Limitar la cantidad a eliminar según la cantidad restante
+            int cardsRemoved = 0;
+
+            // Eliminar cartas hasta que la cantidad a eliminar sea 0 o no haya más cartas que coincidan
+            foreach (var card in cardsToRemove)
+            {
+                if (cardsRemoved >= quantityToRemove)
+                    break;
+
+                // Llamar a la función RemoveCard para eliminar la carta
+                deck.RemoveCard(card);
+                RemoveCard(card); // Llamar al método RemoveCard correspondiente
+
+                cardsRemoved++;
+            }
+
+            return quantityToRemove - cardsRemoved;
+        }
+
+        public void TryRemoveCardsGOFromDecks(GameObject cardToDelete)
+        {
+            if (discardDeck.Cards.Contains(cardToDelete))
+            {
+                discardDeck.RemoveCard(cardToDelete);
+                RemoveCard(cardToDelete);
+            }
+            else if (drawDeck.Cards.Contains(cardToDelete))
+            {
+                drawDeck.RemoveCard(cardToDelete);
+                RemoveCard(cardToDelete);
+            }
+            else if (playedCardsDeck.Cards.Contains(cardToDelete))
+            {
+                playedCardsDeck.RemoveCard(cardToDelete);
+                RemoveCard(cardToDelete);
+            }
+            else
+            {
+                Debug.Log("Miau Miau Miau Miau... :(");
+            }
+        }
+
+        private void RemoveCard(GameObject card)
+        {
+            // Lógica de eliminación de carta (esta es la función que debe eliminar la carta en el juego)
+            Destroy(card);  // Aquí solo se usa Destroy para eliminarla de la escena
+        }
+
+        private void ResetCardRotation(GameObject card)
+        {
+            card.transform.SetParent(deckArea);
+            card.transform.localPosition = Vector3.zero;
+            card.transform.localRotation = Quaternion.identity;
+
+        }
+
     }
 }

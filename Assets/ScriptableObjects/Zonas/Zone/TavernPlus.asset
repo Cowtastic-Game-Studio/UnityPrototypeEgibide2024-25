@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49a391d00c55ea488932e8659b04053, type: 3}
   m_Name: TavernPlus
   m_EditorClassIdentifier: 
-  artwork: {fileID: 2100000, guid: 905bf36bdc7c0324d8936f538dce0132, type: 2}
+  baseCard: {fileID: 2100000, guid: edc33914b937d8244aba28c5c1eb02c5, type: 2}
+  artwork: {fileID: 2100000, guid: 7072a6e79cd94b4418e8a7281d50c0d4, type: 2}
   cardType: 6
-  name: Tavern +
+  name: Tavern+
   description: 
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []
   producedResources: []
-  marketCost: 20
+  marketCost: 30
   discardCost: 0
   dayToUnlock: 0
   targetCardType: 2

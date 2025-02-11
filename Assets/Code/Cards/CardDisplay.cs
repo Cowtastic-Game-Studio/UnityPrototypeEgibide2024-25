@@ -19,6 +19,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         //TODO: El Image que act�a como filtro gris
         [SerializeField] private MeshRenderer targetMeshRenderer;
         public Material newMaterial;
+        public Material baseCardMaterial;
+        [SerializeField] private GameObject backCard;
+
 
         void Awake()
         {
@@ -29,6 +32,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 {
                     // Crea una copia de los materiales para asignar el nuevo material
                     Material[] materials = targetMeshRenderer.materials;
+                    materials[0] = baseCardMaterial;
                     materials[1] = newMaterial;
                     targetMeshRenderer.materials = materials;
 
@@ -37,7 +41,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             else
             {
-                Debug.LogError("Falta asignar el MeshRenderer o el nuevo material.");
+                Debug.LogWarning("Falta asignar el MeshRenderer o el nuevo material.");
             }
         }
 
@@ -96,6 +100,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 {
                     // Crea una copia de los materiales para asignar el nuevo material
                     Material[] materials = targetMeshRenderer.materials;
+                    materials[0] = cardTemplate.baseCard;
                     materials[1] = cardTemplate.artwork;
                     targetMeshRenderer.materials = materials;
 
@@ -109,7 +114,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         // M�todo para activar o desactivar el filtro gris
         public void SetOverlayActive(bool isActive)
         {
-            // overlayImage.gameObject.SetActive(isActive);
+            backCard.gameObject.SetActive(isActive);
         }
 
         // M�todo para formatear los recursos en un string
@@ -125,4 +130,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return formattedText;
         }
     }
+
+
+
+
 }

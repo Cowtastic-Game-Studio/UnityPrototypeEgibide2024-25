@@ -6,6 +6,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public GameResource Type { get; set; }
         public int MaxResources { get; set; }
+        public int MaxLevel { get; set; }
         public int Level { get; set; }
         public int Resource { get; set; }
 
@@ -18,6 +19,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Le indicamos que el tipo del recurso es
             Type = GameResource.ActionPoints;
             MaxResources = 6;
+            MaxLevel = 6;
             Level = 1;
             Resource = 6;
         }

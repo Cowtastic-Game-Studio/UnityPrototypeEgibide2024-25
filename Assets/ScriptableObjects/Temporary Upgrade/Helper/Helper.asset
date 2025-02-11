@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 032636d2554a6eb45b0d64d499715a37, type: 3}
   m_Name: Helper
   m_EditorClassIdentifier: 
+  baseCard: {fileID: 2100000, guid: e7e5a412938c62349924c8c1bfade4e2, type: 2}
   artwork: {fileID: 2100000, guid: 647795d87d7a5e5408ada197d6c1821d, type: 2}
   cardType: 5
   name: Helper
-  description: Una vez colocada no podras moverme, ten cuidao
+  description: " +6AP and draw a card. It seems that you could use some help, and
+    there isn\xB4t a better help that the one that\xB4s free."
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []
@@ -23,8 +25,8 @@ MonoBehaviour:
   - resourceType: 0
     resourceQuantity: 6
   marketCost: 30
-  discardCost: 0
-  dayToUnlock: 0
+  discardCost: 1
+  dayToUnlock: 28
   targetCardType: 6
   multiplier: 1
   targetResoruceType: 4

@@ -45,7 +45,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             weeklyMissionManager = WeeklyMission.GetComponent<MissionSheetManager>();
             weeklyMissionManager.Mission = MissionsManager.Instance.WeeklyMission;
 
-            if (GameManager.Instance.GameCalendar.CurrentWeek == 1)
+            if (GameManager.Instance.GameCalendar.CurrentWeek == 2)
             {
                 ChangeTutorialForWeekly();
             }
@@ -62,6 +62,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             this.TutorialMission.SetActive(false);
             this.WeeklyMission.SetActive(true);
 
+            MissionsManager.Instance.IsTutorialEnabled = false;
         }
 
         #endregion

@@ -15,6 +15,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public StorageManager StorageManager;
         //public MarketManager marketManager;
         public NewMarketManager NewMarketManager;
+        public DiscardManager DiscardManager;
 
         [Header("Board")]
         [Space(1)]
@@ -90,7 +91,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             foreach (PlaceSpaceBehaviour place in placeSpaceBehaviours)
             {
-                place.updateEmpty();
+                if (place.transform.childCount == 0)
+                    place.updateEmpty();
             }
         }
 

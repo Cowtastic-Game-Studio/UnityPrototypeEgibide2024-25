@@ -15,6 +15,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         {
             UnityAction rewardReceiveDelegate = () =>
             {
+                if (!MissionsManager.Instance.IsTutorialEnabled)
+                {
+                    return;
+                }
                 GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(10, GameResource.Muuney, true);
 
                 GameManager.Instance.Tabletop.CardManager.BuyCard("FastCow");
@@ -39,7 +43,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
                 // Calculo del 20 porciento del dinero total que puede tener el jugador
                 int currentMaxMuuney = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.Muuney);
                 double tenPercentMuuney = currentMaxMuuney * 0.20;
-                int roundedMuuney = Utils.RoundMuuney((int)tenPercentMuuney);
+                int roundedMuuney = Utils.RoundMuuney((int) tenPercentMuuney);
 
                 // Añadir dinero y actualizar hud
                 GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(roundedMuuney, GameResource.Muuney, true);

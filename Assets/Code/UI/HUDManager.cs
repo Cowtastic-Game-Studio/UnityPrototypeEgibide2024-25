@@ -1,6 +1,9 @@
-using Cinemachine;
 using System.Text.RegularExpressions;
+
+using Cinemachine;
+
 using TMPro;
+
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -84,12 +87,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         [SerializeField] private GameObject pageGUI;
         [SerializeField] private GameObject buttonsGUI;
-
+        [SerializeField] private GameObject discardBtn;
 
         /// <summary>
         /// Referencia al GamePhaseManager
         /// </summary>
         private GamePhaseManager gamePhaseManager;
+        private CardManager CardManager;
 
         #endregion
 
@@ -97,6 +101,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void Start()
         {
             this.gamePhaseManager = GameManager.Instance.GamePhaseManager;
+            this.CardManager = GameManager.Instance.Tabletop.CardManager;
             UpdateGUI(this.gamePhaseManager.CurrentPhase);
             UpdateResources();
         }
@@ -151,10 +156,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             int milk = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Milk);
             int muuney = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Muuney);
 
+
+
             actionPointTextUI.text = pa.ToString() + "/" + paMax.ToString();
             wheatResourceTextUI.text = wheat.ToString() + "/" + wheatMax.ToString();
             milkResourceTextUI.text = milk.ToString() + "/" + milkMax.ToString();
-            bankResourceTextUI.text = muuney.ToString() + "/" + muuneyMax.ToString();
+            bankResourceTextUI.text = FormatNumber(muuney) + "/" + FormatNumber(muuneyMax);
         }
 
         public void UpdateHUDForCamera(CinemachineVirtualCamera activeCamera)
@@ -175,17 +182,22 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 exitPanel.gameObject.SetActive(false);
                 catButton.gameObject.SetActive(false);
                 savePanel.gameObject.SetActive(false);
+                //discardBtn.gameObject.SetActive(true);
+                CardManager.showHand();
+
             }
             else if (activeCamera.gameObject.name == "VirtualCameraDerecha")
             {
                 // Mostrar fase actual y dinero
                 currentPhasePanel.gameObject.SetActive(true);
                 muuneyPanel.gameObject.SetActive(true);
+                discardBtn.gameObject.SetActive(true);
+
                 actionPointsPanel.gameObject.SetActive(false);
                 exitPanel.gameObject.SetActive(false);
                 catButton.gameObject.SetActive(false);
                 savePanel.gameObject.SetActive(false);
-
+                CardManager.hideHand();
 
 
             }
@@ -198,6 +210,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 exitPanel.gameObject.SetActive(false);
                 catButton.gameObject.SetActive(true);
                 savePanel.gameObject.SetActive(true);
+                discardBtn.gameObject.SetActive(false);
+                CardManager.hideHand();
+
+
 
 
             }
@@ -210,8 +226,24 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 exitPanel.gameObject.SetActive(true);
                 catButton.gameObject.SetActive(false);
                 savePanel.gameObject.SetActive(false);
+                discardBtn.gameObject.SetActive(false);
+                CardManager.hideHand();
+
 
             }
+        }
+        public void HideHUD()
+        {
+
+            actionPointsPanel.gameObject.SetActive(false);
+            currentPhasePanel.gameObject.SetActive(false);
+            muuneyPanel.gameObject.SetActive(false);
+            catButton.gameObject.SetActive(false);
+            savePanel.gameObject.SetActive(false);
+            exitPanel.gameObject.SetActive(false);
+            mulliganButton.gameObject.SetActive(false);
+            discardBtn.gameObject.SetActive(false);
+
         }
 
 
@@ -243,12 +275,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             else if (currentPhase is ActionPointsPhase)
             {
-
+                resourcesPanel.SetActive(true);
             }
             else if (currentPhase is MarketPhase)
             {
                 HideActionPointsPanel();
                 ShowMarket();
+
             }
 
             UpdatePhaseText(currentPhase);
@@ -294,19 +327,47 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void ShowActionPointsPanel()
         {
             actionPointsPanel.SetActive(true);
-            resourcesPanel.SetActive(true);
+            resourcesPanel.SetActive(false);
         }
 
         private void ShowMarket()
         {
+            discardBtn.SetActive(true);
             pageGUI.SetActive(true);
             buttonsGUI.SetActive(true);
         }
 
         private void HideMarket()
         {
+            discardBtn.SetActive(false);
             pageGUI.SetActive(false);
             buttonsGUI.SetActive(false);
+        }
+
+
+        public static string FormatNumber(int number)
+        {
+            if (number >= 10000000)
+            {
+                float millions = number / 1000000.0f;
+                return Mathf.Floor(millions).ToString("0") + "M"; // Sin decimales
+            }
+            if (number >= 1000000)
+            {
+                float millions = number / 1000000.0f;
+                return millions.ToString("0.0") + "M"; // Con un decimal
+            }
+            else if (number >= 10000)
+            {
+                float thousands = number / 1000.0f;
+                return Mathf.Floor(thousands).ToString("0") + "K"; // Sin decimales
+            }
+            else if (number >= 1000)
+            {
+                float thousands = number / 1000.0f;
+                return thousands.ToString("0.0") + "K"; // Con un decimal
+            }
+            return number.ToString();
         }
 
         #endregion

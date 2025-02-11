@@ -27,7 +27,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (rentAmount >= currentMuuney)
             {
                 //TODO poner aqui la fncion de GameOver cuando exista
-                Debug.Log("piu piu GAME OVER piu piu");
+                Debug.LogWarning("piu piu GAME OVER piu piu");
+                MenuManager.Instance.GameOverScene();
             }
             else
             {

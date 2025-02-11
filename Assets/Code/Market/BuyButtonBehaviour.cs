@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -20,7 +18,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <param name="active"></param>
         public void SetActive(bool active)
         {
-            this.gameObject.SetActive(active);
+            gameObject.SetActive(active);
         }
 
         /// <summary>
@@ -33,7 +31,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             this.Text.text = this.Price.ToString();
         }
 
-
         public void SetNormalColor()
         {
             this.Text.color = Color.white;
@@ -42,6 +39,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void SetVacFridayColor()
         {
             this.Text.color = Color.black;
+        }
+
+        public void SetDiscountColor()
+        {
+            this.Text.color = Color.magenta;
         }
 
 

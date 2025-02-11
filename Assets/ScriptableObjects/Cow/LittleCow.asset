@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b4d1d63d404d74bbd7263021c46de1, type: 3}
   m_Name: LittleCow
   m_EditorClassIdentifier: 
+  baseCard: {fileID: 2100000, guid: e7e5a412938c62349924c8c1bfade4e2, type: 2}
   artwork: {fileID: 2100000, guid: 686b8ef4c44dc5d44b204a0750964eba, type: 2}
   cardType: 0
   name: Little Cow
-  description: Muuuu
+  description: Just a little cow, the same as other cows in a smaller package
   lifeCycleDays: 2
   actionPointsCost: 2
   requiredResources:

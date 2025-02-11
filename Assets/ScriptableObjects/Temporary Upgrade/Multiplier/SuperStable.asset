@@ -12,17 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8a96622ca49dec44b0832fc9c555eed, type: 3}
   m_Name: SuperStable
   m_EditorClassIdentifier: 
+  baseCard: {fileID: 2100000, guid: e7e5a412938c62349924c8c1bfade4e2, type: 2}
   artwork: {fileID: 2100000, guid: 035cdf7bc4c431445840c3e16f3ae79c, type: 2}
   cardType: 4
   name: Super Stable
-  description: 
+  description: x2 to the production of the box and draw a card. That stable look
+    pretty comfy not gonna lie.
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []
   producedResources: []
   marketCost: 25
   discardCost: 2
-  dayToUnlock: 0
+  dayToUnlock: 21
   targetCardType: 0
   multiplier: 2
-  targetResoruceType: 4
+  targetResoruceType: 2
