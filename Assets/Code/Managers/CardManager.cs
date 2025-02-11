@@ -548,10 +548,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (isDragging && selectedCard != null)
             {
                 // Devuelve la carta a su posición original
-                selectedCard.transform.position = originalPosition;
+                //selectedCard.transform.position = originalPosition;
+                selectedCard.transform.SetParent(handArea);
             }
 
             isDragging = false;
+
+            //handDeck.Place(selectedCard);
+            //playedCardsDeck.RemoveCard(selectedCard);
+
+            ArrangeCardsInCurve();
 
             // Mostrar todas las cartas en la mano nuevamente
             foreach (Transform card in handArea.transform)
@@ -568,6 +574,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 if (Input.GetMouseButtonDown(1))
                 {
+
+                    handDeck.Place(selectedCard);
+                    playedCardsDeck.RemoveCard(selectedCard);
+
                     StopDragging();
                 }
             }
@@ -650,7 +660,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     }
 
                     ArrangeCardsInCurve();
-
                 }
             }
         }
@@ -679,7 +688,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             playedCardsDeck.RemoveCard(card);
 
-            // ArrangeCardsInCurve();
+            ArrangeCardsInCurve();
         }
 
         private void InitHandCardLifes()
@@ -816,7 +825,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void ResetCardRotation(GameObject card)
         {
-            card.transform.SetParent(deckArea.transform);
+            card.transform.SetParent(deckArea);
             card.transform.localPosition = Vector3.zero;
             card.transform.localRotation = Quaternion.identity;
 
