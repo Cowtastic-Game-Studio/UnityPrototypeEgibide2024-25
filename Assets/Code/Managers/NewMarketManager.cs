@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -79,10 +80,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void RestartMarket()
         {
+            ClearPageItemsList();
             ShowHideCardPreviewZone(false);
-            Debug.Log(shopItemsData);
-
-            UpdateShopItemDisplay(shopItemsData.FindAll(x => x.cardTemplate.cardType == CardType.Cow && x.isActive).ConvertAll(x => x.cardTemplate));
+            normalPriceButton.SetNormalColor();
+            normalPriceButton.SetPrice(0);
+            discountPriceButton.SetPrice(0);
+            discountPriceButton.SetActive(false);
         }
 
         /// <summary>
@@ -192,7 +195,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             CreateShopItems(false);
             cardPreview.SetActive(false);
 
-            slotList.totalPage = Mathf.CeilToInt((float) cardList.Count / 8);
+            slotList.totalPage = Mathf.CeilToInt((float)cardList.Count / 8);
 
             //Limpia la carta previsualizada
             ShowHideCardPreviewZone(false);
@@ -226,7 +229,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             ShopItem clickItem = shopItemGO.GetComponent<ShopItem>();
             actualShopItem = clickItem;
             if (clickItem)
-                cardPreview.GetComponent<CardDisplay>()?.UpdateDisplayAndMat(clickItem.getCardTemplate(), false);
+                cardPreview.GetComponent<CardDisplay>()?.UpdateDisplayAndMat(clickItem.getCardTemplate(), true);
 
             ShowHideCardPreviewZone(true);
             CheckCardsInDeck(clickItem);
@@ -283,6 +286,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             cardPreview.SetActive(active);
             normalPriceButton.SetActive(active);
             discountPriceButton.SetActive(active);
+
         }
 
         /// <summary>

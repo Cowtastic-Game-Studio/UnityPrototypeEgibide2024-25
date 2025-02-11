@@ -9,7 +9,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// Constructor para inicializar el evento generico.
         /// </summary>
         public Heist()
-            : base("¡Te han robado!", "Algo o laguien ha entrado a tu granja y...", 1)
+            : base("You've been robbed!", "Something or someone has broken into your farm and...", 1)
         {
 
         }
