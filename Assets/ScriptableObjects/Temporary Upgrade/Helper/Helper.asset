@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 032636d2554a6eb45b0d64d499715a37, type: 3}
   m_Name: Helper
   m_EditorClassIdentifier: 
+  baseCard: {fileID: 2100000, guid: e7e5a412938c62349924c8c1bfade4e2, type: 2}
   artwork: {fileID: 2100000, guid: 647795d87d7a5e5408ada197d6c1821d, type: 2}
   cardType: 5
   name: Helper
