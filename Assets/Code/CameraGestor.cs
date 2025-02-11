@@ -23,6 +23,7 @@ public class CameraGestor : MonoBehaviour
 
     [SerializeField] private HUDManager HUDManager;
 
+
     private void Awake()
     {
         // Inicializar el Input System        
