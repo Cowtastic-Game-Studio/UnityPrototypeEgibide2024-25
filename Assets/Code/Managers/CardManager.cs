@@ -327,7 +327,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Mueve las cartas de nuevo al mazo de robo
             foreach (ICard card in discardCards)
             {
-                GameObject cardGameObject = ((MonoBehaviour)card).gameObject;
+                GameObject cardGameObject = ((MonoBehaviour) card).gameObject;
                 cardGameObject.transform.SetParent(deckArea);
                 cardGameObject.transform.localPosition = Vector3.zero;
                 cardGameObject.transform.localRotation = Quaternion.identity;
@@ -831,6 +831,29 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
 
             return quantityToRemove - cardsRemoved;
+        }
+
+        public void TryRemoveCardsGOFromDecks(GameObject cardToDelete)
+        {
+            if (discardDeck.Cards.Contains(cardToDelete))
+            {
+                discardDeck.RemoveCard(cardToDelete);
+                RemoveCard(cardToDelete);
+            }
+            else if (drawDeck.Cards.Contains(cardToDelete))
+            {
+                drawDeck.RemoveCard(cardToDelete);
+                RemoveCard(cardToDelete);
+            }
+            else if (playedCardsDeck.Cards.Contains(cardToDelete))
+            {
+                playedCardsDeck.RemoveCard(cardToDelete);
+                RemoveCard(cardToDelete);
+            }
+            else
+            {
+                Debug.Log("Miau Miau Miau Miau... :(");
+            }
         }
 
         private void RemoveCard(GameObject card)

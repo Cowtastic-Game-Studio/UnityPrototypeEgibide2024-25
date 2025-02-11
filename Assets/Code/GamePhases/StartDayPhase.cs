@@ -22,6 +22,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void EnterPhase()
         {
+            //pasar al siguiente dia
+            GameManager.Instance.GameCalendar.NextDay();
+
             // Llama a Robo
             GameManager.Instance.Tabletop.CardManager.DrawFromDeck();
             GameManager.Instance.Tabletop.UpdateEmptyPlaces();

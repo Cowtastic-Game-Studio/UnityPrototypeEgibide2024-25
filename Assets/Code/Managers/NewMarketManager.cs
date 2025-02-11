@@ -24,16 +24,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// List of all the shop items/cards
         /// </summary>
         private List<ShopItemData> shopItemsData;
-
         /// <summary>
         /// The slots in the page
         /// </summary>
         private List<GameObject> pageItemsList = new();
-
-        public float discountPercentage = 1f;
-        public int discountPrice = 5;
-
-
         /// <summary>
         /// Actual list of cards of a specific type
         /// </summary>
@@ -41,6 +35,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private int counter = 0;
         private int nActualItems;
+
+        private float discountPercentage = 1f;
+        private bool isBlackFriday = false;
+        private int discountPrice = 5;
+        private List<GameObject> temporalCardsList = new();
+        private ShopItem actualShopItem;
 
         // Start is called before the first frame update
         void Start()
@@ -94,6 +94,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             shopItemsData.ForEach(x => x.CheckUnlock(day));
         }
 
+        public void ApplyDiscount(float discountPercentage, bool isBlackFriday)
+        {
+            this.discountPercentage = discountPercentage;
+            this.isBlackFriday = isBlackFriday;
+        }
+
         #region Private Methods
 
         /// <summary>
@@ -130,18 +136,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     OnShopItemClicked(shopItemGO);
 
                     break;
-                case "BuyButton":
-                    ShopItem shopItem = shopItemGO.GetComponent<ShopItem>();
-                    shopItemGO.GetComponent<ShopItem>()?.TriggerPrice();
-                    cardPreview.SetActive(false);
+
+                case "NormalPriceButton":
+                    Debug.Log("NormalPriceButton");
+                    OnBuyButtonClicked();
                     break;
 
-                case "NormalBuyButton":
-                    OnBuyButtonClicked(shopItemGO);
-                    break;
-
-                case "DiscountBuyButton":
-                    OnDiscountBuyButtonClicked(shopItemGO);
+                case "DiscountPriceButton":
+                    Debug.Log("DiscountPriceButton");
+                    OnDiscountBuyButtonClicked();
                     break;
 
                 case "NextButton":
@@ -220,75 +223,56 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private void OnShopItemClicked(GameObject shopItemGO)
         {
-            //ShopItem shopItem = shopItemGO.GetComponent<ShopItem>();
-            //shopItem?.TriggerCard();
             ShopItem clickItem = shopItemGO.GetComponent<ShopItem>();
+            actualShopItem = clickItem;
             if (clickItem)
                 cardPreview.GetComponent<CardDisplay>()?.UpdateDisplayAndMat(clickItem.getCardTemplate(), false);
 
             ShowHideCardPreviewZone(true);
+            CheckCardsInDeck(clickItem);
+        }
 
+        private void CheckCardsInDeck(ShopItem clickItem)
+        {
             List<GameObject> allCardsList = GameManager.Instance.Tabletop.CardManager.getAllCardsList();
-            List<GameObject> temporalCardsList = new();
 
             switch (clickItem.getCardTemplate().name)
             {
                 case "Garden+":
-                    temporalCardsList = allCardsList.Where(x => x.GetComponent<CardDisplay>().name == "MuussiveGarden").ToList();
+                    temporalCardsList = allCardsList.Where(x => x.GetComponent<CardDisplay>().name == "Muussive Garden").ToList();
                     break;
                 case "Stable+":
-                    temporalCardsList = allCardsList.Where(x => x.GetComponent<CardDisplay>().name == "MuussiveStable").ToList();
+                    temporalCardsList = allCardsList.Where(x => x.GetComponent<CardDisplay>().name == "Muussive Stable").ToList();
                     break;
                 case "Tavern+":
-                    temporalCardsList = allCardsList.Where(x => x.GetComponent<CardDisplay>().name == "MuussiveTavern").ToList();
+                    temporalCardsList = allCardsList.Where(x => x.GetComponent<CardDisplay>().name == "Muussive Tavern").ToList();
                     break;
                 default:
-                    discountPercentage = 1f;
-                    SetCardPrices(clickItem.card.cost, false, 0);
+                    SetCardPrices(clickItem.cardTemplate.marketCost, false, 0);
                     break;
             }
 
             if (temporalCardsList.Count > 0)
             {
-                SetCardPrices(clickItem.card.cost, true, discountPrice);
+                clickItem.SetDiscountPrice(discountPrice);
+                SetCardPrices(clickItem.price, true, clickItem.discountPrice);
             }
-
+            else
+            {
+                SetCardPrices(clickItem.price, false, 0);
+            }
         }
 
-        private void OnBuyButtonClicked(GameObject shopItemGO)
+        private void OnBuyButtonClicked()
         {
-            ShopItem shopItem = shopItemGO.GetComponent<ShopItem>();
-            shopItemGO.GetComponent<ShopItem>()?.TriggerPrice();
-
-            //TODO: Ejecutar la compra de la carta
-            /**
-             * 1. Otener el precio(hacer unas de las 3 cosas)
-             * * Se puede obtener del shop item, y hacer los mismos calculos que en SetCardPrices
-             * * Se pueden obtener del texto del boton pulsado(lo mas sencillo)
-             * * Pasar la funcion del SetCardPrices, pasarlo al shopItem(lo mas limpio) y llamarle de otra forma(GetCardPrice y GetDiscountPrices)
-             * 2. Comprobar que tiene el dinero
-             *  * Si no tiene mostrar error
-             * 3. Restar el dinero
-             * 4. Añadir la nueva carta al mazo
-             */
+            actualShopItem.TriggerPrice(false, null);
         }
 
-        private void OnDiscountBuyButtonClicked(GameObject shopItemGO)
+        private void OnDiscountBuyButtonClicked()
         {
-            ShopItem shopItem = shopItemGO.GetComponent<ShopItem>();
-            shopItemGO.GetComponent<ShopItem>()?.TriggerPrice();
-
-            //TODO: Ejecutar la compra de la carta con descuento
-            /**
-             * 1. Usar la funcion FindDiscountForCard o guardado la carta de descuento vinculada al shop item o aqui en una variable(RECORDAR LIMPIARLA CADA VEZ QUE SE seleccione otra carta)
-             * 2. Comprobar que tiene el dinero
-             *  * Si no tiene mostrar error
-             * 3. Restar el dinero
-             * 4. Añadir la nueva carta al mazo
-             */
+            actualShopItem.TriggerPrice(true, temporalCardsList[0]);
+            CheckCardsInDeck(actualShopItem);
         }
-
-
 
         /// <summary>
         /// Activa o desactiva 
@@ -309,46 +293,29 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <param name="discount"></param>
         private void SetCardPrices(int cardPrice, bool hasDiscount, int discount)
         {
-            float price, discountPrice;
-
-            //Comprueba si es black friday
-            Debug.Log("IsVacFriday: " + GameManager.Instance.GameCalendar.IsVacFriday());
-            if (GameManager.Instance.GameCalendar.IsVacFriday())
+            if (isBlackFriday)
             {
-                //Rebaja a la mitad el precio
-                price = Utils.RoundMuuney(cardPrice / 2f);
-
-                //Le pone un color especial
                 normalPriceButton.SetVacFridayColor();
             }
-            else //Deja el precio normal
+            else
             {
-                price = cardPrice;
                 normalPriceButton.SetNormalColor();
             }
 
-            //Asigna el precio normal
-            normalPriceButton.SetPrice((int) price);
+            normalPriceButton.SetPrice(cardPrice);
 
-            //Si tiene descuento
             if (hasDiscount)
             {
-                //Calcula el descuento
-                discountPrice = cardPrice - discount;
-
-                //Aplica el precio con descuento
-                discountPriceButton.SetPrice((int) discountPrice);
+                discountPriceButton.SetPrice(discount);
+                discountPriceButton.SetDiscountColor();
+                discountPriceButton.SetActive(true);
             }
-            else//Si no existe descuento
+            else
             {
-                //Oculta el boton con descuento
                 discountPriceButton.SetActive(false);
             }
-
         }
 
-
         #endregion  
-
     }
 }
