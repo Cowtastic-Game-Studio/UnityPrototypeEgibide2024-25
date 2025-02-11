@@ -17,8 +17,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
     public class CardManager : MonoBehaviour, ICardsManager
     {
-        [SerializeField]
-        private SODeck initialCards;
+        [SerializeField] private AudioSource source;
+        [SerializeField] private AudioClip clipStealCard, clipDiscard, clipPlaceCard, clipSelectedCard;
+        private ButtonSoundManager buttonSoundManager;
+        [SerializeField] private SODeck initialCards;
 
         /// <summary>
         /// Mazo de cartas.
@@ -161,8 +163,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void DrawFromDeck()
         {
+            source.PlayOneShot(clipStealCard);
             MoveLastCardsToHand(drawCards);
-
+            source.PlayOneShot(clipStealCard);
             InitHandCardLifes();
         }
 
@@ -286,6 +289,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void Mulligan()
         {
             int handNumber = handDeck.Cards.Count;
+            source.PlayOneShot(clipDiscard);
 
             if (handNumber > 1)
             {
@@ -325,6 +329,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 var card = handDeck.Draw();
                 if (card != null)
                 {
+                    source.PlayOneShot(clipPlaceCard);
                     discardDeck.Place(card);
                     SetCardState(card, CardState.onDiscard);
                 }
@@ -489,6 +494,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 if (selectedCard != null)
                 {
+                    source.PlayOneShot(clipSelectedCard);
                     selectedCard.GetComponent<CardBehaviour>()?.Deactivate();
                 }
 
@@ -496,6 +502,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 if (selectedCard != null)
                 {
+                    source.PlayOneShot(clipSelectedCard);
                     selectedCard.GetComponent<CardBehaviour>()?.Activate();
                 }
             }
@@ -613,6 +620,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 if (target != null && target.gameObject.CompareTag("Place"))
                 {
+                    source.PlayOneShot(clipPlaceCard);
                     // Desactiva el arrastre
                     StopDragging();
 
