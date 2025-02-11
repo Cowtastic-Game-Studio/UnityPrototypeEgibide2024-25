@@ -56,7 +56,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (card != null)
             {
                 //Debug.Log($"Card selected: {card.Name}");
-                MessageManager.Instance.ShowMessage($"Card selected: {card.Name}");
+                //MessageManager.Instance.ShowMessage($"Card selected: {card.Name}");
 
                 CheckAgainstStorage(card);
             }
