@@ -19,6 +19,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         //TODO: El Image que act�a como filtro gris
         [SerializeField] private MeshRenderer targetMeshRenderer;
         public Material newMaterial;
+        [SerializeField] private GameObject backCard;
+
 
         void Awake()
         {
@@ -109,7 +111,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         // M�todo para activar o desactivar el filtro gris
         public void SetOverlayActive(bool isActive)
         {
-            // overlayImage.gameObject.SetActive(isActive);
+            backCard.gameObject.SetActive(isActive);
         }
 
         // M�todo para formatear los recursos en un string
