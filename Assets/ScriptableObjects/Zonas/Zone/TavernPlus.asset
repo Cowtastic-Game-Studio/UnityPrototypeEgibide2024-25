@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TavernPlus
   m_EditorClassIdentifier: 
   baseCard: {fileID: 2100000, guid: edc33914b937d8244aba28c5c1eb02c5, type: 2}
-  artwork: {fileID: 2100000, guid: 905bf36bdc7c0324d8936f538dce0132, type: 2}
+  artwork: {fileID: 2100000, guid: 7072a6e79cd94b4418e8a7281d50c0d4, type: 2}
   cardType: 6
   name: Tavern +
   description: 
