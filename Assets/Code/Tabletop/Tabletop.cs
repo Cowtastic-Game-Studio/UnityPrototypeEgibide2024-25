@@ -91,7 +91,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             foreach (PlaceSpaceBehaviour place in placeSpaceBehaviours)
             {
-                place.updateEmpty();
+                if (place.transform.childCount == 0)
+                    place.updateEmpty();
             }
         }
 

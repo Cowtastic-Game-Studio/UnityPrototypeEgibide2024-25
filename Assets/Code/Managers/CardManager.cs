@@ -1,4 +1,3 @@
-using CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -269,7 +268,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Mueve las cartas de nuevo al mazo de robo
             foreach (ICard card in discardCards)
             {
-                GameObject cardGameObject = ((MonoBehaviour)card).gameObject;
+                GameObject cardGameObject = ((MonoBehaviour) card).gameObject;
                 cardGameObject.transform.SetParent(deckArea);
                 cardGameObject.transform.localPosition = Vector3.zero;
                 cardGameObject.transform.localRotation = Quaternion.identity;
@@ -549,10 +548,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (isDragging && selectedCard != null)
             {
                 // Devuelve la carta a su posición original
-                selectedCard.transform.position = originalPosition;
+                //selectedCard.transform.position = originalPosition;
+                selectedCard.transform.SetParent(handArea);
             }
 
             isDragging = false;
+
+            //handDeck.Place(selectedCard);
+            //playedCardsDeck.RemoveCard(selectedCard);
+
+            ArrangeCardsInCurve();
 
             // Mostrar todas las cartas en la mano nuevamente
             foreach (Transform card in handArea.transform)
@@ -569,6 +574,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 if (Input.GetMouseButtonDown(1))
                 {
+
+                    handDeck.Place(selectedCard);
+                    playedCardsDeck.RemoveCard(selectedCard);
+
                     StopDragging();
                 }
             }
@@ -637,14 +646,20 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         MoveLastCardsToHand(1);
                     }
 
+                    if (cardBH.Type == CardType.PlaceActivator)
+                    {
+                        MoveLastCardsToHand(1);
+                    }
+
                     if (cardBH.Type == CardType.PlaceMultiplier)
                     {
                         // Desactivo el box colaider de la carta seleccionada
                         cardBH.transform.localPosition += new Vector3(0, 0, -0.06f);
+
+                        MoveLastCardsToHand(1);
                     }
 
                     ArrangeCardsInCurve();
-
                 }
             }
         }
@@ -672,6 +687,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             card.transform.rotation = handArea.transform.rotation;
 
             playedCardsDeck.RemoveCard(card);
+
+            ArrangeCardsInCurve();
         }
 
         private void InitHandCardLifes()
@@ -806,6 +823,29 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return quantityToRemove - cardsRemoved;
         }
 
+        public void TryRemoveCardsGOFromDecks(GameObject cardToDelete)
+        {
+            if (discardDeck.Cards.Contains(cardToDelete))
+            {
+                discardDeck.RemoveCard(cardToDelete);
+                RemoveCard(cardToDelete);
+            }
+            else if (drawDeck.Cards.Contains(cardToDelete))
+            {
+                drawDeck.RemoveCard(cardToDelete);
+                RemoveCard(cardToDelete);
+            }
+            else if (playedCardsDeck.Cards.Contains(cardToDelete))
+            {
+                playedCardsDeck.RemoveCard(cardToDelete);
+                RemoveCard(cardToDelete);
+            }
+            else
+            {
+                Debug.Log("Miau Miau Miau Miau... :(");
+            }
+        }
+
         private void RemoveCard(GameObject card)
         {
             // Lógica de eliminación de carta (esta es la función que debe eliminar la carta en el juego)
@@ -814,10 +854,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void ResetCardRotation(GameObject card)
         {
-            card.transform.SetParent(deckArea.transform); 
+            card.transform.SetParent(deckArea);
             card.transform.localPosition = Vector3.zero;
-            card.transform.localRotation = Quaternion.identity; 
-            
+            card.transform.localRotation = Quaternion.identity;
+
         }
 
     }

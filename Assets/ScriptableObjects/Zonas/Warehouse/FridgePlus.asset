@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   artwork: {fileID: 2100000, guid: 326f369de884c6740bd98497ec6276aa, type: 2}
   cardType: 6
-  name: Fridge +
+  name: Fridge+
   description: 
   lifeCycleDays: 1
   actionPointsCost: 0

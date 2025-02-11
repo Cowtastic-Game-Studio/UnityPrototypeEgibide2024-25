@@ -1,6 +1,9 @@
 using System.Text.RegularExpressions;
+
 using Cinemachine;
+
 using TMPro;
+
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -88,7 +91,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// Referencia al GamePhaseManager
         /// </summary>
         private GamePhaseManager gamePhaseManager;
-        [SerializeField] private CardManager CardManager;
+        private CardManager CardManager;
 
         #endregion
 
@@ -96,6 +99,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void Start()
         {
             this.gamePhaseManager = GameManager.Instance.GamePhaseManager;
+            this.CardManager = GameManager.Instance.Tabletop.CardManager;
             UpdateGUI(this.gamePhaseManager.CurrentPhase);
             UpdateResources();
         }
@@ -152,7 +156,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             actionPointTextUI.text = pa.ToString() + "/" + paMax.ToString();
             wheatResourceTextUI.text = wheat.ToString() + "/" + wheatMax.ToString();
             milkResourceTextUI.text = milk.ToString() + "/" + milkMax.ToString();
-            bankResourceTextUI.text = muuney.ToString() + "/" + muuneyMax.ToString();
+            bankResourceTextUI.text = FormatNumber(muuney) + "/" + FormatNumber(muuneyMax);
         }
 
         public void UpdateHUDForCamera(CinemachineVirtualCamera activeCamera)
@@ -226,7 +230,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void HideHUD()
         {
 
-            actionPointsPanel.gameObject.SetActive(false );
+            actionPointsPanel.gameObject.SetActive(false);
             currentPhasePanel.gameObject.SetActive(false);
             muuneyPanel.gameObject.SetActive(false);
             catButton.gameObject.SetActive(false);
@@ -234,7 +238,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             exitPanel.gameObject.SetActive(false);
             mulliganButton.gameObject.SetActive(false);
             discardBtn.gameObject.SetActive(false);
-            
+
         }
 
 
@@ -333,6 +337,32 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             discardBtn.SetActive(false);
             pageGUI.SetActive(false);
             buttonsGUI.SetActive(false);
+        }
+
+
+        public static string FormatNumber(int number)
+        {
+            if (number >= 10000000)
+            {
+                float millions = number / 1000000.0f;
+                return Mathf.Floor(millions).ToString("0") + "M"; // Sin decimales
+            }
+            if (number >= 1000000)
+            {
+                float millions = number / 1000000.0f;
+                return millions.ToString("0.0") + "M"; // Con un decimal
+            }
+            else if (number >= 10000)
+            {
+                float thousands = number / 1000.0f;
+                return Mathf.Floor(thousands).ToString("0") + "K"; // Sin decimales
+            }
+            else if (number >= 1000)
+            {
+                float thousands = number / 1000.0f;
+                return thousands.ToString("0.0") + "K"; // Con un decimal
+            }
+            return number.ToString();
         }
 
         #endregion

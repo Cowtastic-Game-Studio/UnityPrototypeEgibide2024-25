@@ -38,6 +38,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             UpdateSummaryGrid();
         }
 
+        public void CloseMenu()
+        {
+            gameObject.SetActive(false);
+        }
+
         public void ToggleMenu()
         {
             // Verificar si el número de cartas en la baraja es suficiente

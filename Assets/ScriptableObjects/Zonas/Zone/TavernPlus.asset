@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   artwork: {fileID: 2100000, guid: 905bf36bdc7c0324d8936f538dce0132, type: 2}
   cardType: 6
-  name: Tavern +
+  name: Tavern+
   description: 
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []
   producedResources: []
-  marketCost: 20
+  marketCost: 30
   discardCost: 0
   dayToUnlock: 0
   targetCardType: 2

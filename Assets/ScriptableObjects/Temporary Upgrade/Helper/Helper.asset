@@ -15,8 +15,8 @@ MonoBehaviour:
   artwork: {fileID: 2100000, guid: 647795d87d7a5e5408ada197d6c1821d, type: 2}
   cardType: 5
   name: Helper
-  description: "It seems that you could use some help, and there isn\xB4t a better
-    help that the one that\xB4s free."
+  description: " +6AP and draw a card. It seems that you could use some help, and
+    there isn\xB4t a better help that the one that\xB4s free."
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []
@@ -24,8 +24,8 @@ MonoBehaviour:
   - resourceType: 0
     resourceQuantity: 6
   marketCost: 30
-  discardCost: 0
-  dayToUnlock: 0
+  discardCost: 1
+  dayToUnlock: 28
   targetCardType: 6
   multiplier: 1
   targetResoruceType: 4

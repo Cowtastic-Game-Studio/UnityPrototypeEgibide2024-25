@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   artwork: {fileID: 2100000, guid: 530571cd8e775e94a83a00755a486fc9, type: 2}
   cardType: 6
-  name: Safe deposit +
+  name: Bank+
   description: 
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []
   producedResources: []
-  marketCost: 10
+  marketCost: 25
   discardCost: 0
   dayToUnlock: 0
   targetCardType: 6

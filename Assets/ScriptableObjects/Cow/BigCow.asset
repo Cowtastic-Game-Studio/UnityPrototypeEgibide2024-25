@@ -15,18 +15,18 @@ MonoBehaviour:
   artwork: {fileID: 2100000, guid: 1325089185c3c1043987963138d3420f, type: 2}
   cardType: 0
   name: Big Cow
-  description: "Someone should check her diet , doesn\xB4t look too healthy"
+  description: That's a huge cow, you surely could milk it a lot.
   lifeCycleDays: 3
-  actionPointsCost: 3
+  actionPointsCost: 1
   requiredResources:
   - resourceType: 3
-    resourceQuantity: 2
+    resourceQuantity: 3
   producedResources:
   - resourceType: 2
     resourceQuantity: 2
-  marketCost: 5
-  discardCost: 3
-  dayToUnlock: 0
+  marketCost: 8
+  discardCost: 2
+  dayToUnlock: 14
   targetCardType: 6
   multiplier: 1
   targetResoruceType: 4
