@@ -199,6 +199,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     // Verifica si la carta est� en la layer 'CardLayer'
                     if (gameObject.layer == LayerMask.NameToLayer("CardLayer"))
                     {
+                        var placeSpace = transform.parent?.GetComponent<PlaceSpaceBehaviour>();
+                        if (placeSpace != null)
+                        {
+                            placeSpace.updateEmpty();
+                        }
+
                         InvokeCardClicked();
                     }
                 }
