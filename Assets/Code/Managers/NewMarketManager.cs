@@ -341,7 +341,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void ResetShopPlusItemPrice()
         {
             wasFreeShopItemBuyed = true;
-            FreeShopItem.UpdateDisplayDataSpecial(1);
+            FreeShopItem?.UpdateDisplayDataSpecial(1);
+
         }
     }
 }

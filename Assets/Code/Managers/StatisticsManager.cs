@@ -30,6 +30,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             OnStatisticChanged = new UnityEvent();
 
+            statsList.Add(new Statistic(StatisticType.CardsPlaced, CardType.None, GameResource.None, 0, true));
             // Cards
             statsList.Add(new Statistic(StatisticType.CowsMilked, CardType.Cow, GameResource.None, 0, true));
             statsList.Add(new Statistic(StatisticType.SeedsHarvested, CardType.Seed, GameResource.None, 0, true));
@@ -77,6 +78,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void RaiseOnStatisticChanged()
         {
             OnStatisticChanged?.Invoke();
+        }
+
+        public void CheckPlayedCards()
+        {
+            int count = GameManager.Instance.Tabletop.CardManager.PlayedDeck.Cards.Count();
+            Statistic statistics = statsList.Find(x => x.StatType == StatisticType.CardsPlaced);
+            UpdateStatistic(statistics, count);
         }
 
         public void UpdateByType(ICard card)
@@ -206,10 +214,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void UpdateStatistic(Statistic stat, int quantity)
         {
             stat.Uses += quantity;
-
-            //Debug.Log(stat.StatType.GetEnumString() + ": " + stat.Uses);
-            //Debug.Log(GetStat(StatisticType.CardsTotalUsed).StatType.GetEnumString() + ": " + GetStat(StatisticType.CardsTotalUsed).Uses);
-            //Debug.Log(GetStat(StatisticType.TemporaryUsedCards).StatType.GetEnumString() + ": " + GetStat(StatisticType.TemporaryUsedCards).Uses);
 
             RaiseOnStatisticChanged();
         }

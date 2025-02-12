@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-
 using UnityEngine;
 
 
@@ -104,7 +103,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void OutlineByResource(CardType typeResource, bool activar)
         {
             List<PlaceSpaceBehaviour> places = GetPlacesByResource(typeResource);
-            
+
             if (places == null) return;
 
             Outline.Mode mode = activar ? Outline.Mode.OutlineOnly : Outline.Mode.Disabled;
@@ -117,16 +116,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 }
             }
         }
-                
+
         /// <summary>
         /// Estos 3 metodos son los que activan la siguiente zona a activar cuando mejoren alguna zona.(Nota: Asegurarse de que las casillas que tienen que empezar activas estan las primeras en la lista , gracias.)
         /// </summary>
-        public void FarmsActivateZone()
+        public void FarmsActivateZone(int price)
         {
             if (farms.FindAll(x => !x.GetIsActive()).Count == 0)
             {
-                // Debug.LogWarning("Max gardens.");
                 MessageManager.Instance.ShowMessage("Max gardens.");
+                Debug.LogWarning("Max gardens.");
                 return;
             }
 
@@ -136,18 +135,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 if (!farm.GetIsActive())
                 {
                     farm.SetIsActive(true);
+                    GameManager.Instance.Tabletop.StorageManager.WasteMuuney(price);
                     Debug.LogWarning("Updated garden.");
                     break;
                 }
             }
         }
 
-        public void StablesActivateZone()
+        public void StablesActivateZone(int price)
         {
             if (stables.FindAll(x => !x.GetIsActive()).Count == 0)
             {
-                MessageManager.Instance.ShowMessage($"Max stables");
-                // Debug.LogWarning("Max stables.");
+                MessageManager.Instance.ShowMessage("Max stables");
+                Debug.LogWarning("Max stables.");
                 return;
             }
 
@@ -156,18 +156,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 if (!stable.GetIsActive())
                 {
                     stable.SetIsActive(true);
+                    GameManager.Instance.Tabletop.StorageManager.WasteMuuney(price);
                     Debug.LogWarning("Updated stable.");
                     break;
                 }
             }
         }
 
-        public void TavernActivateZone()
+        public void TavernActivateZone(int price)
         {
             if (taverns.FindAll(x => !x.GetIsActive()).Count == 0)
             {
-                //Debug.LogWarning("Max shop.");
-                MessageManager.Instance.ShowMessage($"Max shop");
+                MessageManager.Instance.ShowMessage("Max shop");
+                Debug.LogWarning("Max shop.");
                 return;
             }
 
@@ -176,6 +177,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 if (!tavern.GetIsActive())
                 {
                     tavern.SetIsActive(true);
+                    GameManager.Instance.Tabletop.StorageManager.WasteMuuney(price);
                     Debug.LogWarning("Updated shop.");
                     break;
                 }

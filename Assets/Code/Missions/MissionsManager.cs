@@ -109,7 +109,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             reward = RewardGenerator.CreateTutorialReward();
 
-            this.Tutorial = new Mission("Tutorial", "Tutorial", Mission.MissionTypes.Tutorial, new List<Goal>() { goal1, goal2, goal3, goal4, goal5, goal6 }, new List<Reward>() { reward });
+            this.Tutorial = new Mission("Tutorial", "Tutorial", MissionTypes.Tutorial, new List<Goal>() { goal1, goal2, goal3, goal4, goal5, goal6 }, new List<Reward>() { reward });
 
         }
 

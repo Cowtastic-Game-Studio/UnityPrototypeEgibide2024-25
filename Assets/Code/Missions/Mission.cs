@@ -57,10 +57,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             this.Goals = new List<Goal>(goals);
             this.Rewards = new List<Reward>(rewards);
 
-            if (!MissionsManager.Instance.IsTutorialEnabled && type == MissionTypes.Tutorial)
-            {
-                return;
-            }
+            //if (MissionsManager.Instance.IsTutorialEnabled)
+            //{
+            //    return;
+            //}
 
             //Se suscribe el evento OnCompleted de los goals
             foreach (Goal goal in Goals)

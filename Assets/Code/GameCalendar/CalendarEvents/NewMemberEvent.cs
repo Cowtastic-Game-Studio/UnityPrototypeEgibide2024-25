@@ -13,7 +13,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public override void ApplyEffects()
         {
-            GameManager.Instance.Tabletop.CardManager.BuyCard("Little Cow");
+            GameManager.Instance.Tabletop.CardManager.BuyCard("Little Cow", 0);
         }
 
         public override void EndEvent()

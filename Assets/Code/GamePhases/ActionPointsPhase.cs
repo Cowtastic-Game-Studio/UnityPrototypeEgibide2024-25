@@ -30,6 +30,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             // Suscribirse al evento global de clic de carta en GameManager
             GameManager.Instance.OnCardClickedGlobal += OnCardClickedHandler;
+            StatisticsManager.Instance.CheckPlayedCards();
         }
 
 

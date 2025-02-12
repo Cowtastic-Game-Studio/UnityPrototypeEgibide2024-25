@@ -22,7 +22,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal1()
         {
-            return GenerateStatGoal("T-M1", "Place 1 card on the table", StatisticType.CardsTotalUsed, 1);
+            return GenerateStatGoal("T-M1", "Place 1 card on the table", StatisticType.CardsPlaced, 1);
         }
 
         /// <summary>
@@ -80,7 +80,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             {
                 Statistic zonesUpgraded = StatisticsManager.Instance.GetStat(StatisticType.ZonesUpgradePurchased);
                 if (zonesUpgraded.Uses >= 1)
+                {
                     GameManager.Instance.Tabletop.NewMarketManager.ResetShopPlusItemPrice();
+                }
                 return (zonesUpgraded.Uses >= 1);
             };
 
@@ -397,7 +399,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
                     if (result)
                         goal.IsCompleted = true;
 
-                    //si esta clompleto
+                    //si esta completo
                     if (goal.IsCompleted)
                         StatisticsManager.Instance.OnStatisticChanged.RemoveListener(OnStatisticChanged);
                 };

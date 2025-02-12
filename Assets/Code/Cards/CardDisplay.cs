@@ -128,7 +128,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         // M�todo para activar o desactivar el filtro gris
         public void SetOverlayActive(bool isActive)
         {
-            backCard.gameObject.SetActive(isActive);
+            backCard.gameObject?.SetActive(isActive);
         }
 
         // M�todo para formatear los recursos en un string
