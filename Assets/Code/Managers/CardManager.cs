@@ -548,8 +548,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
 
             // Activar el outline de las cartas del mismo tipo
-            var cardBH = selectedCard.GetComponent<CardBehaviour>();
-            GameManager.Instance.Tabletop.OutlineByResource(cardBH.Type, true);
+            if (selectedCard != null)
+            {
+                var cardBH = selectedCard.GetComponent<CardBehaviour>();
+                GameManager.Instance.Tabletop.OutlineByResource(cardBH.Type, true);
+            }
         }
 
         public void StopDragging()
@@ -577,8 +580,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
 
             // Desactivar el outline de las cartas del mismo tipo
-            var cardBH = selectedCard.GetComponent<CardBehaviour>();
-            GameManager.Instance.Tabletop.OutlineByResource(cardBH.Type, false);
+            if (selectedCard != null)
+            {
+                var cardBH = selectedCard.GetComponent<CardBehaviour>();
+                GameManager.Instance.Tabletop.OutlineByResource(cardBH.Type, false);
+            }
         }
 
         public void UpdatePlacement()
