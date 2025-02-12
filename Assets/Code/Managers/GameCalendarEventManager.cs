@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
@@ -59,13 +60,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 activeEvent.TriggerEvent();
             }
 
-            /*  // Activar el evento de renta cada séptimo día de la semana
-              if (currentDay % 7 == 0)
-              {
-                  Debug.LogWarning("Rent day " + currentDay);
-                  rent.TriggerEvent();
-                  rentEvent = rent;
-              }*/
+            // Activar el evento de renta cada séptimo día de la semana
+            if (currentDay % 7 == 0)
+            {
+                Debug.LogWarning("Rent day " + currentDay);
+                rent.TriggerEvent();
+                rentEvent = rent;
+            }
         }
 
         public void AddDynamicEvent(CalendarEvent calendarEvent)

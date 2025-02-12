@@ -1,4 +1,5 @@
 using TMPro;
+
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -6,6 +7,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     public class BuyButtonBehaviour : MonoBehaviour
     {
         [SerializeField] private TMP_Text Text;
+        [SerializeField] private SpriteRenderer Image;
+
 
         public int Price { get; private set; }
 
@@ -41,9 +44,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             this.Text.color = Color.black;
         }
 
+
         public void SetDiscountColor()
         {
             this.Text.color = Color.magenta;
+        }
+
+        public void SetImage(Sprite sprite)
+        {
+            this.Image.sprite = sprite;
         }
 
 

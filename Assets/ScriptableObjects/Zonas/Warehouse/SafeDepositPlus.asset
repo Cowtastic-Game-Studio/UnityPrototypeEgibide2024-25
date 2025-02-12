@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49a391d00c55ea488932e8659b04053, type: 3}
   m_Name: SafeDepositPlus
   m_EditorClassIdentifier: 
+  baseCard: {fileID: 2100000, guid: edc33914b937d8244aba28c5c1eb02c5, type: 2}
   artwork: {fileID: 2100000, guid: 530571cd8e775e94a83a00755a486fc9, type: 2}
   cardType: 6
   name: Bank+
-  description: 
+  description: "You can\xB4t get richer when you lack the ability to hold more muuney."
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []
   producedResources: []
-  marketCost: 25
+  marketCost: 15
   discardCost: 0
-  dayToUnlock: 0
+  dayToUnlock: 8
   targetCardType: 6
   multiplier: 1
   targetResoruceType: 1

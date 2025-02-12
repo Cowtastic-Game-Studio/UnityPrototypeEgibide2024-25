@@ -19,6 +19,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         //TODO: El Image que act�a como filtro gris
         [SerializeField] private MeshRenderer targetMeshRenderer;
         public Material newMaterial;
+        public Material baseCardMaterial;
+        [SerializeField] private GameObject backCard;
+
 
         void Awake()
         {
@@ -29,6 +32,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 {
                     // Crea una copia de los materiales para asignar el nuevo material
                     Material[] materials = targetMeshRenderer.materials;
+                    materials[0] = baseCardMaterial;
                     materials[1] = newMaterial;
                     targetMeshRenderer.materials = materials;
 
@@ -53,30 +57,44 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 else
                     descriptionText.text = "";
 
-                actionPointsText.text = cardTemplate.actionPointsCost.ToString();
-                lifeCycleDaysText.text = cardTemplate.lifeCycleDays.ToString();
-
-                if (cardTemplate.requiredResources.Count != 0)
-                {
-                    requieredTypeText.text = FormatResources(cardTemplate.requiredResources, true);
-                    requieredQuantityText.text = FormatResources(cardTemplate.requiredResources, false);
-                }
-                else
-                    requieredTypeText.text = requieredQuantityText.text = "";
-
-                if (cardTemplate.producedResources.Count != 0)
-                {
-                    producedTypeText.text = FormatResources(cardTemplate.producedResources, true);
-                    producedQuantityText.text = FormatResources(cardTemplate.producedResources, false);
-                }
-                else
-                    producedTypeText.text = producedQuantityText.text = "";
-
-                if (cardTemplate.cardType == CardType.PlaceActivator ||
-                    cardTemplate.cardType == CardType.PlaceMultiplier)
-                    producedTypeText.text = cardTemplate.targetCardType.ToString();
-
                 cost = cardTemplate.marketCost;
+
+                if (cardTemplate.cardType != CardType.None)
+                {
+
+                    actionPointsText.text = cardTemplate.actionPointsCost.ToString();
+
+                    lifeCycleDaysText.text = gameObject.GetComponent<CardBehaviour>() ?
+                                    gameObject.GetComponent<CardBehaviour>()?.LifeCycleDaysRemaining.ToString() :
+                                    cardTemplate.lifeCycleDays.ToString();
+
+                    if (cardTemplate.requiredResources.Count != 0)
+                    {
+                        requieredTypeText.text = FormatResources(cardTemplate.requiredResources, true);
+                        requieredQuantityText.text = FormatResources(cardTemplate.requiredResources, false);
+                    }
+                    else
+                        requieredTypeText.text = requieredQuantityText.text = "";
+
+                    if (cardTemplate.producedResources.Count != 0)
+                    {
+                        producedTypeText.text = FormatResources(cardTemplate.producedResources, true);
+                        producedQuantityText.text = FormatResources(cardTemplate.producedResources, false);
+                    }
+                    else
+                        producedTypeText.text = producedQuantityText.text = "";
+
+                    if (cardTemplate.cardType == CardType.PlaceActivator ||
+                        cardTemplate.cardType == CardType.PlaceMultiplier)
+                        producedTypeText.text = cardTemplate.targetCardType.ToString();
+                }
+                else
+                {
+                    actionPointsText.text = "";
+                    lifeCycleDaysText.text = "";
+                    requieredTypeText.text = requieredQuantityText.text = "";
+                    producedTypeText.text = producedQuantityText.text = "";
+                }
 
                 // Actualiza la visibilidad del filtro gris seg�n el estado de la carta
                 SetOverlayActive(!isActive);
@@ -96,6 +114,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 {
                     // Crea una copia de los materiales para asignar el nuevo material
                     Material[] materials = targetMeshRenderer.materials;
+                    materials[0] = cardTemplate.baseCard;
                     materials[1] = cardTemplate.artwork;
                     targetMeshRenderer.materials = materials;
 
@@ -109,7 +128,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         // M�todo para activar o desactivar el filtro gris
         public void SetOverlayActive(bool isActive)
         {
-            // overlayImage.gameObject.SetActive(isActive);
+            backCard.gameObject.SetActive(isActive);
         }
 
         // M�todo para formatear los recursos en un string
@@ -124,9 +143,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             return formattedText;
         }
+
+        internal void UpdateDisplay(CardTemplate cardTemplate, bool isActive, int lifeCycleDaysRemaining)
+        {
+            UpdateDisplayAndMat(cardTemplate, isActive);
+            lifeCycleDaysText.text = lifeCycleDaysRemaining.ToString();
+        }
     }
-
-
-
-
 }

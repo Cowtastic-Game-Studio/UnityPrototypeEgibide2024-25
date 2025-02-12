@@ -63,6 +63,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             this.WeeklyMission.SetActive(true);
 
             MissionsManager.Instance.IsTutorialEnabled = false;
+            GameManager.Instance.Tabletop.NewMarketManager.ResetShopPlusItemPrice();
         }
 
         #endregion

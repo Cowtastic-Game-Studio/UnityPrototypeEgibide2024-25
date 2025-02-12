@@ -12,17 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49a391d00c55ea488932e8659b04053, type: 3}
   m_Name: SiloPlus
   m_EditorClassIdentifier: 
+  baseCard: {fileID: 2100000, guid: edc33914b937d8244aba28c5c1eb02c5, type: 2}
   artwork: {fileID: 2100000, guid: d28d84b6177edb847a8743cc67f9a0f8, type: 2}
   cardType: 6
   name: Silo+
-  description: 
+  description: Cereals are important and you need then in great scale , so why not
+    get a small work on your Silo
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []
   producedResources: []
   marketCost: 10
   discardCost: 0
-  dayToUnlock: 0
+  dayToUnlock: 8
   targetCardType: 6
   multiplier: 1
   targetResoruceType: 3
