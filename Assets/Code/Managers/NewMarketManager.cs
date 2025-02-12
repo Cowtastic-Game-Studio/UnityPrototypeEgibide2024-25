@@ -43,6 +43,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private List<GameObject> temporalCardsList = new();
         private ShopItem actualShopItem;
 
+        private bool wasFreeShopItemBuyed = false;
+        private ShopItem FreeShopItem;
+
+
         // Start is called before the first frame update
         void Start()
         {
@@ -193,7 +197,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             CreateShopItems(false);
             cardPreview.SetActive(false);
 
-            slotList.totalPage = Mathf.CeilToInt((float)cardList.Count / 8);
+            slotList.totalPage = Mathf.CeilToInt((float) cardList.Count / 8);
 
             //Limpia la carta previsualizada
             ShowHideCardPreviewZone(false);
@@ -206,10 +210,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 if (counter < actualCardList.Count)
                 {
                     GameObject slot = pageItemsList[i];
+
                     GameObject createdItem = GameObject.Instantiate(shopItem, slot.transform);
                     createdItem.name = actualCardList[counter].name;
 
-                    createdItem.GetComponent<ShopItem>()?.UpdateDisplayData(actualCardList[counter], discountPercentage);
+                    if (createdItem.name == "Tavern+" && MissionsManager.Instance.IsTutorialEnabled && !wasFreeShopItemBuyed)
+                    {
+                        FreeShopItem = createdItem.GetComponent<ShopItem>();
+                        FreeShopItem?.UpdateDisplayData(actualCardList[counter], 0);
+                    }
+
+                    else
+                        createdItem.GetComponent<ShopItem>()?.UpdateDisplayData(actualCardList[counter], discountPercentage);
+
                     counter++;
                     if (isNextPage)
                     {
@@ -268,6 +281,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             Debug.Log("NormalPriceButton");
             actualShopItem.TriggerPrice(false, null);
+            ShowHideCardPreviewZone(false);
+
         }
 
         public void OnDiscountBuyButtonClicked()
@@ -275,6 +290,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             Debug.Log("DiscountPriceButton");
             actualShopItem.TriggerPrice(true, temporalCardsList[0]);
             CheckCardsInDeck(actualShopItem);
+            ShowHideCardPreviewZone(false);
         }
 
         /// <summary>
@@ -321,5 +337,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
 
         #endregion  
+
+        public void ResetShopPlusItemPrice()
+        {
+            wasFreeShopItemBuyed = true;
+            FreeShopItem.UpdateDisplayDataSpecial(1);
+        }
     }
 }
