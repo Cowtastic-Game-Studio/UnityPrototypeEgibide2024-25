@@ -93,12 +93,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             if (CurrentDay % 7 == 0)
             {
-                CurrentWeek++;
-
                 if (CurrentWeek > 1)
                 {
                     MissionsManager.Instance.RenewWeeklyMission();
                 }
+                CurrentWeek++;
             }
             if (DayOfMonth % 29 == 0) // 29 seria principio de mes
             {

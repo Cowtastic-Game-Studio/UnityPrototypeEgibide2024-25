@@ -46,18 +46,21 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             EndActiveEvent();
 
-            if (staticEvents.ContainsKey(currentDay))
+            if (!MissionsManager.Instance.IsTutorialEnabled)
             {
-                //Debug.LogWarning("Static event day: " + currentDay);
-                activeEvent = staticEvents[currentDay];
-                activeEvent.TriggerEvent();
-            }
-            else if (currentWeek > 0 && random.Next(100) < 20) // 20% chance
-            {
-                //Debug.LogWarning("random event day: " + currentDay);
-                int index = random.Next(dynamicEvents.Count);
-                activeEvent = dynamicEvents[index];
-                activeEvent.TriggerEvent();
+                if (staticEvents.ContainsKey(currentDay))
+                {
+                    //Debug.LogWarning("Static event day: " + currentDay);
+                    activeEvent = staticEvents[currentDay];
+                    activeEvent.TriggerEvent();
+                }
+                else if (currentWeek > 0 && random.Next(100) < 20) // 20% chance
+                {
+                    //Debug.LogWarning("random event day: " + currentDay);
+                    int index = random.Next(dynamicEvents.Count);
+                    activeEvent = dynamicEvents[index];
+                    activeEvent.TriggerEvent();
+                }
             }
 
             // Activar el evento de renta cada séptimo día de la semana
