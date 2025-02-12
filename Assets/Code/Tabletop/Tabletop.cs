@@ -104,17 +104,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void OutlineByResource(CardType typeResource, bool activar)
         {
             List<PlaceSpaceBehaviour> places = GetPlacesByResource(typeResource);
+            
+            if (places == null) return;
 
-            if (places == null)
-            {
-                return;
-            }
+            Outline.Mode mode = activar ? Outline.Mode.OutlineOnly : Outline.Mode.Disabled;
 
             foreach (PlaceSpaceBehaviour place in places)
             {
-                if (place.GetIsActive())
+                if (place.GetIsActive() && (activar ? place.GetIsEmpty() : true))
                 {
-                    place.GetComponent<Outline>().OutlineMode = activar ? Outline.Mode.OutlineOnly : Outline.Mode.Disabled;
+                    place.GetComponent<Outline>().OutlineMode = mode;
                 }
             }
         }
