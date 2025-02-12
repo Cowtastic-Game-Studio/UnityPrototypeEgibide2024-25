@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
@@ -25,6 +26,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public int currentDiscardCount = 0;
 
         private List<CardToDelete> cardsToDelete = new List<CardToDelete>();
+
+        public Sprite openSprite;
+        public Sprite closedSprite;
+
+        public Button button;
 
         private void Awake()
         {
@@ -63,6 +69,21 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             // Abrir o cerrar el menú
             gameObject.SetActive(!gameObject.activeSelf);
+
+            if (button != null && button.image != null)
+            {
+                if (gameObject.activeSelf)
+                {
+                    button.image.sprite = openSprite;
+                }
+                else
+                {
+                    button.image.sprite = closedSprite;
+
+                }
+
+            }
+
         }
 
         private void UpdateDiscardGrid()
@@ -85,11 +106,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 var discardItem = stackedItem.GetComponent<DiscardItem>();
                 discardItem.Setup(group.First(), group.Count());
 
+
                 // Suscribirse al evento de cambio de selección
                 discardItem.OnCountChanged += UpdateTotalCost;
             }
 
-            muuneyCostText.text = $"Cost: {TotalCost.ToString()}";
+            muuneyCostText.text = $"{TotalCost.ToString()}";
         }
 
         private void UpdateSummaryGrid()

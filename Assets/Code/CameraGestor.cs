@@ -1,6 +1,6 @@
-using System.Collections;
 using Cinemachine;
 using CowtasticGameStudio.MuuliciousHarvest;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -103,6 +103,7 @@ public class CameraGestor : MonoBehaviour
     private void SwitchToCamera(CinemachineVirtualCamera targetCamera, string cameraState)
     {
         StopAllCoroutines();
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 
         HUDManager.HideHUD();
         //Debug.Log("Cambiando a cámara: " + cameraState);
@@ -134,17 +135,17 @@ public class CameraGestor : MonoBehaviour
         HUDManager.UpdateHUDForCamera(targetCamera);
     }
 
-    private bool IsMainCameraActive()
+    public bool IsMainCameraActive()
     {
         return VirtualCameraIdle.gameObject.activeSelf;
     }
 
-    private bool IsInteriorCameraActive()
+    public bool IsInteriorCameraActive()
     {
         return VirtualCameraInterior.gameObject.activeSelf;
     }
 
-    private bool IsExteriorCameraActive()
+    public bool IsExteriorCameraActive()
     {
 
         return VirtualCameraExterior.gameObject.activeSelf;

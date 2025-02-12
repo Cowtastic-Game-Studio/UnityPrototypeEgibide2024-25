@@ -7,10 +7,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     {
         [SerializeField] public CardDisplayUI cardDisplayUI;
         [SerializeField] private TMP_Text countTxt;
+        [SerializeField] private TMP_Text discardTxt;
 
         private GameObject cardGO;
         public CardTemplate CardTemplate { get; private set; }
         private int totalCount;
+        private int discardPrice;
         public int SelectedCount { get; private set; } = 0;
 
         public delegate void CountChangedDelegate(GameObject cardGO, int selectedCount, CardTemplate cardTemplate);
@@ -22,8 +24,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             CardTemplate = card.GetComponent<CardBehaviour>()?.GetTemplate();
             totalCount = count;
             SelectedCount = 0;
+            discardPrice = CardTemplate.discardCost;
             InitCountText();
             cardDisplayUI.UpdateDisplay(CardTemplate, true);
+
+
+
         }
         public void IncrementCount()
         {
@@ -74,11 +80,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void UpdateCountText()
         {
             countTxt.text = $"{SelectedCount}/{totalCount}";
+            discardTxt.text = discardPrice.ToString();
         }
 
         private void InitCountText()
         {
             countTxt.text = $"{totalCount}";
+            discardTxt.text = discardPrice.ToString();
         }
 
         // Notificar al manager con el selectedCount y el discardCost

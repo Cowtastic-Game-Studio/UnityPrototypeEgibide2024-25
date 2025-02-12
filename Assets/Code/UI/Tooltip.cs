@@ -7,7 +7,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public GameObject storagePanel;
         public GameObject cardTooltip;
+        public GameObject cardTooltipInterior;
+        public GameObject cardTooltipExterior;
         private GameObject selectedCard;
+
+        public CameraGestor cameraGestor;
+
 
         private float hoverTime = 1.5f; // Hover time threshold
         private float storageHoverCounter = 0f;
@@ -20,6 +25,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             storagePanel.SetActive(false);
             cardTooltip.SetActive(false);
+            cardTooltipExterior.SetActive(false);
+            cardTooltipInterior.SetActive(false);
         }
 
         void Update()
@@ -72,15 +79,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     if (cardHoverCounter >= hoverTime)
                     {
                         selectedCard = currentHoveredCard;
+                        CardBehaviour selectedCardBehaviour = selectedCard.GetComponent<CardBehaviour>();
 
-                        CardBehaviour selctedCardBehaviour = selectedCard.GetComponent<CardBehaviour>();
-
-                        //CardBehaviour cardTool = cardTooltip.GetComponent<CardBehaviour>();
-                        CardDisplay cardToolDisplay = cardTooltip.GetComponent<CardDisplay>();
-
-                        cardToolDisplay.UpdateDisplay(selctedCardBehaviour.GetTemplate(), true, selctedCardBehaviour.LifeCycleDaysRemaining);
-
-                        cardTooltip.SetActive(true);
+                        // Determine the appropriate tooltip display based on active camera
+                        CardDisplay cardToolDisplay = GetActiveTooltip();
+                        if (cardToolDisplay != null)
+                        {
+                            cardToolDisplay.UpdateDisplay(selectedCardBehaviour.GetTemplate(), true, selectedCardBehaviour.LifeCycleDaysRemaining);
+                            cardToolDisplay.gameObject.SetActive(true);
+                        }
                     }
                 }
                 else
@@ -90,6 +97,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
+        private CardDisplay GetActiveTooltip()
+        {
+            if (cameraGestor.IsMainCameraActive())
+                return cardTooltip.GetComponent<CardDisplay>();
+            if (cameraGestor.IsExteriorCameraActive())
+                return cardTooltipExterior.GetComponent<CardDisplay>();
+            if (cameraGestor.IsInteriorCameraActive())
+                return cardTooltipInterior.GetComponent<CardDisplay>();
+
+            return null; // No active tooltip
+        }
+
+
         private void ResetCardHover()
         {
             isHoveringCard = false;
@@ -97,6 +117,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             currentHoveredCard = null;
             selectedCard = null;
             cardTooltip.SetActive(false);
+            cardTooltipExterior.SetActive(false);
+            cardTooltipInterior.SetActive(false);
         }
 
 
