@@ -103,6 +103,7 @@ public class CameraGestor : MonoBehaviour
     private void SwitchToCamera(CinemachineVirtualCamera targetCamera, string cameraState)
     {
         StopAllCoroutines();
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 
         HUDManager.HideHUD();
         //Debug.Log("Cambiando a cámara: " + cameraState);

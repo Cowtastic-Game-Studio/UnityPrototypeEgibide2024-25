@@ -423,6 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 644af868d2329d94eb58e8d07cf65639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonSoundManager: {fileID: 0}
   currentPhaseTextUI: {fileID: 4239086559857844780}
   actionPointTextUI: {fileID: 1842723268345856486}
   wheatResourceTextUI: {fileID: 7083977168059812045}
@@ -1872,6 +1873,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storagePanel: {fileID: 1086963676637211725}
   cardTooltip: {fileID: 4466179223127878900}
+  cardTooltipInterior: {fileID: 0}
+  cardTooltipExterior: {fileID: 0}
+  cameraGestor: {fileID: 0}
 --- !u!1 &5756738872128661977
 GameObject:
   m_ObjectHideFlags: 0
@@ -2759,7 +2763,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 850508072762798471, guid: 302482e6332daed4f81649c7304f5a1a, type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 861605462926887196, guid: 302482e6332daed4f81649c7304f5a1a, type: 3}
       propertyPath: m_Color.a

@@ -111,7 +111,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 discardItem.OnCountChanged += UpdateTotalCost;
             }
 
-            muuneyCostText.text = $"Cost: {TotalCost.ToString()}";
+            muuneyCostText.text = $"{TotalCost.ToString()}";
         }
 
         private void UpdateSummaryGrid()

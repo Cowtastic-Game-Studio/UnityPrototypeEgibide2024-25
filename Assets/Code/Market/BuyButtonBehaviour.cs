@@ -36,12 +36,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void SetNormalColor()
         {
-            this.Text.color = Color.white;
+            this.Text.color = Color.black;
         }
 
         public void SetVacFridayColor()
         {
-            this.Text.color = Color.black;
+            this.Text.color = Color.red;
         }
 
 

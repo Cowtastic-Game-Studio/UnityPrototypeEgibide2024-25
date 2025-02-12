@@ -1038,6 +1038,7 @@ GameObject:
   - component: {fileID: 6283395051908469266}
   - component: {fileID: 7999806885045950417}
   - component: {fileID: 4314872093638257022}
+  - component: {fileID: -4114917233094226296}
   m_Layer: 3
   m_Name: NewBaseCard
   m_TagString: Carta
@@ -1121,7 +1122,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   template: {fileID: 0}
-  LifeCycleDaysRemaining: 0
+--- !u!114 &-4114917233094226296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5936057646601637794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a49deafb70581a4abfc3953a7debeac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursor: {fileID: 0}
 --- !u!1 &7369416923235253577
 GameObject:
   m_ObjectHideFlags: 0
