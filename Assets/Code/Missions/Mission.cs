@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-
-using UnityEngine;
 using UnityEngine.Events;
 
 namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
@@ -102,7 +100,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
         private void OnCompleteGoal(Goal goal)
         {
-            Debug.LogWarning("Goal completed: " + goal.Description);
+            MessageManager.Instance.ShowMessage("Goal completed: " + goal.Description);
+            //Debug.LogWarning("Goal completed: " + goal.Description);
             goal.OnCompleted.RemoveListener(OnCompleteGoal);
             this.Updated.Invoke(this);
 

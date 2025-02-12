@@ -57,7 +57,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GameManager.Instance.Tabletop.HUDManager.UpdateResources();
 
             //StatisticsManager.Instance.ShowStatistics();
-
+            GameManager.Instance.Tabletop.NewMarketManager.RestartMarket();
             GameManager.Instance.Tabletop.DiscardManager.CloseMenu();
         }
     }

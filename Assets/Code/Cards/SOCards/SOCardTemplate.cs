@@ -8,6 +8,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
     {
         //public Sprite artwork;
         //public Sprite baseCard;
+        public Material baseCard;
         public Material artwork;
 
         public CardType cardType;

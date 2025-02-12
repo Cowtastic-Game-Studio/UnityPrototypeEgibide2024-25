@@ -97,13 +97,36 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
 
         /// <summary>
+        /// Activa o desactiva el outline en los lugares según el tipo de recurso (CardType).
+        /// </summary>
+        /// <param name="typeResource">El tipo de recurso que determina qué lista de lugares se modificará.</param>
+        /// <param name="activar">Si es verdadero, activa el outline; si es falso, lo desactiva.</param>
+        public void OutlineByResource(CardType typeResource, bool activar)
+        {
+            List<PlaceSpaceBehaviour> places = GetPlacesByResource(typeResource);
+            
+            if (places == null) return;
+
+            Outline.Mode mode = activar ? Outline.Mode.OutlineOnly : Outline.Mode.Disabled;
+
+            foreach (PlaceSpaceBehaviour place in places)
+            {
+                if (place.GetIsActive() && (activar ? place.GetIsEmpty() : true))
+                {
+                    place.GetComponent<Outline>().OutlineMode = mode;
+                }
+            }
+        }
+                
+        /// <summary>
         /// Estos 3 metodos son los que activan la siguiente zona a activar cuando mejoren alguna zona.(Nota: Asegurarse de que las casillas que tienen que empezar activas estan las primeras en la lista , gracias.)
         /// </summary>
         public void FarmsActivateZone()
         {
             if (farms.FindAll(x => !x.GetIsActive()).Count == 0)
             {
-                Debug.LogWarning("Max gardens.");
+                // Debug.LogWarning("Max gardens.");
+                MessageManager.Instance.ShowMessage("Max gardens.");
                 return;
             }
 
@@ -123,7 +146,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (stables.FindAll(x => !x.GetIsActive()).Count == 0)
             {
-                Debug.LogWarning("Max stables.");
+                MessageManager.Instance.ShowMessage($"Max stables");
+                // Debug.LogWarning("Max stables.");
                 return;
             }
 
@@ -142,7 +166,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (taverns.FindAll(x => !x.GetIsActive()).Count == 0)
             {
-                Debug.LogWarning("Max shop.");
+                //Debug.LogWarning("Max shop.");
+                MessageManager.Instance.ShowMessage($"Max shop");
                 return;
             }
 
@@ -168,8 +193,25 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         #endregion
 
         #region Private methods
-
+        /// <summary>
+        /// Devuelve la lista de lugares según el tipo de recurso.
+        /// </summary>
+        /// <param name="typeResource">El tipo de recurso que se utilizará para determinar la lista.</param>
+        /// <returns>La lista de lugares asociados al tipo de recurso.</returns>
+        private List<PlaceSpaceBehaviour> GetPlacesByResource(CardType typeResource)
+        {
+            switch (typeResource)
+            {
+                case CardType.Cow:
+                    return stables;
+                case CardType.Seed:
+                    return farms;
+                case CardType.Customer:
+                    return taverns;
+                default:
+                    return null;
+            }
+        }
         #endregion
-
     }
 }

@@ -17,8 +17,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
     public class CardManager : MonoBehaviour, ICardsManager
     {
-        [SerializeField]
-        private SODeck initialCards;
+        [SerializeField] private AudioSource source;
+        [SerializeField] private AudioClip clipStealCard, clipDiscard, clipPlaceCard, clipSelectedCard;
+        private ButtonSoundManager buttonSoundManager;
+        [SerializeField] private SODeck initialCards;
 
         /// <summary>
         /// Mazo de cartas.
@@ -161,8 +163,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void DrawFromDeck()
         {
+            source.PlayOneShot(clipStealCard);
             MoveLastCardsToHand(drawCards);
-
+            source.PlayOneShot(clipStealCard);
             InitHandCardLifes();
         }
 
@@ -240,6 +243,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     cardsInHand[i].transform.localRotation = cardRotation;
                     var cardBH = card.GetComponent<CardBehaviour>();
                     cardBH.IsPlaced = false;
+                    cardBH.Activate();
                 }
             }
         }
@@ -262,13 +266,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             if (discardCards.Count == 0)
             {
-                Debug.LogWarning("No hay cartas en el mazo de descarte para barajar."); // ESTA NO
+                MessageManager.Instance.ShowMessage("No hay cartas en el mazo de descarte para barajar.");
+                //Debug.LogWarning("No hay cartas en el mazo de descarte para barajar."); // ESTA NO
                 return;
             }
             // Mueve las cartas de nuevo al mazo de robo
             foreach (ICard card in discardCards)
             {
-                GameObject cardGameObject = ((MonoBehaviour) card).gameObject;
+                GameObject cardGameObject = ((MonoBehaviour)card).gameObject;
                 cardGameObject.transform.SetParent(deckArea);
                 cardGameObject.transform.localPosition = Vector3.zero;
                 cardGameObject.transform.localRotation = Quaternion.identity;
@@ -286,6 +291,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void Mulligan()
         {
             int handNumber = handDeck.Cards.Count;
+            source.PlayOneShot(clipDiscard);
 
             if (handNumber > 1)
             {
@@ -325,6 +331,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 var card = handDeck.Draw();
                 if (card != null)
                 {
+                    source.PlayOneShot(clipPlaceCard);
                     discardDeck.Place(card);
                     SetCardState(card, CardState.onDiscard);
                 }
@@ -489,6 +496,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 if (selectedCard != null)
                 {
+                    source.PlayOneShot(clipSelectedCard);
                     selectedCard.GetComponent<CardBehaviour>()?.Deactivate();
                 }
 
@@ -496,6 +504,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 if (selectedCard != null)
                 {
+                    source.PlayOneShot(clipSelectedCard);
                     selectedCard.GetComponent<CardBehaviour>()?.Activate();
                 }
             }
@@ -540,7 +549,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 }
             }
 
-
+            // Activar el outline de las cartas del mismo tipo
+            if (selectedCard != null)
+            {
+                var cardBH = selectedCard.GetComponent<CardBehaviour>();
+                GameManager.Instance.Tabletop.OutlineByResource(cardBH.Type, true);
+            }
         }
 
         public void StopDragging()
@@ -548,8 +562,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (isDragging && selectedCard != null)
             {
                 // Devuelve la carta a su posición original
-                //selectedCard.transform.position = originalPosition;
-                selectedCard.transform.SetParent(handArea);
+                if (playedCardsDeck.Cards.Contains(selectedCard))
+                    selectedCard.transform.position = originalPosition;
+                else
+                    selectedCard.transform.SetParent(handArea);
             }
 
             isDragging = false;
@@ -557,12 +573,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             //handDeck.Place(selectedCard);
             //playedCardsDeck.RemoveCard(selectedCard);
 
-            ArrangeCardsInCurve();
+            //ArrangeCardsInCurve();
 
             // Mostrar todas las cartas en la mano nuevamente
             foreach (Transform card in handArea.transform)
             {
                 card.gameObject.SetActive(true);
+            }
+
+            // Desactivar el outline de las cartas del mismo tipo
+            if (selectedCard != null)
+            {
+                var cardBH = selectedCard.GetComponent<CardBehaviour>();
+                GameManager.Instance.Tabletop.OutlineByResource(cardBH.Type, false);
             }
         }
 
@@ -575,10 +598,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 if (Input.GetMouseButtonDown(1))
                 {
 
-                    handDeck.Place(selectedCard);
-                    playedCardsDeck.RemoveCard(selectedCard);
+                    //handDeck.Place(selectedCard);
+                    //playedCardsDeck.RemoveCard(selectedCard);
 
                     StopDragging();
+
+                    ArrangeCardsInCurve();
                 }
             }
         }
@@ -609,6 +634,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 if (target != null && target.gameObject.CompareTag("Place"))
                 {
+                    source.PlayOneShot(clipPlaceCard);
                     // Desactiva el arrastre
                     StopDragging();
 
@@ -660,6 +686,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     }
 
                     ArrangeCardsInCurve();
+
+                    // Desactivar el outline de las cartas del mismo tipo
+                    GameManager.Instance.Tabletop.OutlineByResource(cardBH.Type, false);
                 }
             }
         }
@@ -683,8 +712,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             cardBH.IsPlaced = false;
 
             card.transform.SetParent(handArea);
-            card.transform.localPosition = new Vector3(cardBH.PositionInHand.Value, 0, 0);
-            card.transform.rotation = handArea.transform.rotation;
+
+            card.transform.localPosition = Vector3.zero;
+            card.transform.localRotation = Quaternion.identity;
 
             playedCardsDeck.RemoveCard(card);
 
@@ -740,8 +770,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 CardBehaviour cardBH = newCard.GetComponent<CardBehaviour>();
                 cardBH.setCardTemplate(cardTemplate);
-
-                Debug.LogWarning($"Card buyed {cardName}");
+                MessageManager.Instance.ShowMessage($"Card buyed {cardName}");
+                //Debug.LogWarning($"Card buyed {cardName}");
 
                 // Agrega la carta al mazo
                 drawDeck.Place(newCard);
@@ -763,10 +793,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     playedCardsDeck.Cards).ToList();
         }
 
-        public void showHand() {
+        public void showHand()
+        {
             handArea.gameObject.SetActive(true);
-        } 
-        public void hideHand() {
+        }
+        public void hideHand()
+        {
             handArea.gameObject.SetActive(false);
         }
         public void DeleteCards(List<CardToDelete> cardsToDelete)

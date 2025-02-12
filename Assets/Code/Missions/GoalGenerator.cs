@@ -76,7 +76,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal6()
         {
-            return GenerateStatGoal("T-M6", "Buy a zone upgrade", StatisticType.ZonesUpgradePurchased, 1);
+            Func<bool> condition = () =>
+            {
+                Statistic zonesUpgraded = StatisticsManager.Instance.GetStat(StatisticType.ZonesUpgradePurchased);
+                if (zonesUpgraded.Uses >= 1)
+                    GameManager.Instance.Tabletop.NewMarketManager.ResetShopPlusItemPrice();
+                return (zonesUpgraded.Uses >= 1);
+            };
+
+            return GenerateStatGoal("T-M6", "Buy a zone upgrade", condition);
         }
 
         #endregion

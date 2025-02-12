@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49a391d00c55ea488932e8659b04053, type: 3}
   m_Name: StablePlus
   m_EditorClassIdentifier: 
+  baseCard: {fileID: 2100000, guid: edc33914b937d8244aba28c5c1eb02c5, type: 2}
   artwork: {fileID: 2100000, guid: 6bed3a345a886374cbae7f943b97c4d9, type: 2}
   cardType: 6
   name: Stable+
-  description: 
+  description: "Let me help you with that fence, won\xB4t be for free though"
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []
   producedResources: []
   marketCost: 25
   discardCost: 0
-  dayToUnlock: 0
+  dayToUnlock: 8
   targetCardType: 0
   multiplier: 1
   targetResoruceType: 4

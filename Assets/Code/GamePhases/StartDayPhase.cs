@@ -29,6 +29,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GameManager.Instance.Tabletop.CardManager.DrawFromDeck();
             GameManager.Instance.Tabletop.UpdateEmptyPlaces();
             GameManager.Instance.Tabletop.UpdateAcivePlaces();
+
+            GameManager.Instance.Tabletop.CardManager.ActivateHandDeckCards();
         }
 
         /// <summary>

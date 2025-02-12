@@ -54,14 +54,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Verificar si el número de cartas en la baraja es suficiente
             if (GameManager.Instance.Tabletop.CardManager.getAllCardsList().Count <= minDeckSize)
             {
-                Debug.LogWarning($"No se pueden borrar cartas. Se necesitan al menos {minDeckSize} cartas.");
+                MessageManager.Instance.ShowMessage($"No se pueden borrar cartas. Se necesitan al menos {minDeckSize} cartas.");
+                //Debug.LogWarning($"No se pueden borrar cartas. Se necesitan al menos {minDeckSize} cartas.");
                 return;
             }
 
             //// Verificar si el número de descartes actuales ha alcanzado el límite
             if (currentDiscardCount >= maxDiscardLimit && !gameObject.activeSelf)
             {
-                Debug.LogWarning($"No se pueden abrir más el menú. Ya has alcanzado el límite de {maxDiscardLimit} descartes.");
+                MessageManager.Instance.ShowMessage($"No se pueden abrir más el menú. Ya has alcanzado el límite de {maxDiscardLimit} descartes.");
+                //Debug.LogWarning($"No se pueden abrir más el menú. Ya has alcanzado el límite de {maxDiscardLimit} descartes.");
                 return;
             }
 
@@ -141,7 +143,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Verificar si el número total de eliminaciones excede el límite
             if (currentDiscardCount > maxDiscardLimit)
             {
-                Debug.LogWarning("No se pueden eliminar más de 5 cartas por turno.");
+                MessageManager.Instance.ShowMessage("No se pueden eliminar más de 5 cartas por turno.");
+                //Debug.LogWarning("No se pueden eliminar más de 5 cartas por turno.");
                 return;
             }
 
@@ -241,13 +244,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Verificar si se ha alcanzado el límite de descartes
             if (currentDiscardCount > maxDiscardLimit)
             {
-                Debug.LogWarning($"No puedes eliminar más de {maxDiscardLimit} cartas por turno.");
+                MessageManager.Instance.ShowMessage($"No puedes eliminar más de {maxDiscardLimit} cartas por turno.");
+                //Debug.LogWarning($"No puedes eliminar más de {maxDiscardLimit} cartas por turno.");
                 return;
             }
 
             if (!GameManager.Instance.Tabletop.StorageManager.CheckMuuney(TotalCost))
             {
-                Debug.LogWarning($"No hay suficnte dinero para eliminar esa cartas.");
+                MessageManager.Instance.ShowMessage("No hay suficiente dinero para eliminar esa cartas.");
+                //Debug.LogWarning($"No hay suficnte dinero para eliminar esa cartas.");
                 return;
             }
 

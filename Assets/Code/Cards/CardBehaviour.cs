@@ -49,7 +49,18 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         int mouseClicks = 0;
         float mouseTimerLimit = .25f;
 
-        public int LifeCycleDaysRemaining;
+        private int lifeCycleDaysRemaining;
+
+        public int LifeCycleDaysRemaining
+        {
+            get { return lifeCycleDaysRemaining; }
+            set
+            {
+                lifeCycleDaysRemaining = value;
+                UpdateDisplay();
+            }
+        }
+
 
         #region Unity methods
 
@@ -199,6 +210,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     // Verifica si la carta est� en la layer 'CardLayer'
                     if (gameObject.layer == LayerMask.NameToLayer("CardLayer"))
                     {
+                        var placeSpace = transform.parent?.GetComponent<PlaceSpaceBehaviour>();
+                        if (placeSpace != null)
+                        {
+                            placeSpace.updateEmpty();
+                        }
+
                         InvokeCardClicked();
                     }
                 }

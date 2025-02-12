@@ -138,7 +138,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         }
 
-        public void UpdateByBuyedZone(CardType targedCardType)
+        public void UpdateByBuyedZone(CardType targedCardType, bool hasDiscount)
         {
             switch (targedCardType)
             {
@@ -153,7 +153,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     break;
             }
 
-            UpdateByStatisticType(StatisticType.ZonesWithCardsPurchased, 1);
+            if (hasDiscount)
+            {
+                UpdateByStatisticType(StatisticType.ZonesWithCardsPurchased, 1);
+            }
+            else
+            {
+                UpdateByStatisticType(StatisticType.ZonesUpgradePurchased, 1);
+            }
         }
 
         public void UpdateByBuyedZone(GameResource targedCardType)

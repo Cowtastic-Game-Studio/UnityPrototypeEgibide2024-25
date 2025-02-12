@@ -13,7 +13,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void UpdateDisplayData(CardTemplate cardT, float discountPercentage)
         {
             cardTemplate = cardT;
-            card.UpdateDisplayAndMat(cardTemplate, false);
+            card.UpdateDisplayAndMat(cardTemplate, true);
+            int finalPrice = Utils.RoundMuuney(cardTemplate.marketCost * discountPercentage);
+            price = finalPrice;
+        }
+
+        public void UpdateDisplayDataSpecial(float discountPercentage)
+        {
+            card.UpdateDisplayAndMat(cardTemplate, true);
             int finalPrice = Utils.RoundMuuney(cardTemplate.marketCost * discountPercentage);
             price = finalPrice;
         }
@@ -70,9 +77,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         }
 
 
-                        if (hasDiscount) { GameManager.Instance.Tabletop.CardManager.TryRemoveCardsGOFromDecks(cardToDelete); }
+                        if (hasDiscount)
+                        {
+                            GameManager.Instance.Tabletop.CardManager.TryRemoveCardsGOFromDecks(cardToDelete);
+                        }
 
-                        StatisticsManager.Instance.UpdateByBuyedZone(cardTemplate.targetCardType);
+                        StatisticsManager.Instance.UpdateByBuyedZone(cardTemplate.targetCardType, hasDiscount);
                     }
                 }
                 else

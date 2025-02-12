@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public class LuckStrike : CalendarEvent
@@ -19,12 +17,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Calculo del 10 porciento del dinero total que puede tener el jugador
             int currentMaxMuuney = GameManager.Instance.Tabletop.StorageManager.GetMaxResourceAmounts(GameResource.Muuney);
             double tenPercentMuuney = currentMaxMuuney * 0.10;
-            int roundedMuuney = Utils.RoundMuuney((int) tenPercentMuuney);
+            int roundedMuuney = Utils.RoundMuuney((int)tenPercentMuuney);
 
             // Añadir dinero y actualizar hud
             GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(roundedMuuney, GameResource.Muuney, true);
             GameManager.Instance.Tabletop.HUDManager.UpdateResources();
-            Debug.LogWarning("Added muuney: " + roundedMuuney);
+            //Debug.LogWarning("Added muuney: " + roundedMuuney);
+            MessageManager.Instance.ShowMessage("Added muuney: " + roundedMuuney);
         }
 
         public override void EndEvent()
