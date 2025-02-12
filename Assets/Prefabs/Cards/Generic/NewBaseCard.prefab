@@ -279,8 +279,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278255374
-  m_fontColor: {r: 0.055840492, g: 1, b: 0, a: 1}
+    rgba: 4278195711
+  m_fontColor: {r: 1, g: 0.08235294, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1102,10 +1102,11 @@ MonoBehaviour:
   requieredTypeText: {fileID: 8656750029809844906}
   requieredQuantityText: {fileID: 8961124607619655735}
   producedTypeText: {fileID: 2040990972104885097}
-  producedQuantityText: {fileID: 8961124607619655735}
+  producedQuantityText: {fileID: 793276716632644714}
   cost: 0
   targetMeshRenderer: {fileID: 4601035944491829219}
   newMaterial: {fileID: 2100000, guid: 7d49d0fca99ab4b469aea83d1d265e53, type: 2}
+  baseCardMaterial: {fileID: 2100000, guid: e7e5a412938c62349924c8c1bfade4e2, type: 2}
   backCard: {fileID: 3267639545219268875}
 --- !u!114 &4314872093638257022
 MonoBehaviour:
@@ -1229,8 +1230,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278195711
-  m_fontColor: {r: 1, g: 0.08211804, b: 0, a: 1}
+    rgba: 4278255374
+  m_fontColor: {r: 0.05490196, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

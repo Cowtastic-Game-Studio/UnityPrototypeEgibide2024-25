@@ -243,6 +243,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     cardsInHand[i].transform.localRotation = cardRotation;
                     var cardBH = card.GetComponent<CardBehaviour>();
                     cardBH.IsPlaced = false;
+                    cardBH.Activate();
                 }
             }
         }
