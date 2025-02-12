@@ -32,7 +32,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             isActive = true;
             MessageManager.Instance.ShowMessage($"{eventName} started. {eventDescription}");
-            //Debug.LogWarning($"{eventName} started. {eventDescription}");
+            UnityEngine.Debug.LogWarning($"{eventName} started. {eventDescription}");
             ApplyEffects();
         }
 
