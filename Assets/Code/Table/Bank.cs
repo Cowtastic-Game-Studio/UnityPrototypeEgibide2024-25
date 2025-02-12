@@ -20,7 +20,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             Type = GameResource.Muuney;
             MaxResources = 25;
             Level = 1;
-            Resource = 0;
+            Resource = 25;
         }
 
         #endregion

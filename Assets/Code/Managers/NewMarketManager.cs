@@ -261,9 +261,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 case "Tavern+":
                     temporalCardsList = allCardsList.Where(x => x.GetComponent<CardDisplay>().name == "Muussive Tavern").ToList();
                     break;
-                default:
-                    SetCardPrices(clickItem.cardTemplate.marketCost, false, 0);
-                    break;
             }
 
             if (temporalCardsList.Count > 0)
@@ -273,7 +270,24 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             else
             {
-                SetCardPrices(clickItem.price, false, 0);
+                switch (clickItem.getCardTemplate().name)
+                {
+                    case "ActionPoints+":
+                        int priceAP = GameManager.Instance.Tabletop.StorageManager.GetActionPointPlusPrice();
+
+                        SetCardPrices(priceAP, false, 0);
+                        break;
+                    case "Bank+":
+                        int priceBank = GameManager.Instance.Tabletop.StorageManager.GetBankPlusPrice();
+
+                        SetCardPrices(priceBank, false, 0);
+                        break;
+                    default:
+                        SetCardPrices(clickItem.price, false, 0);
+                        break;
+                }
+
+
             }
         }
 

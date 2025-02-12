@@ -261,6 +261,40 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return storage.MaxLevel;
         }
 
+        public int GetBankPlusPrice()
+        {
+            return Utils.RoundMuuney(_bankStorage.MaxResources * 0.3);
+        }
+
+        public int GetActionPointPlusPrice()
+        {
+            int upgradeCost = 0;
+
+            switch (_paStorage.Level)
+            {
+                case 1:
+                    upgradeCost = 30;
+                    break;
+                case 2:
+                    upgradeCost = 50;
+                    break;
+                case 3:
+                    upgradeCost = 75;
+                    break;
+                case 4:
+                    upgradeCost = 100;
+                    break;
+                case 5:
+                    upgradeCost = 200;
+                    break;
+                case 6:
+                    upgradeCost = 300;
+                    break;
+            }
+
+            return upgradeCost;
+        }
+
         public bool CheckMuuney(int cardPrice)
         {
             return CheckStorage(cardPrice, _bankStorage);
@@ -301,7 +335,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private bool CheckStorage(int quantity, IStorage storage)
         {
             int leftResources = storage.Resource - quantity;
-            if (quantity > storage.Resource || leftResources < 0)
+            if (/*quantity >= storage.Resource ||*/ leftResources < 0)
             {
                 MessageManager.Instance.ShowMessage("Not enough resources");
 
@@ -412,29 +446,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 return;
             }
 
-            int upgradeCost = 0;
+            int upgradeCost = GetActionPointPlusPrice();
 
-            switch (_paStorage.Level)
-            {
-                case 1:
-                    upgradeCost = 30;
-                    break;
-                case 2:
-                    upgradeCost = 50;
-                    break;
-                case 3:
-                    upgradeCost = 75;
-                    break;
-                case 4:
-                    upgradeCost = 100;
-                    break;
-                case 5:
-                    upgradeCost = 200;
-                    break;
-                case 6:
-                    upgradeCost = 300;
-                    break;
-            }
             if (CheckMuuney(upgradeCost))
             {
                 _paStorage.MaxResources += 2;
@@ -449,7 +462,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private void UpgradeBankStorage()
         {
-            int upgradeCost = Utils.RoundMuuney(30 * _bankStorage.MaxResources) / 100;
+            int upgradeCost = GetBankPlusPrice();
             if (CheckMuuney(upgradeCost))
             {
                 _bankStorage.MaxResources += 5;
