@@ -132,7 +132,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Verifica que el ScriptableObject esté asignado y que la lista de cartas no esté vacía
             if (initialCards == null || initialCards.Cards == null || initialCards.Cards.Count == 0)
             {
-                Debug.LogError("El deck inicial (initialCards) no está asignado o está vacío.");
+                UnityEngine.Debug.LogError("El deck inicial (initialCards) no está asignado o está vacío.");
                 return;
             }
 
@@ -369,7 +369,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             else
             {
-                Debug.LogWarning("La carta no se encuentra en la mano."); // ESTA NO
+                UnityEngine.Debug.LogWarning("La carta no se encuentra en la mano."); // ESTA NO
             }
         }
 
@@ -756,7 +756,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
 
 
-        public void BuyCard(string cardName)
+        public void BuyCard(string cardName, int price)
         {
             if (cardNameMap.ContainsKey(cardName))
             {
@@ -777,6 +777,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 drawDeck.Place(newCard);
                 ArrangeCardsInCurve();
                 //StatisticsManager.UpdateByBuyedCard(cardBH);
+                GameManager.Instance.Tabletop.StorageManager.WasteMuuney(price);
                 StatisticsManager.Instance.UpdateByStatisticType(StatisticType.CardsPurchased, 1);
             }
         }
@@ -826,7 +827,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 // Si aún queda alguna cantidad no eliminada, puedes manejarlo si es necesario
                 if (remainingQuantity > 0)
                 {
-                    Debug.LogWarning($"No se pudieron eliminar todas las cartas del tipo {cardToDelete.CardType}. Cartas restantes: {remainingQuantity}");
+                    UnityEngine.Debug.LogWarning($"No se pudieron eliminar todas las cartas del tipo {cardToDelete.CardType}. Cartas restantes: {remainingQuantity}");
                 }
             }
         }
@@ -874,7 +875,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             else
             {
-                Debug.Log("Miau Miau Miau Miau... :(");
+                UnityEngine.Debug.Log("Miau Miau Miau Miau... :(");
             }
         }
 

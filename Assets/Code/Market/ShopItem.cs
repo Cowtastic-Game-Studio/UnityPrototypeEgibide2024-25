@@ -52,8 +52,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (GameManager.Instance.Tabletop.StorageManager.CheckMuuney(price))
             {
-                int muuney = GameManager.Instance.Tabletop.StorageManager.WasteMuuney(price);
-
                 if (cardTemplate.cardType == CardType.None)
                 {
                     //mejoras permanentes del tablero
@@ -66,16 +64,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         switch (cardTemplate.targetCardType)
                         {
                             case CardType.Cow:
-                                GameManager.Instance.Tabletop.StablesActivateZone();
+                                GameManager.Instance.Tabletop.StablesActivateZone(price);
                                 break;
                             case CardType.Seed:
-                                GameManager.Instance.Tabletop.FarmsActivateZone();
+                                GameManager.Instance.Tabletop.FarmsActivateZone(price);
                                 break;
                             case CardType.Customer:
-                                GameManager.Instance.Tabletop.TavernActivateZone();
+                                GameManager.Instance.Tabletop.TavernActivateZone(price);
                                 break;
                         }
-
 
                         if (hasDiscount)
                         {
@@ -87,10 +84,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 }
                 else
                 {
-                    GameManager.Instance.Tabletop.CardManager.BuyCard(cardTemplate.name);
+                    GameManager.Instance.Tabletop.CardManager.BuyCard(cardTemplate.name, price);
 
                     StatisticsManager.Instance.UpdateByBuyedCard(cardTemplate.cardType);
                 }
+
+
+
             }
         }
 

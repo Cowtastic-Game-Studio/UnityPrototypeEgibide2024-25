@@ -20,7 +20,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
                 //    return;
                 //}
                 GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(10, GameResource.Muuney, true);
-                GameManager.Instance.Tabletop.CardManager.BuyCard("FastCow");
+                GameManager.Instance.Tabletop.CardManager.BuyCard("FastCow", 0);
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
 
                 //Debug.LogWarning("Tutorial reward has been received. 10 Muuneys and 1 Fast Cow");
