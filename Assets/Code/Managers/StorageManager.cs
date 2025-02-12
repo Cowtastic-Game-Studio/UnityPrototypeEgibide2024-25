@@ -515,26 +515,29 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         // Este update se puede borrar, solo es para pruebas.
         public void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Y))
+            if (GameManager.Instance.isActivatedCheatCodes)
             {
-                UpgradeStorage(_bankStorage);
-            }
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                UpgradeStorage(_paStorage);
-            }
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                UpgradeStorage(_fridgeStorage);
-            }
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                UpgradeStorage(_silo);
-            }
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                _bankStorage.Resource = _bankStorage.MaxResources;
-                GameManager.Instance.Tabletop.HUDManager.UpdateResources();
+                if (Input.GetKeyDown(KeyCode.Y))
+                {
+                    UpgradeStorage(_bankStorage);
+                }
+                if (Input.GetKeyDown(KeyCode.U))
+                {
+                    UpgradeStorage(_paStorage);
+                }
+                if (Input.GetKeyDown(KeyCode.I))
+                {
+                    UpgradeStorage(_fridgeStorage);
+                }
+                if (Input.GetKeyDown(KeyCode.O))
+                {
+                    UpgradeStorage(_silo);
+                }
+                if (Input.GetKeyDown(KeyCode.L))
+                {
+                    _bankStorage.Resource = _bankStorage.MaxResources;
+                    GameManager.Instance.Tabletop.HUDManager.UpdateResources();
+                }
             }
         }
 
