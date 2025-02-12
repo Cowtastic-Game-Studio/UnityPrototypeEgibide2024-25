@@ -49,7 +49,18 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         int mouseClicks = 0;
         float mouseTimerLimit = .25f;
 
-        public int LifeCycleDaysRemaining;
+        private int lifeCycleDaysRemaining;
+
+        public int LifeCycleDaysRemaining
+        {
+            get { return lifeCycleDaysRemaining; }
+            set
+            {
+                lifeCycleDaysRemaining = value;
+                UpdateDisplay();
+            }
+        }
+
 
         #region Unity methods
 

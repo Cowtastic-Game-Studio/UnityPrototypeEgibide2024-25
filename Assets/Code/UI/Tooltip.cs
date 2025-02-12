@@ -75,10 +75,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                         CardBehaviour selctedCardBehaviour = selectedCard.GetComponent<CardBehaviour>();
 
-                        CardBehaviour cardTool = cardTooltip.GetComponent<CardBehaviour>();
-                        CardDisplay cardToolDisplay = cardTool.GetComponent<CardDisplay>();
+                        //CardBehaviour cardTool = cardTooltip.GetComponent<CardBehaviour>();
+                        CardDisplay cardToolDisplay = cardTooltip.GetComponent<CardDisplay>();
 
-                        cardToolDisplay.UpdateDisplayAndMat(selctedCardBehaviour.GetTemplate(), true);
+                        cardToolDisplay.UpdateDisplay(selctedCardBehaviour.GetTemplate(), true, selctedCardBehaviour.LifeCycleDaysRemaining);
 
                         cardTooltip.SetActive(true);
                     }

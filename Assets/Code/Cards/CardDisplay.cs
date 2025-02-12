@@ -63,7 +63,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 {
 
                     actionPointsText.text = cardTemplate.actionPointsCost.ToString();
-                    lifeCycleDaysText.text = cardTemplate.lifeCycleDays.ToString();
+
+                    lifeCycleDaysText.text = gameObject.GetComponent<CardBehaviour>() ?
+                                    gameObject.GetComponent<CardBehaviour>()?.LifeCycleDaysRemaining.ToString() :
+                                    cardTemplate.lifeCycleDays.ToString();
 
                     if (cardTemplate.requiredResources.Count != 0)
                     {
@@ -140,9 +143,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             return formattedText;
         }
+
+        internal void UpdateDisplay(CardTemplate cardTemplate, bool isActive, int lifeCycleDaysRemaining)
+        {
+            UpdateDisplayAndMat(cardTemplate, isActive);
+            lifeCycleDaysText.text = lifeCycleDaysRemaining.ToString();
+        }
     }
-
-
-
-
 }
