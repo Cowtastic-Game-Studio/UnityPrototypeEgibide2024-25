@@ -97,9 +97,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 if (Input.GetKeyDown(KeyCode.B))
                 {
-                    Tabletop.FarmsActivateZone();
-                    Tabletop.StablesActivateZone();
-                    Tabletop.TavernActivateZone();
+                    Tabletop.FarmsActivateZone(0);
+                    Tabletop.StablesActivateZone(0);
+                    Tabletop.TavernActivateZone(0);
                 }
 
                 if (Input.GetKeyDown(KeyCode.V))
