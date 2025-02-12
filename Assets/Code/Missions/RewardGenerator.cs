@@ -15,14 +15,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         {
             UnityAction rewardReceiveDelegate = () =>
             {
-                if (!MissionsManager.Instance.IsTutorialEnabled)
+                if (MissionsManager.Instance.IsTutorialEnabled)
                 {
                     return;
                 }
                 GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(10, GameResource.Muuney, true);
-
                 GameManager.Instance.Tabletop.CardManager.BuyCard("FastCow");
-
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
 
                 //Debug.LogWarning("Tutorial reward has been received. 10 Muuneys and 1 Fast Cow");
@@ -31,6 +29,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 
             return new Reward(rewardReceiveDelegate);
         }
+
 
         /// <summary>
         /// Genera la recompensa semanal

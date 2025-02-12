@@ -4,6 +4,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 {
     public enum StatisticType
     {
+        [EnumMember(Value = "Placed cards")]
+        CardsPlaced,
+
         // Cards
         [EnumMember(Value = "Milked cows")]
         CowsMilked,
