@@ -348,7 +348,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void RemoveResources(int quantity, IStorage storage)
         {
-            storage.Resource -= quantity;
+            //storage.Resource -= quantity;
 
             if (storage.Resource <= 0)
             {
