@@ -24,7 +24,7 @@ MonoBehaviour:
     resourceQuantity: 2
   producedResources:
   - resourceType: 1
-    resourceQuantity: 3
+    resourceQuantity: 5
   marketCost: 3
   discardCost: 3
   dayToUnlock: 14
