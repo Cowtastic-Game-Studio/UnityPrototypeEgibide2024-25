@@ -40,6 +40,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (_paStorage.Resource < nAP)
             {
+                MessageManager.Instance.ShowMessage("Not action points.");
+                Debug.LogWarning($"Not enough action points."); // No estoy muy segura
                 return false;
             }
             _paCost = nAP;
@@ -337,8 +339,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (/*quantity >= storage.Resource ||*/ leftResources < 0)
             {
                 MessageManager.Instance.ShowMessage("Not enough resources");
-
-                //Debug.LogWarning("Not enough resources");
+                Debug.LogWarning("Not enough resources");
                 return false;
             }
 
@@ -357,6 +358,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             if (newResources > storage.MaxResources)
             {
+                MessageManager.Instance.ShowMessage("There is not enough space to store the resource.");
                 Debug.LogWarning("There is not enough space to store the resource.");
                 return false;
             }
