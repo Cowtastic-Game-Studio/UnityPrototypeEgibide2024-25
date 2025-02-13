@@ -17,7 +17,7 @@ MonoBehaviour:
   cardType: 0
   name: Big Cow
   description: That's a huge cow, you surely could milk it a lot.
-  lifeCycleDays: 3
+  lifeCycleDays: 2
   actionPointsCost: 1
   requiredResources:
   - resourceType: 3
