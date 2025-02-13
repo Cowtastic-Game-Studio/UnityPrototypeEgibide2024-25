@@ -71,18 +71,18 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 }
             }
 
-            foreach (ResourceAmount resource in producedResources)
-            {
-                int producedQuantity = resource.resourceQuantity;
-                GameResource producedType = resource.resourceType;
+            /*  foreach (ResourceAmount resource in producedResources)
+              {
+                  int producedQuantity = resource.resourceQuantity;
+                  GameResource producedType = resource.resourceType;
 
-                var storage = GetStorage<IStorage>(producedType);
+                  var storage = GetStorage<IStorage>(producedType);
 
-                //if (!CheckMaxStorage(producedQuantity, storage))
-                //{
-                //    return false;
-                //}
-            }
+                  if (!CheckMaxStorage(producedQuantity, storage))
+                  {
+                      return false;
+                  }
+              }*/
 
             _requiredResources = requiredResources;
             _producedResources = producedResources;

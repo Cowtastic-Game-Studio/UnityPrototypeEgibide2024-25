@@ -636,7 +636,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 // Mover la carta sobre el plano
                 //Vector3 newPosition = hit.point + Vector3.up;
-                Vector3 newPosition = hit.point + new Vector3(1, 0, 0.5f);
+                Vector3 newPosition = hit.point + new Vector3(1, 1, 0);
 
                 selectedCard.transform.position = newPosition;
             }
