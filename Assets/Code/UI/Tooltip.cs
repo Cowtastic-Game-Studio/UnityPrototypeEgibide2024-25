@@ -20,6 +20,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private bool isHoveringCard = false;
         private GameObject currentHoveredCard = null;
+        private bool forceResourcesPanelVisible = false;
+
 
         void Start()
         {
@@ -31,35 +33,45 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         void Update()
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (forceResourcesPanelVisible)
             {
-                HandleStorageHover(hit);
-                HandleCardHover(hit);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit hit))
+                {
+                    HandleStorageHover(hit);
+                    HandleCardHover(hit);
+                }
+                else
+                {
+                    // storagePanel.SetActive(false);
+                    ResetCardHover();
+                }
             }
-            else
-            {
-                // storagePanel.SetActive(false);
-                ResetCardHover();
-            }
+        }
+
+
+        public void ForceResourcesPanel(bool state)
+        {
+            forceResourcesPanelVisible = state;
+            storagePanel.SetActive(state); // Si el estado cambia, aplicarlo
         }
 
         private void HandleStorageHover(RaycastHit hit)
         {
-            if (hit.collider.CompareTag("Storage"))
+            if (forceResourcesPanelVisible)
             {
-                storagePanel.SetActive(true);
 
-            }
-            else if (GameManager.Instance.GamePhaseManager.CurrentPhase is ActionPointsPhase)
-            {
-                storagePanel.SetActive(true);
-            }
-            else
-            {
-                storagePanel.SetActive(false);
+                if (hit.collider.CompareTag("Storage") || GameManager.Instance.GamePhaseManager.CurrentPhase is ActionPointsPhase)
+                {
+                    storagePanel.SetActive(true);
+                }
+                else
+                {
+                    storagePanel.SetActive(false);
+                }
             }
         }
+
 
         private void HandleCardHover(RaycastHit hit)
         {

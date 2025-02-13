@@ -1,9 +1,6 @@
-using System.Text.RegularExpressions;
-
 using Cinemachine;
-
+using System.Text.RegularExpressions;
 using TMPro;
-
 using UnityEngine;
 
 namespace CowtasticGameStudio.MuuliciousHarvest
@@ -21,7 +18,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         #region Properties
 
-        [SerializeField]private ButtonSoundManager buttonSoundManager; 
+        [SerializeField] private ButtonSoundManager buttonSoundManager;
 
         /// <summary>
         /// Referencia al TextBox donde se muestra el texto de la fase actual
@@ -94,6 +91,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private GamePhaseManager gamePhaseManager;
         private CardManager CardManager;
+        [SerializeField] private Tooltip tooltip;
 
         #endregion
 
@@ -127,7 +125,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             buttonSoundManager.MulliganAudioPlayer();
             GameManager.Instance.Tabletop.CardManager.Mulligan();
-            
+
         }
         #endregion
 
@@ -164,46 +162,128 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             bankResourceTextUI.text = FormatNumber(muuney) + "/" + FormatNumber(muuneyMax);
         }
 
+        //public void UpdateHUDForCamera(CinemachineVirtualCamera activeCamera)
+        //{
+        //    // Ocultar todo por defecto
+        //    //currentPhaseTextUI.gameObject.SetActive(false);
+        //    //bankResourceTextUI.gameObject.SetActive(false);
+        //    catButton.gameObject.SetActive(false);
+        //    savePanel.gameObject.SetActive(false);
+        //    exitPanel.gameObject.SetActive(false);
+
+        //    if (activeCamera.gameObject.name == "VirtualCameraIdle")
+        //    {
+        //        // Mostrar fase actual y dinero
+        //        currentPhasePanel.gameObject.SetActive(true);
+        //        muuneyPanel.gameObject.SetActive(true);
+        //        actionPointsPanel.gameObject.SetActive(true);
+        //        exitPanel.gameObject.SetActive(false);
+        //        catButton.gameObject.SetActive(false);
+        //        savePanel.gameObject.SetActive(false);
+        //        //discardBtn.gameObject.SetActive(true);
+        //        CardManager.showHand();
+
+        //    }
+        //    else if (activeCamera.gameObject.name == "VirtualCameraDerecha")
+        //    {
+        //        // Mostrar fase actual y dinero
+        //        currentPhasePanel.gameObject.SetActive(true);
+        //        muuneyPanel.gameObject.SetActive(true);
+        //        discardBtn.gameObject.SetActive(true);
+
+        //        actionPointsPanel.gameObject.SetActive(false);
+        //        exitPanel.gameObject.SetActive(false);
+        //        catButton.gameObject.SetActive(false);
+        //        savePanel.gameObject.SetActive(false);
+        //        CardManager.hideHand();
+
+
+        //    }
+        //    else if (activeCamera.gameObject.name == "VirtualCameraAtras")
+        //    {
+        //        // Mostrar solo fase actual
+        //        currentPhasePanel.gameObject.SetActive(true);
+        //        muuneyPanel.gameObject.SetActive(false);
+        //        actionPointsPanel.gameObject.SetActive(false);
+        //        exitPanel.gameObject.SetActive(false);
+        //        catButton.gameObject.SetActive(true);
+        //        savePanel.gameObject.SetActive(true);
+        //        discardBtn.gameObject.SetActive(false);
+        //        CardManager.hideHand();
+
+
+
+
+        //    }
+        //    else if (activeCamera.gameObject.name == "VirtualCameraIzquierda")
+        //    {
+        //        // Mostrar fase actual y dinero
+        //        currentPhasePanel.gameObject.SetActive(false);
+        //        muuneyPanel.gameObject.SetActive(false);
+        //        actionPointsPanel.gameObject.SetActive(false);
+        //        exitPanel.gameObject.SetActive(true);
+        //        catButton.gameObject.SetActive(false);
+        //        savePanel.gameObject.SetActive(false);
+        //        discardBtn.gameObject.SetActive(false);
+        //        CardManager.hideHand();
+
+
+        //    }
+        //}
+
         public void UpdateHUDForCamera(CinemachineVirtualCamera activeCamera)
         {
             // Ocultar todo por defecto
-            //currentPhaseTextUI.gameObject.SetActive(false);
-            //bankResourceTextUI.gameObject.SetActive(false);
             catButton.gameObject.SetActive(false);
             savePanel.gameObject.SetActive(false);
             exitPanel.gameObject.SetActive(false);
+            resourcesPanel.gameObject.SetActive(false); // Asegurar que se oculta por defecto
 
             if (activeCamera.gameObject.name == "VirtualCameraIdle")
             {
-                // Mostrar fase actual y dinero
                 currentPhasePanel.gameObject.SetActive(true);
                 muuneyPanel.gameObject.SetActive(true);
                 actionPointsPanel.gameObject.SetActive(true);
-                exitPanel.gameObject.SetActive(false);
-                catButton.gameObject.SetActive(false);
-                savePanel.gameObject.SetActive(false);
-                //discardBtn.gameObject.SetActive(true);
                 CardManager.showHand();
 
+                if (GameManager.Instance.GamePhaseManager.CurrentPhase is ActionPointsPhase)
+                {
+                    tooltip.ForceResourcesPanel(true);
+                }
+                else
+                {
+                    tooltip.ForceResourcesPanel(false);
+                }
+                if (GameManager.Instance.GamePhaseManager.CurrentPhase is MarketPhase)
+                {
+                    discardBtn.SetActive(true);
+                }
+                if (GameManager.Instance.GamePhaseManager.CurrentPhase is StartDayPhase)
+                {
+                    ShowMulliganButton();
+                }
             }
+
             else if (activeCamera.gameObject.name == "VirtualCameraDerecha")
             {
-                // Mostrar fase actual y dinero
+                //resourcesPanel.gameObject.SetActive(false);
                 currentPhasePanel.gameObject.SetActive(true);
                 muuneyPanel.gameObject.SetActive(true);
-                discardBtn.gameObject.SetActive(true);
-
                 actionPointsPanel.gameObject.SetActive(false);
                 exitPanel.gameObject.SetActive(false);
                 catButton.gameObject.SetActive(false);
                 savePanel.gameObject.SetActive(false);
                 CardManager.hideHand();
-
-
+                tooltip.ForceResourcesPanel(false);
+                HideMulliganButton();
+                if (GameManager.Instance.GamePhaseManager.CurrentPhase is MarketPhase)
+                {
+                    discardBtn.SetActive(true);
+                }
             }
             else if (activeCamera.gameObject.name == "VirtualCameraAtras")
             {
-                // Mostrar solo fase actual
+                //resourcesPanel.gameObject.SetActive(false);
                 currentPhasePanel.gameObject.SetActive(true);
                 muuneyPanel.gameObject.SetActive(false);
                 actionPointsPanel.gameObject.SetActive(false);
@@ -212,14 +292,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 savePanel.gameObject.SetActive(true);
                 discardBtn.gameObject.SetActive(false);
                 CardManager.hideHand();
-
-
+                tooltip.ForceResourcesPanel(false);
+                HideMulliganButton();
 
 
             }
             else if (activeCamera.gameObject.name == "VirtualCameraIzquierda")
             {
-                // Mostrar fase actual y dinero
+                //resourcesPanel.gameObject.SetActive(false);
                 currentPhasePanel.gameObject.SetActive(false);
                 muuneyPanel.gameObject.SetActive(false);
                 actionPointsPanel.gameObject.SetActive(false);
@@ -228,13 +308,60 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 savePanel.gameObject.SetActive(false);
                 discardBtn.gameObject.SetActive(false);
                 CardManager.hideHand();
+                tooltip.ForceResourcesPanel(false);
+                HideMulliganButton();
+
+
+            }
+            else if (activeCamera.gameObject.name == "VirtualCameraPared")
+            {
+                currentPhasePanel.gameObject.SetActive(true);
+                muuneyPanel.gameObject.SetActive(true);
+                actionPointsPanel.gameObject.SetActive(true);
+                //resourcesPanel.gameObject.SetActive(false);
+                exitPanel.gameObject.SetActive(false);
+                catButton.gameObject.SetActive(false);
+                savePanel.gameObject.SetActive(false);
+                discardBtn.gameObject.SetActive(false);
+                tooltip.ForceResourcesPanel(false);
+                HideMulliganButton();
+
+
+            }
+            else if (activeCamera.gameObject.name == "VirtualCameraInterior")
+            {
+                currentPhasePanel.gameObject.SetActive(false);
+                muuneyPanel.gameObject.SetActive(true);
+                actionPointsPanel.gameObject.SetActive(true);
+                //resourcesPanel.gameObject.SetActive(false);
+                exitPanel.gameObject.SetActive(false);
+                catButton.gameObject.SetActive(false);
+                savePanel.gameObject.SetActive(false);
+                discardBtn.gameObject.SetActive(false);
+                tooltip.ForceResourcesPanel(false);
+                HideMulliganButton();
+
+
+            }
+            else if (activeCamera.gameObject.name == "VirtualCameraExterior")
+            {
+                currentPhasePanel.gameObject.SetActive(false);
+                muuneyPanel.gameObject.SetActive(true);
+                actionPointsPanel.gameObject.SetActive(true);
+                exitPanel.gameObject.SetActive(false);
+                catButton.gameObject.SetActive(false);
+                savePanel.gameObject.SetActive(false);
+                discardBtn.gameObject.SetActive(false);
+                tooltip.ForceResourcesPanel(false);
+                HideMulliganButton();
 
 
             }
         }
+
         public void HideHUD()
         {
-
+            tooltip.ForceResourcesPanel(false);
             actionPointsPanel.gameObject.SetActive(false);
             currentPhasePanel.gameObject.SetActive(false);
             muuneyPanel.gameObject.SetActive(false);
@@ -243,6 +370,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             exitPanel.gameObject.SetActive(false);
             mulliganButton.gameObject.SetActive(false);
             discardBtn.gameObject.SetActive(false);
+
 
         }
 
@@ -262,6 +390,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 HideMulliganButton();
                 HideMarket();
+
             }
             else if (currentPhase is StartDayPhase)
             {
@@ -272,15 +401,19 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             else if (currentPhase is PlaceCardsPhase)
             {
                 HideMulliganButton();
+                HideMarket();
             }
             else if (currentPhase is ActionPointsPhase)
             {
-                resourcesPanel.SetActive(true);
+                resourcesPanel.gameObject.SetActive(true);
+                HideMulliganButton();
+                HideMarket();
             }
             else if (currentPhase is MarketPhase)
             {
                 HideActionPointsPanel();
                 ShowMarket();
+                HideMulliganButton();
 
             }
 
@@ -317,7 +450,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void HideActionPointsPanel()
         {
             actionPointsPanel.SetActive(false);
-            resourcesPanel.SetActive(false);
+            //resourcesPanel.SetActive(false);
 
         }
 
@@ -327,7 +460,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private void ShowActionPointsPanel()
         {
             actionPointsPanel.SetActive(true);
-            resourcesPanel.SetActive(false);
+            //resourcesPanel.SetActive(false);
         }
 
         private void ShowMarket()

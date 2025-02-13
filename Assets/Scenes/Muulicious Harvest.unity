@@ -2599,6 +2599,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1278379599}
     - target: {fileID: 7027593613843939066, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
+      propertyPath: tooltip
+      value: 
+      objectReference: {fileID: 741995383}
+    - target: {fileID: 7027593613843939066, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
       propertyPath: buttonsGUI
       value: 
       objectReference: {fileID: 1316569878}
@@ -2709,6 +2713,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5639421414477099762, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
   m_PrefabInstance: {fileID: 712040962}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &741995383 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7127069344785349627, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
+  m_PrefabInstance: {fileID: 712040962}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d446aaea405c13841b0a21266fb3d760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &756413085
 PrefabInstance:
   m_ObjectHideFlags: 0
