@@ -44,9 +44,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Desuscribirse del evento global para evitar referencias persistentes
             GameManager.Instance.OnCardClickedGlobal -= OnCardClickedHandler;
 
-            // Limpiar el tablero
-            GameManager.Instance.Tabletop.CardManager.WipeBoard();
-
             //ALBA: quitar cundo se arregle el poder hacer click en cartas colocadas
             //GameManager.Instance.Tabletop.CardManager.DiscardHand();
         }
