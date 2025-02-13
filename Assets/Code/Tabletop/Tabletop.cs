@@ -20,12 +20,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [Space(1)]
         public GameObject board;
 
-        //[Header("Zones")]
-        //[Space(3)]
-        //public FarmZone Farm;
-        //public StableZone Stables;
-        //public TavernZone Taverna;
-
         /// <summary>
         /// Listas de zonas para poder activarlas
         /// </summary>

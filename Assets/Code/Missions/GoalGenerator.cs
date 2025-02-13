@@ -32,7 +32,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal2()
         {
-            return GenerateStatGoal("T-M2", "Get 1 wheat", StatisticType.CerealTotalAcquired, 1);
+            return GenerateStatGoal("T-M2", "Harvest a wheat", StatisticType.CerealTotalAcquired, 1);
 
         }
 
@@ -43,7 +43,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal3()
         {
-            return GenerateStatGoal("T-M3", "Get 1 milk", StatisticType.MilkTotalAcquired, 1);
+            return GenerateStatGoal("T-M3", "Milk a cow", StatisticType.MilkTotalAcquired, 1);
 
         }
 
@@ -54,7 +54,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal4()
         {
-            return GenerateStatGoal("T-M4", "Get a client", StatisticType.CustomersServed, 1);
+            return GenerateStatGoal("T-M4", "Serve a client", StatisticType.CustomersServed, 1);
 
         }
 
@@ -273,7 +273,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal3()
         {
-            return GenerateStatGoal("G-M3", "Fully upgraded tavern", StatisticType.TavernCountUpgrade, GetMaxSpace(GameManager.Instance.Tabletop.taverns));
+            return GenerateStatGoal("G-M3", "Fully upgraded shop", StatisticType.TavernCountUpgrade, GetMaxSpace(GameManager.Instance.Tabletop.taverns));
         }
 
         /// <summary>
@@ -303,7 +303,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal6()
         {
-            return GenerateStatGoal("G-M6", "Fill the tavern with customers when it is fully upgraded", StatisticType.ShopFull, 1);
+            return GenerateStatGoal("G-M6", "Fill the shop with customers when it is fully upgraded", StatisticType.ShopFull, 1);
         }
 
         /// <summary>

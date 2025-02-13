@@ -76,7 +76,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [EnumMember(Value = "Count upgrade garden")]
         GardenCountUpgrade,
 
-        [EnumMember(Value = "Count upgrade tavern")]
+        [EnumMember(Value = "Count upgrade shop")]
         TavernCountUpgrade,
 
         [EnumMember(Value = "Count upgrade fridge")]
@@ -91,7 +91,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         [EnumMember(Value = "Plant crops in all garden slots")]
         FarmFull,
 
-        [EnumMember(Value = "Fill the entire tavern with customers")]
+        [EnumMember(Value = "Fill the entire shop with customers")]
         ShopFull,
 
         [EnumMember(Value = "Complete events")]
