@@ -21,7 +21,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         #region Properties
 
-        [SerializeField]private ButtonSoundManager buttonSoundManager; 
+        [SerializeField] private ButtonSoundManager buttonSoundManager;
 
         /// <summary>
         /// Referencia al TextBox donde se muestra el texto de la fase actual
@@ -115,8 +115,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void OnNextPhaseButtonClick()
         {
-            buttonSoundManager.PhaseAudioPlayer();
-            this.gamePhaseManager.NextPhase();
+            buttonSoundManager?.PhaseAudioPlayer();
+            GameManager.Instance.GamePhaseManager.NextPhase();
             UpdateGUI(this.gamePhaseManager.CurrentPhase);
         }
 
@@ -127,7 +127,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             buttonSoundManager.MulliganAudioPlayer();
             GameManager.Instance.Tabletop.CardManager.Mulligan();
-            
+
         }
         #endregion
 
