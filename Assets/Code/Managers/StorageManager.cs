@@ -31,6 +31,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         #region Methods
 
         #region Public
+
+        #region Checks
         /// <summary>
         /// Comprueba si hay suficientes puntos de acción para realizar la acción.
         /// </summary>
@@ -56,7 +58,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <returns>Devuelve true si hay recursos y espacio suficiente.</returns>
         public bool CheckResources(List<ResourceAmount> requiredResources, List<ResourceAmount> producedResources)
         {
-
             foreach (ResourceAmount resource in requiredResources)
             {
                 int requireQuantity = resource.resourceQuantity;
@@ -77,10 +78,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 var storage = GetStorage<IStorage>(producedType);
 
-                if (!CheckMaxStorage(producedQuantity, storage))
-                {
-                    return false;
-                }
+                //if (!CheckMaxStorage(producedQuantity, storage))
+                //{
+                //    return false;
+                //}
             }
 
             _requiredResources = requiredResources;
@@ -88,6 +89,91 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             return true;
         }
+
+        public bool CheckMuuney(int cardPrice)
+        {
+            return CheckStorage(cardPrice, _bankStorage);
+        }
+        #endregion
+
+        #region Getters
+        /// <summary>
+        /// Obtiene la cantidad de recursos actual de un tipo.
+        /// </summary>
+        /// <param name="type">Tipo de recurso que se recoge.</param>
+        /// <returns>Devuelve la cantidad.</returns>
+        public int GetResourceAmounts(GameResource type)
+        {
+            return GetStorage<IStorage>(type).Resource;
+        }
+
+        /// <summary>
+        /// Obtiene la cantidad máxima de recursos de un tipo.
+        /// </summary>
+        /// <param name="type">Tipo de recurso que se recoge.</param>
+        /// <returns>Devuelve la cantidad máxima.</returns>
+        public int GetMaxResourceAmounts(GameResource type)
+        {
+            return GetStorage<IStorage>(type).MaxResources;
+        }
+
+        public int GetStorageMaxLevel(GameResource resource)
+        {
+            var storage = GetStorage<IStorage>(resource);
+            return storage.MaxLevel;
+        }
+
+        public int GetBankPlusPrice()
+        {
+            return Utils.RoundMuuney(_bankStorage.MaxResources * 0.3);
+        }
+
+        public int GetActionPointPlusPrice()
+        {
+            int upgradeCost = 0;
+
+            switch (_paStorage.Level)
+            {
+                case 1:
+                    upgradeCost = 30;
+                    break;
+                case 2:
+                    upgradeCost = 50;
+                    break;
+                case 3:
+                    upgradeCost = 75;
+                    break;
+                case 4:
+                    upgradeCost = 100;
+                    break;
+                case 5:
+                    upgradeCost = 200;
+                    break;
+                case 6:
+                    upgradeCost = 300;
+                    break;
+            }
+
+            return upgradeCost;
+        }
+
+        #endregion
+
+        #region Setters
+        public void SetResourceMultiplierEventAndType(int multi, GameResource typeResource)
+        {
+            multiEvent = multi;
+            this.typeResource = typeResource;
+        }
+
+        public void SetResourceMultiplierCardAndType(int multi, GameResource typeResource)
+        {
+            multiCard = multi;
+            this.typeResource = typeResource;
+        }
+        #endregion
+
+        #region Economy
 
         /// <summary>
         /// Realiza la acción de producir recursos.
@@ -145,59 +231,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
 
         /// <summary>
-        /// Obtiene la cantidad de recursos actual de un tipo.
-        /// </summary>
-        /// <param name="type">Tipo de recurso que se recoge.</param>
-        /// <returns>Devuelve la cantidad.</returns>
-        public int GetResourceAmounts(GameResource type)
-        {
-            return GetStorage<IStorage>(type).Resource;
-        }
-
-        /// <summary>
-        /// Obtiene la cantidad máxima de recursos de un tipo.
-        /// </summary>
-        /// <param name="type">Tipo de recurso que se recoge.</param>
-        /// <returns>Devuelve la cantidad máxima.</returns>
-        public int GetMaxResourceAmounts(GameResource type)
-        {
-            return GetStorage<IStorage>(type).MaxResources;
-        }
-
-        /// <summary>
-        /// Reinicia los puntos de acción a los máximos.
-        /// </summary>
-        public void RestartPA()
-        {
-            _paStorage.Resource = _paStorage.MaxResources;
-        }
-
-        public void SetResourceMultiplierEventAndType(int multi, GameResource typeResource)
-        {
-            multiEvent = multi;
-            this.typeResource = typeResource;
-        }
-
-        public void SetResourceMultiplierCardAndType(int multi, GameResource typeResource)
-        {
-            multiCard = multi;
-            this.typeResource = typeResource;
-        }
-
-        public void ClearResourceMultiplierEventAndType()
-        {
-            multiEvent = 0;
-            typeResource = GameResource.None;
-        }
-
-        public void ClearResourceMultiplierCardAndType()
-        {
-            multiCard = 0;
-            typeResource = GameResource.None;
-        }
-
-
-        /// <summary>
         /// Añade una cantidad específica de recurso a un almacenamiento determinado, 
         /// pero si sobrepasa el almacenamiento máximo, lo ajusta al máximo permitido.
         /// </summary>
@@ -236,7 +269,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             RemoveResources(quantity, storage);
         }
 
+        #endregion
 
+        #region Upgrades
         public void UpgradeStorage(GameResource resource)
         {
             switch (resource)
@@ -256,50 +291,31 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
-        public int GetStorageMaxLevel(GameResource resource)
+        #endregion
+
+        #region Restart
+        /// <summary>
+        /// Reinicia los puntos de acción a los máximos.
+        /// </summary>
+        public void RestartPA()
         {
-            var storage = GetStorage<IStorage>(resource);
-            return storage.MaxLevel;
+            _paStorage.Resource = _paStorage.MaxResources;
         }
 
-        public int GetBankPlusPrice()
+        public void ClearResourceMultiplierEventAndType()
         {
-            return Utils.RoundMuuney(_bankStorage.MaxResources * 0.3);
+            multiEvent = 0;
+            typeResource = GameResource.None;
         }
 
-        public int GetActionPointPlusPrice()
+        public void ClearResourceMultiplierCardAndType()
         {
-            int upgradeCost = 0;
-
-            switch (_paStorage.Level)
-            {
-                case 1:
-                    upgradeCost = 30;
-                    break;
-                case 2:
-                    upgradeCost = 50;
-                    break;
-                case 3:
-                    upgradeCost = 75;
-                    break;
-                case 4:
-                    upgradeCost = 100;
-                    break;
-                case 5:
-                    upgradeCost = 200;
-                    break;
-                case 6:
-                    upgradeCost = 300;
-                    break;
-            }
-
-            return upgradeCost;
+            multiCard = 0;
+            typeResource = GameResource.None;
         }
 
-        public bool CheckMuuney(int cardPrice)
-        {
-            return CheckStorage(cardPrice, _bankStorage);
-        }
+        #endregion
+
         #endregion
 
         #region Private
@@ -327,6 +343,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
+        #region Checks
         /// <summary>
         /// Comprueba si hay suficientes recursos para realizar la acción.
         /// </summary>
@@ -356,7 +373,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             int newResources = quantity + storage.Resource;
 
-            if (newResources > storage.MaxResources)
+            if (newResources > storage.MaxResources && storage != _bankStorage)
             {
                 MessageManager.Instance.ShowMessage("There is not enough space to store the resource.");
                 Debug.LogWarning("There is not enough space to store the resource.");
@@ -366,6 +383,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return true;
         }
 
+        #endregion
+
+        #region Economy
         private void AddResources(int quantity, IStorage storage, bool isUpToMax)
         {
             int leftSpace = storage.Resource;
@@ -406,6 +426,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             storage.Level += 1;
         }
+        #endregion
 
         #region UpgradeStorage
 
@@ -518,8 +539,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
 
         #endregion
-
-
 
         #endregion
 
