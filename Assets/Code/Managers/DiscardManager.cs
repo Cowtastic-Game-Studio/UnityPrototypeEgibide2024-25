@@ -79,11 +79,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 else
                 {
                     button.image.sprite = closedSprite;
-
                 }
-
             }
-
         }
 
         private void UpdateDiscardGrid()
@@ -265,7 +262,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void ResetPanel()
         {
-            ResetDiscardCount();
+            TotalCost = 0;
+            cardsToDelete = new List<CardToDelete>();
 
             UpdateDiscardGrid();
             UpdateSummaryGrid();
