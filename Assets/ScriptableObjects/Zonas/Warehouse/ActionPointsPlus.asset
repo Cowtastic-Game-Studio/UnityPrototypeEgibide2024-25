@@ -16,8 +16,8 @@ MonoBehaviour:
   artwork: {fileID: 2100000, guid: eba9195e96f0a514f82f9b19be03d071, type: 2}
   cardType: 6
   name: ActionPoints+
-  description: "I heard you would like to have a little more energy, if that\xB4s
-    the case today maybe your lucky day as long as you have enough muuney , of course"
+  description: I heard you'd like to have a little more energy, today is your lucky
+    day, as long as you have enough muuney, of course.
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []
