@@ -20,7 +20,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void UpdateDisplayDataSpecial(float discountPercentage)
         {
-            card.UpdateDisplayAndMat(cardTemplate, true);
+            gameObject.GetComponent<CardDisplay>()?.UpdateDisplayAndMat(cardTemplate, true);
             int finalPrice = Utils.RoundMuuney(cardTemplate.marketCost * discountPercentage);
             price = finalPrice;
         }
@@ -50,48 +50,46 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void BuyCard(int price, bool hasDiscount, GameObject cardToDelete)
         {
-            if (GameManager.Instance.Tabletop.StorageManager.CheckMuuney(price))
+            if (cardTemplate.cardType == CardType.None)
             {
-                if (cardTemplate.cardType == CardType.None)
+                //mejoras permanentes del tablero
+                if (cardTemplate.targetCardType == CardType.None && cardTemplate.targetResoruceType != GameResource.None)
                 {
-                    //mejoras permanentes del tablero
-                    if (cardTemplate.targetCardType == CardType.None && cardTemplate.targetResoruceType != GameResource.None)
-                    {
-                        GameManager.Instance.Tabletop.StorageManager.UpgradeStorage(cardTemplate.targetResoruceType);
-                    }
-                    else if (cardTemplate.targetCardType != CardType.None && cardTemplate.targetResoruceType == GameResource.None)
-                    {
-                        switch (cardTemplate.targetCardType)
-                        {
-                            case CardType.Cow:
-                                GameManager.Instance.Tabletop.StablesActivateZone(price);
-                                break;
-                            case CardType.Seed:
-                                GameManager.Instance.Tabletop.FarmsActivateZone(price);
-                                break;
-                            case CardType.Customer:
-                                GameManager.Instance.Tabletop.TavernActivateZone(price);
-                                break;
-                        }
-
-                        if (hasDiscount)
-                        {
-                            GameManager.Instance.Tabletop.CardManager.TryRemoveCardsGOFromDecks(cardToDelete);
-                        }
-
-                        StatisticsManager.Instance.UpdateByBuyedZone(cardTemplate.targetCardType, hasDiscount);
-                    }
+                    GameManager.Instance.Tabletop.StorageManager.UpgradeStorage(cardTemplate.targetResoruceType);
                 }
-                else
+                else if (cardTemplate.targetCardType != CardType.None && cardTemplate.targetResoruceType == GameResource.None && GameManager.Instance.Tabletop.StorageManager.CheckMuuney(price))
+                {
+
+                    switch (cardTemplate.targetCardType)
+                    {
+                        case CardType.Cow:
+                            GameManager.Instance.Tabletop.StablesActivateZone(price);
+                            break;
+                        case CardType.Seed:
+                            GameManager.Instance.Tabletop.FarmsActivateZone(price);
+                            break;
+                        case CardType.Customer:
+                            GameManager.Instance.Tabletop.TavernActivateZone(price);
+                            break;
+                    }
+
+                    if (hasDiscount)
+                    {
+                        GameManager.Instance.Tabletop.CardManager.TryRemoveCardsGOFromDecks(cardToDelete);
+                    }
+
+                    StatisticsManager.Instance.UpdateByBuyedZone(cardTemplate.targetCardType, hasDiscount);
+                }
+            }
+            else
+            {
+                if (GameManager.Instance.Tabletop.StorageManager.CheckMuuney(price))
                 {
                     GameManager.Instance.Tabletop.CardManager.BuyCard(cardTemplate.name, price);
-
                     StatisticsManager.Instance.UpdateByBuyedCard(cardTemplate.cardType);
                 }
-
-
-
             }
+
         }
 
         public CardTemplate getCardTemplate()

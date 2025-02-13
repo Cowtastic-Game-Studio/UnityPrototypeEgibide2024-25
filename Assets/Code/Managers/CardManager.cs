@@ -98,6 +98,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private Dictionary<string, CardTemplate> cardNameMap;
 
+        // PARA FUTURAS DEBUGS
+        private List<GameObject> drawList;
+        private List<GameObject> handlist;
+        private List<GameObject> placedList;
+        private List<GameObject> discadList;
+        private int cardCountTOT = 0;
+
         private void Awake()
         {
             InitializeCardNameMap();
@@ -283,6 +290,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             // Baraja el mazo
             drawDeck.Shuffle();
+            discardDeck = new CardDeck(); // Reinicia el mazo de descarte
         }
 
         /// <summary>
@@ -591,6 +599,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void UpdatePlacement()
         {
+            /*   drawList = DrawDeck.Cards.ToList();
+               handlist = HandDeck.Cards.ToList();
+               placedList = PlayedDeck.Cards.ToList();
+               discadList = DiscardDeck.Cards.ToList();
+
+            
+            cardCountTOT = drawList.Count + handlist.Count + placedList.Count + discadList.Count;
+            */
+
             if (isDragging && selectedCard != null)
             {
                 MoveSelectedCardWithMouse();

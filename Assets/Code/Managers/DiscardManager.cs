@@ -52,7 +52,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void ToggleMenu()
         {
             // Verificar si el número de cartas en la baraja es suficiente
-            if (GameManager.Instance.Tabletop.CardManager.getAllCardsList().Count <= minDeckSize)
+            if (GameManager.Instance.Tabletop.CardManager.getAllCardsList().Count < minDeckSize)
             {
                 MessageManager.Instance.ShowMessage($"No se pueden borrar cartas. Se necesitan al menos {minDeckSize} cartas.");
                 //Debug.LogWarning($"No se pueden borrar cartas. Se necesitan al menos {minDeckSize} cartas.");
@@ -79,11 +79,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 else
                 {
                     button.image.sprite = closedSprite;
-
                 }
-
             }
-
         }
 
         private void UpdateDiscardGrid()
@@ -265,7 +262,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private void ResetPanel()
         {
-            ResetDiscardCount();
+            TotalCost = 0;
+            cardsToDelete = new List<CardToDelete>();
 
             UpdateDiscardGrid();
             UpdateSummaryGrid();

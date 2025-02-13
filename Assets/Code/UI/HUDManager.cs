@@ -113,8 +113,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void OnNextPhaseButtonClick()
         {
-            buttonSoundManager.PhaseAudioPlayer();
-            this.gamePhaseManager.NextPhase();
+            buttonSoundManager?.PhaseAudioPlayer();
+            GameManager.Instance.GamePhaseManager.NextPhase();
             UpdateGUI(this.gamePhaseManager.CurrentPhase);
         }
 

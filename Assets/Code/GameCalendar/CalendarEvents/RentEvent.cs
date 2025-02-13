@@ -24,7 +24,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             int currentMuuney = GameManager.Instance.Tabletop.StorageManager.GetResourceAmounts(GameResource.Muuney);
 
-            if (rentAmount >= currentMuuney)
+            if (rentAmount > currentMuuney)
             {
                 //TODO poner aqui la fncion de GameOver cuando exista
                 Debug.LogWarning("piu piu GAME OVER piu piu");
