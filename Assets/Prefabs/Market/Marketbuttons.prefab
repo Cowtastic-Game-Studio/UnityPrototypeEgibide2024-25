@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9197201241655530310}
   - component: {fileID: 2279391360569698345}
   - component: {fileID: 8733345385435618776}
+  - component: {fileID: 1553887572242915013}
   m_Layer: 9
   m_Name: ZonesButton
   m_TagString: Untagged
@@ -106,6 +107,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1553887572242915013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2250280946743221563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a49deafb70581a4abfc3953a7debeac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursor: {fileID: 0}
 --- !u!1 &2899244537594442641
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,6 +164,7 @@ GameObject:
   - component: {fileID: 6576910010522390144}
   - component: {fileID: 2843748723851354673}
   - component: {fileID: 4005566019843778734}
+  - component: {fileID: 7345821912593312015}
   m_Layer: 9
   m_Name: TemporalButton
   m_TagString: Untagged
@@ -244,6 +259,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7345821912593312015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3022975413313607417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a49deafb70581a4abfc3953a7debeac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursor: {fileID: 0}
 --- !u!1 &3495038993341088706
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +365,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -2799240684647502404, guid: 30166ec9019e4134ebcef4d0b575dbc4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -381,8 +409,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Zones
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 30166ec9019e4134ebcef4d0b575dbc4, type: 2}
+  m_sharedMaterial: {fileID: -2799240684647502404, guid: 30166ec9019e4134ebcef4d0b575dbc4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -508,7 +536,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -2799240684647502404, guid: 30166ec9019e4134ebcef4d0b575dbc4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -552,8 +580,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Cows
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 30166ec9019e4134ebcef4d0b575dbc4, type: 2}
+  m_sharedMaterial: {fileID: -2799240684647502404, guid: 30166ec9019e4134ebcef4d0b575dbc4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -634,6 +662,7 @@ GameObject:
   - component: {fileID: 8394844912198582807}
   - component: {fileID: 2285821364234115688}
   - component: {fileID: 8398271365039232243}
+  - component: {fileID: 8078827820919484675}
   m_Layer: 9
   m_Name: SeedButton
   m_TagString: Untagged
@@ -728,6 +757,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8078827820919484675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6044996979220962738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a49deafb70581a4abfc3953a7debeac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursor: {fileID: 0}
 --- !u!1 &6228759166444752233
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,6 +782,7 @@ GameObject:
   - component: {fileID: 6354560490264100848}
   - component: {fileID: 4159228690451784909}
   - component: {fileID: 4471396910840179714}
+  - component: {fileID: 5511071572368574823}
   m_Layer: 9
   m_Name: ClientButton
   m_TagString: Untagged
@@ -834,6 +877,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5511071572368574823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6228759166444752233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a49deafb70581a4abfc3953a7debeac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursor: {fileID: 0}
 --- !u!1 &6601517734566122612
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,6 +902,7 @@ GameObject:
   - component: {fileID: 3116282363947794859}
   - component: {fileID: 7801978984311430495}
   - component: {fileID: 7029560668711280812}
+  - component: {fileID: 8112519852150708895}
   m_Layer: 9
   m_Name: CowButton
   m_TagString: Untagged
@@ -940,6 +997,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8112519852150708895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6601517734566122612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a49deafb70581a4abfc3953a7debeac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursor: {fileID: 0}
 --- !u!1 &7281513281766806744
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,7 +1067,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -2799240684647502404, guid: 30166ec9019e4134ebcef4d0b575dbc4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1041,8 +1111,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Clients
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 30166ec9019e4134ebcef4d0b575dbc4, type: 2}
+  m_sharedMaterial: {fileID: -2799240684647502404, guid: 30166ec9019e4134ebcef4d0b575dbc4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1168,7 +1238,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -2799240684647502404, guid: 30166ec9019e4134ebcef4d0b575dbc4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1212,8 +1282,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Seeds
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 30166ec9019e4134ebcef4d0b575dbc4, type: 2}
+  m_sharedMaterial: {fileID: -2799240684647502404, guid: 30166ec9019e4134ebcef4d0b575dbc4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1339,7 +1409,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -2799240684647502404, guid: 30166ec9019e4134ebcef4d0b575dbc4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1383,8 +1453,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Upgrades
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 30166ec9019e4134ebcef4d0b575dbc4, type: 2}
+  m_sharedMaterial: {fileID: -2799240684647502404, guid: 30166ec9019e4134ebcef4d0b575dbc4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

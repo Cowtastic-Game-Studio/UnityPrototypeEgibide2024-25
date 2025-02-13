@@ -15,8 +15,8 @@ MonoBehaviour:
   baseCard: {fileID: 2100000, guid: e7e5a412938c62349924c8c1bfade4e2, type: 2}
   artwork: {fileID: 2100000, guid: d1b32019571c8a048abc28faea2101a1, type: 2}
   cardType: 3
-  name: Muussive Tavern
-  description: " +1 box on your Tavern and draw a card. That\xB4s a huuge tavern"
+  name: Muussive Shop
+  description: " +1 box on your Shop and draw a card. That\xB4s a huuge shop"
   lifeCycleDays: 1
   actionPointsCost: 0
   requiredResources: []
