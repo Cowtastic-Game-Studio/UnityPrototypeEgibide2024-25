@@ -33,13 +33,17 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         void Update()
         {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                HandleCardHover(hit);
+            }
+
             if (forceResourcesPanelVisible)
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out RaycastHit hit))
+                if (Physics.Raycast(ray, out RaycastHit hitt))
                 {
-                    HandleStorageHover(hit);
-                    HandleCardHover(hit);
+                    HandleStorageHover(hitt);
                 }
                 else
                 {
