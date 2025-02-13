@@ -33,7 +33,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
 
             // Debug log para obtener el nombre de la clase de newPhase
-            Debug.Log("Estableciendo nueva fase: " + newPhase.GetType().Name);
+            //Debug.Log("Estableciendo nueva fase: " + newPhase.GetType().Name);
 
             CurrentPhase = newPhase;
             CurrentPhase.EnterPhase();

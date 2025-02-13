@@ -84,6 +84,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void RestartMarket()
         {
+            FreeShopItem = null;
             ClearPageItemsList();
             ShowHideCardPreviewZone(false);
             normalPriceButton.SetNormalColor();
@@ -219,9 +220,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         FreeShopItem = createdItem.GetComponent<ShopItem>();
                         FreeShopItem?.UpdateDisplayData(actualCardList[counter], 0);
                     }
-
                     else
+                    {
+                        FreeShopItem = null;
                         createdItem.GetComponent<ShopItem>()?.UpdateDisplayData(actualCardList[counter], discountPercentage);
+                    }
 
                     counter++;
                     if (isNextPage)
@@ -355,6 +358,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void ResetShopPlusItemPrice()
         {
             wasFreeShopItemBuyed = true;
+            FreeShopItem = null;
             FreeShopItem?.UpdateDisplayDataSpecial(1);
 
         }

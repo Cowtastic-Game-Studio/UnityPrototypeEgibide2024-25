@@ -20,7 +20,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void UpdateDisplayDataSpecial(float discountPercentage)
         {
-            card.UpdateDisplayAndMat(cardTemplate, true);
+            gameObject.GetComponent<CardDisplay>()?.UpdateDisplayAndMat(cardTemplate, true);
             int finalPrice = Utils.RoundMuuney(cardTemplate.marketCost * discountPercentage);
             price = finalPrice;
         }
