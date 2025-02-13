@@ -22,6 +22,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void EnterPhase()
         {
+            // Limpiar el tablero
+            GameManager.Instance.Tabletop.CardManager.WipeBoard();
+
             //pasar al siguiente dia
             GameManager.Instance.GameCalendar.NextDay();
 
