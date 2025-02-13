@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine.Events;
+﻿using UnityEngine.Events;
 
 namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
 {
-    public class Goal 
+    public class Goal
     {
         public delegate void InitializeCheckGoal();
 
@@ -31,7 +30,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         public bool IsCompleted
         {
             get { return _IsCompleted; }
-            set { _IsCompleted = value;
+            set
+            {
+                _IsCompleted = value;
 
                 if (_IsCompleted == true)
                     OnCompleted.Invoke(this);
@@ -58,7 +59,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
             this.Description = description;
             this.IsCompleted = false;
 
-            if(initializeCondition != null)
+            if (initializeCondition != null)
                 initializeCondition.Invoke(this);
         }
 

@@ -132,7 +132,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return true;
         }
 
-        public int WasteMuuney(int quantity)
+        public void WasteMuuney(int quantity)
         {
             int leftMuuney = _bankStorage.Resource - quantity;
             if (leftMuuney >= 0)
@@ -140,7 +140,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 _bankStorage.Resource -= quantity;
             }
             GameManager.Instance.Tabletop.HUDManager.UpdateResources();
-            return _bankStorage.Resource;
         }
 
         /// <summary>
