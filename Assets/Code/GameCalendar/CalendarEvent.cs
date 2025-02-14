@@ -30,6 +30,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         // M�todo para activar el evento
         public virtual void TriggerEvent()
         {
+            InitEvent();
             isActive = true;
             MessageManager.Instance.ShowMessage($"{eventName} started. {eventDescription}");
             UnityEngine.Debug.LogWarning($"{eventName} started. {eventDescription}");
