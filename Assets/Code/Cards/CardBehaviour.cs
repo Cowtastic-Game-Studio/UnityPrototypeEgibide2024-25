@@ -64,29 +64,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         #region Unity methods
 
-        //private void Start()
-        //{
-        //    LifeCycleDaysRemaining = LifeCycleDays;
-
-        //    this.PositionInHand = null;
-
-        //    if (template == null)
-        //    {
-        //        Debug.LogError("Card template is not assigned.");
-        //    }
-        //    else
-        //    {
-        //        // Configurar la visualizaci�n de la carta usando CardDisplay
-        //        CardDisplay display = GetComponent<CardDisplay>();
-        //        if (display != null)
-        //        {
-        //            SetupDisplay(display);
-        //        }
-        //    }
-        //    // Desactiva la carta inicialmente
-        //    Deactivate();
-        //}
-
         private void OnMouseDown()
         {
             if (GameManager.Instance.GamePhaseManager.CurrentPhaseType == GamePhaseTypes.PlaceCards)

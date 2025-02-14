@@ -56,7 +56,33 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 //Debug.Log($"Card selected: {card.Name}");
                 //MessageManager.Instance.ShowMessage($"Card selected: {card.Name}");
 
-                CheckAgainstStorage(card);
+                // Si la carta es del tipo PlaceActivator o PlaceMultiplier
+                if (card.Type == CardType.PlaceActivator || card.Type == CardType.PlaceMultiplier)
+                {
+                    // Obtener el GameObject de la carta seleccionada
+                    GameObject cardObject = (card as CardBehaviour).gameObject;
+
+                    // Obtener los hermanos del GameObject de la carta
+                    Transform[] siblings = cardObject.transform.parent.GetComponentsInChildren<Transform>();
+
+                    // Iterar a través de los hermanos
+                    foreach (Transform sibling in siblings)
+                    {
+                        // Asegurarse de que el hermano no sea el mismo GameObject
+                        if (sibling.gameObject != cardObject)
+                        {
+                            // Llamar a CheckAgainstStorage con el hermano
+                            ICard siblingCard = sibling.GetComponent<ICard>(); // Asegúrate de que el hermano tenga un componente ICard
+                            if (siblingCard != null)
+                            {
+                                CheckAgainstStorage(siblingCard);
+                                break; // Salir después de encontrar el primer hermano que no sea el mismo
+                            }
+                        }
+                    }
+                }
+                else
+                    CheckAgainstStorage(card);
             }
             else
             {

@@ -7,6 +7,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         CardState State { get; set; }
 
         string Name { get; }
+        CardType Type { get; }
         string Description { get; }
         int ActionPointsCost { get; }
         int LifeCycleDays { get; }
