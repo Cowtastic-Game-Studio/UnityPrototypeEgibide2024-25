@@ -12,7 +12,7 @@ public class Message : MonoBehaviour
     public Image backgroundImage;
 
     // Tiempo (en segundos) que la notificación permanecerá en pantalla.
-    public float displayDuration = 3f;
+    public float displayDuration = 2f;
 
     // Método para asignar el texto del mensaje.
     public void SetText(string text)
