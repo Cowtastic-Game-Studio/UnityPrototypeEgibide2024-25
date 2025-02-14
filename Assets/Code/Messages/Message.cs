@@ -35,5 +35,10 @@ public class Message : MonoBehaviour
         yield return new WaitForSeconds(displayDuration);
         // Aquí podrías agregar animaciones de salida antes de destruir el objeto.
         Destroy(gameObject);
+
+    }
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
     }
 }
