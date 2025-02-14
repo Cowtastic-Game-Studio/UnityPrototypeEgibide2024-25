@@ -96,7 +96,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             discardLeftCountText.text = $"{maxDiscardLimit - currentDiscardCount} discard left";
 
             var groupedCards = allDiscardedCards
-                .GroupBy(card => card.GetComponent<CardBehaviour>()?.GetTemplate().cardType);
+                .GroupBy(card => card.GetComponent<CardBehaviour>()?.GetTemplate().name);
 
             foreach (var group in groupedCards)
             {
