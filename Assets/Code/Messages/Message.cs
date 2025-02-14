@@ -40,13 +40,13 @@ public class Message : MonoBehaviour
         switch (value)
         {
             case 0:
-                backgroundImage.color = new Color(1f, 0f, 0f, alpha); // Rojo
+                backgroundImage.color = new Color(255f / 255f, 97f / 255f, 98f / 255f, alpha); // Rojo
                 break;
             case 1:
-                backgroundImage.color = new Color(0f, 0f, 1f, alpha); // Azul
+                backgroundImage.color = new Color(125f / 255f, 120f / 255f, 255f / 255f, alpha); // Azul
                 break;
             case 2:
-                backgroundImage.color = new Color(0f, 1f, 0f, alpha); // Verde
+                backgroundImage.color = new Color(165f / 255f, 237f / 255f, 138f / 255f, alpha); // Verde
                 break;
             default:
                 Debug.Log("Valor no reconocido: " + value);
