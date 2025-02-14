@@ -198,7 +198,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             CreateShopItems(false);
             cardPreview.SetActive(false);
 
-            slotList.totalPage = Mathf.CeilToInt((float) cardList.Count / 8);
+            slotList.totalPage = Mathf.CeilToInt((float)cardList.Count / 8);
 
             //Limpia la carta previsualizada
             ShowHideCardPreviewZone(false);

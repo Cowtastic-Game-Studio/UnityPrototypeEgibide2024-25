@@ -2310,6 +2310,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 1417715907561800547, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 71f1eb61214e3b841bb71c7efcac2a5b, type: 3}
     - target: {fileID: 1718833770186522527, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2654,6 +2658,10 @@ PrefabInstance:
       propertyPath: buttonSoundManager
       value: 
       objectReference: {fileID: 988621417}
+    - target: {fileID: 7099674409184677712, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 71f1eb61214e3b841bb71c7efcac2a5b, type: 3}
     - target: {fileID: 7127069344785349627, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
       propertyPath: cursor
       value: 
@@ -2665,11 +2673,11 @@ PrefabInstance:
     - target: {fileID: 7127069344785349627, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
       propertyPath: cursorNormal
       value: 
-      objectReference: {fileID: 2800000, guid: 0564126a0a32e9c4c96a5d5813288286, type: 3}
+      objectReference: {fileID: 2800000, guid: 71f1eb61214e3b841bb71c7efcac2a5b, type: 3}
     - target: {fileID: 7127069344785349627, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
       propertyPath: cursorTooltip
       value: 
-      objectReference: {fileID: 2800000, guid: 27b754f29631edf4dbdaebf6544f4551, type: 3}
+      objectReference: {fileID: 2800000, guid: 24d9cb8d4f69fa5479e345a46fc0bb4d, type: 3}
     - target: {fileID: 7127069344785349627, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
       propertyPath: cardTooltipExterior
       value: 
@@ -8587,6 +8595,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 346624656}
     - target: {fileID: 6326096403238561086, guid: 71a3458d7c9957240ac0acadb0dd3193, type: 3}
+      propertyPath: cursorNormal
+      value: 
+      objectReference: {fileID: 2800000, guid: 0ffe78aa7f5d491499dc19abbf5d92ff, type: 3}
+    - target: {fileID: 6326096403238561086, guid: 71a3458d7c9957240ac0acadb0dd3193, type: 3}
       propertyPath: cameraAnimator
       value: 
       objectReference: {fileID: 3921763291175236244}
@@ -8871,6 +8883,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 506343248721261719, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+      propertyPath: cursorBlock
+      value: 
+      objectReference: {fileID: 2800000, guid: 09ec2d229f1ed8c40a48edda3d932f09, type: 3}
+    - target: {fileID: 1390965170647198416, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 71f1eb61214e3b841bb71c7efcac2a5b, type: 3}
+    - target: {fileID: 3086939888244439386, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 71f1eb61214e3b841bb71c7efcac2a5b, type: 3}
+    - target: {fileID: 3105205281582889533, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 71f1eb61214e3b841bb71c7efcac2a5b, type: 3}
     - target: {fileID: 3222470114569409897, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
       propertyPath: m_fontColor.b
       value: 0
@@ -8886,11 +8914,19 @@ PrefabInstance:
     - target: {fileID: 3222470114569409897, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4278190080
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580754209251375895, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4685252753872326998, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
       propertyPath: m_Name
       value: Market
       objectReference: {fileID: 0}
+    - target: {fileID: 5379116087985798514, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 71f1eb61214e3b841bb71c7efcac2a5b, type: 3}
     - target: {fileID: 5423197581194734332, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
       propertyPath: m_fontColor.b
       value: 0
@@ -8907,6 +8943,10 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4278190080
       objectReference: {fileID: 0}
+    - target: {fileID: 5560979552436307663, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 71f1eb61214e3b841bb71c7efcac2a5b, type: 3}
     - target: {fileID: 6675680455553974711, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -8951,7 +8991,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7146277939805723930, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 71f1eb61214e3b841bb71c7efcac2a5b, type: 3}
+    - target: {fileID: 8523135011607309962, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 71f1eb61214e3b841bb71c7efcac2a5b, type: 3}
+    - target: {fileID: 8557108577398015254, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 71f1eb61214e3b841bb71c7efcac2a5b, type: 3}
+    m_RemovedComponents:
+    - {fileID: 3105205281582889533, guid: c0ec76e7e2bf9dd42b41e3527d50bb96, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
