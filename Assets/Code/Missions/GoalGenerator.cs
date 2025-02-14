@@ -22,7 +22,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal1()
         {
-            return GenerateStatGoal("T-M1", "Place 1 card on the table", StatisticType.CardsPlaced, 1);
+            Func<bool> condition = () =>
+            {
+                Statistic CardsPlaced = StatisticsManager.Instance.GetStat(StatisticType.CardsPlaced);
+                return MissionsManager.Instance.IsTutorialEnabled && (CardsPlaced.Uses >= 1);
+            };
+
+            return GenerateStatGoal("T-M1", "Place 1 card on the table", condition);
         }
 
         /// <summary>
@@ -32,7 +38,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal2()
         {
-            return GenerateStatGoal("T-M2", "Harvest a wheat", StatisticType.CerealTotalAcquired, 1);
+            Func<bool> condition = () =>
+            {
+                Statistic CerealTotalAcquired = StatisticsManager.Instance.GetStat(StatisticType.CerealTotalAcquired);
+                return MissionsManager.Instance.IsTutorialEnabled && (CerealTotalAcquired.Uses >= 1);
+            };
+
+            return GenerateStatGoal("T-M2", "Harvest a wheat", condition);
 
         }
 
@@ -43,7 +55,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal3()
         {
-            return GenerateStatGoal("T-M3", "Milk a cow", StatisticType.MilkTotalAcquired, 1);
+            Func<bool> condition = () =>
+            {
+                Statistic MilkTotalAcquired = StatisticsManager.Instance.GetStat(StatisticType.MilkTotalAcquired);
+                return MissionsManager.Instance.IsTutorialEnabled && (MilkTotalAcquired.Uses >= 1);
+            };
+
+            return GenerateStatGoal("T-M3", "Milk a cow", condition);
 
         }
 
@@ -54,7 +72,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal4()
         {
-            return GenerateStatGoal("T-M4", "Serve a client", StatisticType.CustomersServed, 1);
+            Func<bool> condition = () =>
+            {
+                Statistic CustomersServed = StatisticsManager.Instance.GetStat(StatisticType.CustomersServed);
+                return MissionsManager.Instance.IsTutorialEnabled && (CustomersServed.Uses >= 1);
+            };
+
+            return GenerateStatGoal("T-M4", "Serve a client", condition);
 
         }
 
@@ -65,7 +89,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateTutorialGoal5()
         {
-            return GenerateStatGoal("T-M5", "Buy a card", StatisticType.CardsPurchased, 1);
+            Func<bool> condition = () =>
+            {
+                Statistic CardsPurchased = StatisticsManager.Instance.GetStat(StatisticType.CardsPurchased);
+                return MissionsManager.Instance.IsTutorialEnabled && (CardsPurchased.Uses >= 1);
+            };
+
+            return GenerateStatGoal("T-M5", "Buy a card", condition);
 
         }
 
