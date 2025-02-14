@@ -635,8 +635,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, mask))
             {
                 // Mover la carta sobre el plano
-                //Vector3 newPosition = hit.point + Vector3.up;
-                Vector3 newPosition = hit.point + new Vector3(1, 1, 0);
+                Vector3 newPosition = hit.point + Vector3.up;
+                //Vector3 newPosition = hit.point + new Vector3(1, 1, 0);
 
                 selectedCard.transform.position = newPosition;
             }
