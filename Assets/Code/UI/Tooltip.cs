@@ -15,12 +15,16 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
 
         private float hoverTime = 1.5f; // Hover time threshold
+        private float cursorhover = 0.5f; // Hover time threshold
         private float storageHoverCounter = 0f;
         private float cardHoverCounter = 0f;
 
         private bool isHoveringCard = false;
         private GameObject currentHoveredCard = null;
         private bool forceResourcesPanelVisible = false;
+
+        [SerializeField] private Texture2D cursorTooltip;
+        [SerializeField] private Texture2D cursorNormal;
 
 
         void Start()
@@ -57,7 +61,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void ForceResourcesPanel(bool state)
         {
             forceResourcesPanelVisible = state;
-            storagePanel.SetActive(state); // Si el estado cambia, aplicarlo
+            //storagePanel.SetActive(state); // Si el estado cambia, aplicarlo
         }
 
         private void HandleStorageHover(RaycastHit hit)
@@ -81,6 +85,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (GameManager.Instance.GamePhaseManager.CurrentPhaseType != GamePhaseTypes.Market)
             {
+
                 if (hit.collider.CompareTag("Carta"))
                 {
                     if (currentHoveredCard != hit.collider.gameObject)
@@ -91,6 +96,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     }
 
                     cardHoverCounter += Time.deltaTime;
+                    if (cardHoverCounter >= cursorhover)
+                    {
+                        Cursor.SetCursor(cursorTooltip, Vector2.zero, CursorMode.Auto);
+
+                    }
 
                     if (cardHoverCounter >= hoverTime)
                     {
@@ -104,6 +114,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                             cardToolDisplay.UpdateDisplay(selectedCardBehaviour.GetTemplate(), true, selectedCardBehaviour.LifeCycleDaysRemaining);
                             cardToolDisplay.gameObject.SetActive(true);
                         }
+                        Cursor.SetCursor(cursorNormal, Vector2.zero, CursorMode.Auto);
                     }
                 }
                 else

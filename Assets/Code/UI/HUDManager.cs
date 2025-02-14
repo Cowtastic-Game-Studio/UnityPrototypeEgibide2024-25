@@ -92,6 +92,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         private GamePhaseManager gamePhaseManager;
         private CardManager CardManager;
         [SerializeField] private Tooltip tooltip;
+        [SerializeField] private CameraGestor cameraGestor;
 
         #endregion
 
@@ -161,83 +162,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             milkResourceTextUI.text = milk.ToString() + "/" + milkMax.ToString();
             bankResourceTextUI.text = FormatNumber(muuney) + "/" + FormatNumber(muuneyMax);
         }
-
-        //public void UpdateHUDForCamera(CinemachineVirtualCamera activeCamera)
-        //{
-        //    // Ocultar todo por defecto
-        //    //currentPhaseTextUI.gameObject.SetActive(false);
-        //    //bankResourceTextUI.gameObject.SetActive(false);
-        //    catButton.gameObject.SetActive(false);
-        //    savePanel.gameObject.SetActive(false);
-        //    exitPanel.gameObject.SetActive(false);
-
-        //    if (activeCamera.gameObject.name == "VirtualCameraIdle")
-        //    {
-        //        // Mostrar fase actual y dinero
-        //        currentPhasePanel.gameObject.SetActive(true);
-        //        muuneyPanel.gameObject.SetActive(true);
-        //        actionPointsPanel.gameObject.SetActive(true);
-        //        exitPanel.gameObject.SetActive(false);
-        //        catButton.gameObject.SetActive(false);
-        //        savePanel.gameObject.SetActive(false);
-        //        //discardBtn.gameObject.SetActive(true);
-        //        CardManager.showHand();
-
-        //    }
-        //    else if (activeCamera.gameObject.name == "VirtualCameraDerecha")
-        //    {
-        //        // Mostrar fase actual y dinero
-        //        currentPhasePanel.gameObject.SetActive(true);
-        //        muuneyPanel.gameObject.SetActive(true);
-        //        discardBtn.gameObject.SetActive(true);
-
-        //        actionPointsPanel.gameObject.SetActive(false);
-        //        exitPanel.gameObject.SetActive(false);
-        //        catButton.gameObject.SetActive(false);
-        //        savePanel.gameObject.SetActive(false);
-        //        CardManager.hideHand();
-
-
-        //    }
-        //    else if (activeCamera.gameObject.name == "VirtualCameraAtras")
-        //    {
-        //        // Mostrar solo fase actual
-        //        currentPhasePanel.gameObject.SetActive(true);
-        //        muuneyPanel.gameObject.SetActive(false);
-        //        actionPointsPanel.gameObject.SetActive(false);
-        //        exitPanel.gameObject.SetActive(false);
-        //        catButton.gameObject.SetActive(true);
-        //        savePanel.gameObject.SetActive(true);
-        //        discardBtn.gameObject.SetActive(false);
-        //        CardManager.hideHand();
-
-
-
-
-        //    }
-        //    else if (activeCamera.gameObject.name == "VirtualCameraIzquierda")
-        //    {
-        //        // Mostrar fase actual y dinero
-        //        currentPhasePanel.gameObject.SetActive(false);
-        //        muuneyPanel.gameObject.SetActive(false);
-        //        actionPointsPanel.gameObject.SetActive(false);
-        //        exitPanel.gameObject.SetActive(true);
-        //        catButton.gameObject.SetActive(false);
-        //        savePanel.gameObject.SetActive(false);
-        //        discardBtn.gameObject.SetActive(false);
-        //        CardManager.hideHand();
-
-
-        //    }
-        //}
-
         public void UpdateHUDForCamera(CinemachineVirtualCamera activeCamera)
         {
             // Ocultar todo por defecto
             catButton.gameObject.SetActive(false);
             savePanel.gameObject.SetActive(false);
             exitPanel.gameObject.SetActive(false);
-            resourcesPanel.gameObject.SetActive(false); // Asegurar que se oculta por defecto
+            //resourcesPanel.gameObject.SetActive(false); // Asegurar que se oculta por defecto
 
             if (activeCamera.gameObject.name == "VirtualCameraIdle")
             {
@@ -245,15 +176,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 muuneyPanel.gameObject.SetActive(true);
                 actionPointsPanel.gameObject.SetActive(true);
                 CardManager.showHand();
+                tooltip.ForceResourcesPanel(true);
 
                 if (GameManager.Instance.GamePhaseManager.CurrentPhase is ActionPointsPhase)
                 {
-                    tooltip.ForceResourcesPanel(true);
-                }
-                else
-                {
+                    resourcesPanel.gameObject.SetActive(true);
                     tooltip.ForceResourcesPanel(false);
                 }
+
                 if (GameManager.Instance.GamePhaseManager.CurrentPhase is MarketPhase)
                 {
                     discardBtn.SetActive(true);
@@ -266,7 +196,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             else if (activeCamera.gameObject.name == "VirtualCameraDerecha")
             {
-                //resourcesPanel.gameObject.SetActive(false);
+                resourcesPanel.gameObject.SetActive(false);
                 currentPhasePanel.gameObject.SetActive(true);
                 muuneyPanel.gameObject.SetActive(true);
                 actionPointsPanel.gameObject.SetActive(false);
@@ -283,7 +213,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             else if (activeCamera.gameObject.name == "VirtualCameraAtras")
             {
-                //resourcesPanel.gameObject.SetActive(false);
+                resourcesPanel.gameObject.SetActive(false);
                 currentPhasePanel.gameObject.SetActive(true);
                 muuneyPanel.gameObject.SetActive(false);
                 actionPointsPanel.gameObject.SetActive(false);
@@ -299,7 +229,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             else if (activeCamera.gameObject.name == "VirtualCameraIzquierda")
             {
-                //resourcesPanel.gameObject.SetActive(false);
+                resourcesPanel.gameObject.SetActive(false);
                 currentPhasePanel.gameObject.SetActive(false);
                 muuneyPanel.gameObject.SetActive(false);
                 actionPointsPanel.gameObject.SetActive(false);
@@ -318,7 +248,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 currentPhasePanel.gameObject.SetActive(true);
                 muuneyPanel.gameObject.SetActive(true);
                 actionPointsPanel.gameObject.SetActive(true);
-                //resourcesPanel.gameObject.SetActive(false);
+                resourcesPanel.gameObject.SetActive(false);
                 exitPanel.gameObject.SetActive(false);
                 catButton.gameObject.SetActive(false);
                 savePanel.gameObject.SetActive(false);
@@ -333,7 +263,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 currentPhasePanel.gameObject.SetActive(false);
                 muuneyPanel.gameObject.SetActive(true);
                 actionPointsPanel.gameObject.SetActive(true);
-                //resourcesPanel.gameObject.SetActive(false);
+                resourcesPanel.gameObject.SetActive(false);
                 exitPanel.gameObject.SetActive(false);
                 catButton.gameObject.SetActive(false);
                 savePanel.gameObject.SetActive(false);
@@ -357,11 +287,12 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
 
             }
+            //UpdateGUI(GameManager.Instance.GamePhaseManager.CurrentPhase);
         }
 
         public void HideHUD()
         {
-            tooltip.ForceResourcesPanel(false);
+            //tooltip.ForceResourcesPanel(false);
             actionPointsPanel.gameObject.SetActive(false);
             currentPhasePanel.gameObject.SetActive(false);
             muuneyPanel.gameObject.SetActive(false);
@@ -384,12 +315,17 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         /// <param name="currentPhase"></param>
         private void UpdateGUI(IGamePhase currentPhase)
+
         {
+
             //Dependiendo de la fase  modifica la GUI
             if (currentPhase is SetUpPhase)
             {
                 HideMulliganButton();
                 HideMarket();
+                tooltip.ForceResourcesPanel(true);
+                resourcesPanel.gameObject.SetActive(false);
+
 
             }
             else if (currentPhase is StartDayPhase)
@@ -397,23 +333,45 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 ShowActionPointsPanel();
                 ShowMulliganButton();
                 HideMarket();
+                tooltip.ForceResourcesPanel(true);
+                resourcesPanel.gameObject.SetActive(false);
+
             }
             else if (currentPhase is PlaceCardsPhase)
             {
                 HideMulliganButton();
                 HideMarket();
+                tooltip.ForceResourcesPanel(true);
+                resourcesPanel.gameObject.SetActive(false);
+
             }
             else if (currentPhase is ActionPointsPhase)
             {
-                resourcesPanel.gameObject.SetActive(true);
+                if (cameraGestor.GetCurrentCamera().gameObject.name == "VirtualCameraIdle")
+                {
+                    resourcesPanel.gameObject.SetActive(true);
+
+                }
+                else
+                {
+                    resourcesPanel.gameObject.SetActive(false);
+                }
+
+                // tooltip.ForceResourcesPanel(false);
+
                 HideMulliganButton();
                 HideMarket();
             }
             else if (currentPhase is MarketPhase)
             {
+
                 HideActionPointsPanel();
                 ShowMarket();
                 HideMulliganButton();
+                tooltip.ForceResourcesPanel(true);
+                resourcesPanel.gameObject.SetActive(false);
+
+
 
             }
 
