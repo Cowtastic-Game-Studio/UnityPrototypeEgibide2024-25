@@ -39,7 +39,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(1, GameResource.Muuney, true);
                 //Debug.LogWarning("Since you didn't have anything to steal, they took pity on you and left you some money.");
-                MessageManager.Instance.ShowMessage("Since you didn't have anything to steal, they took pity on you and left you some money.");
+                MessageManager.Instance.ShowMessage("Since you didn't have anything to steal, they took pity on you and left you some money.", 2);
             }
             else
             {
@@ -50,20 +50,20 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 {
                     case GameResource.Milk:
                         GameManager.Instance.Tabletop.StorageManager.RemoveResourceDownToMin(theft.amount, GameResource.Milk);
-                        MessageManager.Instance.ShowMessage($"You have been robbed!! U lost {theft.amount} of milk.");
+                        MessageManager.Instance.ShowMessage($"You have been robbed!! U lost {theft.amount} of milk.", 0);
                         //Debug.LogWarning($"Te han robado {theft.amount} de leche.");
                         break;
 
                     case GameResource.Cereal:
                         GameManager.Instance.Tabletop.StorageManager.RemoveResourceDownToMin(theft.amount, GameResource.Cereal);
                         //Debug.LogWarning($"Te han robado {theft.amount} de cereal.");
-                        MessageManager.Instance.ShowMessage($"You have been robbed!! U lost {theft.amount} of wheat.");
+                        MessageManager.Instance.ShowMessage($"You have been robbed!! U lost {theft.amount} of wheat.", 0);
                         break;
 
                     case GameResource.Muuney:
                         GameManager.Instance.Tabletop.StorageManager.WasteMuuney(theft.amount);
                         // Debug.LogWarning($"Te han robado {theft.amount} de muuney.");
-                        MessageManager.Instance.ShowMessage($"You have been robbed! U lost {theft.amount} of muuney.");
+                        MessageManager.Instance.ShowMessage($"You have been robbed! U lost {theft.amount} of muuney.", 0);
                         break;
                 }
             }

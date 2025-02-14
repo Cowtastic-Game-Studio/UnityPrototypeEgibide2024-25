@@ -8,7 +8,7 @@ public class Message : MonoBehaviour
     // Referencia al componente TextMeshProUGUI que mostrará el mensaje.
     public TextMeshProUGUI messageText;
 
-    // (Opcional) Referencia al componente Image del fondo, por si deseas modificar su color vía código.
+    // (Opcional) Referencia al componente Image del fondo, para modificar su color vía código.
     public Image backgroundImage;
 
     // Tiempo (en segundos) que la notificación permanecerá en pantalla.
@@ -20,6 +20,33 @@ public class Message : MonoBehaviour
         if (messageText != null)
         {
             messageText.text = text;
+        }
+    }
+
+    // Método para cambiar el color del fondo según el valor recibido.
+    // 0: Rojo, 1: Azul, 2: Verde.
+    public void SetBackgroundColorByValue(int value)
+    {
+        if (backgroundImage == null)
+        {
+            Debug.LogError("¡El componente Image del fondo no está asignado!");
+            return;
+        }
+
+        switch (value)
+        {
+            case 0:
+                backgroundImage.color = Color.red;
+                break;
+            case 1:
+                backgroundImage.color = Color.blue;
+                break;
+            case 2:
+                backgroundImage.color = Color.green;
+                break;
+            default:
+                Debug.Log("Valor no reconocido: " + value);
+                break;
         }
     }
 

@@ -34,7 +34,7 @@ public class RapidClickCounter : MonoBehaviour
 
         if (rapidClickCount >= 10)
         {
-            MessageManager.Instance.ShowMessage("MIAU MIAU MIAU");
+            MessageManager.Instance.ShowMessage("MIAU MIAU MIAU", 2);
             rapidClickCount = 0; // Opcional: reiniciar el contador a 0 después de llegar a 10
         }
     }
