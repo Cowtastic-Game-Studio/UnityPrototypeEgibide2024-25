@@ -98,12 +98,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         private Dictionary<string, CardTemplate> cardNameMap;
 
+
+        [Header("DEBUG")]
         // PARA FUTURAS DEBUGS
-        private List<GameObject> drawList;
-        private List<GameObject> handlist;
-        private List<GameObject> placedList;
-        private List<GameObject> discadList;
-        private int cardCountTOT = 0;
+        public List<GameObject> drawList;
+        public List<GameObject> handlist;
+        public List<GameObject> placedList;
+        public List<GameObject> discadList;
+        public int cardCountTOT = 0;
 
         private void Awake()
         {
@@ -280,7 +282,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Mueve las cartas de nuevo al mazo de robo
             foreach (ICard card in discardCards)
             {
-                GameObject cardGameObject = ((MonoBehaviour) card).gameObject;
+                GameObject cardGameObject = ((MonoBehaviour)card).gameObject;
                 cardGameObject.transform.SetParent(deckArea);
                 cardGameObject.transform.localPosition = Vector3.zero;
                 cardGameObject.transform.localRotation = Quaternion.identity;
@@ -404,12 +406,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             UpdatePlacedCardLifes();
 
-            foreach (GameObject card in playedCardsDeck.Cards)
+            List<GameObject> playedCards = new List<GameObject>(playedCardsDeck.Cards);
+            foreach (GameObject card in playedCards)
             {
                 CardBehaviour cardBH = card.GetComponent<CardBehaviour>();
                 if (cardBH.LifeCycleDaysRemaining <= 0)
                 {
-                    handDeck.RemoveCard(card);
+                    playedCardsDeck.RemoveCard(card);
 
                     card.transform.SetParent(discardDeckArea);
                     card.transform.localPosition = Vector3.zero;
@@ -417,9 +420,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     SetCardState(card, CardState.onDiscard);
                 }
             }
-
-            // Reiniciar el mazo de cartas jugadas
-            //playedCardsDeck = new CardDeck();
         }
 
 
@@ -599,14 +599,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public void UpdatePlacement()
         {
-            /*   drawList = DrawDeck.Cards.ToList();
-               handlist = HandDeck.Cards.ToList();
-               placedList = PlayedDeck.Cards.ToList();
-               discadList = DiscardDeck.Cards.ToList();
+            drawList = DrawDeck.Cards.ToList();
+            handlist = HandDeck.Cards.ToList();
+            placedList = PlayedDeck.Cards.ToList();
+            discadList = DiscardDeck.Cards.ToList();
 
-            
             cardCountTOT = drawList.Count + handlist.Count + placedList.Count + discadList.Count;
-            */
+
 
             if (isDragging && selectedCard != null)
             {
