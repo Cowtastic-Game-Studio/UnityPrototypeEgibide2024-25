@@ -50,20 +50,20 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 {
                     case GameResource.Milk:
                         GameManager.Instance.Tabletop.StorageManager.RemoveResourceDownToMin(theft.amount, GameResource.Milk);
-                        MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de leche.");
+                        MessageManager.Instance.ShowMessage($"You have been robbed!! U lost {theft.amount} of milk.");
                         //Debug.LogWarning($"Te han robado {theft.amount} de leche.");
                         break;
 
                     case GameResource.Cereal:
                         GameManager.Instance.Tabletop.StorageManager.RemoveResourceDownToMin(theft.amount, GameResource.Cereal);
                         //Debug.LogWarning($"Te han robado {theft.amount} de cereal.");
-                        MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de cereal.");
+                        MessageManager.Instance.ShowMessage($"You have been robbed!! U lost {theft.amount} of wheat.");
                         break;
 
                     case GameResource.Muuney:
                         GameManager.Instance.Tabletop.StorageManager.WasteMuuney(theft.amount);
                         // Debug.LogWarning($"Te han robado {theft.amount} de muuney.");
-                        MessageManager.Instance.ShowMessage($"Te han robado {theft.amount} de muuney.");
+                        MessageManager.Instance.ShowMessage($"You have been robbed! U lost {theft.amount} of muuney.");
                         break;
                 }
             }
