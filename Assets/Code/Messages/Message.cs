@@ -43,7 +43,7 @@ public class Message : MonoBehaviour
                 backgroundImage.color = new Color(255f / 255f, 97f / 255f, 98f / 255f, alpha); // Rojo
                 break;
             case 1:
-                backgroundImage.color = new Color(125f / 255f, 120f / 255f, 255f / 255f, alpha); // Azul
+                backgroundImage.color = new Color(253f / 255f, 224f / 255f, 141f / 255f, alpha); // Azul
                 break;
             case 2:
                 backgroundImage.color = new Color(165f / 255f, 237f / 255f, 138f / 255f, alpha); // Verde
