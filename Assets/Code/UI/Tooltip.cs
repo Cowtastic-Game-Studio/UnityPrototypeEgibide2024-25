@@ -107,6 +107,31 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                         selectedCard = currentHoveredCard;
                         CardBehaviour selectedCardBehaviour = selectedCard.GetComponent<CardBehaviour>();
 
+                        if (selectedCardBehaviour.IsPlaced && (selectedCardBehaviour.Type == CardType.PlaceActivator || selectedCardBehaviour.Type == CardType.PlaceMultiplier))
+                        {
+                            // Obtener el GameObject de la carta seleccionada
+                            GameObject cardObject = selectedCardBehaviour.gameObject;
+
+                            // Obtener los hermanos del GameObject de la carta
+                            Transform[] siblings = cardObject.transform.parent.GetComponentsInChildren<Transform>();
+
+                            // Iterar a través de los hermanos
+                            foreach (Transform sibling in siblings)
+                            {
+                                // Asegurarse de que el hermano no sea el mismo GameObject
+                                if (sibling.gameObject != cardObject)
+                                {
+                                    // Llamar a CheckAgainstStorage con el hermano
+                                    ICard siblingCard = sibling.GetComponent<ICard>(); // Asegúrate de que el hermano tenga un componente ICard
+                                    if (siblingCard != null)
+                                    {
+                                        selectedCardBehaviour = (siblingCard as CardBehaviour);
+                                        break; // Salir después de encontrar el primer hermano que no sea el mismo
+                                    }
+                                }
+                            }
+                        }
+
                         // Determine the appropriate tooltip display based on active camera
                         CardDisplay cardToolDisplay = GetActiveTooltip();
                         if (cardToolDisplay != null)

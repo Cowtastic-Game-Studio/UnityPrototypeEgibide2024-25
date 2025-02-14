@@ -522,6 +522,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (card != null && card.GetComponent<CardBehaviour>() != null)
             {
+                var cardBH = card.GetComponent<CardBehaviour>();
+
+                if (cardBH.IsPlaced && (cardBH.Type == CardType.PlaceActivator || cardBH.Type == CardType.PlaceMultiplier))
+                    return;
+
                 SelectedCard = card;
 
                 // Guarda la posición original de la carta
@@ -691,13 +696,15 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                     if (cardBH.Type == CardType.PlaceActivator)
                     {
+                        //cardBH.Deactivate();
                         MoveLastCardsToHand(1);
                     }
 
                     if (cardBH.Type == CardType.PlaceMultiplier)
                     {
+                        //cardBH.Deactivate();
                         // Desactivo el box colaider de la carta seleccionada
-                        cardBH.transform.localPosition += new Vector3(0, 0, -0.06f);
+                        cardBH.transform.localPosition += new Vector3(0, 0, -0.02f);
 
                         MoveLastCardsToHand(1);
                     }
@@ -715,27 +722,32 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         public void RemovePlacedCard(GameObject card)
         {
-            // Verificar si el padre tiene el componente PlaceSpaceBehaviour
-            var placeSpace = card.transform.parent?.GetComponent<PlaceSpaceBehaviour>();
-            if (placeSpace != null)
-            {
-                placeSpace.updateEmpty();
-            }
-
-            // Proceder a mover la carta de regreso a la mano
-            handDeck.Place(card);
-
             var cardBH = card.GetComponent<CardBehaviour>();
-            cardBH.IsPlaced = false;
 
-            card.transform.SetParent(handArea);
+            if (cardBH && (cardBH.Type != CardType.PlaceActivator && cardBH.Type != CardType.PlaceMultiplier))
+            {
+                // Verificar si el padre tiene el componente PlaceSpaceBehaviour
+                var placeSpace = card.transform.parent?.GetComponent<PlaceSpaceBehaviour>();
+                if (placeSpace != null)
+                {
+                    placeSpace.updateEmpty();
+                }
 
-            card.transform.localPosition = Vector3.zero;
-            card.transform.localRotation = Quaternion.identity;
+                // Proceder a mover la carta de regreso a la mano
+                handDeck.Place(card);
 
-            playedCardsDeck.RemoveCard(card);
+                //var cardBH = card.GetComponent<CardBehaviour>();
+                cardBH.IsPlaced = false;
 
-            ArrangeCardsInCurve();
+                card.transform.SetParent(handArea);
+
+                card.transform.localPosition = Vector3.zero;
+                card.transform.localRotation = Quaternion.identity;
+
+                playedCardsDeck.RemoveCard(card);
+
+                ArrangeCardsInCurve();
+            }
         }
 
         private void InitHandCardLifes()
