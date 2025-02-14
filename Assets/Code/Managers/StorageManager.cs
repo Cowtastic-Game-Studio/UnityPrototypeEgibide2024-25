@@ -71,18 +71,21 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 }
             }
 
-            /*  foreach (ResourceAmount resource in producedResources)
-              {
-                  int producedQuantity = resource.resourceQuantity;
-                  GameResource producedType = resource.resourceType;
+            /*   foreach (ResourceAmount resource in producedResources)
+               {
+                   int producedQuantity = resource.resourceQuantity;
+                   GameResource producedType = resource.resourceType;
 
-                  var storage = GetStorage<IStorage>(producedType);
+                   IStorage storage = GetStorage<IStorage>(producedType);
 
-                  if (!CheckMaxStorage(producedQuantity, storage))
-                  {
-                      return false;
-                  }
-              }*/
+                   if (storage == _paStorage)
+                   {
+                       if (!CheckMaxStorage(producedQuantity, storage))
+                       {
+                           return false;
+                       }
+                   }
+               }*/
 
             _requiredResources = requiredResources;
             _producedResources = producedResources;
@@ -188,7 +191,11 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 IStorage storage = GetStorage<IStorage>(requireType);
 
-                RemoveResources(requireQuantity, storage);
+                if (!RemoveResources(requireQuantity, storage))
+                {
+                    return false;
+                }
+
                 StatisticsManager.Instance.UpdateByResource(requireType, requireQuantity, true);
             }
 
@@ -210,11 +217,17 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 }
 
                 var storage = GetStorage<IStorage>(producedType);
-                AddResources(producedQuantity, storage, true);
+                if (!AddResources(producedQuantity, storage, true))
+                {
+                    return false;
+                }
                 StatisticsManager.Instance.UpdateByResource(producedType, producedQuantity, false);
             }
 
-            RemoveResources(_paCost, _paStorage);
+            if (!RemoveResources(_paCost, _paStorage))
+            {
+                return false;
+            }
             StatisticsManager.Instance.UpdateByResource(GameResource.ActionPoints, _paCost, true);
 
             return true;
@@ -386,7 +399,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         #endregion
 
         #region Economy
-        private void AddResources(int quantity, IStorage storage, bool isUpToMax)
+        private bool AddResources(int quantity, IStorage storage, bool isUpToMax)
         {
             int leftSpace = storage.Resource;
 
@@ -395,27 +408,32 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 leftSpace = storage.MaxResources - storage.Resource;
                 if (leftSpace <= 0)
                 {
-                    Debug.LogWarning($"The storage is full.");
-                    return;
+                    Debug.LogWarning("The storage is full.");
+                    MessageManager.Instance.ShowMessage("The storage is full.");
+                    return false;
                 }
             }
 
             int quantityToAdd = Mathf.Min(quantity, leftSpace);
             storage.Resource += quantityToAdd;
+
+            return true;
         }
 
-        private void RemoveResources(int quantity, IStorage storage)
+        private bool RemoveResources(int quantity, IStorage storage)
         {
             //storage.Resource -= quantity;
 
             if (storage.Resource <= 0)
             {
                 Debug.LogWarning("The storage is already empty.");
-                return;
+                return false;
             }
 
             int quantityToRemove = Mathf.Min(quantity, storage.Resource);
             storage.Resource -= quantityToRemove;
+
+            return true;
         }
 
         /// <summary>
