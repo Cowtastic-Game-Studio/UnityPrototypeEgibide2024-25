@@ -8,11 +8,11 @@ public class Message : MonoBehaviour
     // Referencia al componente TextMeshProUGUI que mostrará el mensaje.
     public TextMeshProUGUI messageText;
 
-    // (Opcional) Referencia al componente Image del fondo, por si deseas modificar su color vía código.
+    // (Opcional) Referencia al componente Image del fondo, para modificar su color vía código.
     public Image backgroundImage;
 
     // Tiempo (en segundos) que la notificación permanecerá en pantalla.
-    public float displayDuration = 3f;
+    public float displayDuration = 2f;
 
     // Método para asignar el texto del mensaje.
     public void SetText(string text)
@@ -20,6 +20,37 @@ public class Message : MonoBehaviour
         if (messageText != null)
         {
             messageText.text = text;
+        }
+    }
+
+    // Método para cambiar el color del fondo según el valor recibido.
+    // 0: Rojo, 1: Azul, 2: Verde.
+    // Además, se establece el alfa a 150 (150/255 en Unity).
+    public void SetBackgroundColorByValue(int value)
+    {
+        if (backgroundImage == null)
+        {
+            Debug.LogError("¡El componente Image del fondo no está asignado!");
+            return;
+        }
+
+        // Calculamos el valor del alfa en el rango [0,1]
+        float alpha = 100f / 255f;
+
+        switch (value)
+        {
+            case 0:
+                backgroundImage.color = new Color(255f / 255f, 97f / 255f, 98f / 255f, alpha); // Rojo
+                break;
+            case 1:
+                backgroundImage.color = new Color(125f / 255f, 120f / 255f, 255f / 255f, alpha); // Azul
+                break;
+            case 2:
+                backgroundImage.color = new Color(165f / 255f, 237f / 255f, 138f / 255f, alpha); // Verde
+                break;
+            default:
+                Debug.Log("Valor no reconocido: " + value);
+                break;
         }
     }
 
