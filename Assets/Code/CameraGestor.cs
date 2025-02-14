@@ -151,6 +151,18 @@ public class CameraGestor : MonoBehaviour
         return VirtualCameraExterior.gameObject.activeSelf;
     }
 
+    public CinemachineVirtualCamera GetCurrentCamera()
+    {
+        foreach (CinemachineVirtualCamera camera in mainCameras)
+        {
+            if (camera.gameObject.activeSelf)
+            {
+                return camera;
+            }
+        }
+        return null;
+    }
+
     private bool IsParedCameraActive()
     {
 

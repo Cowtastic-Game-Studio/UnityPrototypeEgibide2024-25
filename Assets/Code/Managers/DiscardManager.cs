@@ -47,6 +47,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void CloseMenu()
         {
             gameObject.SetActive(false);
+            button.image.sprite = closedSprite;
         }
 
         public void ToggleMenu()

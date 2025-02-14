@@ -2647,13 +2647,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1316569878}
     - target: {fileID: 7027593613843939066, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
+      propertyPath: cameraGestor
+      value: 
+      objectReference: {fileID: 3921763291175236245}
+    - target: {fileID: 7027593613843939066, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
       propertyPath: buttonSoundManager
       value: 
       objectReference: {fileID: 988621417}
     - target: {fileID: 7127069344785349627, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
+      propertyPath: cursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 27b754f29631edf4dbdaebf6544f4551, type: 3}
+    - target: {fileID: 7127069344785349627, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
       propertyPath: cameraGestor
       value: 
       objectReference: {fileID: 3921763291175236245}
+    - target: {fileID: 7127069344785349627, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
+      propertyPath: cursorNormal
+      value: 
+      objectReference: {fileID: 2800000, guid: 0564126a0a32e9c4c96a5d5813288286, type: 3}
+    - target: {fileID: 7127069344785349627, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
+      propertyPath: cursorTooltip
+      value: 
+      objectReference: {fileID: 2800000, guid: 27b754f29631edf4dbdaebf6544f4551, type: 3}
     - target: {fileID: 7127069344785349627, guid: 05d8dce2c14af564f859d3b4c2f4e70d, type: 3}
       propertyPath: cardTooltipExterior
       value: 
