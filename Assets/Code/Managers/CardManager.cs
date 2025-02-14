@@ -792,7 +792,9 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
                 // Agrega la carta al mazo
                 drawDeck.Place(newCard);
-                ArrangeCardsInCurve();
+                drawDeck.Shuffle();
+
+                //ArrangeCardsInCurve();
                 //StatisticsManager.UpdateByBuyedCard(cardBH);
                 GameManager.Instance.Tabletop.StorageManager.WasteMuuney(price);
                 StatisticsManager.Instance.UpdateByStatisticType(StatisticType.CardsPurchased, 1);
