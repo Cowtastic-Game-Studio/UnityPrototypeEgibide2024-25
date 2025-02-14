@@ -275,7 +275,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
             if (discardCards.Count == 0)
             {
-                MessageManager.Instance.ShowMessage("No hay cartas en el mazo de descarte para barajar.");
+                MessageManager.Instance.ShowMessage("There are not enough cards in the discard deck to shuffle.");
                 //Debug.LogWarning("No hay cartas en el mazo de descarte para barajar."); // ESTA NO
                 return;
             }

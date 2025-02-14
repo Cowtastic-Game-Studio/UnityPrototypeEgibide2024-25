@@ -42,7 +42,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (_paStorage.Resource < nAP)
             {
-                MessageManager.Instance.ShowMessage("Not action points.");
+                MessageManager.Instance.ShowMessage("Not enough action points.");
                 Debug.LogWarning($"Not enough action points."); // No estoy muy segura
                 return false;
             }
