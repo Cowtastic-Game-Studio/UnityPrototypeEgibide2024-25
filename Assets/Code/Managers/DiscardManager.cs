@@ -55,7 +55,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Verificar si el número de cartas en la baraja es suficiente
             if (GameManager.Instance.Tabletop.CardManager.getAllCardsList().Count < minDeckSize)
             {
-                MessageManager.Instance.ShowMessage($"Cards cannot be deleted. At least {minDeckSize} cards are required.");
+                MessageManager.Instance.ShowMessage($"Cards cannot be deleted. At least {minDeckSize} cards are required.", 1);
                 //Debug.LogWarning($"No se pueden borrar cartas. Se necesitan al menos {minDeckSize} cartas.");
                 return;
             }
@@ -63,7 +63,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             //// Verificar si el número de descartes actuales ha alcanzado el límite
             if (currentDiscardCount >= maxDiscardLimit && !gameObject.activeSelf)
             {
-                MessageManager.Instance.ShowMessage($"The menu can no longer be opened. You have already reached the limit of {maxDiscardLimit} discards.");
+                MessageManager.Instance.ShowMessage($"The menu can no longer be opened. You have already reached the limit of {maxDiscardLimit} discards.", 1);
                 //Debug.LogWarning($"No se pueden abrir más el menú. Ya has alcanzado el límite de {maxDiscardLimit} descartes.");
                 return;
             }
@@ -96,7 +96,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             discardLeftCountText.text = $"{maxDiscardLimit - currentDiscardCount} discard left";
 
             var groupedCards = allDiscardedCards
-                .GroupBy(card => card.GetComponent<CardBehaviour>()?.GetTemplate().cardType);
+                .GroupBy(card => card.GetComponent<CardBehaviour>()?.GetTemplate().name);
 
             foreach (var group in groupedCards)
             {
@@ -141,7 +141,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Verificar si el número total de eliminaciones excede el límite
             if (currentDiscardCount > maxDiscardLimit)
             {
-                MessageManager.Instance.ShowMessage("No more than 5 cards can be removed per turn.");
+                MessageManager.Instance.ShowMessage("No more than 5 cards can be removed per turn.", 1);
                 //Debug.LogWarning("No se pueden eliminar más de 5 cartas por turno.");
                 return;
             }
@@ -242,14 +242,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Verificar si se ha alcanzado el límite de descartes
             if (currentDiscardCount > maxDiscardLimit)
             {
-                MessageManager.Instance.ShowMessage($"You may not remove more than {maxDiscardLimit} cards per turn.");
+                MessageManager.Instance.ShowMessage($"You may not remove more than {maxDiscardLimit} cards per turn.", 1);
                 //Debug.LogWarning($"No puedes eliminar más de {maxDiscardLimit} cartas por turno.");
                 return;
             }
 
             if (!GameManager.Instance.Tabletop.StorageManager.CheckMuuney(TotalCost))
             {
-                MessageManager.Instance.ShowMessage("There is not enough muuney to eliminate these letters.");
+                MessageManager.Instance.ShowMessage("There is not enough muuney to eliminate these letters.", 2);
                 //Debug.LogWarning($"No hay suficnte dinero para eliminar esa cartas.");
                 return;
             }

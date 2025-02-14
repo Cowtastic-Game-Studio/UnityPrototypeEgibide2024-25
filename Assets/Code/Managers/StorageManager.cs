@@ -42,7 +42,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (_paStorage.Resource < nAP)
             {
-                MessageManager.Instance.ShowMessage("Not enough action points.");
+                MessageManager.Instance.ShowMessage("Not enough action points.", 1);
                 Debug.LogWarning($"Not enough action points."); // No estoy muy segura
                 return false;
             }
@@ -368,7 +368,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             int leftResources = storage.Resource - quantity;
             if (/*quantity >= storage.Resource ||*/ leftResources < 0)
             {
-                MessageManager.Instance.ShowMessage("Not enough resources");
+                MessageManager.Instance.ShowMessage("Not enough resources", 1);
                 Debug.LogWarning("Not enough resources");
                 return false;
             }
@@ -388,7 +388,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
             if (newResources > storage.MaxResources && storage != _bankStorage)
             {
-                MessageManager.Instance.ShowMessage("There is not enough space to store the resource.");
+                MessageManager.Instance.ShowMessage("There is not enough space to store the resource.", 1);
                 Debug.LogWarning("There is not enough space to store the resource.");
                 return false;
             }
@@ -409,7 +409,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 if (leftSpace <= 0)
                 {
                     Debug.LogWarning("The storage is full.");
-                    MessageManager.Instance.ShowMessage("The storage is full.");
+                    MessageManager.Instance.ShowMessage("The storage is full.", 1);
                     return false;
                 }
             }
@@ -481,7 +481,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (_paStorage.Level > _paStorage.MaxLevel)
             {
-                MessageManager.Instance.ShowMessage("Reached AP storage max level.");
+                MessageManager.Instance.ShowMessage("Reached AP storage max level.", 1);
                 //Debug.LogWarning("Reached AP storage max level.");
                 return;
             }
@@ -520,7 +520,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (_fridgeStorage.Level > _fridgeStorage.MaxLevel)
             {
                 //Debug.LogWarning("Reached Fridge max level.");
-                MessageManager.Instance.ShowMessage("Reached Fridge max level.");
+                MessageManager.Instance.ShowMessage("Reached Fridge max level.", 1);
                 return;
             }
 
@@ -542,7 +542,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             if (_silo.Level > _silo.MaxLevel)
             {
                 // Debug.LogWarning("Reached Silo max level.");
-                MessageManager.Instance.ShowMessage("Reached Silo max level.");
+                MessageManager.Instance.ShowMessage("Reached Silo max level.", 1);
                 return;
             }
 
