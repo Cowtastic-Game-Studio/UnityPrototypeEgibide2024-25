@@ -136,12 +136,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return Utils.RoundMuuney(_paStorage.MaxResources * 1.3);
         }
 
-        public bool IsStorageFull(GameResource resource)
-        {
-            IStorage storage = GetStorage<IStorage>(resource);
-            return storage.Resource >= storage.MaxResources;
-        }
-
         #endregion
 
         #region Setters
@@ -461,15 +455,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private void UpgradePAStorage()
         {
-            if (_paStorage.Level >= _paStorage.MaxLevel)
+            if (_paStorage.Level > _paStorage.MaxLevel)
             {
                 MessageManager.Instance.ShowMessage("Reached AP storage max level.", 1);
                 //Debug.LogWarning("Reached AP storage max level.");
                 return;
             }
-
-            int upgradeCost = GetActionPointPlusPrice();
-
+            
             if (CheckMuuney(upgradeCost))
             {
                 _paStorage.MaxResources += 2;
@@ -491,6 +483,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 AddLevel(_bankStorage);
                 WasteMuuney(upgradeCost);
                 Debug.LogWarning("Upgraded bank.");
+                StatisticsManager.Instance.UpdateByBuyedZone(GameResource.ActionPoints);
             }
         }
 
