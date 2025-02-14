@@ -283,7 +283,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal1()
         {
-            return GenerateStatGoal("G-M1", "Fully upgraded stable", StatisticType.StableCountUpgrade, GetMaxSpace(GameManager.Instance.Tabletop.farms));
+            return GenerateStatGoal("G-M1", "Fully upgraded stable", StatisticType.StableCountUpgrade, GetMaxSpace(GameManager.Instance.Tabletop.stables));
         }
 
         /// <summary>
@@ -293,7 +293,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest.Assets.Code.Missions
         /// <returns></returns>
         public static Goal CreateGlobalGoal2()
         {
-            return GenerateStatGoal("G-M2", "Fully upgraded garden", StatisticType.GardenCountUpgrade, GetMaxSpace(GameManager.Instance.Tabletop.stables));
+            return GenerateStatGoal("G-M2", "Fully upgraded garden", StatisticType.GardenCountUpgrade, GetMaxSpace(GameManager.Instance.Tabletop.farms));
         }
 
         /// <summary>
