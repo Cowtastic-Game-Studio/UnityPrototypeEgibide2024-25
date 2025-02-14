@@ -118,7 +118,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (farms.FindAll(x => !x.GetIsActive()).Count == 0)
             {
-                MessageManager.Instance.ShowMessage("Max gardens.", 1);
+                MessageManager.Instance.ShowMessage("Max gardens.");
                 Debug.LogWarning("Max gardens.");
                 return;
             }
@@ -140,7 +140,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (stables.FindAll(x => !x.GetIsActive()).Count == 0)
             {
-                MessageManager.Instance.ShowMessage("Max stables", 1);
+                MessageManager.Instance.ShowMessage("Max stables");
                 Debug.LogWarning("Max stables.");
                 return;
             }
@@ -161,7 +161,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             if (taverns.FindAll(x => !x.GetIsActive()).Count == 0)
             {
-                MessageManager.Instance.ShowMessage("Max shop", 1);
+                MessageManager.Instance.ShowMessage("Max shop");
                 Debug.LogWarning("Max shop.");
                 return;
             }

@@ -21,7 +21,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             {
                 if (!isActive)
                 {
-                    MessageManager.Instance.ShowMessage("New item unlocked: " + cardTemplate.name, 2);
+                    MessageManager.Instance.ShowMessage("New item unlocked: " + cardTemplate.name);
                 }
                 isActive = true;
 

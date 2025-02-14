@@ -32,7 +32,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             InitEvent();
             isActive = true;
-            MessageManager.Instance.ShowMessage($"{eventName} started. {eventDescription}", 1);
+            MessageManager.Instance.ShowMessage($"{eventName} started. {eventDescription}");
             UnityEngine.Debug.LogWarning($"{eventName} started. {eventDescription}");
             ApplyEffects();
         }
@@ -44,7 +44,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public virtual void EndEvent()
         {
             isActive = false;
-            MessageManager.Instance.ShowMessage($"Event {eventName} ended.", 1);
+            MessageManager.Instance.ShowMessage($"Event {eventName} ended.");
             //Debug.LogWarning($"Event {eventName} ended.");
         }
     }

@@ -23,7 +23,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             GameManager.Instance.Tabletop.StorageManager.AddResourceUpToMax(roundedMuuney, GameResource.Muuney, true);
             GameManager.Instance.Tabletop.HUDManager.UpdateResources();
             //Debug.LogWarning("Added muuney: " + roundedMuuney);
-            MessageManager.Instance.ShowMessage("Added muuney: " + roundedMuuney, 2);
+            MessageManager.Instance.ShowMessage("Added muuney: " + roundedMuuney);
         }
 
         public override void EndEvent()
