@@ -4118,6 +4118,10 @@ PrefabInstance:
       value: Manager
       objectReference: {fileID: 0}
     - target: {fileID: 5997160024922195883, guid: 14ec606f02fd63e4a9832df2fbf138f5, type: 3}
+      propertyPath: rentAdd
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5997160024922195883, guid: 14ec606f02fd63e4a9832df2fbf138f5, type: 3}
       propertyPath: isActivatedCheatCodes
       value: 0
       objectReference: {fileID: 0}

@@ -31,6 +31,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         #region Methods
 
         #region Public
+
+        #region Checks
         /// <summary>
         /// Comprueba si hay suficientes puntos de acción para realizar la acción.
         /// </summary>
@@ -56,7 +58,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// <returns>Devuelve true si hay recursos y espacio suficiente.</returns>
         public bool CheckResources(List<ResourceAmount> requiredResources, List<ResourceAmount> producedResources)
         {
-
             foreach (ResourceAmount resource in requiredResources)
             {
                 int requireQuantity = resource.resourceQuantity;
@@ -70,18 +71,21 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 }
             }
 
-            foreach (ResourceAmount resource in producedResources)
-            {
-                int producedQuantity = resource.resourceQuantity;
-                GameResource producedType = resource.resourceType;
+            /*   foreach (ResourceAmount resource in producedResources)
+               {
+                   int producedQuantity = resource.resourceQuantity;
+                   GameResource producedType = resource.resourceType;
 
-                var storage = GetStorage<IStorage>(producedType);
+                   IStorage storage = GetStorage<IStorage>(producedType);
 
-                if (!CheckMaxStorage(producedQuantity, storage))
-                {
-                    return false;
-                }
-            }
+                   if (storage == _paStorage)
+                   {
+                       if (!CheckMaxStorage(producedQuantity, storage))
+                       {
+                           return false;
+                       }
+                   }
+               }*/
 
             _requiredResources = requiredResources;
             _producedResources = producedResources;
@@ -89,61 +93,13 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return true;
         }
 
-        /// <summary>
-        /// Realiza la acción de producir recursos.
-        /// </summary>
-        /// <returns>Devuelve true si se ha podido hacer la acción.</returns>
-        public bool ProduceResources()
+        public bool CheckMuuney(int cardPrice)
         {
-            foreach (ResourceAmount resource in _requiredResources)
-            {
-                int requireQuantity = resource.resourceQuantity;
-                GameResource requireType = resource.resourceType;
-
-                IStorage storage = GetStorage<IStorage>(requireType);
-
-                RemoveResources(requireQuantity, storage);
-                StatisticsManager.Instance.UpdateByResource(requireType, requireQuantity, true);
-            }
-
-            foreach (ResourceAmount resource in _producedResources)
-            {
-                int producedQuantity;
-
-                GameResource producedType = resource.resourceType;
-
-                // Comprobamos el tipo de recurso para aplicar el multiplicador en solo ese producto
-                if (typeResource == producedType)
-                {
-                    int multi = multiEvent + multiCard;
-                    producedQuantity = resource.resourceQuantity * multi;
-                }
-                else
-                {
-                    producedQuantity = resource.resourceQuantity;
-                }
-
-                var storage = GetStorage<IStorage>(producedType);
-                AddResources(producedQuantity, storage, true);
-                StatisticsManager.Instance.UpdateByResource(producedType, producedQuantity, false);
-            }
-
-            RemoveResources(_paCost, _paStorage);
-            StatisticsManager.Instance.UpdateByResource(GameResource.ActionPoints, _paCost, true);
-
-            return true;
+            return CheckStorage(cardPrice, _bankStorage);
         }
+        #endregion
 
-        public void WasteMuuney(int quantity)
-        {
-            int leftMuuney = _bankStorage.Resource - quantity;
-            if (leftMuuney >= 0)
-            {
-                _bankStorage.Resource -= quantity;
-            }
-            GameManager.Instance.Tabletop.HUDManager.UpdateResources();
-        }
-
+        #region Getters
         /// <summary>
         /// Obtiene la cantidad de recursos actual de un tipo.
         /// </summary>
@@ -162,98 +118,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public int GetMaxResourceAmounts(GameResource type)
         {
             return GetStorage<IStorage>(type).MaxResources;
-        }
-
-        /// <summary>
-        /// Reinicia los puntos de acción a los máximos.
-        /// </summary>
-        public void RestartPA()
-        {
-            _paStorage.Resource = _paStorage.MaxResources;
-        }
-
-        public void SetResourceMultiplierEventAndType(int multi, GameResource typeResource)
-        {
-            multiEvent = multi;
-            this.typeResource = typeResource;
-        }
-
-        public void SetResourceMultiplierCardAndType(int multi, GameResource typeResource)
-        {
-            multiCard = multi;
-            this.typeResource = typeResource;
-        }
-
-        public void ClearResourceMultiplierEventAndType()
-        {
-            multiEvent = 0;
-            typeResource = GameResource.None;
-        }
-
-        public void ClearResourceMultiplierCardAndType()
-        {
-            multiCard = 0;
-            typeResource = GameResource.None;
-        }
-
-
-        /// <summary>
-        /// Añade una cantidad específica de recurso a un almacenamiento determinado, 
-        /// pero si sobrepasa el almacenamiento máximo, lo ajusta al máximo permitido.
-        /// </summary>
-        /// <param name="quantity">La cantidad de recursos a añadir.</param>
-        /// <param name="type">El tipo de recurso.</param>
-        public void AddResourceUpToMax(int quantity, GameResource type, bool isUpToMax)
-        {
-            IStorage storage = GetStorage<IStorage>(type);
-
-            if (storage == null)
-            {
-
-                Debug.LogError($"No se encontró almacenamiento para el recurso: {type}");
-                return;
-            }
-
-            AddResources(quantity, storage, isUpToMax);
-        }
-
-        /// <summary>
-        /// Quita una cantidad específica de recurso de un almacenamiento determinado,
-        /// sin reducir la cantidad por debajo de cero.
-        /// </summary>
-        /// <param name="quantity">La cantidad de recursos a quitar.</param>
-        /// <param name="type">El tipo de recurso.</param>
-        public void RemoveResourceDownToMin(int quantity, GameResource type)
-        {
-            IStorage storage = GetStorage<IStorage>(type);
-
-            if (storage == null)
-            {
-                Debug.LogError($"No se encontró almacenamiento para el recurso: {type}");
-                return;
-            }
-
-            RemoveResources(quantity, storage);
-        }
-
-
-        public void UpgradeStorage(GameResource resource)
-        {
-            switch (resource)
-            {
-                case GameResource.ActionPoints:
-                    UpgradeStorage(_paStorage);
-                    break;
-                case GameResource.Milk:
-                    UpgradeStorage(_fridgeStorage);
-                    break;
-                case GameResource.Muuney:
-                    UpgradeStorage(_bankStorage);
-                    break;
-                case GameResource.Cereal:
-                    UpgradeStorage(_silo);
-                    break;
-            }
         }
 
         public int GetStorageMaxLevel(GameResource resource)
@@ -296,10 +160,175 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return upgradeCost;
         }
 
-        public bool CheckMuuney(int cardPrice)
+        #endregion
+
+        #region Setters
+        public void SetResourceMultiplierEventAndType(int multi, GameResource typeResource)
         {
-            return CheckStorage(cardPrice, _bankStorage);
+            multiEvent = multi;
+            this.typeResource = typeResource;
         }
+
+        public void SetResourceMultiplierCardAndType(int multi, GameResource typeResource)
+        {
+            multiCard = multi;
+            this.typeResource = typeResource;
+        }
+        #endregion
+
+        #region Economy
+
+        /// <summary>
+        /// Realiza la acción de producir recursos.
+        /// </summary>
+        /// <returns>Devuelve true si se ha podido hacer la acción.</returns>
+        public bool ProduceResources()
+        {
+            foreach (ResourceAmount resource in _requiredResources)
+            {
+                int requireQuantity = resource.resourceQuantity;
+                GameResource requireType = resource.resourceType;
+
+                IStorage storage = GetStorage<IStorage>(requireType);
+
+                if (!RemoveResources(requireQuantity, storage))
+                {
+                    return false;
+                }
+
+                StatisticsManager.Instance.UpdateByResource(requireType, requireQuantity, true);
+            }
+
+            foreach (ResourceAmount resource in _producedResources)
+            {
+                int producedQuantity;
+
+                GameResource producedType = resource.resourceType;
+
+                // Comprobamos el tipo de recurso para aplicar el multiplicador en solo ese producto
+                if (typeResource == producedType)
+                {
+                    int multi = multiEvent + multiCard;
+                    producedQuantity = resource.resourceQuantity * multi;
+                }
+                else
+                {
+                    producedQuantity = resource.resourceQuantity;
+                }
+
+                var storage = GetStorage<IStorage>(producedType);
+                if (!AddResources(producedQuantity, storage, true))
+                {
+                    return false;
+                }
+                StatisticsManager.Instance.UpdateByResource(producedType, producedQuantity, false);
+            }
+
+            if (!RemoveResources(_paCost, _paStorage))
+            {
+                return false;
+            }
+            StatisticsManager.Instance.UpdateByResource(GameResource.ActionPoints, _paCost, true);
+
+            return true;
+        }
+
+        public void WasteMuuney(int quantity)
+        {
+            int leftMuuney = _bankStorage.Resource - quantity;
+            if (leftMuuney >= 0)
+            {
+                _bankStorage.Resource -= quantity;
+            }
+            GameManager.Instance.Tabletop.HUDManager.UpdateResources();
+        }
+
+        /// <summary>
+        /// Añade una cantidad específica de recurso a un almacenamiento determinado, 
+        /// pero si sobrepasa el almacenamiento máximo, lo ajusta al máximo permitido.
+        /// </summary>
+        /// <param name="quantity">La cantidad de recursos a añadir.</param>
+        /// <param name="type">El tipo de recurso.</param>
+        public void AddResourceUpToMax(int quantity, GameResource type, bool isUpToMax)
+        {
+            IStorage storage = GetStorage<IStorage>(type);
+
+            if (storage == null)
+            {
+
+                Debug.LogError($"No se encontró almacenamiento para el recurso: {type}");
+                return;
+            }
+
+            AddResources(quantity, storage, isUpToMax);
+        }
+
+        /// <summary>
+        /// Quita una cantidad específica de recurso de un almacenamiento determinado,
+        /// sin reducir la cantidad por debajo de cero.
+        /// </summary>
+        /// <param name="quantity">La cantidad de recursos a quitar.</param>
+        /// <param name="type">El tipo de recurso.</param>
+        public void RemoveResourceDownToMin(int quantity, GameResource type)
+        {
+            IStorage storage = GetStorage<IStorage>(type);
+
+            if (storage == null)
+            {
+                Debug.LogError($"No se encontró almacenamiento para el recurso: {type}");
+                return;
+            }
+
+            RemoveResources(quantity, storage);
+        }
+
+        #endregion
+
+        #region Upgrades
+        public void UpgradeStorage(GameResource resource)
+        {
+            switch (resource)
+            {
+                case GameResource.ActionPoints:
+                    UpgradeStorage(_paStorage);
+                    break;
+                case GameResource.Milk:
+                    UpgradeStorage(_fridgeStorage);
+                    break;
+                case GameResource.Muuney:
+                    UpgradeStorage(_bankStorage);
+                    break;
+                case GameResource.Cereal:
+                    UpgradeStorage(_silo);
+                    break;
+            }
+        }
+
+        #endregion
+
+        #region Restart
+        /// <summary>
+        /// Reinicia los puntos de acción a los máximos.
+        /// </summary>
+        public void RestartPA()
+        {
+            _paStorage.Resource = _paStorage.MaxResources;
+        }
+
+        public void ClearResourceMultiplierEventAndType()
+        {
+            multiEvent = 0;
+            typeResource = GameResource.None;
+        }
+
+        public void ClearResourceMultiplierCardAndType()
+        {
+            multiCard = 0;
+            typeResource = GameResource.None;
+        }
+
+        #endregion
+
         #endregion
 
         #region Private
@@ -327,6 +356,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             }
         }
 
+        #region Checks
         /// <summary>
         /// Comprueba si hay suficientes recursos para realizar la acción.
         /// </summary>
@@ -356,7 +386,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             int newResources = quantity + storage.Resource;
 
-            if (newResources > storage.MaxResources)
+            if (newResources > storage.MaxResources && storage != _bankStorage)
             {
                 MessageManager.Instance.ShowMessage("There is not enough space to store the resource.");
                 Debug.LogWarning("There is not enough space to store the resource.");
@@ -366,7 +396,10 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             return true;
         }
 
-        private void AddResources(int quantity, IStorage storage, bool isUpToMax)
+        #endregion
+
+        #region Economy
+        private bool AddResources(int quantity, IStorage storage, bool isUpToMax)
         {
             int leftSpace = storage.Resource;
 
@@ -375,27 +408,32 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 leftSpace = storage.MaxResources - storage.Resource;
                 if (leftSpace <= 0)
                 {
-                    Debug.LogWarning($"The storage is full.");
-                    return;
+                    Debug.LogWarning("The storage is full.");
+                    MessageManager.Instance.ShowMessage("The storage is full.");
+                    return false;
                 }
             }
 
             int quantityToAdd = Mathf.Min(quantity, leftSpace);
             storage.Resource += quantityToAdd;
+
+            return true;
         }
 
-        private void RemoveResources(int quantity, IStorage storage)
+        private bool RemoveResources(int quantity, IStorage storage)
         {
             //storage.Resource -= quantity;
 
             if (storage.Resource <= 0)
             {
                 Debug.LogWarning("The storage is already empty.");
-                return;
+                return false;
             }
 
             int quantityToRemove = Mathf.Min(quantity, storage.Resource);
             storage.Resource -= quantityToRemove;
+
+            return true;
         }
 
         /// <summary>
@@ -406,6 +444,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         {
             storage.Level += 1;
         }
+        #endregion
 
         #region UpgradeStorage
 
@@ -518,8 +557,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         }
 
         #endregion
-
-
 
         #endregion
 

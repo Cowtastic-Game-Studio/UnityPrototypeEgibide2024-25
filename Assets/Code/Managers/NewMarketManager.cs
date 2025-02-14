@@ -215,7 +215,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                     GameObject createdItem = GameObject.Instantiate(shopItem, slot.transform);
                     createdItem.name = actualCardList[counter].name;
 
-                    if (createdItem.name == "Tavern+" && MissionsManager.Instance.IsTutorialEnabled && !wasFreeShopItemBuyed)
+                    if (createdItem.name == "Shop+" && MissionsManager.Instance.IsTutorialEnabled && !wasFreeShopItemBuyed)
                     {
                         FreeShopItem = createdItem.GetComponent<ShopItem>();
                         FreeShopItem?.UpdateDisplayData(actualCardList[counter], 0);
@@ -261,8 +261,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 case "Stable+":
                     temporalCardsList = allCardsList.Where(x => x.GetComponent<CardDisplay>().name == "Muussive Stable").ToList();
                     break;
-                case "Tavern+":
-                    temporalCardsList = allCardsList.Where(x => x.GetComponent<CardDisplay>().name == "Muussive Tavern").ToList();
+                case "Shop+":
+                    temporalCardsList = allCardsList.Where(x => x.GetComponent<CardDisplay>().name == "Muussive Shop").ToList();
                     break;
             }
 

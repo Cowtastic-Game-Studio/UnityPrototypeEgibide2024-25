@@ -44,9 +44,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Desuscribirse del evento global para evitar referencias persistentes
             GameManager.Instance.OnCardClickedGlobal -= OnCardClickedHandler;
 
-            // Limpiar el tablero
-            GameManager.Instance.Tabletop.CardManager.WipeBoard();
-
             //ALBA: quitar cundo se arregle el poder hacer click en cartas colocadas
             //GameManager.Instance.Tabletop.CardManager.DiscardHand();
         }
@@ -97,13 +94,28 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             // Extraer el CardTemplate
             MonoBehaviour cardComponent = selectedCard as MonoBehaviour;
             Transform parentTransform = cardComponent.transform.parent;
-            Transform firstChildTransform = parentTransform.GetChild(0);
-            CardBehaviour cardBehaviourMultiplier = firstChildTransform.GetComponent<CardBehaviour>();
-            CardTemplate cardTemplate = cardBehaviourMultiplier.GetTemplate();
+            bool hasMultiplier = false;
+            CardTemplate cardTemplateMulti = null;
 
-            if (cardTemplate != null)
+            for (int i = 0; i < parentTransform.childCount; i++)
             {
-                GameManager.Instance.Tabletop.StorageManager.SetResourceMultiplierCardAndType(cardTemplate.multiplier, cardTemplate.targetResoruceType);
+                Transform childTransform = parentTransform.GetChild(i);
+                CardBehaviour cardBehaviour = childTransform.GetComponent<CardBehaviour>();
+                if (cardBehaviour != null)
+                {
+                    CardTemplate cardTemplate = cardBehaviour.GetTemplate();
+
+                    if (cardTemplate.cardType == CardType.PlaceMultiplier)
+                    {
+                        hasMultiplier = true;
+                        cardTemplateMulti = cardTemplate;
+                    }
+                }
+            }
+
+            if (hasMultiplier)
+            {
+                GameManager.Instance.Tabletop.StorageManager.SetResourceMultiplierCardAndType(cardTemplateMulti.multiplier, cardTemplateMulti.targetResoruceType);
             }
 
             // Ejecutar la acción de la carta y producir/consumir los recursos necesarios
@@ -119,7 +131,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 Debug.LogWarning("Resources have been produced :)"); // No estoy muy segura
             }
 
-            if (cardTemplate != null)
+            if (hasMultiplier)
             {
                 GameManager.Instance.Tabletop.StorageManager.ClearResourceMultiplierCardAndType();
             }

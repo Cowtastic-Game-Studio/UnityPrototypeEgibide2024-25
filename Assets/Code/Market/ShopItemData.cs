@@ -6,6 +6,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public CardTemplate cardTemplate;
         public int dayToUnlock;
 
+
+
         public ShopItemData(bool isActive, CardTemplate cardTemplate)
         {
             this.isActive = isActive;
@@ -16,7 +18,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public void CheckUnlock(int currentDay)
         {
             if (dayToUnlock <= currentDay)
+            {
+                if (!isActive)
+                {
+                    MessageManager.Instance.ShowMessage("New item unlocked: " + cardTemplate.name);
+                }
                 isActive = true;
+
+            }
         }
     }
 }

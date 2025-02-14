@@ -17,6 +17,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         public event Action<Transform> OnPlaceSpaceClickedGlobal;
 
         public bool isActivatedCheatCodes = false;
+        public int rentAdd = 3;
 
         //private void Awake()
         //{

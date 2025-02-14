@@ -35,7 +35,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 GameManager.Instance.Tabletop.StorageManager.WasteMuuney(rentAmount);
                 GameManager.Instance.Tabletop.HUDManager.UpdateResources();
 
-                rentAmount = rentAmount + 5;
+                //rentAmount = rentAmount + 3;
+                rentAmount = rentAmount + GameManager.Instance.rentAdd;
             }
         }
 
