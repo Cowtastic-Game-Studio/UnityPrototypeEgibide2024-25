@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SuperStable
   m_EditorClassIdentifier: 
   baseCard: {fileID: 2100000, guid: e7e5a412938c62349924c8c1bfade4e2, type: 2}
-  artwork: {fileID: 2100000, guid: 035cdf7bc4c431445840c3e16f3ae79c, type: 2}
+  artwork: {fileID: 2100000, guid: e5ccd6f961d32b9469e3ee7d00cae2be, type: 2}
   cardType: 4
   name: Super Stable
   description: x2 to the production of the box and draw a card. That stable look
