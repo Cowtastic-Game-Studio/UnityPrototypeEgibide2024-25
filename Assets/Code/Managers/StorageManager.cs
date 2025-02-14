@@ -461,7 +461,8 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 //Debug.LogWarning("Reached AP storage max level.");
                 return;
             }
-            
+
+            int upgradeCost = GetActionPointPlusPrice();
             if (CheckMuuney(upgradeCost))
             {
                 _paStorage.MaxResources += 2;
