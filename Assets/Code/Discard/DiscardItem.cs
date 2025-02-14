@@ -27,9 +27,6 @@ namespace CowtasticGameStudio.MuuliciousHarvest
             discardPrice = CardTemplate.discardCost;
             InitCountText();
             cardDisplayUI.UpdateDisplay(CardTemplate, true);
-
-
-
         }
         public void IncrementCount()
         {
