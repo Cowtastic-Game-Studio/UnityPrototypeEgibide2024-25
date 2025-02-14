@@ -25,6 +25,7 @@ public class Message : MonoBehaviour
 
     // Método para cambiar el color del fondo según el valor recibido.
     // 0: Rojo, 1: Azul, 2: Verde.
+    // Además, se establece el alfa a 150 (150/255 en Unity).
     public void SetBackgroundColorByValue(int value)
     {
         if (backgroundImage == null)
@@ -33,16 +34,19 @@ public class Message : MonoBehaviour
             return;
         }
 
+        // Calculamos el valor del alfa en el rango [0,1]
+        float alpha = 100f / 255f;
+
         switch (value)
         {
             case 0:
-                backgroundImage.color = Color.red;
+                backgroundImage.color = new Color(1f, 0f, 0f, alpha); // Rojo
                 break;
             case 1:
-                backgroundImage.color = Color.blue;
+                backgroundImage.color = new Color(0f, 0f, 1f, alpha); // Azul
                 break;
             case 2:
-                backgroundImage.color = Color.green;
+                backgroundImage.color = new Color(0f, 1f, 0f, alpha); // Verde
                 break;
             default:
                 Debug.Log("Valor no reconocido: " + value);
