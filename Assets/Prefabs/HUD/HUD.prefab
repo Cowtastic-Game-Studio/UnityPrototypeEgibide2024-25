@@ -222,7 +222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a49deafb70581a4abfc3953a7debeac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: {fileID: 0}
+  cursorPonter: {fileID: 0}
+  cursorNormal: {fileID: 0}
 --- !u!1 &1223536508709504424
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,6 +442,7 @@ MonoBehaviour:
   buttonsGUI: {fileID: 0}
   discardBtn: {fileID: 527024440273570772}
   tooltip: {fileID: 0}
+  cameraGestor: {fileID: 0}
 --- !u!1 &2379882758131851301
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,7 +719,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a49deafb70581a4abfc3953a7debeac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: {fileID: 0}
+  cursorPonter: {fileID: 0}
+  cursorNormal: {fileID: 0}
 --- !u!1 &3102052158629438681
 GameObject:
   m_ObjectHideFlags: 0
@@ -957,7 +960,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a49deafb70581a4abfc3953a7debeac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: {fileID: 0}
+  cursorPonter: {fileID: 0}
+  cursorNormal: {fileID: 0}
 --- !u!65 &5787836795460047164
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1113,7 +1117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a49deafb70581a4abfc3953a7debeac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: {fileID: 0}
+  cursorPonter: {fileID: 0}
+  cursorNormal: {fileID: 0}
 --- !u!135 &6875968272411434460
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1877,6 +1882,8 @@ MonoBehaviour:
   cardTooltipInterior: {fileID: 0}
   cardTooltipExterior: {fileID: 0}
   cameraGestor: {fileID: 0}
+  cursorTooltip: {fileID: 0}
+  cursorNormal: {fileID: 0}
 --- !u!1 &5756738872128661977
 GameObject:
   m_ObjectHideFlags: 0
@@ -2134,7 +2141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a49deafb70581a4abfc3953a7debeac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: {fileID: 0}
+  cursorPonter: {fileID: 0}
+  cursorNormal: {fileID: 0}
 --- !u!135 &3954015729402264202
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2268,7 +2276,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 25, y: 36.5}
-  m_SizeDelta: {x: 220, y: 80}
+  m_SizeDelta: {x: 380, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2670218375929488199
 CanvasRenderer:
@@ -2418,7 +2426,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -81, y: 3}
+  m_AnchoredPosition: {x: -74, y: 3}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7892831711258844846
@@ -2449,9 +2457,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '100/1K
-
-'
+  m_text: 300K/300K
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 30166ec9019e4134ebcef4d0b575dbc4, type: 2}
   m_sharedMaterial: {fileID: -2799240684647502404, guid: 30166ec9019e4134ebcef4d0b575dbc4, type: 2}
@@ -2514,7 +2520,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -28.577904, y: -5.9631653, z: 82.82469, w: -1.5845013}
+  m_margin: {x: -28.577904, y: -5.9631653, z: 3.3936157, w: -1.5845013}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3693,7 +3699,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a49deafb70581a4abfc3953a7debeac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: {fileID: 0}
+  cursorPonter: {fileID: 0}
+  cursorNormal: {fileID: 0}
 --- !u!224 &5640371884572841496 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1528341774270447862, guid: 2954a5ff1a277b444bec4bec4b2d2a83, type: 3}

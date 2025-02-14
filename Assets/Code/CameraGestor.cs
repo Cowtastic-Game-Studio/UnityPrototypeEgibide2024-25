@@ -22,6 +22,8 @@ public class CameraGestor : MonoBehaviour
     private int currentCameraIndex = 0; // Índice de la cámara actual
 
     [SerializeField] private HUDManager HUDManager;
+    [SerializeField] private Texture2D cursorNormal;
+
 
 
     private void Awake()
@@ -103,7 +105,7 @@ public class CameraGestor : MonoBehaviour
     private void SwitchToCamera(CinemachineVirtualCamera targetCamera, string cameraState)
     {
         StopAllCoroutines();
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(cursorNormal, Vector2.zero, CursorMode.Auto);
 
         HUDManager.HideHUD();
         //Debug.Log("Cambiando a cámara: " + cameraState);
