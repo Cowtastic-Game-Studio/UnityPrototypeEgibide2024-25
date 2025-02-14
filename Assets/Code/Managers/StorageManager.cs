@@ -133,31 +133,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
 
         public int GetActionPointPlusPrice()
         {
-            int upgradeCost = 0;
-
-            switch (_paStorage.Level)
-            {
-                case 1:
-                    upgradeCost = 30;
-                    break;
-                case 2:
-                    upgradeCost = 50;
-                    break;
-                case 3:
-                    upgradeCost = 75;
-                    break;
-                case 4:
-                    upgradeCost = 100;
-                    break;
-                case 5:
-                    upgradeCost = 200;
-                    break;
-                case 6:
-                    upgradeCost = 300;
-                    break;
-            }
-
-            return upgradeCost;
+            return Utils.RoundMuuney(_paStorage.MaxResources * 1.3);
         }
 
         #endregion
@@ -479,15 +455,14 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private void UpgradePAStorage()
         {
-            if (_paStorage.Level > _paStorage.MaxLevel)
+            int upgradeCost = GetActionPointPlusPrice();
+            if (_paStorage.Level >= _paStorage.MaxLevel)
             {
                 MessageManager.Instance.ShowMessage("Reached AP storage max level.", 1);
                 //Debug.LogWarning("Reached AP storage max level.");
                 return;
             }
-
-            int upgradeCost = GetActionPointPlusPrice();
-
+            
             if (CheckMuuney(upgradeCost))
             {
                 _paStorage.MaxResources += 2;
@@ -509,6 +484,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
                 AddLevel(_bankStorage);
                 WasteMuuney(upgradeCost);
                 Debug.LogWarning("Upgraded bank.");
+                StatisticsManager.Instance.UpdateByBuyedZone(GameResource.ActionPoints);
             }
         }
 
@@ -517,7 +493,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private void UpgradeFridgeStorage()
         {
-            if (_fridgeStorage.Level > _fridgeStorage.MaxLevel)
+            if (_fridgeStorage.Level >= _fridgeStorage.MaxLevel)
             {
                 //Debug.LogWarning("Reached Fridge max level.");
                 MessageManager.Instance.ShowMessage("Reached Fridge max level.", 1);
@@ -539,7 +515,7 @@ namespace CowtasticGameStudio.MuuliciousHarvest
         /// </summary>
         private void UpgradeSiloStorage()
         {
-            if (_silo.Level > _silo.MaxLevel)
+            if (_silo.Level >= _silo.MaxLevel)
             {
                 // Debug.LogWarning("Reached Silo max level.");
                 MessageManager.Instance.ShowMessage("Reached Silo max level.", 1);

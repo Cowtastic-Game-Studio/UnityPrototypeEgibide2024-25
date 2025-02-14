@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FridgePlus
   m_EditorClassIdentifier: 
   baseCard: {fileID: 2100000, guid: edc33914b937d8244aba28c5c1eb02c5, type: 2}
-  artwork: {fileID: 2100000, guid: 326f369de884c6740bd98497ec6276aa, type: 2}
+  artwork: {fileID: 2100000, guid: d9019a9da786c244c8f3ff2eeaa0076a, type: 2}
   cardType: 6
   name: Fridge+
   description: "Your fridge isn\xB4t large enough to contain all of your milk? Don\xB4t
